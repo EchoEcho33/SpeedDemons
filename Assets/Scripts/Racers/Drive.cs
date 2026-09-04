@@ -6,38 +6,40 @@ using UnityEngine.UIElements;
 
 public class Drive : MonoBehaviour
 {
-    [SerializeField]
     private float _maxSpeed = 25.0f;
 
-    [SerializeField]
     private float _maxAcceleration = 10.0f;
 
-    [SerializeField]
     private float _brakeStrength = 10.0f;
 
-    [SerializeField]
     private float _drag = 4.0f;
 
-    [SerializeField, Range(0, 75)]
-    private int _turnRadius;
+    private int _turnRadius = 10;
 
-    [SerializeField]
-    private float _traction;
+    private float _traction = 0;
 
     private float m_currentSpeed = 0.0f;
     private float m_turnSpeed = 0.0f;
 
-    [SerializeField]
-    public InputActionReference accelerate;
+    private InputActionReference accelerate;
 
-    [SerializeField]
-    public InputActionReference brake;
+    private InputActionReference brake;
 
-    [SerializeField]
-    public InputActionReference turn;
+    private InputActionReference turn;
 
-    [SerializeField]
-    public InputActionReference reverse;
+    public void Init(float maxSpeed, float maxAcceleration, float brakeStrength, float drag, int turnRadius, float traction)
+    {
+        _maxSpeed = maxSpeed;
+        _maxAcceleration = maxAcceleration;
+        _brakeStrength = brakeStrength;
+        _drag = drag;
+        _turnRadius = turnRadius;
+        _traction = traction;
+
+        accelerate = GameManager.Instance.input.accelerate;
+        brake = GameManager.Instance.input.brake;
+        turn = GameManager.Instance.input.turn;
+    }
 
     public void Update()
     {
