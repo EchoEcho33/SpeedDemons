@@ -9,6 +9,8 @@ public class Character : ScriptableObject
     private Ability ability;
 
     private Kart selectedKart;
+
+    public RacerState racerState {private set; get;}
     
 
     public Kart GetKart()
@@ -19,5 +21,10 @@ public class Character : ScriptableObject
     private void TriggerAbility()
     {
         ability.TriggerAbility();
+    }
+
+    public void AssignRacerState(RacerState newRacerState)
+    {
+        racerState = newRacerState;
     }
 }

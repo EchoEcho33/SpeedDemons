@@ -79,11 +79,19 @@ public class TrackCheckpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Character racer = other.gameObject.GetComponentInParent<Character>();
-        if (racer == null) return;
+        Drive racer = other.gameObject.GetComponentInParent<Drive>();
+        if (racer == null)
+        {
+            Debug.LogError("Racer not found.");
+            return;
+        }
+        
 
-        RacerState racerState = racer.racerState;
-        if (racerState == null) return;
+        RacerState racerState = racer.getCharacter().racerState;
+        if (racerState == null) {
+            Debug.LogError("Racer state not found.");
+            return;
+        }
         
         if (racerState.currCheckpoint.nextCheckpoint == this) racerState.ReachCheckpoint(this);
     }

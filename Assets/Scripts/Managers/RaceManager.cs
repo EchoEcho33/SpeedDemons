@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RaceManager : MonoBehaviour
 {
+
     [SerializeField]
     private List<Character> racers;
     private List<RacerState> _racerStates = new();
@@ -17,9 +18,7 @@ public class RaceManager : MonoBehaviour
     }
     
     public void StartRace()
-    {
-        Character[] racers = FindObjectsByType<Character>(FindObjectsSortMode.None);
-        
+    {     
         foreach (Character racer in racers)
         {
             GameObject racerGO = new GameObject();

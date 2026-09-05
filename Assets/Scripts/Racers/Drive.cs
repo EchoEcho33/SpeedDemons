@@ -53,6 +53,11 @@ public class Drive : MonoBehaviour
         Turn();
     }
 
+    public Character getCharacter()
+    {
+        return character;
+    }
+
     public void Accelerate(float amplitude)
     {
         float initialFrameSpeed = m_currentSpeed;
