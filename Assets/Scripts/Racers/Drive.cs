@@ -6,17 +6,10 @@ using UnityEngine.UIElements;
 
 public class Drive : MonoBehaviour
 {
-    private float _maxSpeed = 25.0f;
+    [SerializeField]
+    private Character character;
 
-    private float _maxAcceleration = 10.0f;
-
-    private float _brakeStrength = 10.0f;
-
-    private float _drag = 4.0f;
-
-    private int _turnRadius = 10;
-
-    private float _traction = 0;
+    private Kart kart;
 
     private float m_currentSpeed = 0.0f;
     private float m_turnSpeed = 0.0f;
@@ -27,15 +20,9 @@ public class Drive : MonoBehaviour
 
     private InputActionReference turn;
 
-    public void Init(float maxSpeed, float maxAcceleration, float brakeStrength, float drag, int turnRadius, float traction)
+    public void Start()
     {
-        _maxSpeed = maxSpeed;
-        _maxAcceleration = maxAcceleration;
-        _brakeStrength = brakeStrength;
-        _drag = drag;
-        _turnRadius = turnRadius;
-        _traction = traction;
-
+        kart = character.GetKart();
         accelerate = GameManager.Instance.input.accelerate;
         brake = GameManager.Instance.input.brake;
         turn = GameManager.Instance.input.turn;
@@ -54,10 +41,10 @@ public class Drive : MonoBehaviour
             {
                 Accelerate(-brake.action.GetControlMagnitude() / 2);
             } else
-                Decelerate(brake.action.GetControlMagnitude(), _brakeStrength);
+                Decelerate(brake.action.GetControlMagnitude(), kart._brakeStrength);
         } else if (m_currentSpeed > 0)
         {
-            Decelerate(1.0f, _drag);
+            Decelerate(1.0f, kart._drag);
         } else if (m_currentSpeed < 0)
         {
             Accelerate(0.5f);
@@ -69,13 +56,13 @@ public class Drive : MonoBehaviour
     public void Accelerate(float amplitude)
     {
         float initialFrameSpeed = m_currentSpeed;
-        m_currentSpeed += _maxAcceleration * amplitude * Time.deltaTime;
+        m_currentSpeed += kart._maxAcceleration * amplitude * Time.deltaTime;
 
-        if (m_currentSpeed > _maxSpeed)
-            m_currentSpeed = _maxSpeed;
+        if (m_currentSpeed > kart._maxSpeed)
+            m_currentSpeed = kart._maxSpeed;
 
-        if (m_currentSpeed < -_maxSpeed / 2)
-            m_currentSpeed = -_maxSpeed / 2;
+        if (m_currentSpeed < -kart._maxSpeed / 2)
+            m_currentSpeed = -kart._maxSpeed / 2;
 
         float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime;
         
@@ -102,8 +89,8 @@ public class Drive : MonoBehaviour
 
         if (turnDirection.x != 0)
         {
-            transform.position += Vector3.forward * _turnRadius * turnDirection.x * m_currentSpeed * Time.deltaTime / 100;
-            transform.Rotate(0, _turnRadius * turnDirection.x * m_currentSpeed * Time.deltaTime, 0, Space.Self);
+            transform.position += Vector3.forward * kart._turnRadius * turnDirection.x * m_currentSpeed * Time.deltaTime / 100;
+            transform.Rotate(0, kart._turnRadius * turnDirection.x * m_currentSpeed * Time.deltaTime, 0, Space.Self);
         } 
 
         // x = horizontal (- left + right) y = vertical (- down + up)
