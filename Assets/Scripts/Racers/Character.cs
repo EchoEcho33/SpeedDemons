@@ -23,6 +23,8 @@ public class Character : MonoBehaviour
     private float _traction;
 
     private Drive drive;
+    
+    public RacerState racerState {private set; get;}
 
     public void Start()
     {
@@ -31,4 +33,8 @@ public class Character : MonoBehaviour
         
     }
 
+    public void AssignRacerState(RacerState newRacerState)
+    {
+        racerState = newRacerState;
+    }
 }
