@@ -1761,6 +1761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e0791826d8f114586ce30f5090a7a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  racers:
+  - {fileID: 11400000, guid: 1e41ed9f7ada331478125c429cb9fcea, type: 2}
   _startFinishCheckpoint: {fileID: 1332032555}
 --- !u!114 &1628683419
 MonoBehaviour:
@@ -2319,10 +2321,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7603069183561121243, guid: 78d632a95e2a08c4db7a42bba98284fd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 644838891945013538}
+      addedObject: {fileID: 644838891945013537}
     - targetCorrespondingSourceObject: {fileID: 7603069183561121243, guid: 78d632a95e2a08c4db7a42bba98284fd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 644838891945013537}
+      addedObject: {fileID: 644838891945013540}
   m_SourcePrefab: {fileID: 100100000, guid: 78d632a95e2a08c4db7a42bba98284fd, type: 3}
 --- !u!1 &644838891945013535 stripped
 GameObject:
@@ -2356,7 +2358,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &644838891945013538
+--- !u!114 &644838891945013540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2365,15 +2367,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 644838891945013535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5c3567e8475164ca3c0d1b1d8487bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a99636c24256de4386c5b1e802875fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSpeed: 25
-  _maxAcceleration: 10
-  _brakeStrength: 10
-  _drag: 4
-  _turnRadius: 10
-  _traction: 0
+  character: {fileID: 11400000, guid: 1e41ed9f7ada331478125c429cb9fcea, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

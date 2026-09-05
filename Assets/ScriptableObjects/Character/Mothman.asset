@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18a672d55fff274f800b94817bc0714, type: 3}
+  m_Name: Mothman
+  m_EditorClassIdentifier: 
+  defaultKart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  ability: {fileID: 0}

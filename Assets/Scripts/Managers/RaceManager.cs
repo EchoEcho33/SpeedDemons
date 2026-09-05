@@ -1,9 +1,12 @@
-using System;
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RaceManager : MonoBehaviour
 {
+
+    [SerializeField]
+    private List<Character> racers;
     private List<RacerState> _racerStates = new();
     [SerializeField]
     private StartFinishCheckpoint _startFinishCheckpoint;
@@ -15,9 +18,7 @@ public class RaceManager : MonoBehaviour
     }
     
     public void StartRace()
-    {
-        Character[] racers = FindObjectsByType<Character>(FindObjectsSortMode.None);
-        
+    {     
         foreach (Character racer in racers)
         {
             GameObject racerGO = new GameObject();
