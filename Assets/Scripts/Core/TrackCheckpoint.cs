@@ -79,10 +79,7 @@ public class TrackCheckpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Entered by {other.gameObject.name}");
-        
         Character racer = other.gameObject.GetComponentInParent<Character>();
-        Debug.Log($"Entered by {other.gameObject.GetComponentInParent<Character>()}");
         if (racer == null) return;
 
         RacerState racerState = racer.racerState;
