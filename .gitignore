@@ -37,6 +37,13 @@
 # Visual Studio cache directory
 .vs/
 
+# Jetbrain Rider Cache
+.idea/
+Assets/Plugins/Editor/JetBrains*
+
+# Unity local user project setting
+UserSettings/
+
 # Gradle cache directory
 .gradle/
 
