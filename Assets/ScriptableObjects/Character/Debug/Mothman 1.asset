@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d18a672d55fff274f800b94817bc0714, type: 3}
-  m_Name: Mothman
+  m_Name: Mothman 1
   m_EditorClassIdentifier: 
   characterType: 1
   defaultKart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
   ability: {fileID: 0}
-  characterPrefab: {fileID: 1418024258059860662, guid: a08d27bbc4bca26498a2a881ad9d4e07, type: 3}
+  characterPrefab: {fileID: 1418024258059860662, guid: 1454f0025ed85e942a586a19e8321ac0, type: 3}
   selectedKart: {fileID: 0}

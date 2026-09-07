@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public InputSys input;
+    
     [HideInInspector]
     public RaceManager race;
 
