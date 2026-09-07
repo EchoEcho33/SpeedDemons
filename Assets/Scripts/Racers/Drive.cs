@@ -30,6 +30,7 @@ public class Drive : MonoBehaviour
 
     public void Update()
     {
+        
 
         if (accelerate.action.IsPressed())
         {

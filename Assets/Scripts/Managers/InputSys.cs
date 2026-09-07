@@ -13,5 +13,4 @@ public class InputSys : MonoBehaviour
 
     [SerializeField]
     public InputActionReference turn;
-
 }
