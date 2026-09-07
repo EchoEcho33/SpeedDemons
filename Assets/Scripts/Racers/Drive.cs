@@ -18,10 +18,22 @@ public class Drive : MonoBehaviour
 
     private InputActionReference brake;
 
-    private InputActionReference turn;
+    private InputActionReference turn;  
 
     public void Start()
     {
+        if (character == null) return;
+        
+        kart = character.GetKart();
+        accelerate = GameManager.Instance.input.accelerate;
+        brake = GameManager.Instance.input.brake;
+        turn = GameManager.Instance.input.turn;
+    }
+
+    public void Initialize(Character newCharacter)
+    {
+        character = newCharacter;
+    
         kart = character.GetKart();
         accelerate = GameManager.Instance.input.accelerate;
         brake = GameManager.Instance.input.brake;
@@ -30,6 +42,7 @@ public class Drive : MonoBehaviour
 
     public void Update()
     {
+        if (!accelerate || !brake || !turn) return;
 
         if (accelerate.action.IsPressed())
         {

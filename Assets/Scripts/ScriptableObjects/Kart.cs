@@ -20,4 +20,7 @@ public class Kart : ScriptableObject
 
     [SerializeField]
     public float _traction;
+    
+    [SerializeField]
+    public GameObject kartPrefab;
 }
