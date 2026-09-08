@@ -49,6 +49,11 @@ public class Drive : MonoBehaviour
         accelerate = GameManager.Instance.input.accelerate;
         brake = GameManager.Instance.input.brake;
         turn = GameManager.Instance.input.turn;
+
+        accelerate_kbd = GameManager.Instance.input.accelerate_kbd;
+        brake_kbd = GameManager.Instance.input.brake_kbd;
+        turnRight_kbd = GameManager.Instance.input.turnRight_kbd;
+        turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd;
     }
 
     public void Update()
@@ -70,10 +75,13 @@ public class Drive : MonoBehaviour
 
         if (turn.action.IsPressed())
         {
-            Turn();
-        } else if (turnRight_kbd.action.IsPressed() || turnLeft_kbd.action.IsPressed())
+            Turn(turn.action.ReadValue<Vector2>().x);
+        } else if (turnRight_kbd.action.IsPressed())
         {
-            KeyboardTurn();
+            Turn(1.0f);
+        } else if (turnLeft_kbd.action.IsPressed())
+        {
+            Turn(-1.0f);
         }
     }
 
@@ -145,31 +153,16 @@ public class Drive : MonoBehaviour
         transform.position += transform.forward * velocityUpdate;
     }
 
-    private void Turn()
+    private void Turn(float turnDirection)
     {
-        Vector2 turnDirection = turn.action.ReadValue<Vector2>();
-
-        if (turnDirection.x != 0)
+        if (turnDirection != 0)
         {
-            transform.position += Vector3.forward * kart._turnRadius * turnDirection.x * m_currentSpeed * Time.deltaTime / 100;
-            transform.Rotate(0, kart._turnRadius * turnDirection.x * m_currentSpeed * Time.deltaTime, 0, Space.Self);
+            transform.position += Vector3.forward * kart._turnRadius * turnDirection * m_currentSpeed * Time.deltaTime / 100;
+            transform.Rotate(0, kart._turnRadius * turnDirection * m_currentSpeed * Time.deltaTime, 0, Space.Self);
         } 
 
         // x = horizontal (- left + right) y = vertical (- down + up)
         
-    }
-
-    private void KeyboardTurn()
-    {
-        if (turnRight_kbd.action.IsPressed())
-        {
-            transform.position += Vector3.forward * kart._turnRadius * m_currentSpeed * Time.deltaTime / 100;
-            transform.Rotate(0, kart._turnRadius *  m_currentSpeed * Time.deltaTime, 0, Space.Self);
-        } else if (turnLeft_kbd.action.IsPressed())
-        {
-            transform.position += Vector3.forward * -kart._turnRadius * m_currentSpeed * Time.deltaTime / 100;
-            transform.Rotate(0, -kart._turnRadius *  m_currentSpeed * Time.deltaTime, 0, Space.Self);
-        }
     }
 
 }
