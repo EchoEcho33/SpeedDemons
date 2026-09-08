@@ -43,9 +43,36 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Reverse",
+                    "name": "Accelerate_KBD",
                     "type": "Button",
-                    "id": "5fdca7d0-68ba-4625-990a-f3adff047292",
+                    "id": "d1c5e34b-f354-49a2-8eca-dd6406fa3fd0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Brake_KBD",
+                    "type": "Button",
+                    "id": "1bc243d7-944a-45a6-8812-eda9849c20c4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TurnRight_KBD",
+                    "type": "Button",
+                    "id": "844432b9-6115-4a8d-b4d9-cff5c0f0bf99",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TurnLeft_KBD",
+                    "type": "Button",
+                    "id": "7ab4bf1f-6962-4f54-ad50-5dd853214aae",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -99,12 +126,45 @@
                 },
                 {
                     "name": "",
-                    "id": "295af39d-a218-48f4-974f-e4788db31d3f",
-                    "path": "<XInputController>/buttonWest",
+                    "id": "9269b9c2-cdc2-4553-81f1-aa79284108c9",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reverse",
+                    "action": "Accelerate_KBD",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b17feda2-5675-4a2b-a028-113ce665fb1e",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake_KBD",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c14170e2-6775-4791-85b8-56646e9c447f",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurnRight_KBD",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c13b23cb-d478-42b3-869d-8d0576722d08",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurnLeft_KBD",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
