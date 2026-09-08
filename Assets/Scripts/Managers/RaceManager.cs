@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using Unity.Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
@@ -19,6 +21,10 @@ public class RaceManager : MonoBehaviour
     
     [SerializeField]
     private Kart selectedKart;
+
+    //Lap Display only for player, prob need smth else for all ui elements
+    [SerializeField]
+    public TMP_Text playerLaps;
 
     [SerializeField] 
     private GameObject cameraPrefab;

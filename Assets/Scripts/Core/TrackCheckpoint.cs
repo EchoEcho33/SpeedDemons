@@ -33,7 +33,7 @@ public class TrackCheckpoint : MonoBehaviour
         if (box == null) return;
         
         Gizmos.matrix = transform.localToWorldMatrix;
-        Gizmos.color = new Color(0f, 1f, 0f, 0.25f);
+        Gizmos.color = new Color(0f, 1f, 0f, 0.5f);
         Gizmos.DrawCube(box.center, box.size);
         
         Gizmos.color = Color.green;
