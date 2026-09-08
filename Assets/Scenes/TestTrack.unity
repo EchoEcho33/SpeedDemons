@@ -1822,10 +1822,10 @@ MonoBehaviour:
   accelerate: {fileID: -8277320560346230119, guid: 41a9820487b87304b942d4152c418794, type: 3}
   brake: {fileID: 4441145663013259888, guid: 41a9820487b87304b942d4152c418794, type: 3}
   turn: {fileID: 3764742966766722342, guid: 41a9820487b87304b942d4152c418794, type: 3}
-  accelerate_kbd: {fileID: 0}
-  brake_kbd: {fileID: 0}
-  turnRight_kbd: {fileID: 0}
-  turnLeft_kbd: {fileID: 0}
+  accelerate_kbd: {fileID: -8223289698064311723, guid: 41a9820487b87304b942d4152c418794, type: 3}
+  brake_kbd: {fileID: -616463696316726754, guid: 41a9820487b87304b942d4152c418794, type: 3}
+  turnRight_kbd: {fileID: -1199123607241241326, guid: 41a9820487b87304b942d4152c418794, type: 3}
+  turnLeft_kbd: {fileID: 2604191141738171914, guid: 41a9820487b87304b942d4152c418794, type: 3}
 --- !u!4 &1628683420
 Transform:
   m_ObjectHideFlags: 0
