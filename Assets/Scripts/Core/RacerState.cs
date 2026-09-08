@@ -5,15 +5,9 @@ public class RacerState : MonoBehaviour
 {
     public TrackCheckpoint currCheckpoint { get; private set;}
 
-    //Lap Counter for all racers
-    public int currLap { get; private set; }
-    public StartFinishCheckpoint startFinishCheckpoint;
-
     public void StartRace(StartFinishCheckpoint startFinishCheckpoint)
     {
         currCheckpoint = startFinishCheckpoint;
-        this.startFinishCheckpoint = startFinishCheckpoint;
-        currLap = 1;
     }
     
 #if UNITY_EDITOR
@@ -50,7 +44,5 @@ public class RacerState : MonoBehaviour
     public void ReachCheckpoint(TrackCheckpoint checkpoint)
     {
         currCheckpoint = checkpoint;
-        if (checkpoint == startFinishCheckpoint) { currLap++; 
-            FindFirstObjectByType<RaceManager>().playerLaps.text = "Lap " + currLap + "/3"; }
-        }
+    }
 }

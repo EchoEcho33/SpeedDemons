@@ -25,6 +25,7 @@ public class RaceManager : MonoBehaviour
     //Lap Display only for player, prob need smth else for all ui elements
     [SerializeField]
     public TMP_Text playerLaps;
+    public int maxLaps = 3;
 
     [SerializeField] 
     private GameObject cameraPrefab;

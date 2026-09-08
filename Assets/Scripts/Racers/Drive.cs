@@ -14,6 +14,10 @@ public class Drive : MonoBehaviour
     private float m_currentSpeed = 0.0f;
     private float m_turnSpeed = 0.0f;
 
+    //lap count for all drivers (non ai racers)
+    private TrackCheckpoint lastCheckpoint;
+    private int currLap = 0;
+
     private InputActionReference accelerate;
 
     private InputActionReference brake;
@@ -28,6 +32,7 @@ public class Drive : MonoBehaviour
         accelerate = GameManager.Instance.input.accelerate;
         brake = GameManager.Instance.input.brake;
         turn = GameManager.Instance.input.turn;
+        currLap = 1;
     }
 
     public void Initialize(Character newCharacter)
@@ -38,10 +43,23 @@ public class Drive : MonoBehaviour
         accelerate = GameManager.Instance.input.accelerate;
         brake = GameManager.Instance.input.brake;
         turn = GameManager.Instance.input.turn;
+        lastCheckpoint = character.racerState.currCheckpoint;
+        FindFirstObjectByType<RaceManager>().playerLaps.text = "Lap " +  1 + "/" + FindFirstObjectByType<RaceManager>().maxLaps;
     }
 
     public void Update()
     {
+        if (!lastCheckpoint.Equals(character.racerState.currCheckpoint)) {
+            if (character.racerState.currCheckpoint.Equals(FindAnyObjectByType<StartFinishCheckpoint>()))
+            {
+                RaceManager rManager = FindFirstObjectByType<RaceManager>();
+                currLap++;
+                rManager.playerLaps.text = (currLap > rManager.maxLaps) ? "FINISH" : "Lap " + currLap + "/" + rManager.maxLaps;
+                //insert condition for finish race other than replacing the text
+            }
+            lastCheckpoint = character.racerState.currCheckpoint;
+        }
+
         if (!accelerate || !brake || !turn) return;
 
         if (accelerate.action.IsPressed())
