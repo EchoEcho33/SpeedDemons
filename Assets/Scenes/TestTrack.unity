@@ -119,6 +119,29 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &41504433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6440828089159839250, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+  m_PrefabInstance: {fileID: 1112351731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &41504434 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+  m_PrefabInstance: {fileID: 1112351731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &41504435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41504433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fea7238e3685e4788fc72d8fae1e81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeathFloorTrigger
+  respawnManager: {fileID: 1628683421}
 --- !u!114 &118983794 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6921657446172296889, guid: c77979113db8e0b4486972bfefa95583, type: 3}
@@ -766,6 +789,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1332032557}
+  - {fileID: 41504434}
   - {fileID: 1865729141}
   - {fileID: 463088124}
   - {fileID: 136535222}
@@ -1172,6 +1196,78 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c77979113db8e0b4486972bfefa95583, type: 3}
+--- !u!1001 &1112351731
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 620109191}
+    m_Modifications:
+    - target: {fileID: -2136650985727934469, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440828089159839250, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_Name
+      value: DeathFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -16.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6440828089159839250, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 41504435}
+  m_SourcePrefab: {fileID: 100100000, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
 --- !u!114 &1171971601 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6921657446172296889, guid: c77979113db8e0b4486972bfefa95583, type: 3}
@@ -1750,6 +1846,7 @@ GameObject:
   - component: {fileID: 1628683419}
   - component: {fileID: 1628683418}
   - component: {fileID: 1628683417}
+  - component: {fileID: 1628683421}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1771,6 +1868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 0}
   race: {fileID: 0}
+  respawnManager: {fileID: 0}
 --- !u!114 &1628683418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1837,6 +1935,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1628683421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628683416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991bd190e68ae914696a0345b3277ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RespawnManager
+  deathFloor: {fileID: 41504433}
 --- !u!1001 &1658471683
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,10 +14,14 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public RaceManager race;
 
+    [HideInInspector]
+    public RespawnManager respawnManager;
+
     public void Awake()
     {
         input = FindFirstObjectByType<InputSys>();
         race = FindFirstObjectByType<RaceManager>();
+        respawnManager = FindFirstObjectByType<RespawnManager>();
 
         if (Instance == null)
             Instance = this;
