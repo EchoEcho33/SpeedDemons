@@ -15,7 +15,7 @@ public class Kart : ScriptableObject
     [SerializeField]
     public float _drag = 4.0f;
 
-    [SerializeField, Range(0, 75)]
+    [SerializeField, Range(0, 5)]
     public int _turnRadius;
 
     [SerializeField]
