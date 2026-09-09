@@ -87,33 +87,39 @@ public class Drive : MonoBehaviour
 
     private void ControllerMove()
     {
-        if (accelerate.action.IsPressed())
+        if (IsGrounded())
         {
-            Accelerate(accelerate.action.GetControlMagnitude());
-        }
-        else if (brake.action.IsPressed())
-        {
-            if (m_currentSpeed <= 0)
+            if (accelerate.action.IsPressed())
             {
-                Accelerate(-brake.action.GetControlMagnitude() / 2);
-            } else
-                Decelerate(brake.action.GetControlMagnitude(), kart._brakeStrength);
+                Accelerate(accelerate.action.GetControlMagnitude());
+            }
+            else if (brake.action.IsPressed())
+            {
+                if (m_currentSpeed <= 0)
+                {
+                    Accelerate(-brake.action.GetControlMagnitude() / 2);
+                } else
+                    Decelerate(brake.action.GetControlMagnitude(), kart._brakeStrength);
+            }
         }
     }
 
     private void KeyboardMove()
     {
-        if (accelerate_kbd.action.IsPressed())
+        if (IsGrounded())
         {
-            Accelerate(1.0f);
-        } else if (brake_kbd.action.IsPressed())
-        {
-            if (m_currentSpeed <= 0)
+            if (accelerate_kbd.action.IsPressed())
             {
-                Accelerate(-0.5f);
-            } else
+                Accelerate(1.0f);
+            } else if (brake_kbd.action.IsPressed())
             {
-                Decelerate(1.0f, kart._brakeStrength);
+                if (m_currentSpeed <= 0)
+                {
+                    Accelerate(-0.5f);
+                } else
+                {
+                    Decelerate(1.0f, kart._brakeStrength);
+                }
             }
         }
     }
@@ -155,14 +161,23 @@ public class Drive : MonoBehaviour
 
     private void Turn(float turnDirection)
     {
-        if (turnDirection != 0)
+        if (IsGrounded())
         {
-            transform.position += Vector3.forward * kart._turnRadius * turnDirection * m_currentSpeed * Time.deltaTime / 100;
-            transform.Rotate(0, kart._turnRadius * turnDirection * m_currentSpeed * Time.deltaTime, 0, Space.Self);
-        } 
+            if (turnDirection != 0)
+            {
+                transform.position += Vector3.forward * kart._turnRadius * turnDirection * m_currentSpeed * Time.deltaTime / 100;
+                transform.Rotate(0, kart._turnRadius * turnDirection * m_currentSpeed * Time.deltaTime, 0, Space.Self);
+            } 
+        }
 
         // x = horizontal (- left + right) y = vertical (- down + up)
         
+    }
+
+    // TODO: Check that wheels are grounded
+    private bool IsGrounded()
+    {
+        return true;
     }
 
 }
