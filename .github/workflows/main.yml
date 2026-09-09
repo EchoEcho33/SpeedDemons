@@ -1,7 +1,5 @@
 name: Build (Both Platforms)
 
-# workflow_dispatch is temporary until it's tested & verified
-# Once it's ready, this will be triggered on pull_request
 on:
   pull_request:
     branches: [main]
