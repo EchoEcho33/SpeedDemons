@@ -18,7 +18,12 @@ public class Drive : MonoBehaviour
 
     private InputActionReference brake;
 
-    private InputActionReference turn;  
+    private InputActionReference turn; 
+
+    private InputActionReference accelerate_kbd;
+    private InputActionReference brake_kbd;
+    private InputActionReference turnRight_kbd;
+    private InputActionReference turnLeft_kbd;
 
     public void Start()
     {
@@ -28,6 +33,11 @@ public class Drive : MonoBehaviour
         accelerate = GameManager.Instance.input.accelerate;
         brake = GameManager.Instance.input.brake;
         turn = GameManager.Instance.input.turn;
+
+        accelerate_kbd = GameManager.Instance.input.accelerate_kbd;
+        brake_kbd = GameManager.Instance.input.brake_kbd;
+        turnRight_kbd = GameManager.Instance.input.turnRight_kbd;
+        turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd;
     }
 
     public void Initialize(Character newCharacter)
@@ -35,15 +45,48 @@ public class Drive : MonoBehaviour
         character = newCharacter;
     
         kart = character.GetKart();
+
         accelerate = GameManager.Instance.input.accelerate;
         brake = GameManager.Instance.input.brake;
         turn = GameManager.Instance.input.turn;
+
+        accelerate_kbd = GameManager.Instance.input.accelerate_kbd;
+        brake_kbd = GameManager.Instance.input.brake_kbd;
+        turnRight_kbd = GameManager.Instance.input.turnRight_kbd;
+        turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd;
     }
 
     public void Update()
     {
-        if (!accelerate || !brake || !turn) return;
 
+        if (accelerate.action.IsPressed() || brake.action.IsPressed())
+        {
+            ControllerMove();
+        } else if (accelerate_kbd.action.IsPressed() || brake_kbd.action.IsPressed())
+        {
+            KeyboardMove();
+        } else if (m_currentSpeed > 0)
+        {
+            Decelerate(1.0f, kart._drag);
+        } else if (m_currentSpeed < 0)
+        {
+            Accelerate(0.5f);
+        }
+
+        if (turn.action.IsPressed())
+        {
+            Turn(turn.action.ReadValue<Vector2>().x);
+        } else if (turnRight_kbd.action.IsPressed())
+        {
+            Turn(1.0f);
+        } else if (turnLeft_kbd.action.IsPressed())
+        {
+            Turn(-1.0f);
+        }
+    }
+
+    private void ControllerMove()
+    {
         if (accelerate.action.IsPressed())
         {
             Accelerate(accelerate.action.GetControlMagnitude());
@@ -55,15 +98,24 @@ public class Drive : MonoBehaviour
                 Accelerate(-brake.action.GetControlMagnitude() / 2);
             } else
                 Decelerate(brake.action.GetControlMagnitude(), kart._brakeStrength);
-        } else if (m_currentSpeed > 0)
-        {
-            Decelerate(1.0f, kart._drag);
-        } else if (m_currentSpeed < 0)
-        {
-            Accelerate(0.5f);
         }
+    }
 
-        Turn();
+    private void KeyboardMove()
+    {
+        if (accelerate_kbd.action.IsPressed())
+        {
+            Accelerate(1.0f);
+        } else if (brake_kbd.action.IsPressed())
+        {
+            if (m_currentSpeed <= 0)
+            {
+                Accelerate(-0.5f);
+            } else
+            {
+                Decelerate(1.0f, kart._brakeStrength);
+            }
+        }
     }
 
     public Character getCharacter()
@@ -101,14 +153,12 @@ public class Drive : MonoBehaviour
         transform.position += transform.forward * velocityUpdate;
     }
 
-    private void Turn()
+    private void Turn(float turnDirection)
     {
-        Vector2 turnDirection = turn.action.ReadValue<Vector2>();
-
-        if (turnDirection.x != 0)
+        if (turnDirection != 0)
         {
-            transform.position += Vector3.forward * kart._turnRadius * turnDirection.x * m_currentSpeed * Time.deltaTime / 100;
-            transform.Rotate(0, kart._turnRadius * turnDirection.x * m_currentSpeed * Time.deltaTime, 0, Space.Self);
+            transform.position += Vector3.forward * kart._turnRadius * turnDirection * m_currentSpeed * Time.deltaTime / 100;
+            transform.Rotate(0, kart._turnRadius * turnDirection * m_currentSpeed * Time.deltaTime, 0, Space.Self);
         } 
 
         // x = horizontal (- left + right) y = vertical (- down + up)
