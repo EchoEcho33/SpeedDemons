@@ -4,9 +4,14 @@ public class RacerState : MonoBehaviour
 {
     public TrackCheckpoint currCheckpoint { get; private set;}
 
+    public int currLap { get; private set;}
+
     public void StartRace(StartFinishCheckpoint startFinishCheckpoint)
     {
         currCheckpoint = startFinishCheckpoint;
+        currLap = 1;
+
+        GameManager.Instance.race.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
     }
     
 #if UNITY_EDITOR
@@ -43,5 +48,10 @@ public class RacerState : MonoBehaviour
     public void ReachCheckpoint(TrackCheckpoint checkpoint)
     {
         currCheckpoint = checkpoint;
+        if (checkpoint.GetType().Equals(typeof(StartFinishCheckpoint)))
+        {
+            currLap++;
+            GameManager.Instance.race.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
+        }
     }
 }
