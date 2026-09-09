@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths-ignore:
       - '.github/**'
+      - '.gitignore'
       - '.vscode/**'
+      - '.idea/**'
       - 'README.md'
       - 'Assets/Models/**'
 
