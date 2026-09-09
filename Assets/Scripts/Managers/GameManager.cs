@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,6 +15,12 @@ public class GameManager : MonoBehaviour
     
     [HideInInspector]
     public RaceManager race;
+
+    [Header("Databases")]
+    [SerializeField]
+    public List<Item> items;
+    [SerializeField]
+    public List<Character> characters;
 
     public void Awake()
     {
