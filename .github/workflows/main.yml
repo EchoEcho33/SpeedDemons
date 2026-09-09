@@ -1,7 +1,8 @@
 name: Build (Both Platforms)
 
 # workflow_dispatch is temporary until it's tested & verified
-on: [pull_request, workflow_dispatch]
+# Once it's ready, this will be triggered on pull_request
+on: [workflow_dispatch]
 
 jobs:
   build-windows:
