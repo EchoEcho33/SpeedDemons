@@ -59,4 +59,9 @@ public class Character : ScriptableObject
     {
         racerState = newRacerState;
     }
+
+    public GameObject GetRacerAndCar()
+    {
+        return characterGameObject.transform.parent.parent.gameObject;
+    }
 }

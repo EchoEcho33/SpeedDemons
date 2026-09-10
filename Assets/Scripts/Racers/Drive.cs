@@ -38,6 +38,8 @@ public class Drive : MonoBehaviour
         brake_kbd = GameManager.Instance.input.brake_kbd;
         turnRight_kbd = GameManager.Instance.input.turnRight_kbd;
         turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd;
+
+        GameManager.Instance.input.respawn.action.performed += _ => RespawnCharacter();
     }
 
     public void Initialize(Character newCharacter)
@@ -54,6 +56,8 @@ public class Drive : MonoBehaviour
         brake_kbd = GameManager.Instance.input.brake_kbd;
         turnRight_kbd = GameManager.Instance.input.turnRight_kbd;
         turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd;
+
+        GameManager.Instance.input.respawn.action.performed += _ => RespawnCharacter();
     }
 
     public void Update()
@@ -180,4 +184,8 @@ public class Drive : MonoBehaviour
         return true;
     }
 
+    private void RespawnCharacter()
+    {
+        GameManager.Instance.respawnManager.RespawnCharacter(character);
+    }
 }
