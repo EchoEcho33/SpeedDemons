@@ -97,8 +97,10 @@ public class TrackCheckpoint : MonoBehaviour
         if (racerState.currCheckpoint.nextCheckpoint == this) racerState.ReachCheckpoint(this);
     }
 
-    // Currently the checkpoints are oriented incorrectly relative to the direction that the race progresses, so
-    // this method is strictly to provide the correction
+    /// <summary>
+    /// Provides a rotation pointing from the checkpoint forward direction towards the forward direction of the race
+    /// </summary>
+    /// <returns>Quaternion rotation to the track forward direction</returns>
     public Quaternion GetTrackForwardDirection()
     {
         return transform.rotation * Quaternion.Euler(Vector3.down * 90);

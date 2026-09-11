@@ -1,8 +1,5 @@
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class Drive : MonoBehaviour
 {
@@ -38,8 +35,6 @@ public class Drive : MonoBehaviour
         brake_kbd = GameManager.Instance.input.brake_kbd;
         turnRight_kbd = GameManager.Instance.input.turnRight_kbd;
         turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd;
-
-        GameManager.Instance.input.respawn.action.performed += _ => RespawnCharacter();
     }
 
     public void Initialize(Character newCharacter)
@@ -56,8 +51,6 @@ public class Drive : MonoBehaviour
         brake_kbd = GameManager.Instance.input.brake_kbd;
         turnRight_kbd = GameManager.Instance.input.turnRight_kbd;
         turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd;
-
-        GameManager.Instance.input.respawn.action.performed += _ => RespawnCharacter();
     }
 
     public void Update()

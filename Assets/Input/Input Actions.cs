@@ -163,15 +163,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Respawn"",
-                    ""type"": ""Button"",
-                    ""id"": ""2368d7f4-d617-4c2b-aaf8-ac9217e59811"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -262,17 +253,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""TurnLeft_KBD"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e9441805-ab58-4206-b263-d0851f7b798b"",
-                    ""path"": ""<Keyboard>/k"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Respawn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -289,7 +269,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Driving_Brake_KBD = m_Driving.FindAction("Brake_KBD", throwIfNotFound: true);
         m_Driving_TurnRight_KBD = m_Driving.FindAction("TurnRight_KBD", throwIfNotFound: true);
         m_Driving_TurnLeft_KBD = m_Driving.FindAction("TurnLeft_KBD", throwIfNotFound: true);
-        m_Driving_Respawn = m_Driving.FindAction("Respawn", throwIfNotFound: true);
     }
 
     ~@InputManager()
@@ -378,7 +357,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Brake_KBD;
     private readonly InputAction m_Driving_TurnRight_KBD;
     private readonly InputAction m_Driving_TurnLeft_KBD;
-    private readonly InputAction m_Driving_Respawn;
     /// <summary>
     /// Provides access to input actions defined in input action map "Driving".
     /// </summary>
@@ -422,10 +400,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Driving/TurnLeft_KBD".
         /// </summary>
         public InputAction @TurnLeft_KBD => m_Wrapper.m_Driving_TurnLeft_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/Respawn".
-        /// </summary>
-        public InputAction @Respawn => m_Wrapper.m_Driving_Respawn;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -476,9 +450,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @TurnLeft_KBD.started += instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.performed += instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.canceled += instance.OnTurnLeft_KBD;
-            @Respawn.started += instance.OnRespawn;
-            @Respawn.performed += instance.OnRespawn;
-            @Respawn.canceled += instance.OnRespawn;
         }
 
         /// <summary>
@@ -514,9 +485,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @TurnLeft_KBD.started -= instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.performed -= instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.canceled -= instance.OnTurnLeft_KBD;
-            @Respawn.started -= instance.OnRespawn;
-            @Respawn.performed -= instance.OnRespawn;
-            @Respawn.canceled -= instance.OnRespawn;
         }
 
         /// <summary>
@@ -613,12 +581,5 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTurnLeft_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Respawn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnRespawn(InputAction.CallbackContext context);
     }
 }

@@ -1,5 +1,3 @@
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,7 +25,4 @@ public class InputSys : MonoBehaviour
 
     [SerializeField]
     public InputActionReference turnLeft_kbd;
-
-    public InputActionReference respawn;
-
 }

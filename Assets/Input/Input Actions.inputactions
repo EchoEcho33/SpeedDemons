@@ -77,15 +77,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Respawn",
-                    "type": "Button",
-                    "id": "2368d7f4-d617-4c2b-aaf8-ac9217e59811",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -174,17 +165,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "TurnLeft_KBD",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e9441805-ab58-4206-b263-d0851f7b798b",
-                    "path": "<Keyboard>/k",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Respawn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
