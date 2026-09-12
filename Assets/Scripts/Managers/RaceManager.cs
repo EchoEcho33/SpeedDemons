@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using System.Runtime.Serialization;
 
 public class RaceManager : MonoBehaviour
 {
@@ -31,11 +33,19 @@ public class RaceManager : MonoBehaviour
     private List<Character> racers;
     private List<RacerState> _racerStates = new();
 
+    //Do we need to create a separete class for ui elements?
     [SerializeField]
     public TMP_Text playerLaps;
     [SerializeField]
     public int maxLaps = 3;
-    
+    [SerializeField]
+    public Image progressBar;
+
+    //filler for example
+    [SerializeField]
+    public Image backgroundImage;
+
+
     // TODO: This is just a temporary count of how many racers should the manager spawn. The real count is the # of racers in _racerStates
     [SerializeField] 
     private int racerCount = 1;
