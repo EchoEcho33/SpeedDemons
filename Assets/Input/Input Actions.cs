@@ -129,9 +129,36 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Reverse"",
+                    ""name"": ""Accelerate_KBD"",
                     ""type"": ""Button"",
-                    ""id"": ""5fdca7d0-68ba-4625-990a-f3adff047292"",
+                    ""id"": ""d1c5e34b-f354-49a2-8eca-dd6406fa3fd0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Brake_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""1bc243d7-944a-45a6-8812-eda9849c20c4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TurnRight_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""844432b9-6115-4a8d-b4d9-cff5c0f0bf99"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TurnLeft_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ab4bf1f-6962-4f54-ad50-5dd853214aae"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -185,12 +212,45 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""295af39d-a218-48f4-974f-e4788db31d3f"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""id"": ""9269b9c2-cdc2-4553-81f1-aa79284108c9"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Reverse"",
+                    ""action"": ""Accelerate_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b17feda2-5675-4a2b-a028-113ce665fb1e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c14170e2-6775-4791-85b8-56646e9c447f"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurnRight_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c13b23cb-d478-42b3-869d-8d0576722d08"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurnLeft_KBD"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -205,7 +265,10 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Driving_Brake = m_Driving.FindAction("Brake", throwIfNotFound: true);
         m_Driving_Turn = m_Driving.FindAction("Turn", throwIfNotFound: true);
         m_Driving_Camera = m_Driving.FindAction("Camera", throwIfNotFound: true);
-        m_Driving_Reverse = m_Driving.FindAction("Reverse", throwIfNotFound: true);
+        m_Driving_Accelerate_KBD = m_Driving.FindAction("Accelerate_KBD", throwIfNotFound: true);
+        m_Driving_Brake_KBD = m_Driving.FindAction("Brake_KBD", throwIfNotFound: true);
+        m_Driving_TurnRight_KBD = m_Driving.FindAction("TurnRight_KBD", throwIfNotFound: true);
+        m_Driving_TurnLeft_KBD = m_Driving.FindAction("TurnLeft_KBD", throwIfNotFound: true);
     }
 
     ~@InputManager()
@@ -290,7 +353,10 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Brake;
     private readonly InputAction m_Driving_Turn;
     private readonly InputAction m_Driving_Camera;
-    private readonly InputAction m_Driving_Reverse;
+    private readonly InputAction m_Driving_Accelerate_KBD;
+    private readonly InputAction m_Driving_Brake_KBD;
+    private readonly InputAction m_Driving_TurnRight_KBD;
+    private readonly InputAction m_Driving_TurnLeft_KBD;
     /// <summary>
     /// Provides access to input actions defined in input action map "Driving".
     /// </summary>
@@ -319,9 +385,21 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Camera => m_Wrapper.m_Driving_Camera;
         /// <summary>
-        /// Provides access to the underlying input action "Driving/Reverse".
+        /// Provides access to the underlying input action "Driving/Accelerate_KBD".
         /// </summary>
-        public InputAction @Reverse => m_Wrapper.m_Driving_Reverse;
+        public InputAction @Accelerate_KBD => m_Wrapper.m_Driving_Accelerate_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/Brake_KBD".
+        /// </summary>
+        public InputAction @Brake_KBD => m_Wrapper.m_Driving_Brake_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/TurnRight_KBD".
+        /// </summary>
+        public InputAction @TurnRight_KBD => m_Wrapper.m_Driving_TurnRight_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/TurnLeft_KBD".
+        /// </summary>
+        public InputAction @TurnLeft_KBD => m_Wrapper.m_Driving_TurnLeft_KBD;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -360,9 +438,18 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @Camera.started += instance.OnCamera;
             @Camera.performed += instance.OnCamera;
             @Camera.canceled += instance.OnCamera;
-            @Reverse.started += instance.OnReverse;
-            @Reverse.performed += instance.OnReverse;
-            @Reverse.canceled += instance.OnReverse;
+            @Accelerate_KBD.started += instance.OnAccelerate_KBD;
+            @Accelerate_KBD.performed += instance.OnAccelerate_KBD;
+            @Accelerate_KBD.canceled += instance.OnAccelerate_KBD;
+            @Brake_KBD.started += instance.OnBrake_KBD;
+            @Brake_KBD.performed += instance.OnBrake_KBD;
+            @Brake_KBD.canceled += instance.OnBrake_KBD;
+            @TurnRight_KBD.started += instance.OnTurnRight_KBD;
+            @TurnRight_KBD.performed += instance.OnTurnRight_KBD;
+            @TurnRight_KBD.canceled += instance.OnTurnRight_KBD;
+            @TurnLeft_KBD.started += instance.OnTurnLeft_KBD;
+            @TurnLeft_KBD.performed += instance.OnTurnLeft_KBD;
+            @TurnLeft_KBD.canceled += instance.OnTurnLeft_KBD;
         }
 
         /// <summary>
@@ -386,9 +473,18 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @Camera.started -= instance.OnCamera;
             @Camera.performed -= instance.OnCamera;
             @Camera.canceled -= instance.OnCamera;
-            @Reverse.started -= instance.OnReverse;
-            @Reverse.performed -= instance.OnReverse;
-            @Reverse.canceled -= instance.OnReverse;
+            @Accelerate_KBD.started -= instance.OnAccelerate_KBD;
+            @Accelerate_KBD.performed -= instance.OnAccelerate_KBD;
+            @Accelerate_KBD.canceled -= instance.OnAccelerate_KBD;
+            @Brake_KBD.started -= instance.OnBrake_KBD;
+            @Brake_KBD.performed -= instance.OnBrake_KBD;
+            @Brake_KBD.canceled -= instance.OnBrake_KBD;
+            @TurnRight_KBD.started -= instance.OnTurnRight_KBD;
+            @TurnRight_KBD.performed -= instance.OnTurnRight_KBD;
+            @TurnRight_KBD.canceled -= instance.OnTurnRight_KBD;
+            @TurnLeft_KBD.started -= instance.OnTurnLeft_KBD;
+            @TurnLeft_KBD.performed -= instance.OnTurnLeft_KBD;
+            @TurnLeft_KBD.canceled -= instance.OnTurnLeft_KBD;
         }
 
         /// <summary>
@@ -458,11 +554,32 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCamera(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Reverse" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Accelerate_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnReverse(InputAction.CallbackContext context);
+        void OnAccelerate_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Brake_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBrake_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TurnRight_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTurnRight_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TurnLeft_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTurnLeft_KBD(InputAction.CallbackContext context);
     }
 }
