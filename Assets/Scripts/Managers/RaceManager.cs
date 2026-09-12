@@ -68,8 +68,8 @@ public class RaceManager : MonoBehaviour
 
     private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot)
     {
-        Character character = racerSelection.character;
-        Kart kart = racerSelection.kart;
+        Character character = Instantiate(racerSelection.character);
+        Kart kart = Instantiate(racerSelection.kart);
         
         // Initialize kart + character.
         GameObject kartObject = Instantiate(kart.kartPrefab, startingGridSpot.GetSpawnPoint(), kart.kartPrefab.transform.rotation);

@@ -14,6 +14,8 @@ public class DeathFloorTrigger : MonoBehaviour
         Debug.Log("Entering trigger with object of type: " + other.GetType());
         
         Drive drive = other.gameObject.GetComponentInParent<Drive>();
+        if (drive == null) return;
+        
         RacerController racer = drive.Racer;
         if (racer != null)
         {
