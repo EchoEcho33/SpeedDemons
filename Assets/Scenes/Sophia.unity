@@ -2091,6 +2091,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 0}
   race: {fileID: 0}
+  cameraPrefab: {fileID: 4182171242420694627, guid: 9e20f44964cc50548a66f6f3c40df558, type: 3}
+  cinemachineCameraPrefab: {fileID: 7860237602509586326, guid: 1871585e22face84baaa97776b19243f, type: 3}
+  items: []
+  characters: []
 --- !u!114 &1628683418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2113,19 +2117,23 @@ MonoBehaviour:
   - {fileID: 264667372}
   - {fileID: 1316091991}
   - {fileID: 1514147225}
-  selectedCharacter: {fileID: 11400000, guid: 1e41ed9f7ada331478125c429cb9fcea, type: 2}
-  selectedKart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
-  cameraPrefab: {fileID: 4182171242420694627, guid: 9e20f44964cc50548a66f6f3c40df558, type: 3}
-  cinemachineCameraPrefab: {fileID: 7860237602509586326, guid: 1871585e22face84baaa97776b19243f, type: 3}
-  racers:
-  - {fileID: 11400000, guid: 1e41ed9f7ada331478125c429cb9fcea, type: 2}
-  - {fileID: 11400000, guid: 638869a3a718404428b0dbe89a009b87, type: 2}
-  - {fileID: 11400000, guid: 0583a517515d6de44a5207a8478fcfa7, type: 2}
-  - {fileID: 11400000, guid: 8e3f2fc56503c9248a5e12f47c465890, type: 2}
-  - {fileID: 11400000, guid: 5777b4e5024ae024b9a7480208fee6cb, type: 2}
-  - {fileID: 11400000, guid: 4eb759bd12df2d2488be4a267c7d8c72, type: 2}
-  - {fileID: 11400000, guid: 9a2aba8ab3b008143be437a17717b807, type: 2}
-  - {fileID: 11400000, guid: e996976c44f432144b9a15531683d02d, type: 2}
+  racerSelections:
+  - character: {fileID: 11400000, guid: 1e41ed9f7ada331478125c429cb9fcea, type: 2}
+    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  - character: {fileID: 11400000, guid: 638869a3a718404428b0dbe89a009b87, type: 2}
+    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  - character: {fileID: 11400000, guid: 0583a517515d6de44a5207a8478fcfa7, type: 2}
+    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  - character: {fileID: 11400000, guid: 8e3f2fc56503c9248a5e12f47c465890, type: 2}
+    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  - character: {fileID: 11400000, guid: 5777b4e5024ae024b9a7480208fee6cb, type: 2}
+    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  - character: {fileID: 11400000, guid: 4eb759bd12df2d2488be4a267c7d8c72, type: 2}
+    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  - character: {fileID: 11400000, guid: 9a2aba8ab3b008143be437a17717b807, type: 2}
+    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  - character: {fileID: 11400000, guid: e996976c44f432144b9a15531683d02d, type: 2}
+    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
   playerLaps: {fileID: 1142649889}
   maxLaps: 3
   racerCount: 4
