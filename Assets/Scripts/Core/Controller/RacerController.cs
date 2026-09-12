@@ -25,4 +25,13 @@ public abstract class RacerController : MonoBehaviour
     }
 
     protected abstract void InitializeDrive();
+    
+    /// <summary>
+    /// Provides the parent GameObject that holds both the racer character and the car that are controlled by the player/AI
+    /// </summary>
+    /// <returns>parent RacerAndCar GameObject of the Character</returns>
+    public GameObject GetCharacterAndKart()
+    {
+        return Character.characterObject.transform.parent.parent.gameObject;
+    }
 }

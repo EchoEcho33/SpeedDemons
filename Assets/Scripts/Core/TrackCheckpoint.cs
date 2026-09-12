@@ -95,4 +95,13 @@ public class TrackCheckpoint : MonoBehaviour
         
         if (racerState.CurrCheckpoint.nextCheckpoint == this) racerState.ReachCheckpoint(this);
     }
+
+    /// <summary>
+    /// Provides a rotation pointing from the checkpoint forward direction towards the forward direction of the race
+    /// </summary>
+    /// <returns>Quaternion rotation to the track forward direction</returns>
+    public Quaternion GetTrackForwardDirection()
+    {
+        return transform.rotation * Quaternion.Euler(Vector3.down * 90);
+    }
 }
