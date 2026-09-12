@@ -11,7 +11,10 @@ public class Drive : MonoBehaviour
 
     private Kart kart;
 
-    private float m_currentSpeed = 0.0f;
+    //temp test object
+    private GameObject item;
+
+    public float m_currentSpeed = 0.0f;
     private float m_turnSpeed = 0.0f;
 
     private InputActionReference accelerate;
@@ -38,6 +41,9 @@ public class Drive : MonoBehaviour
         brake_kbd = GameManager.Instance.input.brake_kbd;
         turnRight_kbd = GameManager.Instance.input.turnRight_kbd;
         turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd;
+
+        item = new GameObject();
+        item.AddComponent<MonkeyPaw>();
     }
 
     public void Initialize(Character newCharacter)
@@ -58,6 +64,11 @@ public class Drive : MonoBehaviour
 
     public void Update()
     {
+
+        if (brake_kbd.action.IsPressed())
+        {
+            item.GetComponent<MonkeyPaw>().Use();
+        }
 
         if (accelerate.action.IsPressed() || brake.action.IsPressed())
         {
