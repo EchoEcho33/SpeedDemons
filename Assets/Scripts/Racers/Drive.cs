@@ -1,9 +1,9 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Drive : MonoBehaviour
 {
-    [SerializeField]
+    public RacerController Racer { get; private set; }
+    
     private Character character;
 
     private Kart kart;
@@ -11,123 +11,21 @@ public class Drive : MonoBehaviour
     private float m_currentSpeed = 0.0f;
     private float m_turnSpeed = 0.0f;
 
-    private InputActionReference accelerate;
-
-    private InputActionReference brake;
-
-    private InputActionReference turn; 
-
-    private InputActionReference accelerate_kbd;
-    private InputActionReference brake_kbd;
-    private InputActionReference turnRight_kbd;
-    private InputActionReference turnLeft_kbd;
-
-    public void Start()
+    public void AssignController(RacerController newRacerController)
     {
-        if (character == null) return;
-        
-        kart = character.GetKart();
-        accelerate = GameManager.Instance.input.accelerate;
-        brake = GameManager.Instance.input.brake;
-        turn = GameManager.Instance.input.turn;
-
-        accelerate_kbd = GameManager.Instance.input.accelerate_kbd;
-        brake_kbd = GameManager.Instance.input.brake_kbd;
-        turnRight_kbd = GameManager.Instance.input.turnRight_kbd;
-        turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd;
+        Racer = newRacerController;
     }
 
-    public void Initialize(Character newCharacter)
+    public void Initialize(Character newCharacter, Kart newKart)
     {
         character = newCharacter;
-    
-        kart = character.GetKart();
-
-        accelerate = GameManager.Instance.input.accelerate;
-        brake = GameManager.Instance.input.brake;
-        turn = GameManager.Instance.input.turn;
-
-        accelerate_kbd = GameManager.Instance.input.accelerate_kbd;
-        brake_kbd = GameManager.Instance.input.brake_kbd;
-        turnRight_kbd = GameManager.Instance.input.turnRight_kbd;
-        turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd;
-    }
-
-    public void Update()
-    {
-
-        if (accelerate.action.IsPressed() || brake.action.IsPressed())
-        {
-            ControllerMove();
-        } else if (accelerate_kbd.action.IsPressed() || brake_kbd.action.IsPressed())
-        {
-            KeyboardMove();
-        } else if (m_currentSpeed > 0)
-        {
-            Decelerate(1.0f, kart._drag);
-        } else if (m_currentSpeed < 0)
-        {
-            Accelerate(0.5f);
-        }
-
-        if (turn.action.IsPressed())
-        {
-            Turn(turn.action.ReadValue<Vector2>().x);
-        } else if (turnRight_kbd.action.IsPressed())
-        {
-            Turn(1.0f);
-        } else if (turnLeft_kbd.action.IsPressed())
-        {
-            Turn(-1.0f);
-        }
-    }
-
-    private void ControllerMove()
-    {
-        if (IsGrounded())
-        {
-            if (accelerate.action.IsPressed())
-            {
-                Accelerate(accelerate.action.GetControlMagnitude());
-            }
-            else if (brake.action.IsPressed())
-            {
-                if (m_currentSpeed <= 0)
-                {
-                    Accelerate(-brake.action.GetControlMagnitude() / 2);
-                } else
-                    Decelerate(brake.action.GetControlMagnitude(), kart._brakeStrength);
-            }
-        }
-    }
-
-    private void KeyboardMove()
-    {
-        if (IsGrounded())
-        {
-            if (accelerate_kbd.action.IsPressed())
-            {
-                Accelerate(1.0f);
-            } else if (brake_kbd.action.IsPressed())
-            {
-                if (m_currentSpeed <= 0)
-                {
-                    Accelerate(-0.5f);
-                } else
-                {
-                    Decelerate(1.0f, kart._brakeStrength);
-                }
-            }
-        }
-    }
-
-    public Character getCharacter()
-    {
-        return character;
+        kart = newKart;
     }
 
     public void Accelerate(float amplitude)
     {
+        if (!IsGrounded()) return;
+        
         float initialFrameSpeed = m_currentSpeed;
         m_currentSpeed += kart._maxAcceleration * amplitude * Time.deltaTime;
 
@@ -143,7 +41,7 @@ public class Drive : MonoBehaviour
         transform.position += transform.forward * velocityUpdate;
     }
 
-    private void Decelerate(float amplitude, float a)
+    public void Decelerate(float amplitude, float a)
     {
         float initialFrameSpeed = m_currentSpeed;
         m_currentSpeed += -a * amplitude * Time.deltaTime;
@@ -156,7 +54,7 @@ public class Drive : MonoBehaviour
         transform.position += transform.forward * velocityUpdate;
     }
 
-    private void Turn(float turnDirection)
+    public void Turn(float turnDirection)
     {
         if (IsGrounded())
         {
@@ -175,5 +73,10 @@ public class Drive : MonoBehaviour
     private bool IsGrounded()
     {
         return true;
+    }
+
+    public float GetCurrentSpeed()
+    {
+        return m_currentSpeed;
     }
 }

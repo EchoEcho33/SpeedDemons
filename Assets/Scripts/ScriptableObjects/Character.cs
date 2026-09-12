@@ -24,42 +24,19 @@ public class Character : ScriptableObject
     [SerializeField]
     public GameObject characterPrefab;
     
-    [SerializeField]
-    private Kart selectedKart;
-    
-    public GameObject characterGameObject;
-    
-    public GameObject kartGameObject;
+    [HideInInspector]
+    public GameObject characterObject;
     
     private readonly int _spawnVerticalDisplacement = 2;
-
-    public RacerState racerState {private set; get;}
     
     public ECharacterType GetCharacterType()
     {
         return characterType;
     }
 
-    public Kart GetKart()
-    {
-        if (selectedKart != null) return selectedKart;
-        
-        return defaultKart;
-    }
-
     private void TriggerAbility()
     {
         ability.TriggerAbility();
-    }
-
-    public void SetKart(Kart kart)
-    {
-        selectedKart = kart;
-    }
-
-    public void AssignRacerState(RacerState newRacerState)
-    {
-        racerState = newRacerState;
     }
 
     /// <summary>
@@ -68,7 +45,7 @@ public class Character : ScriptableObject
     /// <returns>parent RacerAndCar GameObject of the Character</returns>
     public GameObject GetRacerAndCar()
     {
-        return characterGameObject.transform.parent.parent.gameObject;
+        return characterObject.transform.parent.parent.gameObject;
     }
 
     public void Respawn()
