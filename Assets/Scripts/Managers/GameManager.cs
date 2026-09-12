@@ -15,9 +15,6 @@ public class GameManager : MonoBehaviour
     
     [HideInInspector]
     public RaceManager race;
-
-    [HideInInspector]
-    public RespawnManager respawnManager;
     
     [Header("Databases")]
     [SerializeField]
@@ -29,7 +26,6 @@ public class GameManager : MonoBehaviour
     {
         input = FindFirstObjectByType<InputSys>();
         race = FindFirstObjectByType<RaceManager>();
-        respawnManager = FindFirstObjectByType<RespawnManager>();
 
         if (Instance == null)
             Instance = this;

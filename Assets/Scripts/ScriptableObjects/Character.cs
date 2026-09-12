@@ -30,6 +30,8 @@ public class Character : ScriptableObject
     public GameObject characterGameObject;
     
     public GameObject kartGameObject;
+    
+    private readonly int _spawnVerticalDisplacement = 2;
 
     public RacerState racerState {private set; get;}
     
@@ -67,5 +69,17 @@ public class Character : ScriptableObject
     public GameObject GetRacerAndCar()
     {
         return characterGameObject.transform.parent.parent.gameObject;
+    }
+
+    public void Respawn()
+    {
+        Debug.Log("Respawning racer");
+        GameObject racerAndCar = GetRacerAndCar();
+        Rigidbody racerAndCarRigidbody = racerAndCar.GetComponent<Rigidbody>();
+        racerAndCarRigidbody.linearVelocity = Vector3.zero;
+        racerAndCarRigidbody.angularVelocity = Vector3.zero;
+        TrackCheckpoint currentCheckpoint = racerState.currCheckpoint;
+        racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * _spawnVerticalDisplacement;
+        racerAndCar.transform.rotation = currentCheckpoint.GetTrackForwardDirection();
     }
 }

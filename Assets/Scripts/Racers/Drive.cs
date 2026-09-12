@@ -176,9 +176,4 @@ public class Drive : MonoBehaviour
     {
         return true;
     }
-
-    private void RespawnCharacter()
-    {
-        GameManager.Instance.respawnManager.RespawnCharacter(character);
-    }
 }

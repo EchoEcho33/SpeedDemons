@@ -659,28 +659,11 @@ Transform:
   - {fileID: 2047130920}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &488156341 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6440828089159839250, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
-  m_PrefabInstance: {fileID: 912430735}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &488156342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8031022386321242123, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
   m_PrefabInstance: {fileID: 912430735}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &488156343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 488156341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81fea7238e3685e4788fc72d8fae1e81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DeathFloorTrigger
 --- !u!1001 &498108747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1108,10 +1091,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6440828089159839250, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 488156343}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
 --- !u!1001 &955948234
 PrefabInstance:
@@ -2165,7 +2145,6 @@ GameObject:
   - component: {fileID: 1628683419}
   - component: {fileID: 1628683418}
   - component: {fileID: 1628683417}
-  - component: {fileID: 1628683421}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2187,7 +2166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 0}
   race: {fileID: 0}
-  respawnManager: {fileID: 0}
   items: []
   characters: []
 --- !u!114 &1628683418
@@ -2262,19 +2240,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1628683421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628683416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 991bd190e68ae914696a0345b3277ea8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RespawnManager
-  deathFloor: {fileID: 488156341}
 --- !u!1001 &1658471683
 PrefabInstance:
   m_ObjectHideFlags: 0

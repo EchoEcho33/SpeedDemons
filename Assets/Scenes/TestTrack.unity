@@ -141,7 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81fea7238e3685e4788fc72d8fae1e81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeathFloorTrigger
-  respawnManager: {fileID: 1628683421}
 --- !u!114 &118983794 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6921657446172296889, guid: c77979113db8e0b4486972bfefa95583, type: 3}
@@ -1846,7 +1845,6 @@ GameObject:
   - component: {fileID: 1628683419}
   - component: {fileID: 1628683418}
   - component: {fileID: 1628683417}
-  - component: {fileID: 1628683421}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1868,7 +1866,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 0}
   race: {fileID: 0}
-  respawnManager: {fileID: 0}
+  items: []
+  characters: []
 --- !u!114 &1628683418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1904,6 +1903,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4eb759bd12df2d2488be4a267c7d8c72, type: 2}
   - {fileID: 11400000, guid: 9a2aba8ab3b008143be437a17717b807, type: 2}
   - {fileID: 11400000, guid: e996976c44f432144b9a15531683d02d, type: 2}
+  playerLaps: {fileID: 0}
+  maxLaps: 3
   racerCount: 4
 --- !u!114 &1628683419
 MonoBehaviour:
@@ -1939,19 +1940,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1628683421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628683416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 991bd190e68ae914696a0345b3277ea8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RespawnManager
-  deathFloor: {fileID: 41504433}
 --- !u!1001 &1658471683
 PrefabInstance:
   m_ObjectHideFlags: 0
