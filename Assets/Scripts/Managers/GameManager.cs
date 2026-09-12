@@ -21,9 +21,6 @@ public class GameManager : MonoBehaviour
     public PlayerController LocalRacer { get; private set; }
     
     private List<RacerController> racers = new();
-
-    [HideInInspector]
-    public RespawnManager respawnManager;
     
     [Header("Databases")]
     [SerializeField]

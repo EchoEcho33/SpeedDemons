@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum ECharacterType
@@ -55,7 +56,8 @@ public class Character : ScriptableObject
         Rigidbody racerAndCarRigidbody = racerAndCar.GetComponent<Rigidbody>();
         racerAndCarRigidbody.linearVelocity = Vector3.zero;
         racerAndCarRigidbody.angularVelocity = Vector3.zero;
-        TrackCheckpoint currentCheckpoint = racerState.currCheckpoint;
+        RacerController racerController = characterObject.GetComponentInParent<Drive>().Racer;
+        TrackCheckpoint currentCheckpoint = racerController.RacerState.CurrCheckpoint;
         racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * _spawnVerticalDisplacement;
         racerAndCar.transform.rotation = currentCheckpoint.GetTrackForwardDirection();
     }
