@@ -91,19 +91,19 @@ public class PlayerController : RacerController
 
     private void ControllerMove()
     {
-        if (accelerate_kbd.IsPressed())
+        if (accelerate.IsPressed())
         {
-            Drive.Accelerate(1.0f);
-        } 
-        else if (brake_kbd.IsPressed())
+            Drive.Accelerate(accelerate.GetControlMagnitude());
+        }
+        else if (brake.IsPressed())
         {
             if (Drive.GetCurrentSpeed() <= 0)
             {
-                Drive.Accelerate(-0.5f);
-            } 
+                Drive.Accelerate(-brake.GetControlMagnitude() / 2);
+            }
             else
             {
-                Drive.Decelerate(1.0f, Kart._brakeStrength);
+                Drive.Decelerate(brake.GetControlMagnitude(), Kart._brakeStrength);
             }
         }
     }
