@@ -1,8 +1,5 @@
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class Drive : MonoBehaviour
 {
@@ -180,4 +177,8 @@ public class Drive : MonoBehaviour
         return true;
     }
 
+    private void RespawnCharacter()
+    {
+        GameManager.Instance.respawnManager.RespawnCharacter(character);
+    }
 }
