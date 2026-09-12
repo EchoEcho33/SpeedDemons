@@ -24,48 +24,16 @@ public class Character : ScriptableObject
     [SerializeField]
     public GameObject characterPrefab;
     
-    [SerializeField]
-    private Kart selectedKart;
-    
-    public GameObject characterGameObject;
-    
-    public GameObject kartGameObject;
-
-    public RacerState racerState {private set; get;}
+    [HideInInspector]
+    public GameObject characterObject;
     
     public ECharacterType GetCharacterType()
     {
         return characterType;
     }
 
-    public Kart GetKart()
-    {
-        if (selectedKart != null) return selectedKart;
-        
-        return defaultKart;
-    }
-
     private void TriggerAbility()
     {
         ability.TriggerAbility();
-    }
-
-    public void SetKart(Kart kart)
-    {
-        selectedKart = kart;
-    }
-
-    public void AssignRacerState(RacerState newRacerState)
-    {
-        racerState = newRacerState;
-    }
-
-    /// <summary>
-    /// Provides the parent GameObject that holds both the racer and the car that are controlled by the player/AI
-    /// </summary>
-    /// <returns>parent RacerAndCar GameObject of the Character</returns>
-    public GameObject GetRacerAndCar()
-    {
-        return characterGameObject.transform.parent.parent.gameObject;
     }
 }

@@ -13,13 +13,14 @@ public class DeathFloorTrigger : MonoBehaviour
     {
         Debug.Log("Entering trigger with object of type: " + other.GetType());
         
-        // TODO (Taylor) - may not work when we get AI implemented, as the Drive script is for player control
-        //      suggestion - create a map of Racers to RacerState objects in GameManager & register on start?
-        Character racer = other.gameObject.GetComponentInParent<Drive>().getCharacter();
+        Drive drive = other.gameObject.GetComponentInParent<Drive>();
+        if (drive == null) return;
+        
+        RacerController racer = drive.Racer;
         if (racer != null)
         {
             Debug.Log("Respawning " + other.gameObject.name);
-            respawnManager.RespawnCharacter(racer);
+            respawnManager.RespawnRacer(racer);
         }
     }
 }

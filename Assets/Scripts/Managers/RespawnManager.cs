@@ -18,11 +18,11 @@ public class RespawnManager : MonoBehaviour
     /// Respawn the racer at the most recent checkpoint reached
     /// </summary>
     /// <param name="racer">The racer to respawn. This could be a player or AI racer</param>
-    public void RespawnCharacter(Character racer)
+    public void RespawnRacer(RacerController racer)
     {
         Debug.Log("Respawning racer");
-        TrackCheckpoint currentCheckpoint = racer.racerState.currCheckpoint;
-        GameObject racerAndCar = racer.GetRacerAndCar();
+        TrackCheckpoint currentCheckpoint = racer.RacerState.CurrCheckpoint;
+        GameObject racerAndCar = racer.GetCharacterAndKart();
         Rigidbody racerAndCarRigidbody = racerAndCar.GetComponent<Rigidbody>();
         racerAndCarRigidbody.linearVelocity = Vector3.zero;
         racerAndCarRigidbody.angularVelocity = Vector3.zero;

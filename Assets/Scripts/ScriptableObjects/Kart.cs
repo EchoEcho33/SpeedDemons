@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "Kart", menuName = "Scriptable Objects/Kart")]
 public class Kart : ScriptableObject
@@ -23,4 +24,7 @@ public class Kart : ScriptableObject
     
     [SerializeField]
     public GameObject kartPrefab;
+    
+    [HideInInspector]
+    public GameObject kartObject;
 }
