@@ -24,39 +24,16 @@ public class Character : ScriptableObject
     [SerializeField]
     public GameObject characterPrefab;
     
-    [SerializeField]
-    private Kart selectedKart;
-    
-    public GameObject characterGameObject;
-    
-    public GameObject kartGameObject;
-
-    public RacerState racerState {private set; get;}
+    [HideInInspector]
+    public GameObject characterObject;
     
     public ECharacterType GetCharacterType()
     {
         return characterType;
     }
 
-    public Kart GetKart()
-    {
-        if (selectedKart != null) return selectedKart;
-        
-        return defaultKart;
-    }
-
     private void TriggerAbility()
     {
         ability.TriggerAbility();
-    }
-
-    public void SetKart(Kart kart)
-    {
-        selectedKart = kart;
-    }
-
-    public void AssignRacerState(RacerState newRacerState)
-    {
-        racerState = newRacerState;
     }
 }
