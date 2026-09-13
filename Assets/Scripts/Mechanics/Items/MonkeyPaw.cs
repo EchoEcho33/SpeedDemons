@@ -15,8 +15,8 @@ public class MonkeyPaw : Item
     private float timeRemaining = 0;
     private float decel_calc = 0;
 
-    //temp idea, need a solid idea for connecting item to its user for purpose of who to use item on/not on
-    protected Drive user;
+    //temp connection, dont know which class to use really
+    private RacerController user;
     private float baseAccel = 0;
     private float baseSpeed = 0;
 
@@ -34,14 +34,14 @@ public class MonkeyPaw : Item
         if (state != State.INACTIVE) { return; }
 
         //temp for test
-        user = FindFirstObjectByType<Drive>();
-        baseAccel = user.getCharacter().GetKart()._maxAcceleration;
-        baseSpeed = user.getCharacter().GetKart()._maxSpeed;
+        user = FindFirstObjectByType<PlayerController>();
+        baseAccel = user.Kart._maxAcceleration;
+        baseSpeed = user.Kart._maxSpeed;
 
         state = State.BOOST;
         timeRemaining = duration_up;
-        user.getCharacter().GetKart()._maxAcceleration = baseAccel * boost;
-        user.getCharacter().GetKart()._maxSpeed = baseSpeed * boost;
+        user.Kart._maxAcceleration = baseAccel * boost;
+        user.Kart._maxSpeed = baseSpeed * boost;
 
         decel_calc = ((decel - boost) * baseSpeed) / timedecel;
     }
@@ -58,14 +58,14 @@ public class MonkeyPaw : Item
             {
                 if (state == State.BOOST)
                 {
-                    user.getCharacter().GetKart()._maxAcceleration = decel_calc;
+                    user.Kart._maxAcceleration = decel_calc;
                     state = State.DECEL;
                 }
               
-                if (user.getCharacter().GetKart()._maxAcceleration == decel_calc && user.m_currentSpeed <= baseSpeed * decel)
+                if (user.Kart._maxAcceleration == decel_calc && user.Drive.m_currentSpeed <= baseSpeed * decel)
                 {
-                    user.getCharacter().GetKart()._maxAcceleration =baseAccel * decel;
-                    user.getCharacter().GetKart()._maxSpeed = baseSpeed * decel;
+                    user.Kart._maxAcceleration = baseAccel * decel;
+                    user.Kart._maxSpeed = baseSpeed * decel;
 
                 }
 
@@ -74,8 +74,8 @@ public class MonkeyPaw : Item
         }
         else
         {
-            user.getCharacter().GetKart()._maxAcceleration = baseAccel;
-            user.getCharacter().GetKart()._maxSpeed = baseSpeed;
+            user.Kart._maxAcceleration = baseAccel;
+            user.Kart._maxSpeed = baseSpeed;
             state = State.INACTIVE;
         }
     }
@@ -83,7 +83,7 @@ public class MonkeyPaw : Item
     public void OnDestroy()
     {
         if (user == null) return;
-        user.getCharacter().GetKart()._maxAcceleration = baseAccel;
-        user.getCharacter().GetKart()._maxSpeed = baseSpeed;
+        user.Kart._maxAcceleration = baseAccel;
+        user.Kart._maxSpeed = baseSpeed;
     }
 }

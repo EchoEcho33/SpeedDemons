@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : RacerController
 {
     public Camera MainCamera { get; private set; }
-    
     public CinemachineCamera CinemachineCamera { get; private set; }
     
     private InputAction accelerate;
