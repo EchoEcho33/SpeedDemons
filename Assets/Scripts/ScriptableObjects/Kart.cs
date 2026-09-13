@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "Kart", menuName = "Scriptable Objects/Kart")]
 public class Kart : ScriptableObject
@@ -15,9 +16,15 @@ public class Kart : ScriptableObject
     [SerializeField]
     public float _drag = 4.0f;
 
-    [SerializeField, Range(0, 75)]
+    [SerializeField, Range(0, 5)]
     public int _turnRadius;
 
     [SerializeField]
     public float _traction;
+    
+    [SerializeField]
+    public GameObject kartPrefab;
+    
+    [HideInInspector]
+    public GameObject kartObject;
 }
