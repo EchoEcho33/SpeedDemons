@@ -177,5 +177,10 @@ namespace FMODUnity
                 }
             }
         }
+
+        public void SetAttenuationObject(GameObject newTarget)
+        {
+            attenuationObject = newTarget;
+        }   
     }
 }

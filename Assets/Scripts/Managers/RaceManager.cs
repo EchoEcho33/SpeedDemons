@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -25,6 +26,10 @@ public class RaceManager : MonoBehaviour
     
     // TODO: This is just a temporary count of how many racers should the manager spawn. The real count is the # of racers in _racerStates
     public int racerCount = 1;
+
+    // FMOD script to allow us to set the player to be the 
+    public FMODUnity.StudioListener studioListener;
+
     
     public void Start()
     {
@@ -43,10 +48,15 @@ public class RaceManager : MonoBehaviour
         remainingStartingGrid.RemoveAt(startingGridIndex);
 
         RacerSelection localRacerSelection = racerSelections[0]; // TODO: Currently, the local player selection is the first in the list
-        (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot);
+        (Character localCharacter, Kart localKart, RacerState localRacerState, GameObject playerObject) = SpawnRacer(localRacerSelection, startingGridSpot);
         PlayerController localRacer = GameManager.Instance.LocalRacer;
         localRacer.AssignCharacterAndKart(localCharacter, localKart);
         localRacer.AssignRacerState(localRacerState);
+
+        // Sets the attenuarion object for FMOD to the players car. Will need to be updated for multiplayer probably
+        studioListener = localRacer.MainCamera.GetComponent<FMODUnity.StudioListener>();
+        studioListener.SetAttenuationObject(playerObject);
+        // playerObject.AddComponent<TestCarHonk>();
         
         List<RacerController> racerControllers = GameManager.Instance.GetRacers();
         racerControllers.Remove(localRacer);
@@ -58,7 +68,7 @@ public class RaceManager : MonoBehaviour
             startingGridSpot = startingGrid[startingGridIndex];
             remainingStartingGrid.RemoveAt(startingGridIndex);
             
-            (Character character, Kart kart, RacerState racerState) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot);
+            (Character character, Kart kart, RacerState racerState, GameObject kartObject) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot);
             racer.AssignCharacterAndKart(character, kart);
             racer.AssignRacerState(racerState); 
             
@@ -66,7 +76,7 @@ public class RaceManager : MonoBehaviour
         }
     }
 
-    private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot)
+    private (Character, Kart, RacerState, GameObject) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot)
     {
         Character character = Instantiate(racerSelection.character);
         Kart kart = Instantiate(racerSelection.kart);
@@ -87,6 +97,6 @@ public class RaceManager : MonoBehaviour
         // Assign racer state to character.
         racerStates.Add(racerState);
         
-        return (character, kart, racerState);
+        return (character, kart, racerState, kartObject);
     }
 }

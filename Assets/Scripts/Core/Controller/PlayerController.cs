@@ -1,4 +1,5 @@
-﻿using Unity.Cinemachine;
+﻿using FMODUnity;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
