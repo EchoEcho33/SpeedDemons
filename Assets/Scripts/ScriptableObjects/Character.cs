@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum ECharacterType
@@ -24,25 +25,14 @@ public class Character : ScriptableObject
     [SerializeField]
     public GameObject characterPrefab;
     
-    [SerializeField]
-    private Kart selectedKart;
+    [HideInInspector]
+    public GameObject characterObject;
     
-    public GameObject characterGameObject;
-    
-    public GameObject kartGameObject;
-
-    public RacerState racerState {private set; get;}
+    private readonly int _spawnVerticalDisplacement = 2;
     
     public ECharacterType GetCharacterType()
     {
         return characterType;
-    }
-
-    public Kart GetKart()
-    {
-        if (selectedKart != null) return selectedKart;
-        
-        return defaultKart;
     }
 
     private void TriggerAbility()
@@ -50,13 +40,25 @@ public class Character : ScriptableObject
         ability.TriggerAbility();
     }
 
-    public void SetKart(Kart kart)
+    /// <summary>
+    /// Provides the parent GameObject that holds both the racer and the car that are controlled by the player/AI
+    /// </summary>
+    /// <returns>parent RacerAndCar GameObject of the Character</returns>
+    public GameObject GetRacerAndCar()
     {
-        selectedKart = kart;
+        return characterObject.transform.parent.parent.gameObject;
     }
 
-    public void AssignRacerState(RacerState newRacerState)
+    public void Respawn()
     {
-        racerState = newRacerState;
+        Debug.Log("Respawning racer");
+        GameObject racerAndCar = GetRacerAndCar();
+        Rigidbody racerAndCarRigidbody = racerAndCar.GetComponent<Rigidbody>();
+        racerAndCarRigidbody.linearVelocity = Vector3.zero;
+        racerAndCarRigidbody.angularVelocity = Vector3.zero;
+        RacerController racerController = characterObject.GetComponentInParent<Drive>().Racer;
+        TrackCheckpoint currentCheckpoint = racerController.RacerState.CurrCheckpoint;
+        racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * _spawnVerticalDisplacement;
+        racerAndCar.transform.rotation = currentCheckpoint.GetTrackForwardDirection();
     }
 }

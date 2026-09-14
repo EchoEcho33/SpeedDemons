@@ -38,6 +38,10 @@ public class TrackCheckpoint : MonoBehaviour
         
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(box.center, box.size);
+        
+        Handles.color = new Color(0f, 1f, 0f, 0.5f);
+        Vector3 conePosition = transform.TransformPoint(box.center) + GetTrackForwardDirection() * Vector3.forward * box.size.x * 2;
+        Handles.ConeHandleCap(0, conePosition, GetTrackForwardDirection(), 5.0f, EventType.Repaint);
     }
     
     protected virtual void OnDrawGizmosSelected()
@@ -79,21 +83,31 @@ public class TrackCheckpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Drive racer = other.gameObject.GetComponentInParent<Drive>();
-
+        Drive drive = other.gameObject.GetComponentInParent<Drive>();
+        if (drive == null) return;
+        
+        RacerController racer = drive.Racer;
         if (racer == null)
         {
             Debug.LogError("Racer not found.");
             return;
         }
         
-        RacerState racerState = racer.getCharacter().racerState;
-
+        RacerState racerState = racer.RacerState;
         if (racerState == null) {
             Debug.LogError("Racer state not found.");
             return;
         }
         
-        if (racerState.currCheckpoint.nextCheckpoint == this) racerState.ReachCheckpoint(this);
+        if (racerState.CurrCheckpoint.nextCheckpoint == this) racerState.ReachCheckpoint(this);
+    }
+
+    /// <summary>
+    /// Provides a rotation pointing from the checkpoint forward direction towards the forward direction of the race
+    /// </summary>
+    /// <returns>Quaternion rotation to the track forward direction</returns>
+    public Quaternion GetTrackForwardDirection()
+    {
+        return transform.rotation * Quaternion.Euler(Vector3.down * 90);
     }
 }
