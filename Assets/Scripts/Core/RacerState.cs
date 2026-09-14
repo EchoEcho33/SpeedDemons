@@ -8,6 +8,10 @@ public class RacerState : MonoBehaviour
 
     public int currLap { get; private set;}
 
+    //arbitrary max value
+    public int abilityMaxValue = 10;
+    public int abilityBar { get; private set; }
+    
     public void AssignController(RacerController newRacerController)
     {
         RacerController = newRacerController;
@@ -17,6 +21,7 @@ public class RacerState : MonoBehaviour
     {
         CurrCheckpoint = startFinishCheckpoint;
         currLap = 1;
+        abilityBar = 0;
 
         GameManager.Instance.UI.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
     }
@@ -54,11 +59,35 @@ public class RacerState : MonoBehaviour
 
     public void ReachCheckpoint(TrackCheckpoint checkpoint)
     {
+        updateBar(2);
+
         CurrCheckpoint = checkpoint;
         if (checkpoint.GetType().Equals(typeof(StartFinishCheckpoint)))
         {
             currLap++;
+            
+            //applies from all racers, change after getting Driver to connect with certain racerStates
+            if (GameManager.Instance.race.playerLaps == null) return;
             GameManager.Instance.UI.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
+        }
+    }
+
+    //filler method for ability bar, im guessing the bar updates additively/subtractively
+    public void updateBar(int add)
+    {
+        abilityBar = Mathf.Clamp(0, abilityBar + add, abilityMaxValue);
+
+        if (GameManager.Instance.race.progressBar != null)
+        {
+            GameManager.Instance.race.progressBar.fillAmount = abilityBar / (float)abilityMaxValue;
+        }
+
+        //glow green if max
+
+        if (GameManager.Instance.race.backgroundImage != null)
+        {
+            if (abilityBar == abilityMaxValue) { GameManager.Instance.race.backgroundImage.color = new Color(0, 255, 0); }
+            else { GameManager.Instance.race.backgroundImage.color = new Color(255, 255, 255); }
         }
     }
 }
