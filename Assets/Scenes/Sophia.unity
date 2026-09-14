@@ -1868,14 +1868,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 0}
   race: {fileID: 0}
+  UI: {fileID: 0}
   cameraPrefab: {fileID: 4182171242420694627, guid: 9e20f44964cc50548a66f6f3c40df558, type: 3}
   cinemachineCameraPrefab: {fileID: 7860237602509586326, guid: 1871585e22face84baaa97776b19243f, type: 3}
-  respawnManager: {fileID: 0}
-  items: []
+  items:
+  - {fileID: 3169528773399122507, guid: 73024220a3d8e7f42b9c172165bfe7e0, type: 3}
   characters: []
-  _mainRaceCanvas: {fileID: 1055699547}
-  _primaryItemIcon: {fileID: 3499518448512214087}
-  _secondaryItemIcon: {fileID: 3499518448512214088}
 --- !u!114 &1628683418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1915,7 +1913,6 @@ MonoBehaviour:
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
   - character: {fileID: 11400000, guid: e996976c44f432144b9a15531683d02d, type: 2}
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
-  playerLaps: {fileID: 1142649889}
   maxLaps: 3
   racerCount: 4
 --- !u!114 &1628683419
@@ -1961,9 +1958,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1628683416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 991bd190e68ae914696a0345b3277ea8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c626edfcd1f9c340aee3c421537392a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RespawnManager
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  _mainRaceCanvas: {fileID: 1055699547}
+  _primaryItemIcon: {fileID: 3499518448512214087}
+  _secondaryItemIcon: {fileID: 3499518448512214088}
+  playerLaps: {fileID: 1142649889}
 --- !u!1001 &1658471683
 PrefabInstance:
   m_ObjectHideFlags: 0

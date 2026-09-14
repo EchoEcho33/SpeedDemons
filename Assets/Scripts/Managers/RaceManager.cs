@@ -18,15 +18,12 @@ public class RaceManager : MonoBehaviour
     private List<RacerSelection> racerSelections;
     
     private List<RacerState> racerStates = new();
-
-    [SerializeField]
-    public TMP_Text playerLaps;
+    
     [SerializeField]
     public int maxLaps = 3;
     
     // TODO: This is just a temporary count of how many racers should the manager spawn. The real count is the # of racers in _racerStates
     public int racerCount = 1;
-
     
     public void Start()
     {
@@ -90,5 +87,10 @@ public class RaceManager : MonoBehaviour
         racerStates.Add(racerState);
         
         return (character, kart, racerState);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        
     }
 }

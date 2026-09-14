@@ -18,7 +18,7 @@ public class RacerState : MonoBehaviour
         CurrCheckpoint = startFinishCheckpoint;
         currLap = 1;
 
-        GameManager.Instance.race.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
+        GameManager.Instance.UI.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
     }
     
 #if UNITY_EDITOR
@@ -58,7 +58,7 @@ public class RacerState : MonoBehaviour
         if (checkpoint.GetType().Equals(typeof(StartFinishCheckpoint)))
         {
             currLap++;
-            GameManager.Instance.race.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
+            GameManager.Instance.UI.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
         }
     }
 }
