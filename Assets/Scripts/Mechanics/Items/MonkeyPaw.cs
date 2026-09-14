@@ -1,8 +1,11 @@
 using System.Data;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class MonkeyPaw : Item
 {
+
+    [Header("Monkey's Paw Attributes")]
     //placeholder/test values
     public float boost = 2.0f;
     public float decel = 0.7f;
