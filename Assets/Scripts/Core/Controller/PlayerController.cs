@@ -1,11 +1,12 @@
-﻿using Unity.Cinemachine;
+﻿using FMODUnity;
+using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : RacerController
 {
     public Camera MainCamera { get; private set; }
-    
     public CinemachineCamera CinemachineCamera { get; private set; }
     
     private InputAction accelerate;
@@ -26,6 +27,7 @@ public class PlayerController : RacerController
     {
         base.AssignCharacterAndKart(newCharacter, newKart);
         InitializeCamera();
+        InitalizeListener();
     }
 
     protected override void InitializeDrive()
@@ -52,6 +54,11 @@ public class PlayerController : RacerController
         GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
         CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
         CinemachineCamera.Follow = Kart.kartObject.transform;
+    }
+
+    private void InitalizeListener()
+    {
+        MainCamera.GetComponent<FMODUnity.StudioListener>().SetAttenuationObject(GetCharacterAndKart());
     }
 
     private void Update()

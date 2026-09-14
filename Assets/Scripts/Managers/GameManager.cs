@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(InputSys), typeof(RaceManager))]
 public class GameManager : MonoBehaviour
@@ -21,9 +22,6 @@ public class GameManager : MonoBehaviour
     public PlayerController LocalRacer { get; private set; }
     
     private List<RacerController> racers = new();
-
-    [HideInInspector]
-    public RespawnManager respawnManager;
     
     [Header("Databases")]
     [SerializeField]
@@ -32,13 +30,20 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public List<Character> characters;
 
+    [Header("UI")]
+    [SerializeField]
+    private Canvas _mainRaceCanvas;
+    [SerializeField]
+    private Image _primaryItemIcon;
+    [SerializeField]
+    private Image _secondaryItemIcon;
+
     public void Awake()
     {
         if (Instance == null) Instance = this;
 
         input = FindFirstObjectByType<InputSys>();
         race = FindFirstObjectByType<RaceManager>();
-        respawnManager = FindFirstObjectByType<RespawnManager>();
 
         // TODO: The Local Player driven by Inputs, maybe multiplayer?
         GameObject playerControllerObject = new GameObject("PlayerController");
