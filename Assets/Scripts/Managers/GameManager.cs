@@ -22,9 +22,6 @@ public class GameManager : MonoBehaviour
     public PlayerController LocalRacer { get; private set; }
     
     private List<RacerController> racers = new();
-
-    [HideInInspector]
-    public RespawnManager respawnManager;
     
     [Header("Databases")]
     [SerializeField]
@@ -47,7 +44,6 @@ public class GameManager : MonoBehaviour
 
         input = FindFirstObjectByType<InputSys>();
         race = FindFirstObjectByType<RaceManager>();
-        respawnManager = FindFirstObjectByType<RespawnManager>();
 
         // TODO: The Local Player driven by Inputs, maybe multiplayer?
         GameObject playerControllerObject = new GameObject("PlayerController");

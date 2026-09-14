@@ -4,7 +4,7 @@ public class Drive : MonoBehaviour
 {
     public RacerController Racer { get; private set; }
     
-    private Character character;
+    public Character character { get; private set; }
 
     private Kart kart;
 
