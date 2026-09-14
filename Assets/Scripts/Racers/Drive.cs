@@ -8,7 +8,7 @@ public class Drive : MonoBehaviour
 
     private Kart kart;
 
-    private float m_currentSpeed = 0.0f;
+    public float m_currentSpeed = 0.0f;
     private float m_turnSpeed = 0.0f;
 
     public void AssignController(RacerController newRacerController)
