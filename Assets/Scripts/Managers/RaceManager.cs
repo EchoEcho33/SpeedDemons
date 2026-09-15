@@ -92,8 +92,4 @@ public class RaceManager : MonoBehaviour
         return (character, kart, racerState);
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        
-    }
 }
