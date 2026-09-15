@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(InputSys), typeof(RaceManager))]
+[RequireComponent(typeof(InputSys), typeof(RaceManager), typeof(UIManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     
     [HideInInspector]
     public RaceManager race;
+
+    [HideInInspector]
+    public UIManager UI;
     
     [SerializeField] 
     public GameObject cameraPrefab;
@@ -31,20 +34,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public List<Character> characters;
 
-    [Header("UI")]
-    [SerializeField]
-    private Canvas _mainRaceCanvas;
-    [SerializeField]
-    private Image _primaryItemIcon;
-    [SerializeField]
-    private Image _secondaryItemIcon;
-
     public void Awake()
     {
         if (Instance == null) Instance = this;
 
-        input = FindFirstObjectByType<InputSys>();
-        race = FindFirstObjectByType<RaceManager>();
+        input = GetComponent<InputSys>();
+        race = GetComponent<RaceManager>();
+        UI = GetComponent<UIManager>();
 
         // TODO: The Local Player driven by Inputs, maybe multiplayer?
         GameObject playerControllerObject = new GameObject("PlayerController");
