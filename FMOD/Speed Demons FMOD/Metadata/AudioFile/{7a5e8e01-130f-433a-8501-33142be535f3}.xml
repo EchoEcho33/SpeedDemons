@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{7a5e8e01-130f-433a-8501-33142be535f3}">
+		<property name="assetPath">
+			<value>SFX/Car horn/Sean_Honk.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.008</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d66e118d-1d1a-47d2-9dec-40e7fc720e25}</destination>
+		</relationship>
+	</object>
+</objects>
