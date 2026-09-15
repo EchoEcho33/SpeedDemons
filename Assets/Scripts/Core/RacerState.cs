@@ -23,7 +23,7 @@ public class RacerState : MonoBehaviour
         currLap = 1;
         abilityBar = 0;
 
-        GameManager.Instance.UI.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
+        GameManager.Instance.UI.UpdateLap(1);
     }
     
 #if UNITY_EDITOR
@@ -67,8 +67,7 @@ public class RacerState : MonoBehaviour
             currLap++;
             
             //applies from all racers, change after getting Driver to connect with certain racerStates
-            if (GameManager.Instance.race.playerLaps == null) return;
-            GameManager.Instance.UI.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
+            GameManager.Instance.UI.UpdateLap(currLap);
         }
     }
 
@@ -77,17 +76,6 @@ public class RacerState : MonoBehaviour
     {
         abilityBar = Mathf.Clamp(0, abilityBar + add, abilityMaxValue);
 
-        if (GameManager.Instance.race.progressBar != null)
-        {
-            GameManager.Instance.race.progressBar.fillAmount = abilityBar / (float)abilityMaxValue;
-        }
-
-        //glow green if max
-
-        if (GameManager.Instance.race.backgroundImage != null)
-        {
-            if (abilityBar == abilityMaxValue) { GameManager.Instance.race.backgroundImage.color = new Color(0, 255, 0); }
-            else { GameManager.Instance.race.backgroundImage.color = new Color(255, 255, 255); }
-        }
+        GameManager.Instance.UI.UpdateBar(abilityBar, abilityMaxValue);
     }
 }
