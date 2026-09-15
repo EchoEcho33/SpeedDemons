@@ -8,9 +8,16 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Canvas _mainRaceCanvas;
     [SerializeField]
-    private Image _primaryItemIcon;
+    public Image primaryItemIcon;
     [SerializeField]
-    private Image _secondaryItemIcon;
+    public Image secondaryItemIcon;
+
+    [SerializeField]
+    public Image progressBar;
+
+    //filler for example
+    [SerializeField]
+    public Image backgroundImage;
 
     [SerializeField]
     public TMP_Text playerLaps;

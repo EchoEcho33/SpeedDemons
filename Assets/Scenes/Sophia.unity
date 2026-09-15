@@ -660,6 +660,17 @@ Transform:
   - {fileID: 2047130920}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &487555753 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6512433245927889120, guid: cc5e42cdc64ae40459c48dc079ed8a37, type: 3}
+  m_PrefabInstance: {fileID: 3499518448512214086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &498108747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1019,6 +1030,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2612042291722588935, guid: c77979113db8e0b4486972bfefa95583, type: 3}
   m_PrefabInstance: {fileID: 2100234427}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &876962582 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6833547564149119997, guid: cc5e42cdc64ae40459c48dc079ed8a37, type: 3}
+  m_PrefabInstance: {fileID: 3499518448512214086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &955948234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1913,7 +1935,9 @@ MonoBehaviour:
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
   - character: {fileID: 11400000, guid: e996976c44f432144b9a15531683d02d, type: 2}
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  playerLaps: {fileID: 1142649889}
   maxLaps: 3
+  progressBar: {fileID: 487555753}
   racerCount: 4
 --- !u!114 &1628683419
 MonoBehaviour:
@@ -1962,8 +1986,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   _mainRaceCanvas: {fileID: 1055699547}
-  _primaryItemIcon: {fileID: 3499518448512214087}
-  _secondaryItemIcon: {fileID: 3499518448512214088}
+  primaryItemIcon: {fileID: 3499518448512214087}
+  secondaryItemIcon: {fileID: 3499518448512214088}
+  progressBar: {fileID: 487555753}
+  backgroundImage: {fileID: 876962582}
   playerLaps: {fileID: 1142649889}
 --- !u!1001 &1658471683
 PrefabInstance:
