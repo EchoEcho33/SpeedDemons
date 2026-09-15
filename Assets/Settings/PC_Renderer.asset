@@ -20,6 +20,10 @@ MonoBehaviour:
     NearColor: {r: 0.23123944, g: 0, b: 0.34901962, a: 1}
     MiddleColor: {r: 1, g: 0.6436555, b: 0.61960787, a: 1}
     FarColor: {r: 0.9812573, g: 1, b: 0.8509804, a: 1}
+    FogStart: 0.2
+    FogMax: 0.7
+    FirstColorThreshold: 0.3
+    SecondColorThreshold: 0.6
     MaxOpacity: 0.6
 --- !u!114 &11400000
 MonoBehaviour:
