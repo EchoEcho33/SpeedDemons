@@ -21,7 +21,7 @@ public class FlashBang : Item
         }
 
         timeRemaining = duration;
-        victim = GameManager.Instance.racers[Random.Range(0, 4)];
+        victim = GameManager.Instance.Racers[Random.Range(0, 4)];
 
         //flash the camera
         if (victim is PlayerController)

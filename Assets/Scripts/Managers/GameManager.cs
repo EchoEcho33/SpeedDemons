@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     
     public PlayerController LocalRacer { get; private set; }
     
-    private List<RacerController> racers = new();
+    private List<RacerController> _racers = new();
+    public List<RacerController> Racers => new(_racers);
     
     [Header("Databases")]
     [SerializeField]
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
         // TODO: The Local Player driven by Inputs, maybe multiplayer?
         GameObject playerControllerObject = new GameObject("PlayerController");
         LocalRacer = playerControllerObject.AddComponent<PlayerController>();
-        racers.Add(LocalRacer);
+        _racers.Add(LocalRacer);
 
         // TODO: AI Racers
         int totalRacerCount = race.racerCount;
@@ -57,13 +58,13 @@ public class GameManager : MonoBehaviour
         {
             GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
             AIController aiController = aiControllerObject.AddComponent<AIController>();
-            racers.Add(aiController);
+            _racers.Add(aiController);
             racerCount--;
         }
     }
 
     public List<RacerController> GetRacers()
     {
-        return new List<RacerController>(racers);
+        return new List<RacerController>(_racers);
     }
 }
