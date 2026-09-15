@@ -37,9 +37,9 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
 
-        input = FindFirstObjectByType<InputSys>();
-        race = FindFirstObjectByType<RaceManager>();
-        UI = FindFirstObjectByType<UIManager>();
+        input = GetComponent<InputSys>();
+        race = GetComponent<RaceManager>();
+        UI = GetComponent<UIManager>();
 
         // TODO: The Local Player driven by Inputs, maybe multiplayer?
         GameObject playerControllerObject = new GameObject("PlayerController");

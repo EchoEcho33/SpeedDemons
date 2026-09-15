@@ -21,8 +21,17 @@ public class RaceManager : MonoBehaviour
     
     private List<RacerState> racerStates = new();
 
+    //Do we need to create a separete class for ui elements?
+    [SerializeField]
+    public TMP_Text playerLaps;
     [SerializeField]
     public int maxLaps = 3;
+    [SerializeField]
+    public Image progressBar;
+
+    //filler for example
+    [SerializeField]
+    public Image backgroundImage;
 
 
     // TODO: This is just a temporary count of how many racers should the manager spawn. The real count is the # of racers in _racerStates
