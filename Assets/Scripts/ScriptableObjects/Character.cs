@@ -20,10 +20,13 @@ public class Character : ScriptableObject
     private Kart defaultKart;
 
     [SerializeField]
-    private Ability ability;
+    public Ability ability;
 
     [SerializeField]
     public GameObject characterPrefab;
+
+    [SerializeField]
+    public Texture2D PolaroidIcon;
     
     [HideInInspector]
     public GameObject characterObject;

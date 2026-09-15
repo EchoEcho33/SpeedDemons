@@ -1,6 +1,5 @@
 using Unity.VisualScripting;
 using UnityEngine;
-using System.Collections;
 
 public abstract class Ability : MonoBehaviour
 {
@@ -8,6 +7,5 @@ public abstract class Ability : MonoBehaviour
 
     public abstract void TriggerAbility();
 
-    [SerializeField]
     public string Description;
 }
