@@ -21,7 +21,9 @@ public class RaceManager : MonoBehaviour
     
     private List<RacerState> racerStates = new();
 
-    //Do we need to create a separete class for ui elements?
+    //temp UI Screen, to be put in UI Manager
+    [SerializeField]
+    public Canvas UIscreen;
     [SerializeField]
     public TMP_Text playerLaps;
     [SerializeField]
