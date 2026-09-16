@@ -1,10 +1,10 @@
 name: Build (Both Platforms)
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: [main]
     paths-ignore:
-      - '.github/**'
       - '.gitignore'
       - '.vscode/**'
       - '.idea/**'
@@ -45,7 +45,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Build-Windows
-          path: build-windows
+          path: build
 
   build-mac:
     name: Build (Mac)
@@ -80,4 +80,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Build-OSX
-          path: build-osx
+          path: build
