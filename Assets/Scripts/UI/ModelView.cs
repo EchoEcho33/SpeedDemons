@@ -9,9 +9,9 @@ public class ModelView : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        displayedModel.transform.Rotate(0,.5f,0);
-    }
-}
+//     // Update is called once per frame
+//     void Update()
+//     {
+//         displayedModel.transform.Rotate(0,.2f,0);
+//     }
+ }

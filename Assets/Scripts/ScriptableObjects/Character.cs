@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ECharacterType
 {
@@ -17,7 +18,7 @@ public class Character : ScriptableObject
     private ECharacterType characterType = ECharacterType.None;
     
     [SerializeField]
-    private Kart defaultKart;
+    public Kart defaultKart;
 
     [SerializeField]
     public Ability ability;
@@ -26,7 +27,7 @@ public class Character : ScriptableObject
     public GameObject characterPrefab;
 
     [SerializeField]
-    public Texture2D PolaroidIcon;
+    public Sprite PolaroidIcon;
     
     [HideInInspector]
     public GameObject characterObject;

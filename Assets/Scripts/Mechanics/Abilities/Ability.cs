@@ -7,5 +7,7 @@ public abstract class Ability : MonoBehaviour
 
     public abstract void TriggerAbility();
 
-    public string Description;
+    public string abilityName;
+    public string description;
+    public Sprite icon;
 }
