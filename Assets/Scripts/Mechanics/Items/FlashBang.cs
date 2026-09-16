@@ -25,7 +25,7 @@ public class FlashBang : Item
         if (victim is PlayerController)
         {
             imageObject = new GameObject("DaFlash");
-            imageObject.transform.SetParent(GameManager.Instance.race.UIscreen.transform, false);
+            imageObject.transform.SetParent(RaceManager.Instance.UIscreen.transform, false);
 
             RectTransform rectTransform = imageObject.AddComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(1920 * 1.5f, 1080 * 1.5f);

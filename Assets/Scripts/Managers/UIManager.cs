@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     {
         if (_playerLaps != null)
         {
-            _playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
+            _playerLaps.text = currLap + " / " + RaceManager.Instance.maxLaps;
         } else
         {
             Debug.LogError("PlayerLaps text not set in UIManager.");

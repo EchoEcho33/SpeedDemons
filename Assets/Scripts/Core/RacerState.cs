@@ -23,7 +23,7 @@ public class RacerState : MonoBehaviour
         currLap = 1;
         abilityBar = 0;
 
-        GameManager.Instance.UI.UpdateLap(1);
+        GameManager.Instance.UIManager.UpdateLap(1);
     }
     
 #if UNITY_EDITOR
@@ -67,7 +67,7 @@ public class RacerState : MonoBehaviour
             currLap++;
             
             //applies from all racers, change after getting Driver to connect with certain racerStates
-            GameManager.Instance.UI.UpdateLap(currLap);
+            GameManager.Instance.UIManager.UpdateLap(currLap);
         }
     }
 
@@ -76,6 +76,6 @@ public class RacerState : MonoBehaviour
     {
         abilityBar = Mathf.Clamp(0, abilityBar + add, abilityMaxValue);
 
-        GameManager.Instance.UI.UpdateBar(abilityBar, abilityMaxValue);
+        GameManager.Instance.UIManager.UpdateBar(abilityBar, abilityMaxValue);
     }
 }

@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-using System.Runtime.Serialization;
 
 public class RaceManager : MonoBehaviour
 {
@@ -35,14 +33,20 @@ public class RaceManager : MonoBehaviour
     [SerializeField]
     public Image backgroundImage;
 
-
     // TODO: This is just a temporary count of how many racers should the manager spawn. The real count is the # of racers in _racerStates
     public int racerCount = 1;
     
-    public void Start()
+    public static RaceManager Instance { get; private set; }
+    
+    private void Awake()
     {
-        // TODO: Mike - I'm just doing this for now for testing purposes. Move this later!
-        StartRace();
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
     }
     
     public void StartRace()
