@@ -46,12 +46,23 @@ public class CharButton : Button
         {
             GameObject.Destroy(child.gameObject);
         }
-        Instantiate(targetCharacter.characterPrefab, modelLocation.transform);
-        Instantiate(targetCharacter.defaultKart.kartPrefab, modelLocation.transform);
+        
+        SpawnRacerModel(targetCharacter, targetCharacter.defaultKart, modelLocation);
     }
     
     private void Awake()
     {
         GetComponent<Button>().onClick.AddListener(PopulateInfo);
+    }
+    
+    private void SpawnRacerModel(Character character, Kart kart, GameObject spawnLocation)
+    {
+        // Initialize kart + character.
+        GameObject kartObject = Instantiate(kart.kartPrefab, spawnLocation.transform);
+        GameObject characterSlot = kartObject.transform.GetChild(0).gameObject; // First child should be the CharacterSlot!
+        GameObject characterObject = Instantiate(character.characterPrefab, Vector3.zero, character.characterPrefab.transform.rotation); // TODO: Mike - The rotation of the character is currently just based on the prefab. 
+        characterObject.transform.SetParent(characterSlot.transform, false);
+        character.characterObject = characterObject;
+        kart.kartObject = kartObject;
     }
 }
