@@ -7,7 +7,22 @@ public abstract class Ability : MonoBehaviour
 
     public abstract void TriggerAbility();
 
-    public string abilityName;
-    public string description;
-    public Sprite icon;
+    private string abilityName;
+    private string description;
+    private Sprite icon;
+
+    public string getAbilityName()
+    {
+        return abilityName;
+    }
+
+    public string getDescription()
+    {
+        return description;
+    }
+
+    public Sprite getIcon()
+    {
+        return icon;
+    }
 }

@@ -41,9 +41,9 @@ public class CharButton : Button
         Debug.Log("abilityDescBox: " + abilityDescBox);
         if (targetCharacter.getAbility() != null)
         {
-            abilityNameBox.text = targetCharacter.getAbility().abilityName;
-            abilityDescBox.text = targetCharacter.getAbility().description;
-            abilityIconBox.sprite = targetCharacter.getAbility().icon;
+            abilityNameBox.text = targetCharacter.getAbility().getAbilityName();
+            abilityDescBox.text = targetCharacter.getAbility().getDescription();
+            abilityIconBox.sprite = targetCharacter.getAbility().getIcon();
         }
         else
         {
