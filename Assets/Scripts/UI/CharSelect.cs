@@ -7,6 +7,8 @@ using TMPro;
 
 public class CharSelect : MonoBehaviour
 {
+    public RacerSelection racerSelection;
+    
     [SerializeField]
     private List<Character> characters;
 
@@ -18,23 +20,16 @@ public class CharSelect : MonoBehaviour
     private Image abilityIcon;
     [SerializeField]
     private GameObject modelLocation;
-    
 
-// will be replaced with progress bars
     [Header("Kart Stats Text")]
     [SerializeField]
-    private Text maxSpeed;
+    private Image speedRating;
     [SerializeField]
-    private Text maxAccel;
+    private Image accelRating;
     [SerializeField]
-    private Text brakeStrength;
+    private Image brakeRating;
     [SerializeField]
-    private Text drag;
-    [SerializeField]
-    private Text turnRadius;
-    [SerializeField]
-    private Text traction;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Image dragRating;
     void Start()
     {
         List<CharButton> buttons = new List<CharButton>();
@@ -51,9 +46,15 @@ public class CharSelect : MonoBehaviour
         
         for (int i = 0; i < characters.Count; i++)
         {
-            buttons[i].GetInfo(characters[i], abilityName, abilityDesc, abilityIcon, kartText, modelLocation);
+            buttons[i].GetInfo
+                (this, characters[i], abilityName, abilityDesc, abilityIcon, kartText, modelLocation, speedRating, accelRating, brakeRating, dragRating);
             Debug.Log(buttons[i] + " has character " + characters[i].name);
         }
 
-    }   
+    }
+
+    public void SaveSelection(RacerSelection racer)
+    {
+        racerSelection = racer; 
+    }
 }

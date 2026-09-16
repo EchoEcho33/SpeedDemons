@@ -1,17 +1,23 @@
+using System;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; 
+using TMPro;
+using UnityEditor;
 
 public class CharButton : Button
 {
-    
+
+    private CharSelect UIController; 
     private Character targetCharacter;
     private TextMeshProUGUI abilityNameBox, abilityDescBox, kartStatsBox;
-    private Image abilityIconBox;
+    private Image abilityIconBox, speedRating, accelRating, brakeRating, dragRating;
     private GameObject modelLocation;
-    public void GetInfo(Character c, TextMeshProUGUI ability, TextMeshProUGUI abilityDesc,  Image abilityIcon, TextMeshProUGUI kartStats, GameObject mLocation)
+    public void GetInfo
+        (CharSelect ui, Character c, TextMeshProUGUI ability, TextMeshProUGUI abilityDesc,  Image abilityIcon, TextMeshProUGUI kartStats, GameObject mLocation,
+            Image speed, Image accel, Image brake, Image drag)
     {
+        UIController = ui;
         targetCharacter = c;
         this.image.sprite = c.PolaroidIcon;
         
@@ -21,6 +27,10 @@ public class CharButton : Button
         kartStatsBox = kartStats;
         modelLocation = mLocation;
         
+        speedRating = speed;
+        accelRating = accel;
+        brakeRating = brake;
+        dragRating = drag;
     }
 
     public void PopulateInfo()
@@ -41,13 +51,26 @@ public class CharButton : Button
             abilityDescBox.text = "No ability description";
             
         }
-        kartStatsBox.text = targetCharacter.defaultKart.name;
+        // kart stats
+        Kart kart = targetCharacter.defaultKart;
+        kartStatsBox.text = kart.name;
+        speedRating.fillAmount = Mathf.Clamp01(kart._maxSpeed / 50f);
+        accelRating.fillAmount = Mathf.Clamp01(kart._maxAcceleration / 20f);
+        brakeRating.fillAmount = Mathf.Clamp01(kart._brakeStrength / 15f);
+        dragRating.fillAmount = Mathf.Clamp01(kart._drag / 5f);
+        
         foreach (Transform child in modelLocation.transform)
         {
             GameObject.Destroy(child.gameObject);
         }
         
         SpawnRacerModel(targetCharacter, targetCharacter.defaultKart, modelLocation);
+
+        RacerSelection racer = new RacerSelection();
+        racer.character = targetCharacter;
+        racer.kart = targetCharacter.defaultKart;
+        
+        UIController.SaveSelection(racer);
     }
     
     private void Awake()
