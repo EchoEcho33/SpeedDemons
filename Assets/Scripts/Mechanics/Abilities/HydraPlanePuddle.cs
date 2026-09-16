@@ -39,6 +39,12 @@ public class HydraPlanePuddle : MonoBehaviour
             drive.Racer.SpinOut = true;
         }
 
+        // Attempts to Trigger the Spin Out Animation On Racer
+        if (drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
+        {
+            animator.SetBool("SpinOut", true);
+        }
+
         // Delete After Collision
         Destroy(this.gameObject);
     }

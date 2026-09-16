@@ -62,6 +62,11 @@ public class PlayerController : RacerController
             Drive.SpinOut();
             base.SpinOutDuration--;
 
+            // Ends Spin Out Animation
+            if (SpinOutDuration == 30 && Drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator)) { 
+                animator.SetBool("SpinOut", false);
+            }
+
             // Ends Spin Out
             if (SpinOutDuration <= 0) { 
                 base.SpinOut = false;
