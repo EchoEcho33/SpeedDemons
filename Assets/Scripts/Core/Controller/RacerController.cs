@@ -9,7 +9,10 @@ public abstract class RacerController : MonoBehaviour
     public Drive Drive { get; protected set; }
     
     public RacerState RacerState { get; private set; }
-    
+
+    public bool SpinOut = false;
+    public float SpinOutDuration = 0;
+
     public void AssignRacerState(RacerState newRacerState)
     {
         RacerState = newRacerState;

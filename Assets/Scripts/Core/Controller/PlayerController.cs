@@ -55,6 +55,18 @@ public class PlayerController : RacerController
 
     private void Update()
     {
+        // Spin Out Handler
+        if (base.SpinOut)
+        {
+
+            Drive.SpinOut();
+            base.SpinOutDuration -= Time.deltaTime;
+
+            // Ends Spin Out
+            if (SpinOutDuration <= 0) { base.SpinOut = false; }
+
+            return; // Exit Update Code During Spin Out
+        }
 
         // Brake and Accelerate
         if (accelerate.IsPressed() || brake.IsPressed())
