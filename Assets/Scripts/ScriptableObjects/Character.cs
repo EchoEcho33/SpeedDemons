@@ -20,7 +20,7 @@ public class Character : ScriptableObject
     private Kart defaultKart;
 
     [SerializeField]
-    private Ability ability;
+    public Ability ability;
 
     [SerializeField]
     public GameObject characterPrefab;
@@ -35,7 +35,7 @@ public class Character : ScriptableObject
         return characterType;
     }
 
-    private void TriggerAbility()
+    public void TriggerAbility()
     {
         ability.TriggerAbility();
     }

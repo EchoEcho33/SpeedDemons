@@ -163,6 +163,24 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability"",
+                    ""type"": ""Button"",
+                    ""id"": ""0be9eb94-43e4-465d-bcaa-374dd23cb411"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""fe8102a2-c25d-4f60-8d9d-f78491eb4704"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -253,6 +271,28 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""TurnLeft_KBD"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6dbb220-5820-49e4-b64a-4855345c3f5b"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""840b0331-0f82-47c1-94bf-a1b32d2dd3fe"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -269,6 +309,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Driving_Brake_KBD = m_Driving.FindAction("Brake_KBD", throwIfNotFound: true);
         m_Driving_TurnRight_KBD = m_Driving.FindAction("TurnRight_KBD", throwIfNotFound: true);
         m_Driving_TurnLeft_KBD = m_Driving.FindAction("TurnLeft_KBD", throwIfNotFound: true);
+        m_Driving_Ability = m_Driving.FindAction("Ability", throwIfNotFound: true);
+        m_Driving_Ability_KBD = m_Driving.FindAction("Ability_KBD", throwIfNotFound: true);
     }
 
     ~@InputManager()
@@ -357,6 +399,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Brake_KBD;
     private readonly InputAction m_Driving_TurnRight_KBD;
     private readonly InputAction m_Driving_TurnLeft_KBD;
+    private readonly InputAction m_Driving_Ability;
+    private readonly InputAction m_Driving_Ability_KBD;
     /// <summary>
     /// Provides access to input actions defined in input action map "Driving".
     /// </summary>
@@ -400,6 +444,14 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Driving/TurnLeft_KBD".
         /// </summary>
         public InputAction @TurnLeft_KBD => m_Wrapper.m_Driving_TurnLeft_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/Ability".
+        /// </summary>
+        public InputAction @Ability => m_Wrapper.m_Driving_Ability;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/Ability_KBD".
+        /// </summary>
+        public InputAction @Ability_KBD => m_Wrapper.m_Driving_Ability_KBD;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -450,6 +502,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @TurnLeft_KBD.started += instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.performed += instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.canceled += instance.OnTurnLeft_KBD;
+            @Ability.started += instance.OnAbility;
+            @Ability.performed += instance.OnAbility;
+            @Ability.canceled += instance.OnAbility;
+            @Ability_KBD.started += instance.OnAbility_KBD;
+            @Ability_KBD.performed += instance.OnAbility_KBD;
+            @Ability_KBD.canceled += instance.OnAbility_KBD;
         }
 
         /// <summary>
@@ -485,6 +543,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @TurnLeft_KBD.started -= instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.performed -= instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.canceled -= instance.OnTurnLeft_KBD;
+            @Ability.started -= instance.OnAbility;
+            @Ability.performed -= instance.OnAbility;
+            @Ability.canceled -= instance.OnAbility;
+            @Ability_KBD.started -= instance.OnAbility_KBD;
+            @Ability_KBD.performed -= instance.OnAbility_KBD;
+            @Ability_KBD.canceled -= instance.OnAbility_KBD;
         }
 
         /// <summary>
@@ -581,5 +645,19 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTurnLeft_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Ability" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAbility(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Ability_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAbility_KBD(InputAction.CallbackContext context);
     }
 }

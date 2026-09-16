@@ -1,4 +1,5 @@
-﻿using Unity.Cinemachine;
+﻿using System;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +21,10 @@ public class PlayerController : RacerController
     private InputAction turnRight_kbd;
     
     private InputAction turnLeft_kbd;
+
+    private InputAction ability;
+
+    private InputAction ability_kbd;
         
     public override void AssignCharacterAndKart(Character newCharacter, Kart newKart)
     {
@@ -41,6 +46,9 @@ public class PlayerController : RacerController
         brake_kbd = GameManager.Instance.input.brake_kbd.action;
         turnRight_kbd = GameManager.Instance.input.turnRight_kbd.action;
         turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd.action;
+
+        ability = GameManager.Instance.input.ability.action;
+        ability_kbd = GameManager.Instance.input.ability_kbd.action;
     }
 
     private void InitializeCamera()
@@ -105,7 +113,15 @@ public class PlayerController : RacerController
         {
             Drive.Turn(-1.0f);
         }
+
+        // Ability
+        if (ability.IsPressed() || ability_kbd.IsPressed())
+        {
+            // The Ability Trigger is Not Fully Set Up, So this goes to Comment Jail for now
+            // Character.TriggerAbility();
+        }
     }
+    
 
     private void ControllerMove()
     {
@@ -144,4 +160,5 @@ public class PlayerController : RacerController
             }
         }
     }
+
 }

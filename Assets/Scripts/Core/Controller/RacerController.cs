@@ -35,6 +35,6 @@ public abstract class RacerController : MonoBehaviour
     /// <returns>parent RacerAndCar GameObject of the Character</returns>
     public GameObject GetCharacterAndKart()
     {
-        return Character.characterObject.transform.parent.parent.gameObject;
+        return Character.characterObject.transform.root.gameObject;
     }
 }
