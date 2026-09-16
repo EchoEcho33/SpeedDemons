@@ -108,7 +108,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -222,7 +222,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -325,7 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6872535725321996775}
   - component: {fileID: 3505323999846997372}
-  - component: {fileID: 2697439858763961751}
+  - component: {fileID: 4337602195990914792}
   m_Layer: 0
   m_Name: MothmanCar
   m_TagString: Racer
@@ -376,7 +376,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2697439858763961751
+--- !u!65 &4337602195990914792
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -395,8 +395,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.470241, y: 1, z: 2.0535793}
-  m_Center: {x: -0.09597325, y: 0, z: 0.006453991}
+  m_Size: {x: 1.3, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8156571441669091172
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +505,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2

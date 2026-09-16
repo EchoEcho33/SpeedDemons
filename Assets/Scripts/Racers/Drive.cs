@@ -73,7 +73,8 @@ public class Drive : MonoBehaviour
     {
         if (!IsGrounded()) return;
         float initialFrameSpeed = m_currentSpeed;
-        m_currentSpeed += -20 * Time.deltaTime;
+        float slowdownSpeed = 20;
+        m_currentSpeed -= slowdownSpeed * Time.deltaTime;
 
         if (m_currentSpeed < 0)
             m_currentSpeed = 0;
