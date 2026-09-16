@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(InputSys), typeof(RaceManager))]
+[RequireComponent(typeof(InputSys), typeof(RaceManager), typeof(UIManager))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     
     [HideInInspector]
     public RaceManager race;
+
+    [HideInInspector]
+    public UIManager UI;
     
     [SerializeField] 
     public GameObject cameraPrefab;
@@ -21,7 +24,8 @@ public class GameManager : MonoBehaviour
     
     public PlayerController LocalRacer { get; private set; }
     
-    private List<RacerController> racers = new();
+    private List<RacerController> _racers = new();
+    public List<RacerController> Racers => new(_racers);
     
     [Header("Databases")]
     [SerializeField]
@@ -30,25 +34,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public List<Character> characters;
 
-    [Header("UI")]
-    [SerializeField]
-    private Canvas _mainRaceCanvas;
-    [SerializeField]
-    private Image _primaryItemIcon;
-    [SerializeField]
-    private Image _secondaryItemIcon;
-
     public void Awake()
     {
         if (Instance == null) Instance = this;
 
-        input = FindFirstObjectByType<InputSys>();
-        race = FindFirstObjectByType<RaceManager>();
+        input = GetComponent<InputSys>();
+        race = GetComponent<RaceManager>();
+        UI = GetComponent<UIManager>();
 
         // TODO: The Local Player driven by Inputs, maybe multiplayer?
         GameObject playerControllerObject = new GameObject("PlayerController");
         LocalRacer = playerControllerObject.AddComponent<PlayerController>();
-        racers.Add(LocalRacer);
+        _racers.Add(LocalRacer);
 
         // TODO: AI Racers
         int totalRacerCount = race.racerCount;
@@ -57,13 +54,13 @@ public class GameManager : MonoBehaviour
         {
             GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
             AIController aiController = aiControllerObject.AddComponent<AIController>();
-            racers.Add(aiController);
+            _racers.Add(aiController);
             racerCount--;
         }
     }
 
     public List<RacerController> GetRacers()
     {
-        return new List<RacerController>(racers);
+        return new List<RacerController>(_racers);
     }
 }

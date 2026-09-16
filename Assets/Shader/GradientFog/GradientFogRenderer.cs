@@ -49,8 +49,41 @@ public class GradientFogRenderer : ScriptableRendererFeature
         public Color NearColor = new Color(0.23f, 0f, 0.35f, 1);
         public Color MiddleColor = new Color(1f, 0.64f, .62f, 1);
         public Color FarColor = new Color(0.98f, 1f, .85f, 1);
+        
+        [UnityEngine.Range(0f, 1f)]
+        public float FogStart = 0.2f;
+        
+        [UnityEngine.Range(0f, 1f)]
+        public float FogMax = 0.7f;
+        
+        [UnityEngine.Range(0f, 1f)]
+        public float FirstColorThreshold = 0.3f;
+        
+        [UnityEngine.Range(0f, 1f)]
+        public float SecondColorThreshold = 0.6f;
 
+        [UnityEngine.Range(0f, 1f)]
         public float MaxOpacity = 0.5f;
+        
+        public void Validate()
+        {
+            StartDistance = StartDistance < 0 ? 0 : StartDistance;
+            EndDistance = EndDistance < StartDistance ? StartDistance + 0.001f : EndDistance;
+            
+            FogStart = Mathf.Clamp01(FogStart);
+            FirstColorThreshold = Mathf.Clamp01(FirstColorThreshold);
+            
+            FogMax = Mathf.Max(FogStart + 0.001f, FogMax);
+            FogMax = Mathf.Min(1f, FogMax);
+            
+            SecondColorThreshold = Mathf.Max(FirstColorThreshold + 0.001f, SecondColorThreshold);
+            SecondColorThreshold = Mathf.Min(1f, SecondColorThreshold);
+        }
+    }
+    
+    public void OnValidate()
+    {
+        settings.Validate();
     }
 
     class GradientFogRendererPass : ScriptableRenderPass
@@ -75,6 +108,10 @@ public class GradientFogRenderer : ScriptableRendererFeature
             fogMaterial.SetColor("_MidColor", settings.MiddleColor);
             fogMaterial.SetColor("_FarColor", settings.FarColor);
             fogMaterial.SetFloat("_MaxOpacity", settings.MaxOpacity);
+            fogMaterial.SetFloat("_FogStart", settings.FogStart);
+            fogMaterial.SetFloat("_FogMax", settings.FogMax);
+            fogMaterial.SetFloat("_1stColorThreshold", settings.FirstColorThreshold);
+            fogMaterial.SetFloat("_2ndColorThreshold", settings.SecondColorThreshold);
         }
 
         // This class stores the data needed by the RenderGraph pass.
