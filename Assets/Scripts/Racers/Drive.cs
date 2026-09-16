@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Drive : MonoBehaviour
@@ -68,6 +69,19 @@ public class Drive : MonoBehaviour
         // x = horizontal (- left + right) y = vertical (- down + up)
         
     }
+    public void SpinOut()
+    {
+        if (!IsGrounded()) return;
+        float initialFrameSpeed = m_currentSpeed;
+        m_currentSpeed += -20 * Time.deltaTime;
+
+        if (m_currentSpeed < 0)
+            m_currentSpeed = 0;
+
+        float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime;
+
+        transform.position += transform.forward * velocityUpdate;
+    }
 
     // TODO: Check that wheels are grounded
     private bool IsGrounded()
@@ -79,4 +93,6 @@ public class Drive : MonoBehaviour
     {
         return m_currentSpeed;
     }
+
+
 }

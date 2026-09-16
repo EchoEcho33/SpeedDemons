@@ -361,6 +361,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2612042291722588935, guid: c77979113db8e0b4486972bfefa95583, type: 3}
   m_PrefabInstance: {fileID: 1375299189}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &354960761
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 770199635307438384, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: puddleWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 770199635307438384, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: puddleHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3112265597178999586, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: m_Name
+      value: HydraPlanePuddle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028023524973129819, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028023524973129819, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028023524973129819, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -95.56998
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028023524973129819, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028023524973129819, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028023524973129819, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028023524973129819, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028023524973129819, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028023524973129819, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028023524973129819, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 303bc788e17d15c48aec4f8134c1ec86, type: 3}
 --- !u!1 &356502927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,6 +2233,7 @@ GameObject:
   - component: {fileID: 1628683421}
   - component: {fileID: 1628683423}
   - component: {fileID: 1628683422}
+  - component: {fileID: 1628683424}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2189,9 +2255,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 0}
   race: {fileID: 0}
+  UI: {fileID: 0}
   cameraPrefab: {fileID: 4182171242420694627, guid: 9e20f44964cc50548a66f6f3c40df558, type: 3}
   cinemachineCameraPrefab: {fileID: 7860237602509586326, guid: 1871585e22face84baaa97776b19243f, type: 3}
-  respawnManager: {fileID: 0}
   items: []
   characters: []
 --- !u!114 &1628683418
@@ -2233,10 +2299,12 @@ MonoBehaviour:
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
   - character: {fileID: 11400000, guid: e996976c44f432144b9a15531683d02d, type: 2}
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  UIscreen: {fileID: 0}
   playerLaps: {fileID: 356502929}
   maxLaps: 3
+  progressBar: {fileID: 0}
+  backgroundImage: {fileID: 0}
   racerCount: 4
-  studioListener: {fileID: 0}
 --- !u!114 &1628683419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2314,6 +2382,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 546fbe776ffad9040b1c3216f41ce7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+--- !u!114 &1628683424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628683416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c626edfcd1f9c340aee3c421537392a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  _mainRaceCanvas: {fileID: 0}
+  _primaryItemIcon: {fileID: 0}
+  _secondaryItemIcon: {fileID: 0}
+  _playerLaps: {fileID: 0}
+  _progressBar: {fileID: 0}
+  _backgroundImage: {fileID: 0}
 --- !u!1001 &1658471683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2810,3 +2896,4 @@ SceneRoots:
   - {fileID: 466986241}
   - {fileID: 845563337}
   - {fileID: 1589956514}
+  - {fileID: 354960761}

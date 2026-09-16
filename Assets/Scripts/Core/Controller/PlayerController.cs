@@ -1,4 +1,5 @@
-﻿using Unity.Cinemachine;
+﻿using System;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,7 +21,7 @@ public class PlayerController : RacerController
     private InputAction turnRight_kbd;
     
     private InputAction turnLeft_kbd;
-        
+
     public override void AssignCharacterAndKart(Character newCharacter, Kart newKart)
     {
         base.AssignCharacterAndKart(newCharacter, newKart);
@@ -55,6 +56,19 @@ public class PlayerController : RacerController
 
     private void Update()
     {
+        // Spin Out Handler
+        if (base.SpinOut) {
+
+            Drive.SpinOut();
+            base.SpinOutDuration--;
+
+            // Ends Spin Out
+            if (SpinOutDuration <= 0) { 
+                base.SpinOut = false;
+            }
+
+            return; // Exit Update Code During Spin Out
+        }
 
         // Brake and Accelerate
         if (accelerate.IsPressed() || brake.IsPressed())
