@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 1625279630982434052}
   m_Layer: 0
   m_Name: MothmanCar
-  m_TagString: Untagged
+  m_TagString: Racer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -46,7 +46,7 @@ public class Character : ScriptableObject
     /// <returns>parent RacerAndCar GameObject of the Character</returns>
     public GameObject GetRacerAndCar()
     {
-        return characterObject.transform.parent.parent.gameObject;
+        return characterObject.transform.root.gameObject;
     }
 
     public void Respawn()
