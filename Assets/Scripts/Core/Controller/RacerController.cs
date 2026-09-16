@@ -9,7 +9,10 @@ public abstract class RacerController : MonoBehaviour
     public Drive Drive { get; protected set; }
     
     public RacerState RacerState { get; private set; }
-    
+
+    public bool SpinOut = false;
+    public float SpinOutDuration = 0;
+
     public void AssignRacerState(RacerState newRacerState)
     {
         RacerState = newRacerState;
@@ -32,6 +35,6 @@ public abstract class RacerController : MonoBehaviour
     /// <returns>parent RacerAndCar GameObject of the Character</returns>
     public GameObject GetCharacterAndKart()
     {
-        return Character.characterObject.transform.parent.parent.gameObject;
+        return Character.characterObject.transform.root.gameObject;
     }
 }
