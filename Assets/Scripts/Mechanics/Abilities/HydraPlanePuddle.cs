@@ -14,14 +14,13 @@ public class HydraPlanePuddle : MonoBehaviour
 
     private void Awake()
     {
-        duration = duration * 60; // Sets Durations to Seconds
         this.gameObject.transform.localScale = new Vector3(puddleHeight, 0, puddleWidth); // Scales Object to Declared Width/Height
     }
     // Update is called once per frame
     void Update()
     {
         // Destroys Puddle After Duration
-        duration--;
+        duration -= Time.deltaTime;
         if (duration <= 0) {
             Destroy(this.gameObject);
         }
@@ -35,7 +34,7 @@ public class HydraPlanePuddle : MonoBehaviour
         // Attempt to get Drive Component & Call SpinOut
         if (other.gameObject.TryGetComponent<Drive>(out var drive))
         {
-            drive.Racer.SpinOutDuration = spinOutDuration * 60;
+            drive.Racer.SpinOutDuration = spinOutDuration;
             drive.Racer.SpinOut = true;
         }
 

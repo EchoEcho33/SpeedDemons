@@ -69,8 +69,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HydroPlane
   duration: 30
   spinOutDuration: 3
-  puddleWidth: 4
-  puddleHeight: 4
+  puddleWidth: 1
+  puddleHeight: 1
 --- !u!1 &5142797620673873361
 GameObject:
   m_ObjectHideFlags: 0
