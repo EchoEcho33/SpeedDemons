@@ -608,6 +608,17 @@ Transform:
   - {fileID: 1514147224}
   m_Father: {fileID: 466986241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &412937294 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3642627975307859049, guid: cc5e42cdc64ae40459c48dc079ed8a37, type: 3}
+  m_PrefabInstance: {fileID: 3499518448512214086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &463088122 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6921657446172296889, guid: c77979113db8e0b4486972bfefa95583, type: 3}
@@ -780,6 +791,17 @@ Transform:
   - {fileID: 1810181471}
   m_Father: {fileID: 466986241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &639565924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7050174172609419906, guid: cc5e42cdc64ae40459c48dc079ed8a37, type: 3}
+  m_PrefabInstance: {fileID: 3499518448512214086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &664606766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1870,12 +1892,11 @@ MonoBehaviour:
   race: {fileID: 0}
   cameraPrefab: {fileID: 4182171242420694627, guid: 9e20f44964cc50548a66f6f3c40df558, type: 3}
   cinemachineCameraPrefab: {fileID: 7860237602509586326, guid: 1871585e22face84baaa97776b19243f, type: 3}
-  respawnManager: {fileID: 0}
   items: []
   characters: []
   _mainRaceCanvas: {fileID: 1055699547}
-  _primaryItemIcon: {fileID: 3499518448512214087}
-  _secondaryItemIcon: {fileID: 3499518448512214088}
+  _primaryItemIcon: {fileID: 412937294}
+  _secondaryItemIcon: {fileID: 639565924}
 --- !u!114 &1628683418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1899,8 +1920,8 @@ MonoBehaviour:
   - {fileID: 1316091991}
   - {fileID: 1514147225}
   racerSelections:
-  - character: {fileID: 11400000, guid: 1e41ed9f7ada331478125c429cb9fcea, type: 2}
-    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  - character: {fileID: 11400000, guid: 84c161433122d91969c86d2bae9c8fbf, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
   - character: {fileID: 11400000, guid: 638869a3a718404428b0dbe89a009b87, type: 2}
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
   - character: {fileID: 11400000, guid: 0583a517515d6de44a5207a8478fcfa7, type: 2}
@@ -1917,6 +1938,8 @@ MonoBehaviour:
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
   playerLaps: {fileID: 1142649889}
   maxLaps: 3
+  progressBar: {fileID: 0}
+  backgroundImage: {fileID: 0}
   racerCount: 4
 --- !u!114 &1628683419
 MonoBehaviour:
@@ -2569,28 +2592,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc5e42cdc64ae40459c48dc079ed8a37, type: 3}
---- !u!114 &3499518448512214087 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4193769997189828697, guid: cc5e42cdc64ae40459c48dc079ed8a37, type: 3}
-  m_PrefabInstance: {fileID: 3499518448512214086}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!114 &3499518448512214088 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8516806282042039623, guid: cc5e42cdc64ae40459c48dc079ed8a37, type: 3}
-  m_PrefabInstance: {fileID: 3499518448512214086}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &7227532554157621376
 PrefabInstance:
   m_ObjectHideFlags: 0
