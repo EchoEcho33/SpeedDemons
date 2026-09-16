@@ -18,10 +18,10 @@ public class Character : ScriptableObject
     private ECharacterType characterType = ECharacterType.None;
     
     [SerializeField]
-    public Kart defaultKart;
+    private Kart defaultKart;
 
     [SerializeField]
-    public Ability ability;
+    private Ability ability;
 
     [SerializeField]
     public GameObject characterPrefab;
@@ -64,5 +64,16 @@ public class Character : ScriptableObject
         TrackCheckpoint currentCheckpoint = racerController.RacerState.CurrCheckpoint;
         racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * _spawnVerticalDisplacement;
         racerAndCar.transform.rotation = currentCheckpoint.GetTrackForwardDirection();
+    }
+    
+    // Some getters necessary for the character selection UI.
+    public Kart getDefaultKart()
+    {
+        return defaultKart;
+    }
+    
+    public Ability getAbility()
+    {
+        return ability;
     }
 }

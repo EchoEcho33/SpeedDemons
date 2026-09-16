@@ -39,11 +39,11 @@ public class CharButton : Button
         Debug.Log("targetCharacter: " + targetCharacter);
         Debug.Log("abilityNameBox: " + abilityNameBox);
         Debug.Log("abilityDescBox: " + abilityDescBox);
-        if (targetCharacter.ability != null)
+        if (targetCharacter.getAbility() != null)
         {
-            abilityNameBox.text = targetCharacter.ability.abilityName;
-            abilityDescBox.text = targetCharacter.ability.description;
-            abilityIconBox.sprite = targetCharacter.ability.icon;
+            abilityNameBox.text = targetCharacter.getAbility().abilityName;
+            abilityDescBox.text = targetCharacter.getAbility().description;
+            abilityIconBox.sprite = targetCharacter.getAbility().icon;
         }
         else
         {
@@ -52,7 +52,7 @@ public class CharButton : Button
             
         }
         // kart stats
-        Kart kart = targetCharacter.defaultKart;
+        Kart kart = targetCharacter.getDefaultKart();
         kartStatsBox.text = kart.name;
         speedRating.fillAmount = Mathf.Clamp01(kart._maxSpeed / 50f);
         accelRating.fillAmount = Mathf.Clamp01(kart._maxAcceleration / 20f);
@@ -64,11 +64,11 @@ public class CharButton : Button
             GameObject.Destroy(child.gameObject);
         }
         
-        SpawnRacerModel(targetCharacter, targetCharacter.defaultKart, modelLocation);
+        SpawnRacerModel(targetCharacter, targetCharacter.getDefaultKart(), modelLocation);
 
         RacerSelection racer = new RacerSelection();
         racer.character = targetCharacter;
-        racer.kart = targetCharacter.defaultKart;
+        racer.kart = targetCharacter.getDefaultKart();
         
         UIController.SaveSelection(racer);
     }
