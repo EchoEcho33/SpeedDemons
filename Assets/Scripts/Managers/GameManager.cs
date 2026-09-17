@@ -39,7 +39,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] 
     public GameObject cinemachineCameraPrefab;
 
-    public GameState GameState { get; private set; } = GameState.WaitingToStart;
+    /// <summary>
+    /// The default game state when the game manager is initialized.
+    /// Should be set to WaitingToStart in track scenes, or MainMenu for the title screen.
+    /// </summary>
+    public GameState startingGameState = GameState.WaitingToStart;
+
+    public GameState GameState { get; private set; }
     
     public PlayerController LocalRacer { get; private set; }
     
@@ -68,7 +74,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // For testing purposes, the default value forces a match to start.
-        SetGameState(GameState);
+        SetGameState(startingGameState);
     }
 
     public void SetGameState(GameState newGameState)
