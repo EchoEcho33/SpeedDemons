@@ -2195,6 +2195,9 @@ MonoBehaviour:
   cinemachineCameraPrefab: {fileID: 7860237602509586326, guid: 1871585e22face84baaa97776b19243f, type: 3}
   items: []
   characters: []
+  _mainRaceCanvas: {fileID: 0}
+  _primaryItemIcon: {fileID: 0}
+  _secondaryItemIcon: {fileID: 0}
 --- !u!114 &1628683418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2218,8 +2221,8 @@ MonoBehaviour:
   - {fileID: 1316091991}
   - {fileID: 1514147225}
   racerSelections:
-  - character: {fileID: 11400000, guid: 1e41ed9f7ada331478125c429cb9fcea, type: 2}
-    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  - character: {fileID: 11400000, guid: 84c161433122d91969c86d2bae9c8fbf, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
   - character: {fileID: 11400000, guid: 638869a3a718404428b0dbe89a009b87, type: 2}
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
   - character: {fileID: 11400000, guid: 0583a517515d6de44a5207a8478fcfa7, type: 2}
