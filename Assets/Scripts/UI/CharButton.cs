@@ -82,8 +82,9 @@ public class CharButton : Button
     {
         // Initialize kart + character.
         GameObject kartObject = Instantiate(kart.kartPrefab, spawnLocation.transform);
-        GameObject characterSlot = kartObject.transform.GetChild(0).gameObject; // First child should be the CharacterSlot!
-        GameObject characterObject = Instantiate(character.characterPrefab, Vector3.zero, character.characterPrefab.transform.rotation); // TODO: Mike - The rotation of the character is currently just based on the prefab. 
+        GameObject characterSlot = kartObject.transform.GetChild(0).transform.GetChild(0).gameObject; // First child should be the CharacterSlot!
+        Debug.Log(characterSlot.gameObject.name);
+        GameObject characterObject = Instantiate(character.characterPrefab, characterSlot.transform); 
         characterObject.transform.SetParent(characterSlot.transform, false);
         character.characterObject = characterObject;
         kart.kartObject = kartObject;
