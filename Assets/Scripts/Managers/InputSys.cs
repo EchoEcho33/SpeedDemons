@@ -13,6 +13,9 @@ public class InputSys : MonoBehaviour
     [SerializeField]
     public InputActionReference turn;
 
+    [SerializeField]
+    public InputActionReference ability;
+
     [Header("Keyboard Controls")]
     [SerializeField]
     public InputActionReference accelerate_kbd;
@@ -25,4 +28,7 @@ public class InputSys : MonoBehaviour
 
     [SerializeField]
     public InputActionReference turnLeft_kbd;
+
+    [SerializeField]
+    public InputActionReference ability_kbd;
 }

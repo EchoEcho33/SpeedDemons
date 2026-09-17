@@ -21,7 +21,7 @@ public class Character : ScriptableObject
     private Kart defaultKart;
 
     [SerializeField]
-    private Ability ability;
+    public Ability ability;
 
     [SerializeField]
     public GameObject characterPrefab;
@@ -39,7 +39,7 @@ public class Character : ScriptableObject
         return characterType;
     }
 
-    private void TriggerAbility()
+    public void TriggerAbility()
     {
         ability.TriggerAbility();
     }
@@ -50,7 +50,7 @@ public class Character : ScriptableObject
     /// <returns>parent RacerAndCar GameObject of the Character</returns>
     public GameObject GetRacerAndCar()
     {
-        return characterObject.transform.parent.parent.gameObject;
+        return characterObject.transform.root.gameObject;
     }
 
     public void Respawn()

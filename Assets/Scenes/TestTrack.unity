@@ -2168,6 +2168,7 @@ GameObject:
   - component: {fileID: 1628683421}
   - component: {fileID: 1628683423}
   - component: {fileID: 1628683422}
+  - component: {fileID: 1628683424}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2189,6 +2190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 0}
   race: {fileID: 0}
+  UI: {fileID: 0}
   cameraPrefab: {fileID: 4182171242420694627, guid: 9e20f44964cc50548a66f6f3c40df558, type: 3}
   cinemachineCameraPrefab: {fileID: 7860237602509586326, guid: 1871585e22face84baaa97776b19243f, type: 3}
   items: []
@@ -2235,6 +2237,7 @@ MonoBehaviour:
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
   - character: {fileID: 11400000, guid: e996976c44f432144b9a15531683d02d, type: 2}
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  UIscreen: {fileID: 0}
   playerLaps: {fileID: 356502929}
   maxLaps: 3
   progressBar: {fileID: 0}
@@ -2255,10 +2258,12 @@ MonoBehaviour:
   accelerate: {fileID: -8277320560346230119, guid: 41a9820487b87304b942d4152c418794, type: 3}
   brake: {fileID: 4441145663013259888, guid: 41a9820487b87304b942d4152c418794, type: 3}
   turn: {fileID: 3764742966766722342, guid: 41a9820487b87304b942d4152c418794, type: 3}
+  ability: {fileID: 4901592190496710210, guid: 41a9820487b87304b942d4152c418794, type: 3}
   accelerate_kbd: {fileID: -8223289698064311723, guid: 41a9820487b87304b942d4152c418794, type: 3}
   brake_kbd: {fileID: -616463696316726754, guid: 41a9820487b87304b942d4152c418794, type: 3}
   turnRight_kbd: {fileID: -1199123607241241326, guid: 41a9820487b87304b942d4152c418794, type: 3}
   turnLeft_kbd: {fileID: 2604191141738171914, guid: 41a9820487b87304b942d4152c418794, type: 3}
+  ability_kbd: {fileID: 4947919216772591376, guid: 41a9820487b87304b942d4152c418794, type: 3}
 --- !u!4 &1628683420
 Transform:
   m_ObjectHideFlags: 0
@@ -2317,6 +2322,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 546fbe776ffad9040b1c3216f41ce7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+--- !u!114 &1628683424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628683416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c626edfcd1f9c340aee3c421537392a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  _mainRaceCanvas: {fileID: 0}
+  _primaryItemIcon: {fileID: 0}
+  _secondaryItemIcon: {fileID: 0}
+  _playerLaps: {fileID: 0}
+  _progressBar: {fileID: 0}
+  _backgroundImage: {fileID: 0}
 --- !u!1001 &1658471683
 PrefabInstance:
   m_ObjectHideFlags: 0
