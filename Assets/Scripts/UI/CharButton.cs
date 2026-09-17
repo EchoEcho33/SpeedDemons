@@ -1,9 +1,7 @@
 using System;
-using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor;
 
 public class CharButton : Button
 {
@@ -14,10 +12,10 @@ public class CharButton : Button
     private Image abilityIconBox, speedRating, accelRating, brakeRating, dragRating;
     private GameObject modelLocation;
     public void GetInfo
-        (CharSelect ui, Character c, TextMeshProUGUI ability, TextMeshProUGUI abilityDesc,  Image abilityIcon, TextMeshProUGUI kartStats, GameObject mLocation,
+        (CharSelect canvasObject, Character c, TextMeshProUGUI ability, TextMeshProUGUI abilityDesc,  Image abilityIcon, TextMeshProUGUI kartStats, GameObject mLocation,
             Image speed, Image accel, Image brake, Image drag)
     {
-        UIController = ui;
+        UIController = canvasObject;
         targetCharacter = c;
         this.image.sprite = c.PolaroidIcon;
         
