@@ -7,8 +7,12 @@ public class UIManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField]
     private Canvas _mainRaceCanvas;
+    
+    public Canvas MainRaceCanvas => _mainRaceCanvas;
+    
     [SerializeField]
     private Image _primaryItemIcon;
+    
     [SerializeField]
     private Image _secondaryItemIcon;
 
@@ -26,7 +30,7 @@ public class UIManager : MonoBehaviour
     {
         if (_playerLaps != null)
         {
-            _playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
+            _playerLaps.text = currLap + " / " + RaceManager.Instance.maxLaps;
         } else
         {
             Debug.LogError("PlayerLaps text not set in UIManager.");

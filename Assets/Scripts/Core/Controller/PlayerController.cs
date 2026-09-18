@@ -1,5 +1,4 @@
-﻿using System;
-using Unity.Cinemachine;
+﻿using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -38,17 +37,17 @@ public class PlayerController : RacerController
         Drive.AssignController(this);
         Drive.Initialize(Character, Kart);
         
-        accelerate = GameManager.Instance.input.accelerate.action;
-        brake = GameManager.Instance.input.brake.action;
-        turn = GameManager.Instance.input.turn.action;
+        accelerate = GameManager.Instance.inputManager.accelerate.action;
+        brake = GameManager.Instance.inputManager.brake.action;
+        turn = GameManager.Instance.inputManager.turn.action;
 
-        accelerate_kbd = GameManager.Instance.input.accelerate_kbd.action;
-        brake_kbd = GameManager.Instance.input.brake_kbd.action;
-        turnRight_kbd = GameManager.Instance.input.turnRight_kbd.action;
-        turnLeft_kbd = GameManager.Instance.input.turnLeft_kbd.action;
-
-        ability = GameManager.Instance.input.ability.action;
-        ability_kbd = GameManager.Instance.input.ability_kbd.action;
+        accelerate_kbd = GameManager.Instance.inputManager.accelerate_kbd.action;
+        brake_kbd = GameManager.Instance.inputManager.brake_kbd.action;
+        turnRight_kbd = GameManager.Instance.inputManager.turnRight_kbd.action;
+        turnLeft_kbd = GameManager.Instance.inputManager.turnLeft_kbd.action;
+        
+        ability = GameManager.Instance.inputManager.ability.action;
+        ability_kbd = GameManager.Instance.inputManager.ability_kbd.action;
     }
 
     private void InitializeCamera()
@@ -121,7 +120,6 @@ public class PlayerController : RacerController
             // Character.TriggerAbility();
         }
     }
-    
 
     private void ControllerMove()
     {
@@ -160,5 +158,4 @@ public class PlayerController : RacerController
             }
         }
     }
-
 }
