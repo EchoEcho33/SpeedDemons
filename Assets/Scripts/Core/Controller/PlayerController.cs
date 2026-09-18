@@ -20,6 +20,10 @@ public class PlayerController : RacerController
     private InputAction turnRight_kbd;
     
     private InputAction turnLeft_kbd;
+
+    private InputAction ability;
+
+    private InputAction ability_kbd;
         
     public override void AssignCharacterAndKart(Character newCharacter, Kart newKart)
     {
@@ -41,6 +45,9 @@ public class PlayerController : RacerController
         brake_kbd = GameManager.Instance.inputManager.brake_kbd.action;
         turnRight_kbd = GameManager.Instance.inputManager.turnRight_kbd.action;
         turnLeft_kbd = GameManager.Instance.inputManager.turnLeft_kbd.action;
+        
+        ability = GameManager.Instance.inputManager.ability.action;
+        ability_kbd = GameManager.Instance.inputManager.ability_kbd.action;
     }
 
     private void InitializeCamera()
@@ -55,6 +62,24 @@ public class PlayerController : RacerController
 
     private void Update()
     {
+        // Spin Out Handler
+        if (base.SpinOut)
+        {
+            // Main Spin Out Code
+            Drive.SpinOut();
+            base.SpinOutDuration -= Time.deltaTime;
+
+            // Ends Spin Out Animation
+            if (SpinOutDuration <= 1 && Drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
+            {
+                animator.SetBool("SpinOut", false);
+            }
+
+            // Ends Spin Out
+            if (SpinOutDuration <= 0) { base.SpinOut = false; }
+
+            return; // Exit Update Code During Spin Out
+        }
 
         // Brake and Accelerate
         if (accelerate.IsPressed() || brake.IsPressed())
@@ -86,6 +111,13 @@ public class PlayerController : RacerController
         else if (turnLeft_kbd.IsPressed())
         {
             Drive.Turn(-1.0f);
+        }
+
+        // Ability
+        if (ability.IsPressed() || ability_kbd.IsPressed())
+        {
+            // The Ability Trigger is Not Fully Set Up, So this goes to Comment Jail for now
+            // Character.TriggerAbility();
         }
     }
 

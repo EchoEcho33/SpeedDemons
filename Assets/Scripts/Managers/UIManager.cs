@@ -7,8 +7,12 @@ public class UIManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField]
     private Canvas _mainRaceCanvas;
+    
+    public Canvas MainRaceCanvas => _mainRaceCanvas;
+    
     [SerializeField]
     private Image _primaryItemIcon;
+    
     [SerializeField]
     private Image _secondaryItemIcon;
 
