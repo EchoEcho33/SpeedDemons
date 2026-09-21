@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : RacerController
 {
     public Camera MainCamera { get; private set; }
-    public CinemachineCamera CinemachineCamera { get; private set; }
+    public CinemachineCamera CinemachineCamera;
     
     private InputAction accelerate;
 
@@ -24,14 +24,22 @@ public class PlayerController : RacerController
     private InputAction ability;
 
     private InputAction ability_kbd;
-        
+
+    private GameObject snowball;
+
+    public void Start()
+    {
+        snowball = new GameObject();
+        snowball.AddComponent<Snowball>();
+     }
+
     public override void AssignCharacterAndKart(Character newCharacter, Kart newKart)
     {
         base.AssignCharacterAndKart(newCharacter, newKart);
         InitializeCamera();
     }
 
-    protected override void InitializeDrive()
+    public override void InitializeDrive()
     {
         Drive = Kart.kartObject.AddComponent<Drive>();
         Drive.AssignController(this);
@@ -79,6 +87,11 @@ public class PlayerController : RacerController
             if (SpinOutDuration <= 0) { base.SpinOut = false; }
 
             return; // Exit Update Code During Spin Out
+        }
+
+        if (brake_kbd.IsPressed())
+        {
+            snowball.GetComponent<Snowball>().Use();
         }
 
         // Brake and Accelerate

@@ -2,7 +2,7 @@
 
 public class AIController : RacerController
 {
-    protected override void InitializeDrive() 
+    public override void InitializeDrive() 
     {
         
     }

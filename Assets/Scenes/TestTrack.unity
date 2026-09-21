@@ -328,11 +328,7 @@ MonoBehaviour:
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
   - character: {fileID: 11400000, guid: e996976c44f432144b9a15531683d02d, type: 2}
     kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
-  UIscreen: {fileID: 0}
-  playerLaps: {fileID: 0}
   maxLaps: 3
-  progressBar: {fileID: 0}
-  backgroundImage: {fileID: 0}
   racerCount: 4
 --- !u!4 &299463521
 Transform:

@@ -18,5 +18,5 @@ MonoBehaviour:
   _drag: 4
   _turnRadius: 2
   _traction: 0
-  kartPrefab: {fileID: 7603069183561121243, guid: cc998fbfab1dfdf4bbc8053c1dc5fd21, type: 3}
+  kartPrefab: {fileID: 7688243050940769710, guid: 46bcae7c2d16de540a9a46c1ecf2d89d, type: 3}
   kartObject: {fileID: 0}

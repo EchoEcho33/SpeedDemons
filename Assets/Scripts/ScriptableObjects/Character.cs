@@ -1,6 +1,5 @@
 using Unity.VisualScripting;
 using UnityEngine;
-
 public enum ECharacterType
 {
     None,
@@ -29,7 +28,9 @@ public class Character : ScriptableObject
     public GameObject characterObject;
     
     private readonly int _spawnVerticalDisplacement = 2;
-    
+
+    private GameObject snowball;
+
     public ECharacterType GetCharacterType()
     {
         return characterType;
