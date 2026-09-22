@@ -110,7 +110,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6197266621214722317
 GameObject:
@@ -153,7 +153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 219451019184670474}
   - component: {fileID: 7471389361199331910}
-  - component: {fileID: -6701685075930944143}
+  - component: {fileID: 3654518935674669414}
   m_Layer: 0
   m_Name: Snowball
   m_TagString: Racer
@@ -198,7 +198,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &-6701685075930944143
+--- !u!54 &3654518935674669414
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,7 +206,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7688243050940769710}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
