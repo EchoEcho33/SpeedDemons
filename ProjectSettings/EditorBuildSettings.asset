@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ConceptDemo.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Start Menu.unity
+    guid: b383516ab56e95648bc0de263079b431
+  - enabled: 1
+    path: Assets/Scenes/TestTrack.unity
+    guid: 893f5bf703781c34795e9eac5a638272
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
