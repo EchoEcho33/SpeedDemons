@@ -17,9 +17,9 @@ MonoBehaviour:
     ShaderFogGraph: {fileID: -6465566751694194690, guid: ff925979627e467458ec78294ef8d074, type: 3}
     StartDistance: 0
     EndDistance: 100
-    NearColor: {r: 0.1977034, g: 0.19479524, b: 0.4113207, a: 1}
-    MiddleColor: {r: 0.3363603, g: 0.17616943, b: 0.4113207, a: 1}
-    FarColor: {r: 0.47204226, g: 0.2955571, b: 0.5169811, a: 1}
+    NearColor: {r: 0.13832277, g: 0.080562435, b: 0.2754717, a: 1}
+    MiddleColor: {r: 0.26380774, g: 0.16043428, b: 0.4188679, a: 1}
+    FarColor: {r: 0.10614294, g: 0.10256316, b: 0.16226411, a: 1}
     FogStart: 0.2
     FogMax: 0.7
     FirstColorThreshold: 0.3
