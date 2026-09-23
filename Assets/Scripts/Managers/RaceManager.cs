@@ -1,7 +1,6 @@
+using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class RaceManager : MonoBehaviour
@@ -18,6 +17,8 @@ public class RaceManager : MonoBehaviour
     private List<RacerSelection> racerSelections;
     
     private List<RacerState> racerStates = new();
+    
+    public Action OnRaceStart;
 
     [SerializeField]
     public int maxLaps = 3;
@@ -70,6 +71,8 @@ public class RaceManager : MonoBehaviour
             
             racerSelectionIndex++;
         }
+        
+        OnRaceStart?.Invoke();
     }
 
     private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot)

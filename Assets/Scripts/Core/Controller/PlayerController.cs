@@ -102,15 +102,18 @@ public class PlayerController : RacerController
         // Steering
         if (turn.IsPressed())
         {
-            Drive.Turn(turn.ReadValue<Vector2>().x);
+            Steering = turn.ReadValue<Vector2>().x;
+            Drive.Turn(Steering);
         } 
         else if (turnRight_kbd.IsPressed())
         {
-            Drive.Turn(1.0f);
+            Steering = 1.0f;
+            Drive.Turn(Steering);
         } 
         else if (turnLeft_kbd.IsPressed())
         {
-            Drive.Turn(-1.0f);
+            Steering = -1.0f;
+            Drive.Turn(Steering);
         }
 
         // Ability
@@ -125,17 +128,19 @@ public class PlayerController : RacerController
     {
         if (accelerate.IsPressed())
         {
-            Drive.Accelerate(accelerate.GetControlMagnitude());
+            Throttle = accelerate.GetControlMagnitude();
+            Drive.Accelerate(Throttle);
         }
         else if (brake.IsPressed())
         {
+            Brake = brake.GetControlMagnitude();
             if (Drive.GetCurrentSpeed() <= 0)
             {
                 Drive.Accelerate(-brake.GetControlMagnitude() / 2);
             }
             else
             {
-                Drive.Decelerate(brake.GetControlMagnitude(), Kart._brakeStrength);
+                Drive.Decelerate(Brake, Kart._brakeStrength);
             }
         }
     }
@@ -144,17 +149,19 @@ public class PlayerController : RacerController
     {
         if (accelerate_kbd.IsPressed())
         {
-            Drive.Accelerate(1.0f);
+            Throttle = 1.0f;
+            Drive.Accelerate(Throttle);
         } 
         else if (brake_kbd.IsPressed())
         {
+            Brake = 1.0f;
             if (Drive.GetCurrentSpeed() <= 0)
             {
                 Drive.Accelerate(-0.5f);
             } 
             else
             {
-                Drive.Decelerate(1.0f, Kart._brakeStrength);
+                Drive.Decelerate(Brake, Kart._brakeStrength);
             }
         }
     }
