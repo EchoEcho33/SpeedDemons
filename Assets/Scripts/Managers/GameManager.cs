@@ -13,16 +13,17 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager Instance { get; private set;}
 
-    [HideInInspector]
-    public InputSys inputManager;
+    public InputSys inputManager { get; private set;}
 
-    [HideInInspector]
-    public UIManager UIManager;
+    public UIManager UIManager { get; private set;}
     
-    [HideInInspector]
-    public AudioManager audioManager;
+    public AudioManager audioManager { get; private set;}
+    
+#if UNITY_EDITOR
+    public RacerRecorder racerRecorder { get; private set;}
+#endif
     
     [SerializeField]
     public GameObject inputManagerPrefab;
