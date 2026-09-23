@@ -1,5 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+
 public enum ECharacterType
 {
     None,
@@ -23,6 +25,9 @@ public class Character : ScriptableObject
 
     [SerializeField]
     public GameObject characterPrefab;
+
+    [SerializeField]
+    public Sprite PolaroidIcon;
     
     [HideInInspector]
     public GameObject characterObject;
@@ -61,5 +66,16 @@ public class Character : ScriptableObject
         TrackCheckpoint currentCheckpoint = racerController.RacerState.CurrCheckpoint;
         racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * _spawnVerticalDisplacement;
         racerAndCar.transform.rotation = currentCheckpoint.GetTrackForwardDirection();
+    }
+    
+    // Some getters necessary for the character selection UI.
+    public Kart getDefaultKart()
+    {
+        return defaultKart;
+    }
+    
+    public Ability getAbility()
+    {
+        return ability;
     }
 }

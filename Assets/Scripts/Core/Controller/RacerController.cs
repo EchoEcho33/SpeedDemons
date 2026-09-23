@@ -12,6 +12,12 @@ public abstract class RacerController : MonoBehaviour
 
     public bool SpinOut = false;
     public float SpinOutDuration = 0;
+    
+    public float Steering { get; protected set; }
+    
+    public float Throttle { get; protected set; }
+    
+    public float Brake { get; protected set; }
 
     public void AssignRacerState(RacerState newRacerState)
     {
@@ -36,5 +42,10 @@ public abstract class RacerController : MonoBehaviour
     public GameObject GetCharacterAndKart()
     {
         return Character.characterObject.transform.root.gameObject;
+    }
+
+    public Vector3 GetKartPosition()
+    {
+        return GetCharacterAndKart().transform.position;
     }
 }

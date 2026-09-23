@@ -30,11 +30,12 @@ public class HydraPlanePuddle : MonoBehaviour
     // Trigger for Racer Collision to Cause Spin Out
     private void OnTriggerEnter(Collider other)
     {
+        Transform parentTransform = other.gameObject.transform.root;
         // Exit if the collision was not triggered by a Racer
-        if (!other.gameObject.CompareTag("Racer")) { return; }
+        if (!parentTransform.CompareTag("Racer")) { return; }
 
         // Attempt to get Drive Component & Call SpinOut
-        if (other.gameObject.TryGetComponent<Drive>(out var drive))
+        if (parentTransform.TryGetComponent<Drive>(out var drive))
         {
             drive.Racer.SpinOutDuration = spinOutDuration;
             drive.Racer.SpinOut = true;

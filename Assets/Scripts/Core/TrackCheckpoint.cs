@@ -81,23 +81,16 @@ public class TrackCheckpoint : MonoBehaviour
         box.center = Vector3.up * box.size.y * 0.5f;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        Drive drive = other.gameObject.GetComponentInParent<Drive>();
+        Drive drive = other.gameObject.GetComponent<Drive>();
         if (drive == null) return;
         
         RacerController racer = drive.Racer;
-        if (racer == null)
-        {
-            Debug.LogError("Racer not found.");
-            return;
-        }
+        if (racer == null) return;
         
         RacerState racerState = racer.RacerState;
-        if (racerState == null) {
-            Debug.LogError("Racer state not found.");
-            return;
-        }
+        if (racerState == null) return;
         
         if (racerState.CurrCheckpoint.nextCheckpoint == this) racerState.ReachCheckpoint(this);
     }

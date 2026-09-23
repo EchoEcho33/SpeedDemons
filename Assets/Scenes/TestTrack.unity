@@ -312,22 +312,22 @@ MonoBehaviour:
   - {fileID: 1316091991}
   - {fileID: 1514147225}
   racerSelections:
-  - character: {fileID: 11400000, guid: 1e41ed9f7ada331478125c429cb9fcea, type: 2}
-    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
-  - character: {fileID: 11400000, guid: 638869a3a718404428b0dbe89a009b87, type: 2}
-    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
-  - character: {fileID: 11400000, guid: 0583a517515d6de44a5207a8478fcfa7, type: 2}
-    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
-  - character: {fileID: 11400000, guid: 8e3f2fc56503c9248a5e12f47c465890, type: 2}
-    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
-  - character: {fileID: 11400000, guid: 5777b4e5024ae024b9a7480208fee6cb, type: 2}
-    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
-  - character: {fileID: 11400000, guid: 4eb759bd12df2d2488be4a267c7d8c72, type: 2}
-    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
-  - character: {fileID: 11400000, guid: 9a2aba8ab3b008143be437a17717b807, type: 2}
-    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
-  - character: {fileID: 11400000, guid: e996976c44f432144b9a15531683d02d, type: 2}
-    kart: {fileID: 11400000, guid: da046bd01942a0948ade11b772c4d25a, type: 2}
+  - character: {fileID: 11400000, guid: 84c161433122d91969c86d2bae9c8fbf, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: 8500a31729f5bccefa8e16ba2d50ce11, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: 77ff570b42114f60581a072ac42e3c3d, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: 401325ccb94698a668a94dd4270c9c18, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: e5b1e4cd0f112cdf4a0af2413483a2bd, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: 39c5217701e82ba92a533f3ff33e1997, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: a5ed28c94d10e429a9c6e78f1b0e00e0, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: 52f9af48fce685662a4c94d6254a5446, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
   maxLaps: 3
   racerCount: 4
 --- !u!4 &299463521
