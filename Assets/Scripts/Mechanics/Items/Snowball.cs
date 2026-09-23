@@ -18,15 +18,21 @@ public class Snowball : Item
     SphereCollider sphereCollider;
     GameObject sphereObject;
 
+    [SerializeField]
+    GameObject prefab;
+
     //jank ass shi...
     float timeRemaining = -2f;
 
 
     public override void Use()
     {
+        if (prefab == null) return;
+
         //don't use while running
         if (timeRemaining > 0) return;
         timeRemaining = duration;
+        
 
         //placeholder
         user = FindAnyObjectByType<PlayerController>();
@@ -34,7 +40,6 @@ public class Snowball : Item
         if (user is PlayerController) follow = ((PlayerController)user).CinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
 
         //ok basically replaces the car with a sphere, really couldnt find a better/less jank solution
-        GameObject prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Items/Snowball.prefab", typeof(GameObject)) as GameObject;
         //retain speed
         float currSpeed = user.Drive.m_currentSpeed;
         Destroy(user.Kart.kartObject);
