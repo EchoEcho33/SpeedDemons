@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using System.Runtime.Serialization;
+using System.Diagnostics;
 
 public class RaceManager : MonoBehaviour
 {
@@ -64,6 +65,8 @@ public class RaceManager : MonoBehaviour
         List<RacerController> racerControllers = GameManager.Instance.GetRacers();
         racerControllers.Remove(localRacer);
         int racerSelectionIndex = 0;
+
+        List<Item> items = GameManager.Instance.items;
         
         foreach (RacerController racer in racerControllers)
         {
@@ -76,6 +79,15 @@ public class RaceManager : MonoBehaviour
             racer.AssignRacerState(racerState); 
             
             racerSelectionIndex++;
+        }
+
+        foreach (Item item in items)
+        {
+            item.spawnItem();
+            Transform transform = item.itemObject.GetComponent<Transform>();
+            int xCoord = 40 + ((int) (Random.value * 6) * 5);
+            int zCoord = -100 - ((int) (Random.value * 6) * 5);
+            transform.Translate(xCoord, 0, zCoord);
         }
     }
 
