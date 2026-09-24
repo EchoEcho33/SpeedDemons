@@ -23,4 +23,24 @@ public class StartFinishCheckpoint : TrackCheckpoint
         Handles.ConeHandleCap(0, conePosition, GetTrackForwardDirection(), 5.0f, EventType.Repaint);
     }
 #endif
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        Drive drive = other.gameObject.GetComponent<Drive>();
+        if (drive == null) return;
+        
+        RacerController racer = drive.Racer;
+        if (racer == null) return;
+        
+        RacerState racerState = racer.RacerState;
+        if (racerState == null) return;
+
+        if (racerState.CurrCheckpoint == this)
+        {
+            racerState.InitialStartFinishCrossing(this);
+            return;
+        }
+        
+        if (racerState.CurrCheckpoint.nextCheckpoint == this) racerState.ReachCheckpoint(this);
+    }
 }

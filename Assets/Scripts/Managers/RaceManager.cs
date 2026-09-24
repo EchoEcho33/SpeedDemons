@@ -1,10 +1,7 @@
+using System;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
-using System.Runtime.Serialization;
 using System.Diagnostics;
 
 public class RaceManager : MonoBehaviour
@@ -21,29 +18,26 @@ public class RaceManager : MonoBehaviour
     private List<RacerSelection> racerSelections;
     
     private List<RacerState> racerStates = new();
+    
+    public Action OnRaceStart;
 
-    //temp UI Screen, to be put in UI Manager
-    [SerializeField]
-    public Canvas UIscreen;
-    [SerializeField]
-    public TMP_Text playerLaps;
     [SerializeField]
     public int maxLaps = 3;
-    [SerializeField]
-    public Image progressBar;
-
-    //filler for example
-    [SerializeField]
-    public Image backgroundImage;
-
 
     // TODO: This is just a temporary count of how many racers should the manager spawn. The real count is the # of racers in _racerStates
     public int racerCount = 1;
     
-    public void Start()
+    public static RaceManager Instance { get; private set; }
+    
+    private void Awake()
     {
-        // TODO: Mike - I'm just doing this for now for testing purposes. Move this later!
-        StartRace();
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
     }
     
     public void StartRace()
@@ -89,6 +83,8 @@ public class RaceManager : MonoBehaviour
             int zCoord = -100 - ((int) (Random.value * 6) * 5);
             transform.Translate(xCoord, 0, zCoord);
         }
+        
+        OnRaceStart?.Invoke();
     }
 
     private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot)
@@ -98,7 +94,7 @@ public class RaceManager : MonoBehaviour
         
         // Initialize kart + character.
         GameObject kartObject = Instantiate(kart.kartPrefab, startingGridSpot.GetSpawnPoint(), kart.kartPrefab.transform.rotation);
-        GameObject characterSlot = kartObject.transform.GetChild(0).gameObject; // First child should be the CharacterSlot!
+        GameObject characterSlot = kartObject.transform.Find("Model").Find("CharacterSocket").gameObject; // Finds Kart Model and Character Socket to Place Character
         GameObject characterObject = Instantiate(character.characterPrefab, Vector3.zero, character.characterPrefab.transform.rotation); // TODO: Mike - The rotation of the character is currently just based on the prefab. 
         characterObject.transform.SetParent(characterSlot.transform, false);
         character.characterObject = characterObject;

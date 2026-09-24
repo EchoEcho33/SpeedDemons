@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ECharacterType
 {
@@ -20,10 +21,13 @@ public class Character : ScriptableObject
     private Kart defaultKart;
 
     [SerializeField]
-    private Ability ability;
+    public Ability ability;
 
     [SerializeField]
     public GameObject characterPrefab;
+
+    [SerializeField]
+    public Sprite PolaroidIcon;
     
     [HideInInspector]
     public GameObject characterObject;
@@ -35,7 +39,7 @@ public class Character : ScriptableObject
         return characterType;
     }
 
-    private void TriggerAbility()
+    public void TriggerAbility()
     {
         ability.TriggerAbility();
     }
@@ -46,7 +50,7 @@ public class Character : ScriptableObject
     /// <returns>parent RacerAndCar GameObject of the Character</returns>
     public GameObject GetRacerAndCar()
     {
-        return characterObject.transform.parent.parent.gameObject;
+        return characterObject.transform.root.gameObject;
     }
 
     public void Respawn()
@@ -60,5 +64,16 @@ public class Character : ScriptableObject
         TrackCheckpoint currentCheckpoint = racerController.RacerState.CurrCheckpoint;
         racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * _spawnVerticalDisplacement;
         racerAndCar.transform.rotation = currentCheckpoint.GetTrackForwardDirection();
+    }
+    
+    // Some getters necessary for the character selection UI.
+    public Kart getDefaultKart()
+    {
+        return defaultKart;
+    }
+    
+    public Ability getAbility()
+    {
+        return ability;
     }
 }

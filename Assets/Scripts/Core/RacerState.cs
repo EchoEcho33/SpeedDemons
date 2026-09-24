@@ -1,10 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class RacerState : MonoBehaviour
 {
     public RacerController RacerController { get; private set; }
     
     public TrackCheckpoint CurrCheckpoint { get; private set;}
+    
+    public Action<TrackCheckpoint> OnReachedCheckpoint;
+    
+    public Action<StartFinishCheckpoint> OnReachedStartFinishCheckpoint;
 
     public int currLap { get; private set;}
 
@@ -23,7 +28,7 @@ public class RacerState : MonoBehaviour
         currLap = 1;
         abilityBar = 0;
 
-        GameManager.Instance.UI.UpdateLap(1);
+        GameManager.Instance.UIManager.UpdateLap(1);
     }
     
 #if UNITY_EDITOR
@@ -56,18 +61,24 @@ public class RacerState : MonoBehaviour
         }
     }
 #endif
+    public void InitialStartFinishCrossing(StartFinishCheckpoint startFinishCheckpoint)
+    {
+        OnReachedStartFinishCheckpoint?.Invoke(startFinishCheckpoint);
+    }
 
     public void ReachCheckpoint(TrackCheckpoint checkpoint)
     {
+        OnReachedCheckpoint?.Invoke(checkpoint);
         updateBar(2);
 
         CurrCheckpoint = checkpoint;
-        if (checkpoint.GetType().Equals(typeof(StartFinishCheckpoint)))
+        if (checkpoint is StartFinishCheckpoint startFinishCheckpoint)
         {
+            OnReachedStartFinishCheckpoint?.Invoke(startFinishCheckpoint);
             currLap++;
             
             //applies from all racers, change after getting Driver to connect with certain racerStates
-            GameManager.Instance.UI.UpdateLap(currLap);
+            GameManager.Instance.UIManager.UpdateLap(currLap);
         }
     }
 
@@ -76,6 +87,6 @@ public class RacerState : MonoBehaviour
     {
         abilityBar = Mathf.Clamp(0, abilityBar + add, abilityMaxValue);
 
-        GameManager.Instance.UI.UpdateBar(abilityBar, abilityMaxValue);
+        GameManager.Instance.UIManager.UpdateBar(abilityBar, abilityMaxValue);
     }
 }
