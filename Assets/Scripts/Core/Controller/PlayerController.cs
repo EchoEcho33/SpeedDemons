@@ -24,6 +24,10 @@ public class PlayerController : RacerController
     private InputAction ability;
 
     private InputAction ability_kbd;
+
+    private InputAction useItem;
+    private InputAction useItem_kbd;
+
     public override void AssignCharacterAndKart(Character newCharacter, Kart newKart)
     {
         base.AssignCharacterAndKart(newCharacter, newKart);
@@ -47,6 +51,9 @@ public class PlayerController : RacerController
         
         ability = GameManager.Instance.inputManager.ability.action;
         ability_kbd = GameManager.Instance.inputManager.ability_kbd.action;
+
+        useItem = GameManager.Instance.inputManager.useItem.action;
+        useItem_kbd = GameManager.Instance.inputManager.useItem_kbd.action;
     }
 
     private void InitializeCamera()
@@ -120,6 +127,11 @@ public class PlayerController : RacerController
         {
             // The Ability Trigger is Not Fully Set Up, So this goes to Comment Jail for now
             // Character.TriggerAbility();
+        }
+
+        if (useItem.IsPressed() || useItem_kbd.IsPressed())
+        {
+            RacerState.UseItem();
         }
     }
 

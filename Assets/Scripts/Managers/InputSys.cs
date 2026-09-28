@@ -15,6 +15,8 @@ public class InputSys : MonoBehaviour
 
     [SerializeField]
     public InputActionReference ability;
+    [SerializeField]
+    public InputActionReference useItem;
 
     [Header("Keyboard Controls")]
     [SerializeField]
@@ -31,4 +33,7 @@ public class InputSys : MonoBehaviour
 
     [SerializeField]
     public InputActionReference ability_kbd;
+
+    [SerializeField]
+    public InputActionReference useItem_kbd;
 }

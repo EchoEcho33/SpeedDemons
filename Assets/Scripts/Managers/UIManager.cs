@@ -57,16 +57,20 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UseItem()
+    public bool UseItem()
     {
         if (_secondaryItemIcon.IsActive())
         {
             _primaryItemIcon.sprite = _secondaryItemIcon.sprite;
             _secondaryItemIcon.enabled = false;
-        } else
+            return true;
+        } else if (_primaryItemIcon.IsActive())
         {
             _primaryItemIcon.enabled = false;
+            _secondaryItemIcon.enabled = false;
+            return true;
         }
+        return false;
     }
 
     public void UpdateBar(int abilityBar, int abilityMaxValue)

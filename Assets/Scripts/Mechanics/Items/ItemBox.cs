@@ -4,8 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class ItemBox : MonoBehaviour
 {
-    [SerializeField]
-    private Item item;
 
     // When a player enters the collider, picks up the item and adds it to the UI
     // When an AI enters the collider, TODO 
@@ -13,16 +11,18 @@ public class ItemBox : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("AI"))
         {
+            Item randomItem = GameManager.Instance.GetRandomItem();
+
             if (other.gameObject.CompareTag("Player"))
             {
                 Debug.Log("Hit!");
-                GameManager.Instance.UIManager.PickUpItem(item);
+                GameManager.Instance.UIManager.PickUpItem(randomItem);
             }
 
-            RacerController controller = other.gameObject.GetComponent<RacerController>();
-            controller.RacerState.PickUpItem(item);
+            Drive controller = other.gameObject.GetComponent<Drive>();
+            controller.Racer.RacerState.PickUpItem(randomItem);
             
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         } 
     }
 }

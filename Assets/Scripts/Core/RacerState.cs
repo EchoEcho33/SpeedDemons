@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class RacerState : MonoBehaviour
@@ -16,8 +17,11 @@ public class RacerState : MonoBehaviour
     //arbitrary max value
     public int abilityMaxValue = 10;
     public int abilityBar { get; private set; }
-    private Item primaryItem;
-    private Item secondaryItem;
+
+    private Item _primaryItem = null;
+    private Item _secondaryItem = null;
+    private float _itemCooldown = 0.5f;
+    private bool _onItemCooldown = false;
     
     public void AssignController(RacerController newRacerController)
     {
@@ -94,12 +98,33 @@ public class RacerState : MonoBehaviour
 
     public void PickUpItem(Item item)
     {
-        if (primaryItem == null)
+        if (_primaryItem == null)
         {
-            primaryItem = item;
-        } else if (secondaryItem == null)
+            _primaryItem = item;
+        } else if (_secondaryItem == null)
         {
-            secondaryItem = item;
+            _secondaryItem = item;
         }
+    }
+
+    public bool UseItem()
+    {
+        if (!_onItemCooldown && _primaryItem != null)
+        {
+            _onItemCooldown = true;
+            _primaryItem.Use();
+            GameManager.Instance.UIManager.UseItem();
+            _primaryItem = _secondaryItem;
+            _secondaryItem = null;
+            StartCoroutine(ItemCooldown());
+            return true;
+        }
+        return false;
+    }
+
+    private IEnumerator ItemCooldown()
+    {
+        yield return new WaitForSeconds(_itemCooldown);
+        _onItemCooldown = false;
     }
 }

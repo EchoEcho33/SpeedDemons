@@ -14,12 +14,12 @@ public class Snowball : Item
     float startsize = 5;
     float basefollowr = 5;
 
-    CinemachineOrbitalFollow follow;
-    SphereCollider sphereCollider;
-    GameObject sphereObject;
+    private CinemachineOrbitalFollow follow;
+    private SphereCollider sphereCollider;
+    private GameObject sphereObject;
 
     [SerializeField]
-    GameObject prefab;
+    private GameObject snowballPrefab;
 
     //jank ass shi...
     float timeRemaining = -2f;
@@ -27,7 +27,7 @@ public class Snowball : Item
 
     public override void Use()
     {
-        if (prefab == null) return;
+        if (snowballPrefab == null) return;
 
         //don't use while running
         if (timeRemaining > 0) return;
@@ -45,7 +45,7 @@ public class Snowball : Item
         Destroy(user.Kart.kartObject);
 
         //create snowball in place of kart
-        user.Kart.kartObject = Instantiate(prefab, user.Drive.transform.position + new Vector3(0f, 1f, 0f), user.Drive.transform.rotation);
+        user.Kart.kartObject = Instantiate(snowballPrefab, user.Drive.transform.position + new Vector3(0f, 1f, 0f), user.Drive.transform.rotation);
         sphereCollider = user.Kart.kartObject.GetComponent<SphereCollider>();
         sphereObject = user.Kart.kartObject.transform.Find("Model").Find("Sphere").gameObject;
         
