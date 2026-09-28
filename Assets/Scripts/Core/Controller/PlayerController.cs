@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : RacerController
 {
     public Camera MainCamera { get; private set; }
-    public CinemachineCamera CinemachineCamera { get; private set; }
+    public CinemachineCamera CinemachineCamera;
     
     private InputAction accelerate;
 
@@ -24,14 +24,13 @@ public class PlayerController : RacerController
     private InputAction ability;
 
     private InputAction ability_kbd;
-        
     public override void AssignCharacterAndKart(Character newCharacter, Kart newKart)
     {
         base.AssignCharacterAndKart(newCharacter, newKart);
         InitializeCamera();
     }
 
-    protected override void InitializeDrive()
+    public override void InitializeDrive()
     {
         Drive = Kart.kartObject.AddComponent<Drive>();
         Drive.AssignController(this);
