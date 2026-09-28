@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +27,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Image _backgroundImage;
 
+    public void Start()
+    {
+        _primaryItemIcon.enabled = false;
+        _secondaryItemIcon.enabled = false;
+    }
+
     public void UpdateLap(int currLap)
     {
         if (_playerLaps != null)
@@ -37,14 +44,29 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void PickUpItem(string itemId)
+    public void PickUpItem(Item item)
     {
-        
+        if (!_primaryItemIcon.IsActive())
+        {
+            _primaryItemIcon.sprite = item.getIcon();
+            _primaryItemIcon.enabled = true;
+        } else if (!_secondaryItemIcon.IsActive())
+        {
+            _secondaryItemIcon.sprite = item.getIcon();
+            _secondaryItemIcon.enabled = true;
+        }
     }
 
     public void UseItem()
     {
-        
+        if (_secondaryItemIcon.IsActive())
+        {
+            _primaryItemIcon.sprite = _secondaryItemIcon.sprite;
+            _secondaryItemIcon.enabled = false;
+        } else
+        {
+            _primaryItemIcon.enabled = false;
+        }
     }
 
     public void UpdateBar(int abilityBar, int abilityMaxValue)

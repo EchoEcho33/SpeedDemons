@@ -16,6 +16,8 @@ public class RacerState : MonoBehaviour
     //arbitrary max value
     public int abilityMaxValue = 10;
     public int abilityBar { get; private set; }
+    private Item primaryItem;
+    private Item secondaryItem;
     
     public void AssignController(RacerController newRacerController)
     {
@@ -88,5 +90,16 @@ public class RacerState : MonoBehaviour
         abilityBar = Mathf.Clamp(0, abilityBar + add, abilityMaxValue);
 
         GameManager.Instance.UIManager.UpdateBar(abilityBar, abilityMaxValue);
+    }
+
+    public void PickUpItem(Item item)
+    {
+        if (primaryItem == null)
+        {
+            primaryItem = item;
+        } else if (secondaryItem == null)
+        {
+            secondaryItem = item;
+        }
     }
 }

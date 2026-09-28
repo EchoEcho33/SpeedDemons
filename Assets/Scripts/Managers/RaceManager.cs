@@ -51,7 +51,7 @@ public class RaceManager : MonoBehaviour
         remainingStartingGrid.RemoveAt(startingGridIndex);
 
         RacerSelection localRacerSelection = racerSelections[0]; // TODO: Currently, the local player selection is the first in the list
-        (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot);
+        (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
         PlayerController localRacer = GameManager.Instance.LocalRacer;
         localRacer.AssignCharacterAndKart(localCharacter, localKart);
         localRacer.AssignRacerState(localRacerState);
@@ -68,9 +68,10 @@ public class RaceManager : MonoBehaviour
             startingGridSpot = startingGrid[startingGridIndex];
             remainingStartingGrid.RemoveAt(startingGridIndex);
             
-            (Character character, Kart kart, RacerState racerState) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot);
+            (Character character, Kart kart, RacerState racerState) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot, false);
             racer.AssignCharacterAndKart(character, kart);
             racer.AssignRacerState(racerState); 
+            
             
             racerSelectionIndex++;
         }
@@ -87,7 +88,7 @@ public class RaceManager : MonoBehaviour
         OnRaceStart?.Invoke();
     }
 
-    private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot)
+    private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot, bool isPlayer)
     {
         Character character = Instantiate(racerSelection.character);
         Kart kart = Instantiate(racerSelection.kart);
@@ -107,6 +108,9 @@ public class RaceManager : MonoBehaviour
         
         // Assign racer state to character.
         racerStates.Add(racerState);
+
+        kartObject.tag = isPlayer ? "Player" : "AI";
+        
         
         return (character, kart, racerState);
     }

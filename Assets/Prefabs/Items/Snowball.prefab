@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607064f13ab85e44e8d479508ade09c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Snowball
-  _itemId: 
+  _itemId: Snowball
   _rarity: 0
   _icon: {fileID: 0}
+  itemObject: {fileID: 0}
   prefab: {fileID: 7688243050940769710, guid: 46bcae7c2d16de540a9a46c1ecf2d89d, type: 3}
