@@ -1,5 +1,3 @@
-using System.ComponentModel;
-using System.Diagnostics;
 //using System.Threading.Tasks.Dataflow;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -23,7 +21,6 @@ public abstract class Item : MonoBehaviour
     [SerializeField]
     private Sprite _icon;
 
-    public GameObject itemObject;
     public abstract void Use();
 
     public string getItemId()
@@ -31,13 +28,18 @@ public abstract class Item : MonoBehaviour
         return this._itemId;
     }
 
+    public Sprite getIcon()
+    {
+        return _icon;
+    }
+
     public void spawnItem()
     {
-        this.itemObject = new GameObject(this._itemId);
-        BoxCollider box = this.itemObject.AddComponent<BoxCollider>();
-        box.isTrigger = true;
-        SpriteMask spriteMask = this.itemObject.AddComponent<SpriteMask>();
-        spriteMask.sprite = this._icon;
+        // this.itemObject = new GameObject(this._itemId);
+        // BoxCollider box = this.itemObject.AddComponent<BoxCollider>();
+        // box.isTrigger = true;
+        // SpriteMask spriteMask = this.itemObject.AddComponent<SpriteMask>();
+        // spriteMask.sprite = this._icon;
     }
 
     private void OnTriggerEnter(Collider other)
