@@ -11,7 +11,7 @@ public class FlashBang : Item
 
     private float timeRemaining ;
 
-    public override void Use()
+    public override void Use(RacerState racer)
     {
         if (imageObject != null) {
             Destroy(imageObject);

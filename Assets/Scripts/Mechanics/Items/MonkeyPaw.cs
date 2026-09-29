@@ -32,7 +32,7 @@ public class MonkeyPaw : Item
 
     private State state = State.INACTIVE;
 
-    public override void Use()
+    public override void Use(RacerState racer)
     {
         if (state != State.INACTIVE) { return; }
 
