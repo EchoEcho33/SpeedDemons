@@ -6,7 +6,7 @@ public class AIController : RacerController
     
     private float _steering;
     
-    protected override void InitializeDrive() 
+    public override void InitializeDrive() 
     {
         
     }

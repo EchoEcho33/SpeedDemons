@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 1148649676983201709}
   - component: {fileID: 8516806282042039623}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: SecondaryIcon
   m_TagString: ItemIconUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 6635278688666732976}
   - component: {fileID: 4193769997189828697}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: PrimaryIcon
   m_TagString: ItemIconUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
