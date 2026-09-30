@@ -8,19 +8,17 @@ using UnityEngine.TextCore.Text;
 
 public class Snowball : Item
 {
-
-    private float duration = 10.0f;
+    [SerializeField]
     private float maxsize = 10;
-    private float growthscale = 1 / 40000f;
-    private float startsize = 0.2f;
+    [SerializeField]
+    private float growthscale = 10f;
+    [SerializeField]
+    private float startsize = 2f;
     private float basefollowr = 5;
 
     private CinemachineOrbitalFollow follow;
     private SphereCollider sphereCollider;
     private GameObject sphereObject;
-    private Vector3 _sphereObjectScale;
-
-    private Coroutine _activeTimer;
 
 
     private void Start()
@@ -32,18 +30,14 @@ public class Snowball : Item
 
     public override void Use(RacerState racer)
     {
-        //if (_snowballActive) return;
-
         if (follow != null) basefollowr = follow.Radius;
 
         // Enable snowball
         sphereCollider = racer.RacerController.GetCharacterAndKart().GetComponentInChildren<SphereCollider>(true);
         sphereObject = sphereCollider.gameObject;
-        
-        //apply starting size
-        sphereObject.transform.localScale = new Vector3(startsize, startsize, startsize);
 
         sphereObject.SetActive(true);
+        sphereObject.AddComponent<Snowball>();
     }
 
 
@@ -51,28 +45,21 @@ public class Snowball : Item
     {
         if (sphereObject.activeSelf)
         {
-            //sphere growth based on speed
-            sphereObject.transform.localScale += new Vector3(growthscale, growthscale, growthscale);
-            
-            //idea: insert rotate ball or increasing mass
+            // Grow sphere based on growth scale
+            sphereObject.transform.localScale += new Vector3(growthscale, growthscale, growthscale) * Time.deltaTime;
 
             if (follow != null) follow.Radius = basefollowr + sphereObject.transform.localScale.x;
             
-            //if too big, stop as well
-            if (sphereObject.transform.localScale.x == maxsize)
+            // When the sphere reaches it's maximum size threshold, player returns to normal
+            if (sphereObject.transform.localScale.x >= maxsize)
             {
-                StopCoroutine(_activeTimer);
                 sphereObject.SetActive(false);
                 if (follow != null) follow.Radius = basefollowr;
+                sphereObject.transform.localScale = new Vector3(startsize, startsize, startsize);
+                Destroy(this);
             }
         }
 
-    }
-
-    private IEnumerator BecomeSnowball()
-    {
-        yield return new WaitForSeconds(duration);
-        sphereObject.SetActive(false);
     }
 
     //event for hitting other drivers
