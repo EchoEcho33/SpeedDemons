@@ -50,7 +50,7 @@ public class Snowball : Item
         {
             // Grow sphere based on growth scale
             sphereObject.transform.localScale += new Vector3(growthscale, growthscale, growthscale) * Time.deltaTime;
-            sphereObject.transform.rotation *= Quaternion.AngleAxis(-10 * racer.RacerController.Drive.GetCurrentSpeed() * Time.deltaTime, 
+            sphereObject.transform.rotation *= Quaternion.AngleAxis(10 * racer.RacerController.Drive.GetCurrentSpeed() * Time.deltaTime, 
                                             Quaternion.LookRotation(racer.RacerController.gameObject.transform.forward, 
                                             racer.RacerController.gameObject.transform.up) * Vector3.right);
 
