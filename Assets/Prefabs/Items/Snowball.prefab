@@ -47,6 +47,6 @@ MonoBehaviour:
   _itemId: Snowball
   _rarity: 1
   _icon: {fileID: 21300000, guid: 92b635a1d63cf6040bfc9bb0eebd1ecc, type: 3}
-  maxsize: 10
-  growthscale: 10
+  maxsize: 3
+  growthscale: 0.1
   startsize: 2

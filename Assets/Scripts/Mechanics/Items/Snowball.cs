@@ -9,12 +9,14 @@ using UnityEngine.TextCore.Text;
 public class Snowball : Item
 {
     [SerializeField]
-    private float maxsize = 10;
+    private float maxsize = 3;
     [SerializeField]
-    private float growthscale = 10f;
+    private float growthscale = 0.2f;
     [SerializeField]
     private float startsize = 2f;
     private float basefollowr = 5;
+
+    private RacerState racer;
 
     private CinemachineOrbitalFollow follow;
     private SphereCollider sphereCollider;
@@ -32,12 +34,13 @@ public class Snowball : Item
     {
         if (follow != null) basefollowr = follow.Radius;
 
+        this.racer = racer;
+
         // Enable snowball
         sphereCollider = racer.RacerController.GetCharacterAndKart().GetComponentInChildren<SphereCollider>(true);
         sphereObject = sphereCollider.gameObject;
 
         sphereObject.SetActive(true);
-        sphereObject.AddComponent<Snowball>();
     }
 
 
@@ -47,6 +50,9 @@ public class Snowball : Item
         {
             // Grow sphere based on growth scale
             sphereObject.transform.localScale += new Vector3(growthscale, growthscale, growthscale) * Time.deltaTime;
+            sphereObject.transform.rotation *= Quaternion.AngleAxis(-10 * racer.RacerController.Drive.GetCurrentSpeed() * Time.deltaTime, 
+                                            Quaternion.LookRotation(racer.RacerController.gameObject.transform.forward, 
+                                            racer.RacerController.gameObject.transform.up) * Vector3.right);
 
             if (follow != null) follow.Radius = basefollowr + sphereObject.transform.localScale.x;
             
@@ -56,7 +62,6 @@ public class Snowball : Item
                 sphereObject.SetActive(false);
                 if (follow != null) follow.Radius = basefollowr;
                 sphereObject.transform.localScale = new Vector3(startsize, startsize, startsize);
-                Destroy(this);
             }
         }
 

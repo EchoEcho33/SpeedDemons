@@ -114,7 +114,8 @@ public class RacerState : MonoBehaviour
         if (!_onItemCooldown && _primaryItem != null)
         {
             _onItemCooldown = true;
-            _primaryItem.Use(this);
+            Item instantiatedItem = Instantiate(_primaryItem, RacerController.transform);
+            instantiatedItem.Use(this);
             GameManager.Instance.UIManager.UseItem();
             _primaryItem = _secondaryItem;
             _secondaryItem = null;
