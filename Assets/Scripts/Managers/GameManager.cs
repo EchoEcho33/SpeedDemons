@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public enum GameState
 {
@@ -20,10 +18,6 @@ public class GameManager : MonoBehaviour
     public UIManager UIManager { get; private set;}
     
     public AudioManager audioManager { get; private set;}
-    
-#if UNITY_EDITOR
-    public RacerRecorder racerRecorder { get; private set;}
-#endif
     
     [SerializeField]
     public GameObject inputManagerPrefab;

@@ -1,0 +1,666 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4629051538652346269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b27bb6d9a2c8d540a10dff10acc543e, type: 3}
+  m_Name: RacerAI Debug Info
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphDebugInfo
+  m_CodeBreakPointsList: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad8f2220607dac4db5082ff333fafb8, type: 3}
+  m_Name: RacerAI
+  m_EditorClassIdentifier: Unity.Behavior.Authoring::Unity.Behavior.BehaviorAuthoringGraph
+  Blackboard: {fileID: 8472685246062474965}
+  m_Description: 
+  m_Nodes:
+  - rid: 6912283283188613120
+  - rid: 6912283283216138313
+  - rid: 6912283283216138373
+  - rid: 6912283283216138414
+  - rid: 6912283283216138431
+  m_VersionTimestamp: 639264165521621818
+  m_SerializedVersion: 3
+  m_DebugInfo: {fileID: -4629051538652346269}
+  m_RuntimeGraph: {fileID: 4277563521462159303}
+  AssetID:
+    m_Value0: 14133252836926627756
+    m_Value1: 3431513640033057784
+  Story:
+    Story: 
+    StoryVariableNames: []
+    Variables: []
+  m_NodeModelsInfo:
+  - Name: On Start
+    Story: 
+    RuntimeTypeString: Unity.Behavior.Start, Unity.Behavior, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    RuntimeTypeID:
+      m_Value0: 3335272451348827663
+      m_Value1: 11549843281177505721
+    Variables: []
+    NamedChildren: []
+    IsPlaceholder: 0
+  - Name: Drive
+    Story: '[Racer] drives to [Waypoint]'
+    RuntimeTypeString: DriveAction, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    RuntimeTypeID:
+      m_Value0: 14676646867782482411
+      m_Value1: 182540010198423478
+    Variables:
+    - Name: Racer
+      Type:
+        m_SerializableType: AIController, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+      Tooltip: 
+    - Name: Waypoint
+      Type:
+        m_SerializableType: NavigationWaypoint, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+    IsPlaceholder: 0
+  - Name: Repeat
+    Story: 
+    RuntimeTypeString: Unity.Behavior.RepeaterModifier, Unity.Behavior, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    RuntimeTypeID:
+      m_Value0: 3696095273264312494
+      m_Value1: 14191201703811421854
+    Variables: []
+    NamedChildren: []
+    IsPlaceholder: 0
+  - Name: SelectNewWaypoint
+    Story: '[Racer] selects new [waypoint]'
+    RuntimeTypeString: SelectNewWaypointAction, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    RuntimeTypeID:
+      m_Value0: 6793207888305867122
+      m_Value1: 3440120126179101381
+    Variables:
+    - Name: Racer
+      Type:
+        m_SerializableType: AIController, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+      Tooltip: 
+    - Name: Waypoint
+      Type:
+        m_SerializableType: NavigationWaypoint, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      Tooltip: 
+    NamedChildren: []
+    IsPlaceholder: 0
+  m_Blackboards: []
+  m_MainBlackboardAuthoringAsset: {fileID: 8472685246062474965}
+  m_CommandBuffer:
+    m_Commands: []
+  m_SubgraphsInfo: []
+  m_BlackboardMissingManagedRef: 0
+  m_GraphMissingManagedRef: 0
+  m_HasMissingTypeInManagedRef: 0
+  m_EnumDependencyCache:
+    Entries: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6912283283188613120
+      type: {class: StartNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -22.4, y: 3.199997}
+        ID:
+          m_Value0: 10101220408463690570
+          m_Value1: 6255298064096840694
+        Parents: []
+        PortModels:
+        - rid: 6912283283188613121
+        NodeType:
+          m_SerializableType: Unity.Behavior.Start, Unity.Behavior, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 3335272451348827663
+          m_Value1: 11549843281177505721
+        m_FieldValues: []
+        Repeat: 1
+        AllowMultipleRepeatsPerTick: 0
+    - rid: 6912283283188613121
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6912283283188613120
+        m_Connections:
+        - rid: 6912283283216138374
+    - rid: 6912283283216138313
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: 8.300015, y: 272.1001}
+        ID:
+          m_Value0: 17010145080293526263
+          m_Value1: 14531405898987274784
+        Parents:
+        - rid: 6912283283216138431
+        PortModels:
+        - rid: 6912283283216138314
+        - rid: 6912283283216138315
+        NodeType:
+          m_SerializableType: DriveAction, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 14676646867782482411
+          m_Value1: 182540010198423478
+        m_FieldValues:
+        - rid: 6912283283216138322
+        - rid: 6912283283216138317
+    - rid: 6912283283216138314
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6912283283216138313
+        m_Connections: []
+    - rid: 6912283283216138315
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6912283283216138313
+        m_Connections: []
+    - rid: 6912283283216138317
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Waypoint
+        Type:
+          m_SerializableType: NavigationWaypoint, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 6912283283216138319
+        LinkedVariable:
+          rid: 6912283283216138367
+    - rid: 6912283283216138319
+      type: {class: 'BlackboardVariable`1[[NavigationWaypoint, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138322
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Racer
+        Type:
+          m_SerializableType: AIController, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        LocalValue:
+          rid: 6912283283216138323
+        LinkedVariable:
+          rid: 6912283283216138361
+    - rid: 6912283283216138323
+      type: {class: 'BlackboardVariable`1[[AIController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138361
+      type: {class: 'TypedVariableModel`1[[AIController, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 4450119088376707696
+          m_Value1: 13002794317540302218
+        Name: Racer
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138367
+      type: {class: 'TypedVariableModel`1[[NavigationWaypoint, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 12661890294741946480
+          m_Value1: 15614181376991332501
+        Name: CurrentWaypoint
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138373
+      type: {class: RepeatNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: -21.445919, y: 144.5798}
+        ID:
+          m_Value0: 13642293136337996851
+          m_Value1: 12024538793104916604
+        Parents: []
+        PortModels:
+        - rid: 6912283283216138374
+        - rid: 6912283283216138375
+        NodeType:
+          m_SerializableType: Unity.Behavior.RepeaterModifier, Unity.Behavior, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 3696095273264312494
+          m_Value1: 14191201703811421854
+        m_FieldValues: []
+        AllowMultipleRepeatsPerTick: 0
+        <ConditionModels>k__BackingField: []
+        <RequiresAllConditionsTrue>k__BackingField: 0
+        <ShouldTruncateNodeUI>k__BackingField: 0
+        m_RepeatMode: 0
+        <ObserverType>k__BackingField: 0
+        <ReturnFailureOnConditionFail>k__BackingField: 1
+    - rid: 6912283283216138374
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6912283283216138373
+        m_Connections:
+        - rid: 6912283283188613121
+    - rid: 6912283283216138375
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6912283283216138373
+        m_Connections:
+        - rid: 6912283283216138432
+    - rid: 6912283283216138414
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: 6.554085, y: 295.7797}
+        ID:
+          m_Value0: 7560256602219894266
+          m_Value1: 1786153389887630409
+        Parents:
+        - rid: 6912283283216138431
+        PortModels:
+        - rid: 6912283283216138415
+        - rid: 6912283283216138416
+        NodeType:
+          m_SerializableType: SelectNewWaypointAction, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 6793207888305867122
+          m_Value1: 3440120126179101381
+        m_FieldValues:
+        - rid: 6912283283216138417
+        - rid: 6912283283216138418
+    - rid: 6912283283216138415
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6912283283216138414
+        m_Connections: []
+    - rid: 6912283283216138416
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6912283283216138414
+        m_Connections: []
+    - rid: 6912283283216138417
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Racer
+        Type:
+          m_SerializableType: AIController, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+            PublicKeyToken=null
+        LocalValue:
+          rid: 6912283283216138419
+        LinkedVariable:
+          rid: 6912283283216138439
+    - rid: 6912283283216138418
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: Waypoint
+        Type:
+          m_SerializableType: NavigationWaypoint, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 6912283283216138420
+        LinkedVariable:
+          rid: 6912283283216138448
+    - rid: 6912283283216138419
+      type: {class: 'BlackboardVariable`1[[AIController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138420
+      type: {class: 'BlackboardVariable`1[[NavigationWaypoint, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138431
+      type: {class: SequenceNodeModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        Position: {x: -20.499985, y: 260.1002}
+        ID:
+          m_Value0: 16243777235682424191
+          m_Value1: 18121802735073816492
+        Parents: []
+        PortModels:
+        - rid: 6912283283216138432
+        - rid: 6912283283216138433
+        Nodes:
+        - rid: 6912283283216138313
+        - rid: 6912283283216138414
+    - rid: 6912283283216138432
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6912283283216138431
+        m_Connections:
+        - rid: 6912283283216138375
+    - rid: 6912283283216138433
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 6912283283216138431
+        m_Connections: []
+    - rid: 6912283283216138439
+      type: {class: 'TypedVariableModel`1[[AIController, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 4450119088376707696
+          m_Value1: 13002794317540302218
+        Name: Racer
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138448
+      type: {class: 'TypedVariableModel`1[[NavigationWaypoint, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 12661890294741946480
+          m_Value1: 15614181376991332501
+        Name: CurrentWaypoint
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+--- !u!114 &4277563521462159303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db920e62f70f420bb33c771449926fa4, type: 3}
+  m_Name: RacerAI
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraph
+  Graphs:
+  - rid: 6912283283188613122
+  m_DebugInfo: {fileID: -4629051538652346269}
+  m_WasCompileWithPlaceholderNode: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6912283283188613122
+      type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        AuthoringAssetID:
+          m_Value0: 14133252836926627756
+          m_Value1: 3431513640033057784
+        m_DebugInfo: {fileID: -4629051538652346269}
+        BlackboardReference:
+          rid: 6912283283188613123
+        BlackboardGroupReferences: []
+        Root:
+          rid: 6912283283216138449
+        m_VersionTimestamp: 639264165521621818
+    - rid: 6912283283188613123
+      type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        m_Blackboard:
+          rid: 6912283283188613125
+        m_Source: {fileID: 5663054409318632730}
+    - rid: 6912283283188613125
+      type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        m_Variables:
+        - rid: 6912283283216138451
+        - rid: 6912283283216138452
+        - rid: 6912283283216138453
+    - rid: 6912283283216138449
+      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 10101220408463690570
+          m_Value1: 6255298064096840694
+        Graph:
+          rid: 6912283283188613122
+        m_Parent:
+          rid: -2
+        m_Child:
+          rid: 6912283283216138450
+        Repeat: 1
+        AllowMultipleRepeatsPerTick: 0
+    - rid: 6912283283216138450
+      type: {class: RepeaterModifier, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 13642293136337996851
+          m_Value1: 12024538793104916604
+        Graph:
+          rid: 6912283283188613122
+        m_Parent:
+          rid: 6912283283216138449
+        m_Child:
+          rid: 6912283283216138454
+        m_AllowMultipleRepeatsPerTick: 0
+    - rid: 6912283283216138451
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138452
+      type: {class: 'BlackboardVariable`1[[AIController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 4450119088376707696
+          m_Value1: 13002794317540302218
+        Name: Racer
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138453
+      type: {class: 'BlackboardVariable`1[[NavigationWaypoint, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12661890294741946480
+          m_Value1: 15614181376991332501
+        Name: CurrentWaypoint
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138454
+      type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 16243777235682424191
+          m_Value1: 18121802735073816492
+        Graph:
+          rid: 6912283283188613122
+        m_Parent:
+          rid: 6912283283216138450
+        m_Children:
+        - rid: 6912283283216138455
+        - rid: 6912283283216138456
+        m_RegisteredObservers: []
+    - rid: 6912283283216138455
+      type: {class: DriveAction, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          m_Value0: 17010145080293526263
+          m_Value1: 14531405898987274784
+        Graph:
+          rid: 6912283283188613122
+        m_Parent:
+          rid: 6912283283216138454
+        Racer:
+          rid: 6912283283216138452
+        Waypoint:
+          rid: 6912283283216138453
+    - rid: 6912283283216138456
+      type: {class: SelectNewWaypointAction, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          m_Value0: 7560256602219894266
+          m_Value1: 1786153389887630409
+        Graph:
+          rid: 6912283283188613122
+        m_Parent:
+          rid: 6912283283216138454
+        Racer:
+          rid: 6912283283216138452
+        Waypoint:
+          rid: 6912283283216138453
+--- !u!114 &5663054409318632730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
+  m_Name: RacerAI Blackboard
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.RuntimeBlackboardAsset
+  VersionTimestamp: 639264165455233576
+  AssetID:
+    m_Value0: 14133252836926627756
+    m_Value1: 3431513640033057784
+  m_Blackboard:
+    m_Variables:
+    - rid: 6912283283188613127
+    - rid: 6912283283216138344
+    - rid: 6912283283216138355
+  m_SharedBlackboardVariableGuids: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6912283283188613127
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138344
+      type: {class: 'BlackboardVariable`1[[AIController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 4450119088376707696
+          m_Value1: 13002794317540302218
+        Name: Racer
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138355
+      type: {class: 'BlackboardVariable`1[[NavigationWaypoint, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 12661890294741946480
+          m_Value1: 15614181376991332501
+        Name: CurrentWaypoint
+        m_Value: {fileID: 0}
+--- !u!114 &8472685246062474965
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd922ae02c94c87a66e46a10a7319b9, type: 3}
+  m_Name: RacerAI Blackboard
+  m_EditorClassIdentifier: Unity.Behavior.Authoring::Unity.Behavior.BehaviorBlackboardAuthoringAsset
+  AssetID:
+    m_Value0: 14133252836926627756
+    m_Value1: 3431513640033057784
+  m_Variables:
+  - rid: 6912283283188613128
+  - rid: 6912283283216138339
+  - rid: 6912283283216138349
+  m_VersionTimestamp: 639264165455233576
+  m_CommandBuffer:
+    m_Commands: []
+  m_RuntimeBlackboardAsset: {fileID: 5663054409318632730}
+  references:
+    version: 2
+    RefIds:
+    - rid: 6912283283188613128
+      type: {class: 'TypedVariableModel`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138339
+      type: {class: 'TypedVariableModel`1[[AIController, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 4450119088376707696
+          m_Value1: 13002794317540302218
+        Name: Racer
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
+    - rid: 6912283283216138349
+      type: {class: 'TypedVariableModel`1[[NavigationWaypoint, Assembly-CSharp]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 12661890294741946480
+          m_Value1: 15614181376991332501
+        Name: CurrentWaypoint
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
