@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ItemIconUI
   - Racer
+  - AI
   layers:
   - Default
   - TransparentFX

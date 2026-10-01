@@ -4,7 +4,7 @@ public class AIController : RacerController
 {
     private BehaviorGraphAgent agent;
     
-    protected override void InitializeDrive() 
+    public override void InitializeDrive() 
     {
         Drive = Kart.kartObject.AddComponent<Drive>();
         Drive.AssignController(this);

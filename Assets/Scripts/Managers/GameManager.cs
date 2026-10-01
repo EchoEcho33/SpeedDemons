@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public enum GameState
@@ -154,5 +155,11 @@ public class GameManager : MonoBehaviour
     public List<RacerController> GetRacers()
     {
         return new List<RacerController>(_racers);
+    }
+
+    // TODO add weights to rarities
+    public Item GetRandomItem()
+    {
+        return items[Random.Range(0,items.Count)];
     }
 }

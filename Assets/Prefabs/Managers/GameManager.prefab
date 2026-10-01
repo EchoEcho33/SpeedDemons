@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e382e81c8c3cf84592455d5e50a157c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 0}
+  race: {fileID: 0}
+  UI: {fileID: 0}
+  audio: {fileID: 0}
   inputManagerPrefab: {fileID: 569531373793563182, guid: c82e1a703e17a77438a298cdee550787, type: 3}
   UIManagerPrefab: {fileID: 6641532586504146744, guid: 7c7ca0cecf892cd4da0e904b19693205, type: 3}
   AudioManagerPrefab: {fileID: 8243155562266291126, guid: 9d7fe81701d2d5b40add78372c660fce, type: 3}
@@ -51,5 +55,7 @@ MonoBehaviour:
   cameraPrefab: {fileID: 4182171242420694627, guid: 9e20f44964cc50548a66f6f3c40df558, type: 3}
   cinemachineCameraPrefab: {fileID: 7860237602509586326, guid: 1871585e22face84baaa97776b19243f, type: 3}
   startingGameState: 2
-  items: []
+  items:
+  - {fileID: 3169528773399122507, guid: 73024220a3d8e7f42b9c172165bfe7e0, type: 3}
+  - {fileID: 2088196993903852788, guid: 6d7200f0756774e4395330ad3edc7fad, type: 3}
   characters: []

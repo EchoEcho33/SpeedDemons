@@ -19,6 +19,7 @@ public class FlashBang : Item
         }
 
         timeRemaining = duration;
+        //placeholder
         victim = GameManager.Instance.Racers[Random.Range(0, 4)];
 
         //flash the camera
