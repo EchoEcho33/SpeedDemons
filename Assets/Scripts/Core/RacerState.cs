@@ -1,13 +1,28 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 public class RacerState : MonoBehaviour
 {
     public RacerController RacerController { get; private set; }
     
     public TrackCheckpoint CurrCheckpoint { get; private set;}
+    
+    public Action<TrackCheckpoint> OnReachedCheckpoint;
+    
+    public Action<StartFinishCheckpoint> OnReachedStartFinishCheckpoint;
 
     public int currLap { get; private set;}
 
+    //arbitrary max value
+    public int abilityMaxValue = 10;
+    public int abilityBar { get; private set; }
+
+    private Item _primaryItem = null;
+    private Item _secondaryItem = null;
+    private float _itemCooldown = 0.5f;
+    private bool _onItemCooldown = false;
+    
     public void AssignController(RacerController newRacerController)
     {
         RacerController = newRacerController;
@@ -17,8 +32,9 @@ public class RacerState : MonoBehaviour
     {
         CurrCheckpoint = startFinishCheckpoint;
         currLap = 1;
+        abilityBar = 0;
 
-        GameManager.Instance.race.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
+        GameManager.Instance.UIManager.UpdateLap(1);
     }
     
 #if UNITY_EDITOR
@@ -51,14 +67,64 @@ public class RacerState : MonoBehaviour
         }
     }
 #endif
+    public void InitialStartFinishCrossing(StartFinishCheckpoint startFinishCheckpoint)
+    {
+        OnReachedStartFinishCheckpoint?.Invoke(startFinishCheckpoint);
+    }
 
     public void ReachCheckpoint(TrackCheckpoint checkpoint)
     {
+        OnReachedCheckpoint?.Invoke(checkpoint);
+        updateBar(2);
+
         CurrCheckpoint = checkpoint;
-        if (checkpoint.GetType().Equals(typeof(StartFinishCheckpoint)))
+        if (checkpoint is StartFinishCheckpoint startFinishCheckpoint)
         {
+            OnReachedStartFinishCheckpoint?.Invoke(startFinishCheckpoint);
             currLap++;
-            GameManager.Instance.race.playerLaps.text = currLap + " / " + GameManager.Instance.race.maxLaps;
+            
+            //applies from all racers, change after getting Driver to connect with certain racerStates
+            GameManager.Instance.UIManager.UpdateLap(currLap);
         }
+    }
+
+    //filler method for ability bar, im guessing the bar updates additively/subtractively
+    public void updateBar(int add)
+    {
+        abilityBar = Mathf.Clamp(0, abilityBar + add, abilityMaxValue);
+
+        GameManager.Instance.UIManager.UpdateBar(abilityBar, abilityMaxValue);
+    }
+
+    public void PickUpItem(Item item)
+    {
+        if (_primaryItem == null)
+        {
+            _primaryItem = item;
+        } else if (_secondaryItem == null)
+        {
+            _secondaryItem = item;
+        }
+    }
+
+    public bool UseItem()
+    {
+        if (!_onItemCooldown && _primaryItem != null)
+        {
+            _onItemCooldown = true;
+            _primaryItem.Use();
+            GameManager.Instance.UIManager.UseItem();
+            _primaryItem = _secondaryItem;
+            _secondaryItem = null;
+            StartCoroutine(ItemCooldown());
+            return true;
+        }
+        return false;
+    }
+
+    private IEnumerator ItemCooldown()
+    {
+        yield return new WaitForSeconds(_itemCooldown);
+        _onItemCooldown = false;
     }
 }

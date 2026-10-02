@@ -1,4 +1,6 @@
+//using System.Threading.Tasks.Dataflow;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public abstract class Item : MonoBehaviour
 {
@@ -18,5 +20,30 @@ public abstract class Item : MonoBehaviour
 
     [SerializeField]
     private Sprite _icon;
+
     public abstract void Use();
+
+    public string getItemId()
+    {
+        return this._itemId;
+    }
+
+    public Sprite getIcon()
+    {
+        return _icon;
+    }
+
+    public void spawnItem()
+    {
+        // this.itemObject = new GameObject(this._itemId);
+        // BoxCollider box = this.itemObject.AddComponent<BoxCollider>();
+        // box.isTrigger = true;
+        // SpriteMask spriteMask = this.itemObject.AddComponent<SpriteMask>();
+        // spriteMask.sprite = this._icon;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(_itemId + " collided with " + other);
+    }
 }

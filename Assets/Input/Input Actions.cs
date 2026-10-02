@@ -163,6 +163,42 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability"",
+                    ""type"": ""Button"",
+                    ""id"": ""0be9eb94-43e4-465d-bcaa-374dd23cb411"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""fe8102a2-c25d-4f60-8d9d-f78491eb4704"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""5955c590-4278-4986-82af-238800b54128"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""27344c32-3628-4a5a-8579-7314ea4e1ac2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -253,6 +289,50 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""TurnLeft_KBD"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6dbb220-5820-49e4-b64a-4855345c3f5b"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""840b0331-0f82-47c1-94bf-a1b32d2dd3fe"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a725b4d1-83f5-4fbb-a4f9-1c727d49438e"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35d75401-0b2a-4029-8049-f0ba6a0b848d"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -269,6 +349,10 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Driving_Brake_KBD = m_Driving.FindAction("Brake_KBD", throwIfNotFound: true);
         m_Driving_TurnRight_KBD = m_Driving.FindAction("TurnRight_KBD", throwIfNotFound: true);
         m_Driving_TurnLeft_KBD = m_Driving.FindAction("TurnLeft_KBD", throwIfNotFound: true);
+        m_Driving_Ability = m_Driving.FindAction("Ability", throwIfNotFound: true);
+        m_Driving_Ability_KBD = m_Driving.FindAction("Ability_KBD", throwIfNotFound: true);
+        m_Driving_UseItem_KBD = m_Driving.FindAction("UseItem_KBD", throwIfNotFound: true);
+        m_Driving_UseItem = m_Driving.FindAction("UseItem", throwIfNotFound: true);
     }
 
     ~@InputManager()
@@ -357,6 +441,10 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Brake_KBD;
     private readonly InputAction m_Driving_TurnRight_KBD;
     private readonly InputAction m_Driving_TurnLeft_KBD;
+    private readonly InputAction m_Driving_Ability;
+    private readonly InputAction m_Driving_Ability_KBD;
+    private readonly InputAction m_Driving_UseItem_KBD;
+    private readonly InputAction m_Driving_UseItem;
     /// <summary>
     /// Provides access to input actions defined in input action map "Driving".
     /// </summary>
@@ -400,6 +488,22 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Driving/TurnLeft_KBD".
         /// </summary>
         public InputAction @TurnLeft_KBD => m_Wrapper.m_Driving_TurnLeft_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/Ability".
+        /// </summary>
+        public InputAction @Ability => m_Wrapper.m_Driving_Ability;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/Ability_KBD".
+        /// </summary>
+        public InputAction @Ability_KBD => m_Wrapper.m_Driving_Ability_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/UseItem_KBD".
+        /// </summary>
+        public InputAction @UseItem_KBD => m_Wrapper.m_Driving_UseItem_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/UseItem".
+        /// </summary>
+        public InputAction @UseItem => m_Wrapper.m_Driving_UseItem;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -450,6 +554,18 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @TurnLeft_KBD.started += instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.performed += instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.canceled += instance.OnTurnLeft_KBD;
+            @Ability.started += instance.OnAbility;
+            @Ability.performed += instance.OnAbility;
+            @Ability.canceled += instance.OnAbility;
+            @Ability_KBD.started += instance.OnAbility_KBD;
+            @Ability_KBD.performed += instance.OnAbility_KBD;
+            @Ability_KBD.canceled += instance.OnAbility_KBD;
+            @UseItem_KBD.started += instance.OnUseItem_KBD;
+            @UseItem_KBD.performed += instance.OnUseItem_KBD;
+            @UseItem_KBD.canceled += instance.OnUseItem_KBD;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
         }
 
         /// <summary>
@@ -485,6 +601,18 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @TurnLeft_KBD.started -= instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.performed -= instance.OnTurnLeft_KBD;
             @TurnLeft_KBD.canceled -= instance.OnTurnLeft_KBD;
+            @Ability.started -= instance.OnAbility;
+            @Ability.performed -= instance.OnAbility;
+            @Ability.canceled -= instance.OnAbility;
+            @Ability_KBD.started -= instance.OnAbility_KBD;
+            @Ability_KBD.performed -= instance.OnAbility_KBD;
+            @Ability_KBD.canceled -= instance.OnAbility_KBD;
+            @UseItem_KBD.started -= instance.OnUseItem_KBD;
+            @UseItem_KBD.performed -= instance.OnUseItem_KBD;
+            @UseItem_KBD.canceled -= instance.OnUseItem_KBD;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
         }
 
         /// <summary>
@@ -581,5 +709,33 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTurnLeft_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Ability" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAbility(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Ability_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAbility_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UseItem_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseItem_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UseItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseItem(InputAction.CallbackContext context);
     }
 }
