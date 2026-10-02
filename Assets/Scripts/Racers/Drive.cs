@@ -54,14 +54,14 @@ public class Drive : MonoBehaviour
         transform.position += transform.forward * velocityUpdate;
     }
 
-    public void Turn(float turnDirection, float driftMultiplier = 1.0f)
+    public void Turn(float turnDirection, float turnMultiplier = 1.0f)
     {
         if (IsGrounded())
         {
             if (turnDirection != 0)
             {
-                transform.position += Vector3.forward * kart._turnRadius * turnDirection * driftMultiplier * m_currentSpeed * Time.deltaTime / 100;
-                transform.Rotate(0, kart._turnRadius * turnDirection * driftMultiplier * m_currentSpeed * Time.deltaTime, 0, Space.Self);
+                transform.position += Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime / 100;
+                transform.Rotate(0, kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime, 0, Space.Self);
             } 
         }
 
