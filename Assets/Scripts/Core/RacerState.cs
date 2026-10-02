@@ -87,6 +87,26 @@ public class RacerState : MonoBehaviour
             GameManager.Instance.UIManager.UpdateLap(currLap);
         }
     }
+    
+    /// <summary>
+    /// Respawns the racer at their last checkpoint.
+    /// </summary>
+    public void Respawn()
+    {
+        GameObject racerAndCar = RacerController.GetCharacterAndKart();
+        Rigidbody racerAndCarRigidbody = racerAndCar.GetComponent<Rigidbody>();
+        racerAndCarRigidbody.linearVelocity = Vector3.zero;
+        racerAndCarRigidbody.angularVelocity = Vector3.zero;
+        RacerController racerController = RacerController.Character.characterObject.GetComponentInParent<Drive>().Racer;
+        TrackCheckpoint currentCheckpoint = racerController.RacerState.CurrCheckpoint;
+        racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * RacerController.Character._spawnVerticalDisplacement;
+        racerAndCar.transform.rotation = currentCheckpoint.GetTrackForwardDirection();
+
+        if (RacerController is AIController aiController)
+        {
+            RaceChoreographer.Instance.SendRacerRespawnEvent(aiController, currentCheckpoint);
+        }
+    }
 
     //filler method for ability bar, im guessing the bar updates additively/subtractively
     public void updateBar(int add)

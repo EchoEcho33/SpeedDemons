@@ -39,6 +39,8 @@ public class RacerRecorder : MonoBehaviour
     private float distanceTraveled;
 
     private float time;
+
+    private int checkpointCounter;
     
     bool IsRecording = false;
 
@@ -75,6 +77,7 @@ public class RacerRecorder : MonoBehaviour
     private void ReachedCheckpoint(TrackCheckpoint checkpoint)
     {
         Vector3 racerPosition = racer.GetKartPosition();
+        checkpointCounter++;
         RecordFrame(racerPosition);
     }
     
@@ -92,6 +95,7 @@ public class RacerRecorder : MonoBehaviour
 
         Debug.Log("Started Recording");
         time = 0;
+        checkpointCounter = 0;
         RecordFrame(racerPosition);
         IsRecording = true;
         distanceTraveled = 0;
@@ -127,9 +131,9 @@ public class RacerRecorder : MonoBehaviour
         RecordFrame(racerPosition);
     }
 
-    private void RecordFrame(Vector3 racerPosition)
+    private void RecordFrame(Vector3 racerPosition, TrackCheckpoint checkpoint = null)
     {
-        RacerTelemetryFrame newFrame = new RacerTelemetryFrame(time, 1, racer.Steering, racer.Throttle, racer.Brake, racerPosition);
+        RacerTelemetryFrame newFrame = new RacerTelemetryFrame(time, 1, racer.Steering, racer.Throttle, racer.Brake, racerPosition, checkpointCounter);
         distanceTraveled = 0;
         lastRecordedPosition = racerPosition;
         racerTelemetry.Add(newFrame);

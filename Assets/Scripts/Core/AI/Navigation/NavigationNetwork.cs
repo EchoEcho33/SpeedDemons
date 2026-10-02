@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class NavigationNetwork : MonoBehaviour
 {
     public NavigationWaypoint head { get ; private set ;}
+    
+    private List<NavigationWaypoint> checkpointWaypoints = new();
 
     [SerializeField] 
     private TextAsset raceTelemetryJSON;
@@ -21,16 +24,35 @@ public class NavigationNetwork : MonoBehaviour
         {
             return;
         }
+        checkpointWaypoints.Clear();
         
         RacerTelemetryRecording recording = JsonUtility.FromJson<RacerTelemetryRecording>(raceTelemetryJSON.text);
         NavigationWaypoint curr = CreateWaypoint(recording.frames[0]);
         head = curr;
         
+        int checkpointCounter = 0;
+        List<NavigationWaypoint> markedWaypoints = new List<NavigationWaypoint> { curr };
+        
         for (int i = 1; i < recording.frames.Count; i++)
         {
+            RacerTelemetryFrame frame = recording.frames[i];
             NavigationWaypoint next = CreateWaypoint(recording.frames[i]);
             curr.SetNext(next);
             curr = next;
+            
+            if (checkpointCounter != frame.CheckpointID)
+            {
+                checkpointCounter++;
+                markedWaypoints.Add(curr);
+            }
+        }
+        
+        curr.SetNext(head);
+        
+        for (int i = 0; i < markedWaypoints.Count; i++)
+        {
+            NavigationWaypoint startFinishLineWaypoint = CreateCheckpointWaypoint(i, markedWaypoints[i].Next);
+            if (startFinishLineWaypoint != null) checkpointWaypoints.Add(startFinishLineWaypoint);
         }
     }
     
@@ -41,9 +63,29 @@ public class NavigationNetwork : MonoBehaviour
         return waypoint;
     }
     
-#if UNITY_EDITOR
+    private NavigationWaypoint CreateCheckpointWaypoint(int checkpointID, NavigationWaypoint[] nextWaypoints)
+    {
+        if (nextWaypoints == null) return null;
+        
+        NavigationWaypoint waypoint = ScriptableObject.CreateInstance<NavigationWaypoint>();
+        TrackCheckpoint checkpoint = RaceManager.Instance.GetCheckpoint(checkpointID);
+        if (checkpoint == null) return null;
+        
+        waypoint.position = checkpoint.GetPosition();
+        waypoint.SetNext(nextWaypoints);
+        return waypoint;
+    }
     
-    public void OnValidate()
+    public NavigationWaypoint GetCheckpointWaypoint(int checkpointID)
+    {
+        if (checkpointID < 0 || checkpointWaypoints.Count <= checkpointID) return null;
+        
+        return checkpointWaypoints[checkpointID];
+    }
+    
+#if UNITY_EDITOR
+    [ContextMenu("Regenerate Network")]
+    private void RegenerateNetwork()
     {
         GenerateNetwork();
     }
@@ -54,6 +96,17 @@ public class NavigationNetwork : MonoBehaviour
         
         Gizmos.color = new Color(0f, .5f, 1f, 0.5f);
         DrawWaypoint(head);
+        
+        foreach (NavigationWaypoint waypoint in checkpointWaypoints)
+        {
+            Gizmos.DrawSphere(waypoint.position, 1f);
+            
+            if (waypoint.Next == null) continue;
+            foreach (NavigationWaypoint nextWaypoint in waypoint.Next)
+            {
+                Gizmos.DrawLine(waypoint.position, nextWaypoint.position);
+            }
+        }
     }
 
     private void DrawWaypoint(NavigationWaypoint curr)
@@ -70,6 +123,7 @@ public class NavigationNetwork : MonoBehaviour
             
             Vector3 nextPos = next.position;
             Gizmos.DrawLine(currPos, nextPos);
+            if (next == head) continue;
             DrawWaypoint(next);
         }
     }

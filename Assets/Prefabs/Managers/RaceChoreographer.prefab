@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RaceChoreographer
   graph: {fileID: 4277563521462159303, guid: ac1fcbf1926623c4f8fb1384792f9f2f, type: 2}
   network: {fileID: 0}
+  racerRespawnEvent: {fileID: 11400000, guid: 5a94a1686e0f3ed4abc0c115c464fc02, type: 2}

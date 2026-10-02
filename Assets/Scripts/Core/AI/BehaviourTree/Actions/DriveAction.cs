@@ -10,7 +10,6 @@ public partial class DriveAction : Action
 {
     [SerializeReference] public BlackboardVariable<AIController> Racer;
     [SerializeReference] public BlackboardVariable<NavigationWaypoint> Waypoint;
-    
     private AIController racer;
     private NavigationWaypoint waypoint;
     
@@ -27,8 +26,6 @@ public partial class DriveAction : Action
         Vector3 kartPos = racer.GetKartPosition();
         Vector3 waypointPos = waypoint.position;
         
-        if (Vector2.Distance(waypointPos, kartPos) < 0.1f) return Status.Success;
-        
         Vector3 vectorToTarget = waypointPos - kartPos;
         vectorToTarget.Normalize();
         
@@ -40,7 +37,7 @@ public partial class DriveAction : Action
         steerAmount = Mathf.Clamp(steerAmount, -1.0f, 1.0f);
         racer.PassInputs(steerAmount, 1.0f, 0.0f);
         
-        return Status.Running;
+        return Status.Success;
     }
 
     protected override void OnEnd()
