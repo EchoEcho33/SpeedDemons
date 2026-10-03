@@ -8,6 +8,9 @@ public class RaceChoreographer : MonoBehaviour
     [SerializeField]
     public NavigationNetwork network;
     
+    [SerializeField]
+    private RacerRespawn racerRespawnEvent;
+    
     public static RaceChoreographer Instance { get; private set; }
     private void Awake()
     {
@@ -18,5 +21,10 @@ public class RaceChoreographer : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    public void SendRacerRespawnEvent(AIController racer, TrackCheckpoint checkpoint)
+    {
+        racerRespawnEvent.SendEventMessage(racer, checkpoint);
     }
 }

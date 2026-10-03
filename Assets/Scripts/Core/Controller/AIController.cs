@@ -2,7 +2,7 @@
 
 public class AIController : RacerController
 {
-    private BehaviorGraphAgent agent;
+    public BehaviorGraphAgent agent { get; private set; }
     
     public override void InitializeDrive() 
     {

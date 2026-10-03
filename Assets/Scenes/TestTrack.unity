@@ -681,51 +681,6 @@ Transform:
   - {fileID: 1514147224}
   m_Father: {fileID: 466986241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &418212655
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 418212657}
-  - component: {fileID: 418212656}
-  m_Layer: 0
-  m_Name: NavNetwork
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &418212656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418212655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ad6776e12b24e6fb23482432d2280e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NavigationNetwork
-  raceTelemetryJSON: {fileID: 4900000, guid: d374c25c7202723439521323afadce3e, type: 3}
---- !u!4 &418212657
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418212655}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 106.82793, y: 0.00001, z: -90.46922}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &420592679 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6440828089159839250, guid: d9d474f32029770419438c8f7ea408a3, type: 3}
@@ -1192,9 +1147,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1162345662977810326, guid: cc8d0a56eb19a764a93944d86cf269a9, type: 3}
+      propertyPath: graph
+      value: 
+      objectReference: {fileID: 4277563521462159303, guid: ac1fcbf1926623c4f8fb1384792f9f2f, type: 2}
+    - target: {fileID: 1162345662977810326, guid: cc8d0a56eb19a764a93944d86cf269a9, type: 3}
       propertyPath: network
       value: 
-      objectReference: {fileID: 418212656}
+      objectReference: {fileID: 1589679843}
+    - target: {fileID: 1162345662977810326, guid: cc8d0a56eb19a764a93944d86cf269a9, type: 3}
+      propertyPath: racerRespawnEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: bd18e2b702714654495cac87807a97ac, type: 2}
     - target: {fileID: 4032631352165166920, guid: cc8d0a56eb19a764a93944d86cf269a9, type: 3}
       propertyPath: m_Name
       value: RaceChoreographer
@@ -2070,6 +2033,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c77979113db8e0b4486972bfefa95583, type: 3}
+--- !u!1 &1589679842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1589679844}
+  - component: {fileID: 1589679843}
+  m_Layer: 0
+  m_Name: NavNetwork
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1589679843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589679842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad6776e12b24e6fb23482432d2280e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NavigationNetwork
+  raceTelemetryJSON: {fileID: 4900000, guid: 2c441a1e50309914d88aa3a46da91b27, type: 3}
+--- !u!4 &1589679844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589679842}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -292.70084, y: 0, z: -9.92665}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1589956511
 GameObject:
   m_ObjectHideFlags: 0
@@ -2643,6 +2651,6 @@ SceneRoots:
   - {fileID: 1258232016}
   - {fileID: 773177873}
   - {fileID: 299463521}
-  - {fileID: 418212657}
   - {fileID: 466986241}
   - {fileID: 1589956514}
+  - {fileID: 1589679844}

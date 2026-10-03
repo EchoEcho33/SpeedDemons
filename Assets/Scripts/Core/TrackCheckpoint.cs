@@ -10,6 +10,8 @@ public class TrackCheckpoint : MonoBehaviour
 
     public TrackCheckpoint prevCheckpoint;
     public TrackCheckpoint nextCheckpoint;
+
+    public int CheckpointID = -1;
     
     private void Start()
     {
@@ -102,5 +104,10 @@ public class TrackCheckpoint : MonoBehaviour
     public Quaternion GetTrackForwardDirection()
     {
         return transform.rotation * Quaternion.Euler(Vector3.down * 90);
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 }

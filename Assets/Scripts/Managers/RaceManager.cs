@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using System.Diagnostics;
 
+[ExecuteAlways]
 public class RaceManager : MonoBehaviour
 {
     [Header("Level")]
     [SerializeField]
     private StartFinishCheckpoint startFinishCheckpoint;
+    
+    private List<TrackCheckpoint> trackCheckpoints = new ();
     
     [SerializeField]
     private List<StartingGridSpot> startingGrid;
@@ -38,7 +40,27 @@ public class RaceManager : MonoBehaviour
         }
 
         Instance = this;
+        StoreCheckpoints();
     }
+    
+#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        if (Instance != null && Instance != this)
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
+
+        Instance = this;
+        StoreCheckpoints();
+    }
+
+    private void OnDisable()
+    {
+        if (Instance == this) Instance = null;
+    }
+#endif
     
     public void StartRace()
     {     
@@ -111,8 +133,31 @@ public class RaceManager : MonoBehaviour
 
         kartObject.tag = isPlayer ? "Player" : "AI";
         
-        
         return (character, kart, racerState);
     }
 
+    public void StoreCheckpoints()
+    {
+        if (startFinishCheckpoint == null) return;
+        
+        trackCheckpoints.Clear();
+        trackCheckpoints.Add(startFinishCheckpoint);
+        TrackCheckpoint currCheckpoint = startFinishCheckpoint.nextCheckpoint;
+
+        int checkpointCounter = 0;
+        startFinishCheckpoint.CheckpointID = checkpointCounter;
+        while (currCheckpoint != startFinishCheckpoint)
+        {
+            trackCheckpoints.Add(currCheckpoint);
+            currCheckpoint.CheckpointID = ++checkpointCounter;
+            currCheckpoint = currCheckpoint.nextCheckpoint;
+        }
+    }
+
+    public TrackCheckpoint GetCheckpoint(int id)
+    {
+        if (id < 0 || trackCheckpoints.Count <= id) return null;
+        
+        return trackCheckpoints[id];
+    }
 }
