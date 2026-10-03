@@ -14,6 +14,7 @@ public class NavigationNetwork : MonoBehaviour
 
     public void Start()
     {
+        ClearNetwork();
         GenerateNetwork();
     }
     
@@ -24,7 +25,6 @@ public class NavigationNetwork : MonoBehaviour
         {
             return;
         }
-        checkpointWaypoints.Clear();
         
         RacerTelemetryRecording recording = JsonUtility.FromJson<RacerTelemetryRecording>(raceTelemetryJSON.text);
         NavigationWaypoint curr = CreateWaypoint(recording.frames[0]);
@@ -82,12 +82,80 @@ public class NavigationNetwork : MonoBehaviour
         
         return checkpointWaypoints[checkpointID];
     }
+
+    private void ClearNetwork()
+    {
+        if (head != null)
+        {
+            HashSet<NavigationWaypoint> visited = new();
+            ClearNetworkHelper(head, visited);
+        }
+        
+        foreach (NavigationWaypoint waypoint in checkpointWaypoints)
+        {
+            if (waypoint == null) continue;
+
+            if (Application.isPlaying)
+            {
+                Destroy(waypoint);
+            }
+            else
+            {
+                DestroyImmediate(waypoint);
+            }
+        }
+        
+        checkpointWaypoints.Clear();
+        head = null;
+    }
+
+    private void ClearNetworkHelper(NavigationWaypoint curr, HashSet<NavigationWaypoint> visited)
+    {
+        if (curr == null || !visited.Add(curr)) return;
+
+        if (curr.Next != null)
+        {
+            foreach (NavigationWaypoint nextWaypoint in curr.Next)
+            {
+                ClearNetworkHelper(nextWaypoint, visited);
+            }
+        }
+
+        if (Application.isPlaying)
+        {
+            Destroy(curr);
+        }
+        else
+        {
+            DestroyImmediate(curr);
+        }
+    }
     
 #if UNITY_EDITOR
     [ContextMenu("Regenerate Network")]
     private void RegenerateNetwork()
     {
+        ClearNetwork();
         GenerateNetwork();
+    }
+
+    private void OnValidate()
+    {
+        if (raceTelemetryJSON == null)
+        {
+            ClearNetwork();
+        }
+    }
+
+    private void OnEnable()
+    {
+        ClearNetwork();
+        GenerateNetwork();
+    }
+
+    private void OnDisable()
+    {
+        ClearNetwork();
     }
     
     private void OnDrawGizmos()
