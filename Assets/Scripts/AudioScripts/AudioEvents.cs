@@ -5,6 +5,9 @@ public class AudioEvents : MonoBehaviour
 {
     [field: Header("Sean honk")]
     [field: SerializeField] public EventReference seanHonk {get; private set;}
+
+    [field: Header("Car SFX")]
+    [field: SerializeField] public EventReference basicCarDrive {get; private set;}
     public static AudioEvents instance {get; private set;}
 
     private void Awake()

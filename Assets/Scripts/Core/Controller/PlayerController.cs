@@ -1,6 +1,8 @@
 ﻿using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMOD.Studio;
+using FMODUnity;
 
 public class PlayerController : RacerController
 {
@@ -64,6 +66,9 @@ public class PlayerController : RacerController
         GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
         CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
         CinemachineCamera.Follow = Kart.kartObject.transform;
+
+        // audio stuff
+        MainCamera.GetComponent<StudioListener>().SetAttenuationObject(MainCamera.gameObject);
     }
 
     private void Update()
