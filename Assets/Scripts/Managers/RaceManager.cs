@@ -74,13 +74,13 @@ public class RaceManager : MonoBehaviour
         remainingStartingGrid.RemoveAt(startingGridIndex);
 
         RacerSelection localRacerSelection = racerSelections[0]; // TODO: Currently, the local player selection is the first in the list
-        // TODO: Going to use the first player as the UI timer. This works, but not the best practice
         (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
         PlayerController localRacer = GameManager.Instance.LocalRacer;
         localRacer.AssignCharacterAndKart(localCharacter, localKart);
         localRacer.AssignRacerState(localRacerState);
         
         // TODO: Change this when we swap to multiplayer
+        // ai countdown timer is handled by the racerController loop
         localRacer.immobileDuration = countdownTimer;
         localRacer.preventMovement = true;
         
@@ -100,10 +100,8 @@ public class RaceManager : MonoBehaviour
             racer.AssignCharacterAndKart(character, kart);
             racer.AssignRacerState(racerState);
             
-            // TODO: this works, but not for the Ais. 
             racer.immobileDuration = countdownTimer;
             racer.preventMovement = true;
-            
             
             racerSelectionIndex++;
         }
