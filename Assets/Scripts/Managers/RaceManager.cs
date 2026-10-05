@@ -23,8 +23,9 @@ public class RaceManager : MonoBehaviour
     
     public Action OnRaceStart;
 
-    [SerializeField]
-    public int maxLaps = 3;
+    [SerializeField] public int maxLaps = 3;
+
+    [SerializeField] public int countdownTimer = 3;  
 
     // TODO: This is just a temporary count of how many racers should the manager spawn. The real count is the # of racers in _racerStates
     public int racerCount = 1;
@@ -73,10 +74,16 @@ public class RaceManager : MonoBehaviour
         remainingStartingGrid.RemoveAt(startingGridIndex);
 
         RacerSelection localRacerSelection = racerSelections[0]; // TODO: Currently, the local player selection is the first in the list
+        // TODO: Going to use the first player as the UI timer. This works, but not the best practice
         (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
         PlayerController localRacer = GameManager.Instance.LocalRacer;
         localRacer.AssignCharacterAndKart(localCharacter, localKart);
         localRacer.AssignRacerState(localRacerState);
+        
+        // TODO: Change this when we swap to multiplayer
+        print("set immobile");
+        localRacer.immobileDuration = countdownTimer;
+        localRacer.preventMovement = true;
         
         List<RacerController> racerControllers = GameManager.Instance.GetRacers();
         racerControllers.Remove(localRacer);
@@ -92,7 +99,12 @@ public class RaceManager : MonoBehaviour
             
             (Character character, Kart kart, RacerState racerState) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot, false);
             racer.AssignCharacterAndKart(character, kart);
-            racer.AssignRacerState(racerState); 
+            racer.AssignRacerState(racerState);
+            
+            // TODO: this works, but not for the Ais. 
+            print("set immobile");
+            racer.immobileDuration = countdownTimer;
+            racer.preventMovement = true;
             
             
             racerSelectionIndex++;
@@ -108,6 +120,8 @@ public class RaceManager : MonoBehaviour
         // }
         
         OnRaceStart?.Invoke();
+        GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
+
     }
 
     private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot, bool isPlayer)

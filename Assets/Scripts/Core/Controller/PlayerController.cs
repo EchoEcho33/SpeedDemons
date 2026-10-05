@@ -86,6 +86,22 @@ public class PlayerController : RacerController
 
             return; // Exit Update Code During Spin Out
         }
+        
+        // Race Countdown Handler
+        // see PassInputs in AIController for equivalent
+        if (base.preventMovement)
+        {
+            
+            Drive.PreventMovement();
+            immobileDuration -= Time.deltaTime;
+            
+            if (base.immobileDuration <= 0)
+            {
+                base.preventMovement = false;
+            }
+
+            return; // prevent any movement in update
+        }
 
         // Brake and Accelerate
         if (accelerate.IsPressed() || brake.IsPressed())

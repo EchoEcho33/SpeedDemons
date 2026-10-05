@@ -444,6 +444,7 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 52f9af48fce685662a4c94d6254a5446, type: 2}
     kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
   maxLaps: 3
+  countdownTimer: 3
   racerCount: 4
 --- !u!4 &299463521
 Transform:
