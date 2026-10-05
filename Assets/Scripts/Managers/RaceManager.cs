@@ -81,7 +81,6 @@ public class RaceManager : MonoBehaviour
         localRacer.AssignRacerState(localRacerState);
         
         // TODO: Change this when we swap to multiplayer
-        print("set immobile");
         localRacer.immobileDuration = countdownTimer;
         localRacer.preventMovement = true;
         
@@ -102,7 +101,6 @@ public class RaceManager : MonoBehaviour
             racer.AssignRacerState(racerState);
             
             // TODO: this works, but not for the Ais. 
-            print("set immobile");
             racer.immobileDuration = countdownTimer;
             racer.preventMovement = true;
             
