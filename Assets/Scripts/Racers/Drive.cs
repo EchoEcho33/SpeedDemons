@@ -1,4 +1,6 @@
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 public class Drive : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class Drive : MonoBehaviour
 
     public float m_currentSpeed = 0.0f;
     private float m_turnSpeed = 0.0f;
+    public StudioEventEmitter drivingAudio;
 
     public void AssignController(RacerController newRacerController)
     {
@@ -20,6 +23,8 @@ public class Drive : MonoBehaviour
     {
         character = newCharacter;
         kart = newKart;
+        drivingAudio = AudioManager.instance.createEmitter(AudioEvents.instance.basicCarDrive, this.gameObject);
+        drivingAudio.Play();
     }
 
     public void Accelerate(float amplitude)
@@ -39,6 +44,7 @@ public class Drive : MonoBehaviour
         
 
         transform.position += transform.forward * velocityUpdate;
+        UpdateSound(1);
     }
 
     public void Decelerate(float amplitude, float a)
@@ -52,6 +58,7 @@ public class Drive : MonoBehaviour
         float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime;
 
         transform.position += transform.forward * velocityUpdate;
+        UpdateSound(-1);
     }
 
     public void Turn(float turnDirection)
@@ -95,5 +102,11 @@ public class Drive : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return m_currentSpeed;
+    }
+
+    // Audio
+    public void UpdateSound(int dir) 
+    {
+        drivingAudio.SetParameter("Driving", m_currentSpeed * dir);
     }
 }

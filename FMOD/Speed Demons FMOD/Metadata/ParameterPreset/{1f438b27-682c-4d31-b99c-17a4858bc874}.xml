@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{1f438b27-682c-4d31-b99c-17a4858bc874}">
+		<property name="name">
+			<value>Driving_Ghost</value>
+		</property>
+		<relationship name="folder">
+			<destination>{dd9da968-d0a3-470e-b5fb-d8a73ef26839}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{eaeedbd8-420a-421f-bec7-97012b47d256}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{eaeedbd8-420a-421f-bec7-97012b47d256}">
+		<property name="maximum">
+			<value>25</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{1623ebb2-4703-491e-8ce1-362d589eab2c}</destination>
+		</relationship>
+	</object>
+	<object class="SeekModulator" id="{1623ebb2-4703-491e-8ce1-362d589eab2c}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+		<property name="speedAscending">
+			<value>0.0099999997764825821</value>
+		</property>
+	</object>
+</objects>
