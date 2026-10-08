@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
 
 [ExecuteAlways]
@@ -42,6 +43,11 @@ public class RaceManager : MonoBehaviour
         Instance = this;
         StoreCheckpoints();
     }
+
+    private void Start()
+    {
+        GameManager.Instance.SetGameState(GameState.WaitingToStart);
+    }
     
 #if UNITY_EDITOR
     private void OnEnable()
@@ -72,7 +78,12 @@ public class RaceManager : MonoBehaviour
         StartingGridSpot startingGridSpot = startingGrid[startingGridIndex];
         remainingStartingGrid.RemoveAt(startingGridIndex);
 
-        RacerSelection localRacerSelection = racerSelections[0]; // TODO: Currently, the local player selection is the first in the list
+        RacerSelection localRacerSelection = GameManager.Instance.Player1; // TODO: Currently, the local player selection is the first in the list
+        if (localRacerSelection.kart == null || localRacerSelection.character == null)
+        {
+            Debug.LogError("Player 1 Character Selection not found.");
+            localRacerSelection = racerSelections[0];
+        }
         (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
         PlayerController localRacer = GameManager.Instance.LocalRacer;
         localRacer.AssignCharacterAndKart(localCharacter, localKart);

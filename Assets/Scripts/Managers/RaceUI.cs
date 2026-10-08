@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class RaceUI : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField]

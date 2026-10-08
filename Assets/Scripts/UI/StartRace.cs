@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,9 @@ public class StartRace : MonoBehaviour
         // When multiplayer and other characters are implemented, convert racerSelection to a list and pass it into gamecontroller
         RacerSelection racer = UIController.racerSelection;
         
-        SceneManager.LoadScene("Scenes/Sophia");
+        if (UIController.IsSingleplayer())
+            GameManager.Instance.SelectCharactersAndKarts(racer);
+        
+        SceneManager.LoadScene("Scenes/MAIN/MainRace");
     }
 }
