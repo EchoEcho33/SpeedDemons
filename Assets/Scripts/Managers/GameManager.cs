@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     /// Should be set to WaitingToStart in track scenes, or MainMenu for the title screen.
     /// </summary>
     public GameState startingGameState = GameState.Lobby;
+    public bool _singlePlayer {get; private set;}
 
     public GameState GameState { get; private set; }
     
@@ -183,5 +184,10 @@ public class GameManager : MonoBehaviour
     {
         Player1 = player1;
         Player2 = player2;
+    }
+
+    public void SetSingleplayer(bool IsSingleplayer)
+    {
+        _singlePlayer = IsSingleplayer;
     }
 }

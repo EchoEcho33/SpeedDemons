@@ -3,11 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class StartGameStart : MonoBehaviour
 {
-    public void StartGame()
+    private void StartGame()
     {
         SceneManager.sceneLoaded += LoadTestTrack;
-        SceneManager.LoadSceneAsync("TestTrack");
-        
+        SceneManager.LoadSceneAsync("Scenes/Main/CharacterSelect");
+    }
+
+    public void StartSinglePlayer()
+    {
+        GameManager.Instance.SetSingleplayer(true);
+        StartGame();
+    }
+
+    public void StartLocalMultiplayer()
+    {
+        GameManager.Instance.SetSingleplayer(false);
+        StartGame();
     }
 
     public void LoadTestTrack(Scene scene, LoadSceneMode mode)
