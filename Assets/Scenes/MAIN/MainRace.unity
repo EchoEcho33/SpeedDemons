@@ -325,6 +325,142 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82cc86b5820349b4a25a52178f85110b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartingGridSpot
+--- !u!1 &299463519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 299463521}
+  - component: {fileID: 299463520}
+  m_Layer: 0
+  m_Name: RaceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &299463520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299463519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0791826d8f114586ce30f5090a7a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startFinishCheckpoint: {fileID: 1332032555}
+  startingGrid:
+  - {fileID: 7227532554157621378}
+  - {fileID: 299465162}
+  - {fileID: 706964920}
+  - {fileID: 1800508379}
+  - {fileID: 824646881}
+  - {fileID: 264667372}
+  - {fileID: 1316091991}
+  - {fileID: 1514147225}
+  racerSelections:
+  - character: {fileID: 11400000, guid: 84c161433122d91969c86d2bae9c8fbf, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: 8500a31729f5bccefa8e16ba2d50ce11, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: 77ff570b42114f60581a072ac42e3c3d, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: 401325ccb94698a668a94dd4270c9c18, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: e5b1e4cd0f112cdf4a0af2413483a2bd, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: 39c5217701e82ba92a533f3ff33e1997, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: a5ed28c94d10e429a9c6e78f1b0e00e0, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  - character: {fileID: 11400000, guid: 52f9af48fce685662a4c94d6254a5446, type: 2}
+    kart: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+  maxLaps: 3
+  countdownTimer: 3
+  racerCount: 4
+--- !u!4 &299463521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299463519}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.39915, y: -0, z: -42.96677}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &299465160
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 412180169}
+    m_Modifications:
+    - target: {fileID: 2021361646021076404, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021361646021076404, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021361646021076404, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -103
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021361646021076404, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021361646021076404, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021361646021076404, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021361646021076404, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021361646021076404, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021361646021076404, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021361646021076404, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702425956671684780, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+      propertyPath: m_Name
+      value: StartingGridSpot (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+--- !u!4 &299465161 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2021361646021076404, guid: 1058e60d8d673c0448605f2ff3d1af0d, type: 3}
+  m_PrefabInstance: {fileID: 299465160}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &299465162 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 231211573249961944, guid: 3254f1376ab416e4e87154047f844c74, type: 3}

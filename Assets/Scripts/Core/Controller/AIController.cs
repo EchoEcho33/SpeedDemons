@@ -1,4 +1,5 @@
 ﻿using Unity.Behavior;
+using UnityEngine;
 
 public class AIController : RacerController
 {
@@ -25,7 +26,21 @@ public class AIController : RacerController
     // TODO: This will work for now
     public void PassInputs(float steering, float throttle, float brake)
     {
-        Drive.Turn(steering);
-        Drive.Accelerate(throttle);
+        // This check is probably temporary, but it is essentially the same as the Race Countdown handler in PlayerController.
+        if (preventMovement)
+        {
+            Drive.PreventMovement();
+            immobileDuration -= Time.deltaTime;
+            
+            if (base.immobileDuration <= 0)
+            {
+                base.preventMovement = false;
+            }
+        }
+        else
+        {
+            Drive.Turn(steering);
+            Drive.Accelerate(throttle);   
+        }
     }
 }

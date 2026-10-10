@@ -24,8 +24,9 @@ public class RaceManager : MonoBehaviour
     
     public Action OnRaceStart;
 
-    [SerializeField]
-    public int maxLaps = 3;
+    [SerializeField] public int maxLaps = 3;
+
+    [SerializeField] public int countdownTimer = 3;  
 
     // TODO: This is just a temporary count of how many racers should the manager spawn. The real count is the # of racers in _racerStates
     public int racerCount = 1;
@@ -89,6 +90,11 @@ public class RaceManager : MonoBehaviour
         localRacer.AssignCharacterAndKart(localCharacter, localKart);
         localRacer.AssignRacerState(localRacerState);
         
+        // TODO: Change this when we swap to multiplayer
+        // ai countdown timer is handled by the racerController loop
+        localRacer.immobileDuration = countdownTimer;
+        localRacer.preventMovement = true;
+        
         List<RacerController> racerControllers = GameManager.Instance.GetRacers();
         racerControllers.Remove(localRacer);
         int racerSelectionIndex = 0;
@@ -103,8 +109,10 @@ public class RaceManager : MonoBehaviour
             
             (Character character, Kart kart, RacerState racerState) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot, false);
             racer.AssignCharacterAndKart(character, kart);
-            racer.AssignRacerState(racerState); 
+            racer.AssignRacerState(racerState);
             
+            racer.immobileDuration = countdownTimer;
+            racer.preventMovement = true;
             
             racerSelectionIndex++;
         }
@@ -119,6 +127,8 @@ public class RaceManager : MonoBehaviour
         // }
         
         OnRaceStart?.Invoke();
+        GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
+
     }
 
     private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot, bool isPlayer)
