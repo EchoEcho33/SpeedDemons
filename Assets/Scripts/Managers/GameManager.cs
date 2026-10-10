@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public InputSys inputManager { get; private set;}
 
-    public UIManager UIManager { get; private set;}
+    public RaceUI UIManager { get; private set;}
     
     public AudioManager audioManager { get; private set;}
     
@@ -39,11 +39,15 @@ public class GameManager : MonoBehaviour
     /// The default game state when the game manager is initialized.
     /// Should be set to WaitingToStart in track scenes, or MainMenu for the title screen.
     /// </summary>
-    public GameState startingGameState = GameState.WaitingToStart;
+    public GameState startingGameState = GameState.Lobby;
+    public bool _singlePlayer {get; private set;}
 
     public GameState GameState { get; private set; }
     
     public PlayerController LocalRacer { get; private set; }
+
+    public RacerSelection Player1 {get; private set;}
+    public RacerSelection Player2 {get; private set;}
     
     private List<RacerController> _racers = new();
     public List<RacerController> Racers => new(_racers);
@@ -54,6 +58,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public List<Character> characters;
+
+    [SerializeField]
+    public List<Kart> karts;
 
     private void Awake()
     {
@@ -138,6 +145,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameStateSetInMatch()
     {
+        UIManager.gameObject.SetActive(true);
         RaceManager.Instance.StartRace();
     }
     
@@ -148,8 +156,10 @@ public class GameManager : MonoBehaviour
         GameObject audioManagerObject = Instantiate(AudioManagerPrefab, gameObject.transform);
         
         inputManager = inputManagerObject.GetComponent<InputSys>();
-        UIManager = UIManagerObject.GetComponent<UIManager>();
+        UIManager = UIManagerObject.GetComponent<RaceUI>();
         audioManager = audioManagerObject.GetComponent<AudioManager>();
+
+        UIManager.gameObject.SetActive(false);
     }
     
     public List<RacerController> GetRacers()
@@ -161,5 +171,23 @@ public class GameManager : MonoBehaviour
     public Item GetRandomItem()
     {
         return items[Random.Range(0,items.Count)];
+    }
+
+    // Singleplayer case
+    public void SelectCharactersAndKarts(RacerSelection player1)
+    {
+        Player1 = player1;
+    }
+
+    // Multiplayer case
+    public void SelectCharactersAndKarts(RacerSelection player1, RacerSelection player2)
+    {
+        Player1 = player1;
+        Player2 = player2;
+    }
+
+    public void SetSingleplayer(bool IsSingleplayer)
+    {
+        _singlePlayer = IsSingleplayer;
     }
 }
