@@ -93,6 +93,12 @@ public class Drive : MonoBehaviour
         transform.position += transform.forward * velocityUpdate;
     }
 
+    public void PreventMovement()
+    {
+        if (!IsGrounded()) return;
+        m_currentSpeed = 0;
+    }
+
     // TODO: Check that wheels are grounded
     private bool IsGrounded()
     {
