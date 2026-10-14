@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
-using System.Diagnostics;
 
+[ExecuteAlways]
 public class RaceManager : MonoBehaviour
 {
     [Header("Level")]
     [SerializeField]
     private StartFinishCheckpoint startFinishCheckpoint;
+    
+    private List<TrackCheckpoint> trackCheckpoints = new ();
     
     [SerializeField]
     private List<StartingGridSpot> startingGrid;
@@ -21,8 +24,9 @@ public class RaceManager : MonoBehaviour
     
     public Action OnRaceStart;
 
-    [SerializeField]
-    public int maxLaps = 3;
+    [SerializeField] public int maxLaps = 3;
+
+    [SerializeField] public int countdownTimer = 3;  
 
     // TODO: This is just a temporary count of how many racers should the manager spawn. The real count is the # of racers in _racerStates
     public int racerCount = 1;
@@ -38,7 +42,32 @@ public class RaceManager : MonoBehaviour
         }
 
         Instance = this;
+        StoreCheckpoints();
     }
+
+    private void Start()
+    {
+        GameManager.Instance.SetGameState(GameState.WaitingToStart);
+    }
+    
+#if UNITY_EDITOR
+    private void OnEnable()
+    {
+        if (Instance != null && Instance != this)
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
+
+        Instance = this;
+        StoreCheckpoints();
+    }
+
+    private void OnDisable()
+    {
+        if (Instance == this) Instance = null;
+    }
+#endif
     
     public void StartRace()
     {     
@@ -50,11 +79,21 @@ public class RaceManager : MonoBehaviour
         StartingGridSpot startingGridSpot = startingGrid[startingGridIndex];
         remainingStartingGrid.RemoveAt(startingGridIndex);
 
-        RacerSelection localRacerSelection = racerSelections[0]; // TODO: Currently, the local player selection is the first in the list
+        RacerSelection localRacerSelection = GameManager.Instance.Player1; // TODO: Currently, the local player selection is the first in the list
+        if (localRacerSelection.kart == null || localRacerSelection.character == null)
+        {
+            Debug.LogError("Player 1 Character Selection not found.");
+            localRacerSelection = racerSelections[0];
+        }
         (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
         PlayerController localRacer = GameManager.Instance.LocalRacer;
         localRacer.AssignCharacterAndKart(localCharacter, localKart);
         localRacer.AssignRacerState(localRacerState);
+        
+        // TODO: Change this when we swap to multiplayer
+        // ai countdown timer is handled by the racerController loop
+        localRacer.immobileDuration = countdownTimer;
+        localRacer.preventMovement = true;
         
         List<RacerController> racerControllers = GameManager.Instance.GetRacers();
         racerControllers.Remove(localRacer);
@@ -70,8 +109,10 @@ public class RaceManager : MonoBehaviour
             
             (Character character, Kart kart, RacerState racerState) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot, false);
             racer.AssignCharacterAndKart(character, kart);
-            racer.AssignRacerState(racerState); 
+            racer.AssignRacerState(racerState);
             
+            racer.immobileDuration = countdownTimer;
+            racer.preventMovement = true;
             
             racerSelectionIndex++;
         }
@@ -86,6 +127,8 @@ public class RaceManager : MonoBehaviour
         // }
         
         OnRaceStart?.Invoke();
+        GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
+
     }
 
     private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot, bool isPlayer)
@@ -111,8 +154,31 @@ public class RaceManager : MonoBehaviour
 
         kartObject.tag = isPlayer ? "Player" : "AI";
         
-        
         return (character, kart, racerState);
     }
 
+    public void StoreCheckpoints()
+    {
+        if (startFinishCheckpoint == null) return;
+        
+        trackCheckpoints.Clear();
+        trackCheckpoints.Add(startFinishCheckpoint);
+        TrackCheckpoint currCheckpoint = startFinishCheckpoint.nextCheckpoint;
+
+        int checkpointCounter = 0;
+        startFinishCheckpoint.CheckpointID = checkpointCounter;
+        while (currCheckpoint != startFinishCheckpoint)
+        {
+            trackCheckpoints.Add(currCheckpoint);
+            currCheckpoint.CheckpointID = ++checkpointCounter;
+            currCheckpoint = currCheckpoint.nextCheckpoint;
+        }
+    }
+
+    public TrackCheckpoint GetCheckpoint(int id)
+    {
+        if (id < 0 || trackCheckpoints.Count <= id) return null;
+        
+        return trackCheckpoints[id];
+    }
 }

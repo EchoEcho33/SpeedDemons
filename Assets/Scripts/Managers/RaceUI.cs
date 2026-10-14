@@ -1,9 +1,10 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class RaceUI : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField]
@@ -27,10 +28,31 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Image _backgroundImage;
 
+    [SerializeField] private TextMeshProUGUI countdownText; 
+    
+    private int currCountdownValue;
+
     public void Start()
     {
         _primaryItemIcon.enabled = false;
         _secondaryItemIcon.enabled = false;
+    }
+    
+    IEnumerator TickCountdown(int countdown)
+    {
+        currCountdownValue = countdown;
+        while (currCountdownValue > 0)
+        {
+            countdownText.text = currCountdownValue.ToString();
+            yield return new WaitForSeconds(1.0f);
+            currCountdownValue--;
+        }
+
+        if (currCountdownValue <= 0)
+        {
+            // cant set active? doing this for now
+            countdownText.enabled = false;
+        }
     }
 
     public void UpdateLap(int currLap)

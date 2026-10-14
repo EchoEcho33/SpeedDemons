@@ -1,6 +1,8 @@
 ﻿using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMOD.Studio;
+using FMODUnity;
 
 public class PlayerController : RacerController
 {
@@ -64,6 +66,9 @@ public class PlayerController : RacerController
         GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
         CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
         CinemachineCamera.Follow = Kart.kartObject.transform;
+
+        // audio stuff
+        MainCamera.GetComponent<StudioListener>().SetAttenuationObject(MainCamera.gameObject);
     }
 
     private void Update()
@@ -85,6 +90,22 @@ public class PlayerController : RacerController
             if (SpinOutDuration <= 0) { base.SpinOut = false; }
 
             return; // Exit Update Code During Spin Out
+        }
+        
+        // Race Countdown Handler
+        // see PassInputs in AIController for equivalent
+        if (base.preventMovement)
+        {
+            
+            Drive.PreventMovement();
+            immobileDuration -= Time.deltaTime;
+            
+            if (base.immobileDuration <= 0)
+            {
+                base.preventMovement = false;
+            }
+
+            return; // prevent any movement in update
         }
 
         // Brake and Accelerate
