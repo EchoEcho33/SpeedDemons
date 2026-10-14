@@ -22,7 +22,6 @@ public class Snowball : Item
     private SphereCollider sphereCollider;
     private GameObject sphereObject;
 
-
     private void Start()
     {
         follow = GameManager.Instance.cinemachineCameraPrefab.GetComponent<CinemachineOrbitalFollow>();
