@@ -1,6 +1,7 @@
 using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
+using System.Collections.Generic;
 
 public class Drive : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Drive : MonoBehaviour
     public Character character { get; private set; }
 
     private Kart kart;
+    private KartSuspension kartSuspension;
 
     public float m_currentSpeed = 0.0f;
     private float m_turnSpeed = 0.0f;
@@ -23,32 +25,39 @@ public class Drive : MonoBehaviour
     {
         character = newCharacter;
         kart = newKart;
+
         drivingAudio = AudioManager.instance.createEmitter(AudioEvents.instance.basicCarDrive, this.gameObject);
         drivingAudio.Play();
+
+
+        kartSuspension = kart.kartObject.GetComponent<KartSuspension>();
     }
 
     public void Accelerate(float amplitude)
     {
-        if (!IsGrounded()) return;
+        float velocityUpdate = m_currentSpeed * Time.deltaTime;
+
+        if (IsGrounded())
+        {
+            float initialFrameSpeed = m_currentSpeed;
+            m_currentSpeed += kart._maxAcceleration * amplitude * Time.deltaTime;
+
+            if (m_currentSpeed > kart._maxSpeed)
+                m_currentSpeed = kart._maxSpeed;
+
+            if (m_currentSpeed < -kart._maxSpeed / 2)
+                m_currentSpeed = -kart._maxSpeed / 2;
+
+            velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime;
+        }
         
-        float initialFrameSpeed = m_currentSpeed;
-        m_currentSpeed += kart._maxAcceleration * amplitude * Time.deltaTime;
-
-        if (m_currentSpeed > kart._maxSpeed)
-            m_currentSpeed = kart._maxSpeed;
-
-        if (m_currentSpeed < -kart._maxSpeed / 2)
-            m_currentSpeed = -kart._maxSpeed / 2;
-
-        float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime;
-        
-
         transform.position += transform.forward * velocityUpdate;
         UpdateSound(1);
     }
 
     public void Decelerate(float amplitude, float a)
     {
+        
         float initialFrameSpeed = m_currentSpeed;
         m_currentSpeed += -a * amplitude * Time.deltaTime;
 
@@ -99,9 +108,21 @@ public class Drive : MonoBehaviour
         m_currentSpeed = 0;
     }
 
-    // TODO: Check that wheels are grounded
+    // TODO: Done c:
     private bool IsGrounded()
     {
+        for(int i = 0; i < kartSuspension.wheels.Count; i++)
+        {
+            Vector3 wheelSpringDir = kartSuspension.wheels[i].transform.up;
+            
+            Physics.Raycast(
+                transform.TransformPoint(kartSuspension.wheelLocalPositions[i]),
+                -wheelSpringDir,
+                out RaycastHit hit,
+                kartSuspension.wheelHeight / 2);
+
+            if (hit.collider == null) { return false; }
+        }
         return true;
     }
 
