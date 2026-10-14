@@ -25,7 +25,7 @@ public class Snowball : Item
     float timeRemaining = -2f;
 
 
-    public override void Use()
+    public override void Use(RacerState racer)
     {
         if (snowballPrefab == null) return;
 
