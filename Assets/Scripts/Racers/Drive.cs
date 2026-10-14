@@ -111,17 +111,10 @@ public class Drive : MonoBehaviour
     // TODO: Done c:
     private bool IsGrounded()
     {
-        for(int i = 0; i < kartSuspension.wheels.Count; i++)
+        kartSuspension.CheckGroundedWheels();
+        for (int i = 0; i < kartSuspension.wheelGroundedState.Length; i++)
         {
-            Vector3 wheelSpringDir = kartSuspension.wheels[i].transform.up;
-            
-            Physics.Raycast(
-                transform.TransformPoint(kartSuspension.wheelLocalPositions[i]),
-                -wheelSpringDir,
-                out RaycastHit hit,
-                kartSuspension.wheelHeight / 2);
-
-            if (hit.collider == null) { return false; }
+            if (!kartSuspension.wheelGroundedState[i]) { return false; }
         }
         return true;
     }

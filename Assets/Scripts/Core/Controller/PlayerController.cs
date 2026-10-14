@@ -74,11 +74,11 @@ public class PlayerController : RacerController
     private void Update()
     {
         // Spin Out Handler
-        if (base.SpinOut)
+        if (SpinOut)
         {
             // Main Spin Out Code
             Drive.SpinOut();
-            base.SpinOutDuration -= Time.deltaTime;
+            SpinOutDuration -= Time.deltaTime;
 
             // Ends Spin Out Animation
             if (SpinOutDuration <= 1 && Drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
@@ -87,7 +87,7 @@ public class PlayerController : RacerController
             }
 
             // Ends Spin Out
-            if (SpinOutDuration <= 0) { base.SpinOut = false; }
+            if (SpinOutDuration <= 0) { SpinOut = false; }
 
             return; // Exit Update Code During Spin Out
         }

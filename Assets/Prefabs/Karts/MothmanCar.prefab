@@ -415,10 +415,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KartSuspension
   wheels:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1452593094869032724}
+  - {fileID: 5168647681678217034}
+  - {fileID: 3820126557526940842}
+  - {fileID: 5173584500329052705}
   wheelLocalPositions: []
   wheelHeight: 0.5
 --- !u!1 &7633962090835233391
