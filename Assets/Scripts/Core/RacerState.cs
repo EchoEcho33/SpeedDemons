@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class RacerState : MonoBehaviour
@@ -22,6 +23,7 @@ public class RacerState : MonoBehaviour
     private Item _secondaryItem = null;
     private float _itemCooldown = 0.5f;
     private bool _onItemCooldown = false;
+    private Item _usingItem;
     
     public void AssignController(RacerController newRacerController)
     {
@@ -132,7 +134,8 @@ public class RacerState : MonoBehaviour
         if (!_onItemCooldown && _primaryItem != null)
         {
             _onItemCooldown = true;
-            _primaryItem.Use();
+            Item instantiatedItem = Instantiate(_primaryItem, RacerController.transform);
+            instantiatedItem.Use(this);
             GameManager.Instance.UIManager.UseItem();
             _primaryItem = _secondaryItem;
             _secondaryItem = null;

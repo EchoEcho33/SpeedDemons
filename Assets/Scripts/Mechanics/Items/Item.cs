@@ -21,7 +21,7 @@ public abstract class Item : MonoBehaviour
     [SerializeField]
     private Sprite _icon;
 
-    public abstract void Use();
+    public abstract void Use(RacerState racer);
 
     public string getItemId()
     {
