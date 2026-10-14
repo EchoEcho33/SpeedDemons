@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -6,119 +8,61 @@ using UnityEngine.TextCore.Text;
 
 public class Snowball : Item
 {
+    [SerializeField]
+    private float maxsize = 3;
+    [SerializeField]
+    private float growthscale = 0.2f;
+    [SerializeField]
+    private float startsize = 2f;
+    private float basefollowr = 5;
 
-    RacerController user;
-    float duration = 10.0f;
-    float maxsize = 100;
-    float growthscale = 1 / 1500f;
-    float startsize = 5;
-    float basefollowr = 5;
+    private RacerState racer;
 
     private CinemachineOrbitalFollow follow;
     private SphereCollider sphereCollider;
     private GameObject sphereObject;
 
-    [SerializeField]
-    private GameObject snowballPrefab;
 
-    //jank ass shi...
-    float timeRemaining = -2f;
-
-
-    public override void Use()
+    private void Start()
     {
-        if (snowballPrefab == null) return;
+        follow = GameManager.Instance.cinemachineCameraPrefab.GetComponent<CinemachineOrbitalFollow>();
+        if (follow == null)
+            Debug.LogError("No Cinemachine Orbital Follow found in GameManager.");
+    }
 
-        //don't use while running
-        if (timeRemaining > 0) return;
-        timeRemaining = duration;
-        
+    public override void Use(RacerState racer)
+    {
+        if (follow != null) basefollowr = follow.Radius;
 
-        //placeholder
-        user = FindAnyObjectByType<PlayerController>();
+        this.racer = racer;
 
-        if (user is PlayerController) follow = ((PlayerController)user).CinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
+        // Enable snowball
+        sphereCollider = racer.RacerController.GetCharacterAndKart().GetComponentInChildren<SphereCollider>(true);
+        sphereObject = sphereCollider.gameObject;
 
-        //ok basically replaces the car with a sphere, really couldnt find a better/less jank solution
-        //retain speed
-        float currSpeed = user.Drive.m_currentSpeed;
-        Destroy(user.Kart.kartObject);
-
-        //create snowball in place of kart
-        user.Kart.kartObject = Instantiate(snowballPrefab, user.Drive.transform.position + new Vector3(0f, 1f, 0f), user.Drive.transform.rotation);
-        sphereCollider = user.Kart.kartObject.GetComponent<SphereCollider>();
-        sphereObject = user.Kart.kartObject.transform.Find("Model").Find("Sphere").gameObject;
-        
-        //apply starting size
-        sphereObject.transform.localScale = new Vector3(startsize, startsize, startsize);
-        sphereCollider.radius = startsize / 2;
-
-        //character still needs to be created for checkpoints and deathfloor
-        GameObject characterSlot = user.Kart.kartObject.transform.Find("Model").Find("CharacterSocket").gameObject;
-        user.Character.characterObject = Instantiate(user.Character.characterPrefab, Vector3.zero, user.Character.characterPrefab.transform.rotation);
-        user.Character.characterObject.transform.SetParent(characterSlot.transform, false);
-
-        //have to recreate drive ugh
-        user.InitializeDrive();
-        user.Drive.m_currentSpeed = currSpeed;
-
-        //update follow
-        if (user is PlayerController) {
-            ((PlayerController)user).CinemachineCamera.Follow = user.Kart.kartObject.transform;
-            basefollowr = follow.Radius;
-        }
+        sphereObject.SetActive(true);
     }
 
 
     void Update()
     {
-        if (timeRemaining > 0)
+        if (sphereObject.activeSelf)
         {
-            //primitive timer countdown lol
-            timeRemaining -= Time.deltaTime;
+            // Grow sphere based on growth scale
+            sphereObject.transform.localScale += new Vector3(growthscale, growthscale, growthscale) * Time.deltaTime;
+            sphereObject.transform.rotation *= Quaternion.AngleAxis(10 * racer.RacerController.Drive.GetCurrentSpeed() * Time.deltaTime, 
+                                            Quaternion.LookRotation(racer.RacerController.gameObject.transform.forward, 
+                                            racer.RacerController.gameObject.transform.up) * Vector3.right);
 
-            //sphere growth based on speed
-            sphereObject.transform.localScale += new Vector3(user.Drive.m_currentSpeed * growthscale, user.Drive.m_currentSpeed * growthscale, user.Drive.m_currentSpeed * growthscale);
-            sphereCollider.radius = sphereObject.transform.localScale.x / 2;
+            if (follow != null) follow.Radius = basefollowr + sphereObject.transform.localScale.x;
             
-            //idea: insert rotate ball or increasing mass
-
-            if (follow != null) follow.Radius = basefollowr + sphereObject.gameObject.transform.localScale.x / 2;
-            
-            //if too big, stop as well
-            if (sphereObject.transform.localScale.x == maxsize) timeRemaining = 0;
-
-        } else if (timeRemaining > -1)
-        {
-            //runs once so any "gets" are sorta fine imo
-
-            //retains speed
-            float currSpeed = user.Drive.m_currentSpeed;
-
-            //kill ball
-            Destroy(user.Kart.kartObject);
-
-            //creates kart again
-            user.Kart.kartObject = Instantiate(user.Kart.kartPrefab, user.Drive.transform.position + new Vector3(0f, 1f, 0f), user.Drive.transform.rotation);
-
-            //and character
-            GameObject characterSlot = user.Kart.kartObject.transform.Find("Model").Find("CharacterSocket").gameObject;
-            user.Character.characterObject = Instantiate(user.Character.characterPrefab, Vector3.zero, user.Character.characterPrefab.transform.rotation);
-            user.Character.characterObject.transform.SetParent(characterSlot.transform, false);
-
-            //remake drive with retained speed
-            user.InitializeDrive();
-            user.Drive.m_currentSpeed = currSpeed;
-
-            //reset camera
-            if (user is PlayerController)
+            // When the sphere reaches it's maximum size threshold, player returns to normal
+            if (sphereObject.transform.localScale.x >= maxsize)
             {
-                ((PlayerController)user).CinemachineCamera.Follow = user.Kart.kartObject.transform;
-                follow.Radius = basefollowr;
+                sphereObject.SetActive(false);
+                if (follow != null) follow.Radius = basefollowr;
+                sphereObject.transform.localScale = new Vector3(startsize, startsize, startsize);
             }
-
-            //makes sure nothing runs after
-            timeRemaining = -2;
         }
 
     }
