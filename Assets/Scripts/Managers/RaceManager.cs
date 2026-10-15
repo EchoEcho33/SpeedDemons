@@ -47,7 +47,7 @@ public class RaceManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.SetGameState(GameState.WaitingToStart);
+        //GameManager.Instance.SetGameState(GameState.WaitingToStart);
     }
     
 #if UNITY_EDITOR
@@ -116,15 +116,6 @@ public class RaceManager : MonoBehaviour
             
             racerSelectionIndex++;
         }
-
-        // foreach (Item item in items)
-        // {
-        //     item.spawnItem();
-        //     //Transform transform = item.itemObject.GetComponent<Transform>();
-        //     int xCoord = 40 + ((int) (Random.value * 6) * 5);
-        //     int zCoord = -100 - ((int) (Random.value * 6) * 5);
-        //     transform.Translate(xCoord, 0, zCoord);
-        // }
         
         OnRaceStart?.Invoke();
         GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
