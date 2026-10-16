@@ -47,7 +47,8 @@ public class RaceManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.SetGameState(GameState.WaitingToStart);
+        // TODO This function doubles the amount of players.
+        // GameManager.Instance.SetGameState(GameState.WaitingToStart);
     }
     
 #if UNITY_EDITOR
@@ -76,8 +77,22 @@ public class RaceManager : MonoBehaviour
         // TODO: Mike - This only spawns 1 drive script for a singleplayer game. Change this for multiplayer!
         List<StartingGridSpot> remainingStartingGrid = startingGrid;
         int startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
+        // DELETE THIS IMMEDIATELY. it works tho
+        int startingGridIndex2 = Random.Range(0, remainingStartingGrid.Count);
+        if (startingGridIndex2 == startingGridIndex)
+        {
+            startingGridIndex2--;
+            if (startingGridIndex2 < 0)
+            {
+                startingGridIndex2 = 5;
+            }
+        }
+        
+        
+        
         StartingGridSpot startingGridSpot = startingGrid[startingGridIndex];
         remainingStartingGrid.RemoveAt(startingGridIndex);
+        remainingStartingGrid.RemoveAt(startingGridIndex2);
 
         RacerSelection localRacerSelection = GameManager.Instance.Player1; // TODO: Currently, the local player selection is the first in the list
         if (localRacerSelection.kart == null || localRacerSelection.character == null)
@@ -85,7 +100,7 @@ public class RaceManager : MonoBehaviour
             Debug.LogError("Player 1 Character Selection not found.");
             localRacerSelection = racerSelections[0];
         }
-        (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGrid[++startingGridIndex], true);
+        (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
         PlayerController player1 = GameManager.Instance.LocalRacers[0];
         player1.AssignCharacterAndKart(localCharacter, localKart);
         player1.InitializeMultiCamera(0);
@@ -96,7 +111,8 @@ public class RaceManager : MonoBehaviour
         player1.immobileDuration = countdownTimer;
         player1.preventMovement = true;
         
-        (Character localCharacter2, Kart localKart2, RacerState localRacerState2) = SpawnRacer(localRacerSelection, startingGridSpot, true);
+        (Character localCharacter2, Kart localKart2, RacerState localRacerState2) = SpawnRacer(localRacerSelection, startingGrid[startingGridIndex2], true);
+        
         PlayerController player2 = GameManager.Instance.LocalRacers[1];
         player2.AssignCharacterAndKart(localCharacter2, localKart2);
         player2.InitializeMultiCamera(1);

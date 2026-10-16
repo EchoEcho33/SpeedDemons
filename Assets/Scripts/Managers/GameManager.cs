@@ -125,17 +125,18 @@ public class GameManager : MonoBehaviour
         // TODO: This currently how all the players are initialized. This should be instead be populated via fields in a lobby.
         // TODO: The Local Player driven by Inputs, maybe multiplayer?
         GameObject playerControllerObject1 = new GameObject("PlayerController");
-        LocalRacers.Add(playerControllerObject1.AddComponent<PlayerController>());
+        LocalRacers.Insert(0, playerControllerObject1.AddComponent<PlayerController>());
+        LocalRacers[0].playerNum = 0;
         _racers.Add(LocalRacers[0]);
         
-        GameObject playerControllerObject2 = new GameObject("PlayerController");
-        Instantiate(playerControllerObject2, gameObject.transform);
-        LocalRacers.Add(playerControllerObject2.AddComponent<PlayerController>());
+        GameObject playerControllerObject2 = new GameObject("PlayerController2");
+        LocalRacers.Insert(1, playerControllerObject2.AddComponent<PlayerController>());
+        LocalRacers[1].playerNum = 1;
         _racers.Add(LocalRacers[1]);
 
         // TODO: AI Racers
         int totalRacerCount = RaceManager.Instance.racerCount;
-        int racerCount = --totalRacerCount;
+        int racerCount =  --totalRacerCount;
         while (racerCount > 0)
         {
             GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
