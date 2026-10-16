@@ -7,6 +7,7 @@ using FMODUnity;
 public class PlayerController : RacerController
 {
     public Camera MainCamera { get; private set; }
+    public Camera Player2Camera { get; private set; }
     public CinemachineCamera CinemachineCamera;
     
     private InputAction accelerate;
@@ -33,7 +34,7 @@ public class PlayerController : RacerController
     public override void AssignCharacterAndKart(Character newCharacter, Kart newKart)
     {
         base.AssignCharacterAndKart(newCharacter, newKart);
-        InitializeCamera();
+        // InitializeCamera();
     }
 
     public override void InitializeDrive()
@@ -58,17 +59,46 @@ public class PlayerController : RacerController
         useItem_kbd = GameManager.Instance.inputManager.useItem_kbd.action;
     }
 
-    private void InitializeCamera()
+    public void InitializeCamera()
     {
-        GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
-        MainCamera = cameraObject.GetComponent<Camera>();
-        
-        GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
-        CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
-        CinemachineCamera.Follow = Kart.kartObject.transform;
+            GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
+            MainCamera = cameraObject.GetComponent<Camera>();
+    
+            GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
+            CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
+            CinemachineCamera.Follow = Kart.kartObject.transform;
 
-        // audio stuff
-        MainCamera.GetComponent<StudioListener>().SetAttenuationObject(MainCamera.gameObject);
+            // audio stuff
+            MainCamera.GetComponent<StudioListener>().SetAttenuationObject(MainCamera.gameObject);
+    }
+
+    public void InitializeMultiCamera(int playerIndex)
+    {
+        // this is hardcoded and bad. 
+        if (playerIndex == 0)
+        {
+            GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
+            MainCamera = cameraObject.GetComponent<Camera>();
+            MainCamera.rect = new Rect(0f, 0f, 0.5f, 1f);
+
+    
+            GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
+            CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
+            CinemachineCamera.Follow = Kart.kartObject.transform;
+
+            // audio stuff
+            MainCamera.GetComponent<StudioListener>().SetAttenuationObject(MainCamera.gameObject);
+        }
+        else
+        {
+            GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
+            MainCamera = cameraObject.GetComponent<Camera>();
+            MainCamera.rect = new Rect(0.5f, 0f, 0.5f, 1f);
+    
+            GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
+            CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
+            CinemachineCamera.Follow = Kart.kartObject.transform;
+        }
     }
 
     private void Update()

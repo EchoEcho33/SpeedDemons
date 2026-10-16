@@ -88,6 +88,7 @@ public class RaceManager : MonoBehaviour
         (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
         PlayerController localRacer = GameManager.Instance.LocalRacer;
         localRacer.AssignCharacterAndKart(localCharacter, localKart);
+        localRacer.InitializeMultiCamera(0);
         localRacer.AssignRacerState(localRacerState);
         
         // TODO: Change this when we swap to multiplayer
