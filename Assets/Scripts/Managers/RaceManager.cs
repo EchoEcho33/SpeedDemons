@@ -152,17 +152,9 @@ public class RaceManager : MonoBehaviour
             StartingGridSpot P2startingGridSpot = startingGrid[P2startingGridIndex];
             
             remainingStartingGrid.RemoveAt(startingGridIndex);
+            // This may be slow but prevents crashing
+            remainingStartingGrid.Remove(P2startingGridSpot);
             
-            // Gianluca - there is a very small chance of a crash because im indexing a list after removing an item.
-            // This catches it, but sometimes there are double spawns
-            // TODO - fix post m2
-            if(remainingStartingGrid.ElementAtOrDefault(startingGridIndex) != null)
-            {
-                remainingStartingGrid.RemoveAt(P2startingGridIndex);
-            }
-
-            
-
             // TODO: There is no multi character select right now, so both players get the same character. 
             RacerSelection localRacerSelection = GameManager.Instance.Player1; // TODO: Currently, the local player selection is the first in the list
             if (localRacerSelection.kart == null || localRacerSelection.character == null)
