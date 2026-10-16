@@ -80,7 +80,11 @@ public class Snowball : Item
         }
 
         //placeholder for spinout
-        racer.SpinOut = true;
-        racer.SpinOutDuration = 3.0f;
+        if (racer.activatedRF) {
+            racer.activatedRF = false;
+        } else {
+            racer.SpinOut = true;
+            racer.SpinOutDuration = 3.0f;
+        }
     }
 }
