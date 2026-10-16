@@ -74,7 +74,8 @@ public class PlayerController : RacerController
             useItem_kbd = GameManager.Instance.inputManager.p2_useItem_kbd.action;
             
             // undef values. will get second controller later
-            accelerate = GameManager.Instance.inputManager.p2_empty_kbd;
+            // "Empty" is just some inaccessible keyboard key so we don't get null reference errors
+            accelerate = GameManager.Instance.inputManager.p2_empty_kbd.action;
             brake = GameManager.Instance.inputManager.p2_empty_kbd.action;
             turn = GameManager.Instance.inputManager.p2_empty_kbd.action;
             ability = GameManager.Instance.inputManager.p2_empty_kbd.action;
