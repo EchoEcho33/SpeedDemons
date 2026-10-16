@@ -36,10 +36,12 @@ public class RaceUI : MonoBehaviour
     {
         _primaryItemIcon.enabled = false;
         _secondaryItemIcon.enabled = false;
+        
     }
     
     IEnumerator TickCountdown(int countdown)
     {
+        
         currCountdownValue = countdown;
         while (currCountdownValue > 0)
         {

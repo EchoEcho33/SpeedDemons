@@ -101,6 +101,9 @@ public class RaceManager : MonoBehaviour
 
         List<Item> items = GameManager.Instance.items;
         
+        Debug.Log("tick countdown should've been called");
+        GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
+        
         foreach (RacerController racer in racerControllers)
         {
             startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
@@ -116,6 +119,7 @@ public class RaceManager : MonoBehaviour
             
             racerSelectionIndex++;
         }
+        
 
         // foreach (Item item in items)
         // {
@@ -127,7 +131,7 @@ public class RaceManager : MonoBehaviour
         // }
         
         OnRaceStart?.Invoke();
-        GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
+        
 
     }
 
