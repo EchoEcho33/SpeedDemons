@@ -130,9 +130,9 @@ public class PlayerController : RacerController
             CinemachineCamera.Follow = Kart.kartObject.transform;
         }
     }
-
-    private void Update()
+    private void FixedUpdate()
     {
+        var old_transform_position = transform.position;
         // Spin Out Handler
         if (base.SpinOut)
         {
@@ -213,6 +213,17 @@ public class PlayerController : RacerController
         {
             RacerState.UseItem();
         }
+
+        Debug.Log("runnn chekkkk");
+        
+        float up_dot = Vector3.Dot(transform.up, new Vector3(0,1,0));
+        if (up_dot <= 1.0)
+        {
+            Debug.Log("runnn");
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward,new Vector3(0,1,0)), Time.deltaTime * 5);
+        }
+        
+        transform.position = new Vector3(transform.position.x, old_transform_position.y - (9.81f * Time.deltaTime), transform.position.z);
     }
 
     private void ControllerMove()
