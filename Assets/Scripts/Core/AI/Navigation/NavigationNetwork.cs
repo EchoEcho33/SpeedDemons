@@ -12,6 +12,9 @@ public class NavigationNetwork : MonoBehaviour
     [SerializeField] 
     private TextAsset raceTelemetryJSON;
 
+    /** Callback for when a navigation network is generated. */
+    public event Action OnNetworkGenerated;
+    
     public void Start()
     {
         ClearNetwork();
@@ -54,6 +57,9 @@ public class NavigationNetwork : MonoBehaviour
             NavigationWaypoint startFinishLineWaypoint = CreateCheckpointWaypoint(i, markedWaypoints[i].Next);
             if (startFinishLineWaypoint != null) checkpointWaypoints.Add(startFinishLineWaypoint);
         }
+        
+        OnNetworkGenerated?.Invoke();
+        Debug.LogError("Navigation Network Generated. AI Initialized.");
     }
     
     private NavigationWaypoint CreateWaypoint(RacerTelemetryFrame frame)
