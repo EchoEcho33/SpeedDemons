@@ -118,6 +118,7 @@ public class RaceManager : MonoBehaviour
             racerSelectionIndex++;
         }
         
+
         // foreach (Item item in items)
         // {
         //     item.spawnItem();
