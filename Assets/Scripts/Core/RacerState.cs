@@ -33,7 +33,7 @@ public class RacerState : MonoBehaviour
     public void StartRace(StartFinishCheckpoint startFinishCheckpoint)
     {
         CurrCheckpoint = startFinishCheckpoint;
-        currLap = 1;
+        currLap = 0;
         abilityBar = 0;
 
         GameManager.Instance.UIManager.UpdateLap(1);
@@ -84,6 +84,12 @@ public class RacerState : MonoBehaviour
         {
             OnReachedStartFinishCheckpoint?.Invoke(startFinishCheckpoint);
             currLap++;
+            Debug.Log(currLap);
+            if (currLap >= RaceManager.Instance.maxLaps)
+            {
+                Debug.Log(RaceManager.Instance.maxLaps);
+                RaceManager.Instance.FinishRace(this);
+            }
             
             //applies from all racers, change after getting Driver to connect with certain racerStates
             GameManager.Instance.UIManager.UpdateLap(currLap);

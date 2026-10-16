@@ -32,6 +32,10 @@ public class RaceManager : MonoBehaviour
     // TODO: This is just a temporary count of how many racers should the manager spawn. The real count is the # of racers in _racerStates
     public int racerCount = 1;
     
+    private List<RacerState> finishedRacers = new();
+    
+    private List<RacerState> finishedPlayerRacers = new();
+    
     public static RaceManager Instance { get; private set; }
     
     private void Awake()
@@ -251,6 +255,31 @@ public class RaceManager : MonoBehaviour
         kartObject.tag = isPlayer ? "Player" : "AI";
         
         return (character, kart, racerState);
+    }
+
+    public void FinishRace(RacerState racerState)
+    {
+        finishedRacers.Add(racerState);
+
+        if (racerState.RacerController is PlayerController playerController)
+        {
+            finishedPlayerRacers.Add(racerState);
+
+            if (GameManager.Instance._singlePlayer || finishedPlayerRacers.Count >= 2) // TODO: Mike - This only works for 2-player rn
+            {
+                FinishRaceTimer();
+            }
+        }
+    }
+
+    private async void FinishRaceTimer()
+    {
+        for (int seconds = 10; seconds > 0; seconds--)
+        {
+            GameManager.Instance.UIManager.TickTimer(seconds);
+            await Awaitable.WaitForSecondsAsync(1.0f, destroyCancellationToken);
+        }
+        GameManager.Instance.SetGameState(GameState.FinishedMatch);
     }
 
     public void StoreCheckpoints()

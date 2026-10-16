@@ -57,6 +57,20 @@ public class RaceUI : MonoBehaviour
         }
     }
 
+    public void TickTimer(int countdown)
+    {
+        currCountdownValue = countdown;
+        if (currCountdownValue > 0)
+        {
+            countdownText.text = currCountdownValue.ToString();
+            countdownText.enabled = true;
+        }
+        else
+        {
+            countdownText.enabled = false;
+        }
+    }
+
     public void UpdateLap(int currLap)
     {
         if (_playerLaps != null)

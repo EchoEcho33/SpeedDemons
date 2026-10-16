@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
     MainMenu,
     Lobby,
     WaitingToStart,
-    InMatch
+    InMatch,
+    FinishedMatch,
 }
 
 public class GameManager : MonoBehaviour
@@ -40,7 +42,8 @@ public class GameManager : MonoBehaviour
     /// Should be set to WaitingToStart in track scenes, or MainMenu for the title screen.
     /// </summary>
     public GameState startingGameState = GameState.Lobby;
-
+    
+    // default to multiplayer
     [SerializeField] public bool _singlePlayer = false;
 
     public GameState GameState { get; private set; }
@@ -106,6 +109,10 @@ public class GameManager : MonoBehaviour
             case GameState.InMatch:
                 HandleGameStateSetInMatch();
                 break;
+            
+            case GameState.FinishedMatch:
+                HandleGameStateSetFinishedMatch();
+                break;
         }
     }
 
@@ -150,7 +157,7 @@ public class GameManager : MonoBehaviour
             LocalRacers.Insert(0, playerControllerObject.AddComponent<PlayerController>());
             LocalRacers[0].playerNum = 0;
             _racers.Add(LocalRacers[0]);
-        
+
             GameObject p2PlayerControllerObject = new GameObject("PlayerController2");
             LocalRacers.Insert(1, p2PlayerControllerObject.AddComponent<PlayerController>());
             LocalRacers[1].playerNum = 1;
@@ -158,7 +165,7 @@ public class GameManager : MonoBehaviour
 
             // TODO: AI Racers
             int totalRacerCount = RaceManager.Instance.racerCount;
-            int racerCount =  --totalRacerCount;
+            int racerCount = --totalRacerCount;
             while (racerCount > 0)
             {
                 GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
@@ -175,6 +182,12 @@ public class GameManager : MonoBehaviour
     {
         UIManager.gameObject.SetActive(true);
         RaceManager.Instance.StartRace();
+    }
+
+    private void HandleGameStateSetFinishedMatch()
+    {
+        SceneManager.LoadSceneAsync("Scenes/Main/StartMenu");
+        SetGameState(GameState.MainMenu);
     }
     
     private void InitializeManagers()
