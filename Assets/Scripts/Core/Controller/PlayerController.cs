@@ -78,7 +78,7 @@ public class PlayerController : RacerController
         
     }
 
-    public void InitializeCamera()
+    public void InitializeSingleCamera()
     {
             GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
             MainCamera = cameraObject.GetComponent<Camera>();
@@ -93,7 +93,7 @@ public class PlayerController : RacerController
 
     public void InitializeMultiCamera(int playerIndex)
     {
-        // this is hardcoded and bad. 
+        // this is hardcoded and bad. currently two player
         if (playerIndex == 0)
         {
             GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);

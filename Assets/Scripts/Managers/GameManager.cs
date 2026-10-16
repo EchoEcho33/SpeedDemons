@@ -40,7 +40,8 @@ public class GameManager : MonoBehaviour
     /// Should be set to WaitingToStart in track scenes, or MainMenu for the title screen.
     /// </summary>
     public GameState startingGameState = GameState.Lobby;
-    public bool _singlePlayer {get; private set;}
+
+    [SerializeField] public bool _singlePlayer = false;
 
     public GameState GameState { get; private set; }
 
@@ -121,31 +122,52 @@ public class GameManager : MonoBehaviour
     private void HandleGameStateSetWaitingToStart()
     {
         InitializeManagers();
-        
-        // TODO: This currently how all the players are initialized. This should be instead be populated via fields in a lobby.
-        // TODO: The Local Player driven by Inputs, maybe multiplayer?
-        GameObject playerControllerObject1 = new GameObject("PlayerController");
-        LocalRacers.Insert(0, playerControllerObject1.AddComponent<PlayerController>());
-        LocalRacers[0].playerNum = 0;
-        _racers.Add(LocalRacers[0]);
-        
-        GameObject playerControllerObject2 = new GameObject("PlayerController2");
-        LocalRacers.Insert(1, playerControllerObject2.AddComponent<PlayerController>());
-        LocalRacers[1].playerNum = 1;
-        _racers.Add(LocalRacers[1]);
-
-        // TODO: AI Racers
-        int totalRacerCount = RaceManager.Instance.racerCount;
-        int racerCount =  --totalRacerCount;
-        while (racerCount > 0)
+        // This is the original non multiplayer code
+        if (_singlePlayer)
         {
-            GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
-            AIController aiController = aiControllerObject.AddComponent<AIController>();
-            _racers.Add(aiController);
-            racerCount--;
-        }
+            // TODO: This is currently how all the players are initialized. This should be instead be populated via fields in a lobby.
+            // TODO: The Local Player driven by Inputs, maybe multiplayer?
+            GameObject playerControllerObject = new GameObject("PlayerController");
+            LocalRacers.Insert(0, playerControllerObject.AddComponent<PlayerController>());
+            _racers.Add(LocalRacers[0]);
 
-        // TODO: This is just to start the race have the match is setup.
+            // TODO: AI Racers
+            int totalRacerCount = RaceManager.Instance.racerCount;
+            int racerCount = --totalRacerCount;
+            while (racerCount > 0)
+            {
+                GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
+                AIController aiController = aiControllerObject.AddComponent<AIController>();
+                _racers.Add(aiController);
+                racerCount--;
+            }
+        }
+        else
+        {
+            // TODO: This currently how all the players are initialized. This should be instead be populated via fields in a lobby.
+            // TODO: The Local Player driven by Inputs, maybe multiplayer?
+            GameObject playerControllerObject = new GameObject("PlayerController");
+            LocalRacers.Insert(0, playerControllerObject.AddComponent<PlayerController>());
+            LocalRacers[0].playerNum = 0;
+            _racers.Add(LocalRacers[0]);
+        
+            GameObject p2PlayerControllerObject = new GameObject("PlayerController2");
+            LocalRacers.Insert(1, p2PlayerControllerObject.AddComponent<PlayerController>());
+            LocalRacers[1].playerNum = 1;
+            _racers.Add(LocalRacers[1]);
+
+            // TODO: AI Racers
+            int totalRacerCount = RaceManager.Instance.racerCount;
+            int racerCount =  --totalRacerCount;
+            while (racerCount > 0)
+            {
+                GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
+                AIController aiController = aiControllerObject.AddComponent<AIController>();
+                _racers.Add(aiController);
+                racerCount--;
+            }
+            
+        }
         SetGameState(GameState.InMatch);
     }
 
