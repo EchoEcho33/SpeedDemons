@@ -145,11 +145,7 @@ public class RaceManager : MonoBehaviour
             int P2startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
             if (P2startingGridIndex == startingGridIndex)
             {
-                P2startingGridIndex--;
-                if (P2startingGridIndex < 0)
-                {
-                    P2startingGridIndex = 5;
-                }
+                P2startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
             }
             StartingGridSpot startingGridSpot = startingGrid[startingGridIndex];
             StartingGridSpot P2startingGridSpot = startingGrid[P2startingGridIndex];
