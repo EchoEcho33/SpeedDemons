@@ -48,11 +48,6 @@ public class RaceManager : MonoBehaviour
         Instance = this;
         StoreCheckpoints();
     }
-
-    private void Start()
-    {
-        //GameManager.Instance.SetGameState(GameState.WaitingToStart);
-    }
     
 #if UNITY_EDITOR
     private void OnEnable()
@@ -105,7 +100,6 @@ public class RaceManager : MonoBehaviour
 
         List<Item> items = GameManager.Instance.items;
         
-        Debug.Log("tick countdown should've been called");
         GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
         
         foreach (RacerController racer in racerControllers)
@@ -124,9 +118,17 @@ public class RaceManager : MonoBehaviour
             racerSelectionIndex++;
         }
         
-        OnRaceStart?.Invoke();
-        
 
+        // foreach (Item item in items)
+        // {
+        //     item.spawnItem();
+        //     //Transform transform = item.itemObject.GetComponent<Transform>();
+        //     int xCoord = 40 + ((int) (Random.value * 6) * 5);
+        //     int zCoord = -100 - ((int) (Random.value * 6) * 5);
+        //     transform.Translate(xCoord, 0, zCoord);
+        // }
+        
+        OnRaceStart?.Invoke();
     }
 
     private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot, bool isPlayer)

@@ -1,5 +1,6 @@
 ﻿using Unity.Behavior;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AIController : RacerController
 {
@@ -17,6 +18,11 @@ public class AIController : RacerController
     private void InitializeAI()
     {
         agent = gameObject.AddComponent<BehaviorGraphAgent>();
+        if (!RaceChoreographer.Instance)
+        {
+            Debug.LogError("No RaceChoreographer found! AI disabled.");
+            return;
+        }
         agent.Graph = RaceChoreographer.Instance.graph;
 
         agent.SetVariableValue("Racer", this);
