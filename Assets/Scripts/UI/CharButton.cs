@@ -80,7 +80,9 @@ public class CharButton : Button
     {
         // Initialize kart + character.
         GameObject kartObject = Instantiate(kart.kartPrefab, spawnLocation.transform);
-        GameObject characterSlot = kartObject.transform.GetChild(0).transform.GetChild(0).gameObject; // First child should be the CharacterSlot!
+        // TODO - Gianluca: Had to change this to be 2 since one of the powerups messed up the order.
+        // need a guaranteed way to get the characterslot object instead
+        GameObject characterSlot = kartObject.transform.GetChild(2).transform.GetChild(0).gameObject; // First child should be the CharacterSlot!
         Debug.Log(characterSlot.gameObject.name);
         GameObject characterObject = Instantiate(character.characterPrefab, characterSlot.transform); 
         characterObject.transform.SetParent(characterSlot.transform, false);

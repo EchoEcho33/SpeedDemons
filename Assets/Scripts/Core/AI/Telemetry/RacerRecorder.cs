@@ -57,7 +57,7 @@ public class RacerRecorder : MonoBehaviour
             return;
         }
 
-        racer = GameManager.Instance.LocalRacer;
+        racer = GameManager.Instance.LocalRacers[0];
         racerState = racer.RacerState;
         racerState.OnReachedCheckpoint += ReachedCheckpoint;
         racerState.OnReachedStartFinishCheckpoint += ReachedStartFinishCheckpoint;
