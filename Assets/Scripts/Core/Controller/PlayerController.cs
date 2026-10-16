@@ -96,7 +96,6 @@ public class PlayerController : RacerController
         // see PassInputs in AIController for equivalent
         if (base.preventMovement)
         {
-            
             Drive.PreventMovement();
             immobileDuration -= Time.deltaTime;
             
