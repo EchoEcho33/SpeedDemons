@@ -85,19 +85,31 @@ public class RaceManager : MonoBehaviour
             Debug.LogError("Player 1 Character Selection not found.");
             localRacerSelection = racerSelections[0];
         }
-        (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
-        PlayerController localRacer = GameManager.Instance.LocalRacer;
-        localRacer.AssignCharacterAndKart(localCharacter, localKart);
-        localRacer.InitializeMultiCamera(0);
-        localRacer.AssignRacerState(localRacerState);
+        (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGrid[++startingGridIndex], true);
+        PlayerController player1 = GameManager.Instance.LocalRacers[0];
+        player1.AssignCharacterAndKart(localCharacter, localKart);
+        player1.InitializeMultiCamera(0);
+        player1.AssignRacerState(localRacerState);
         
         // TODO: Change this when we swap to multiplayer
         // ai countdown timer is handled by the racerController loop
-        localRacer.immobileDuration = countdownTimer;
-        localRacer.preventMovement = true;
+        player1.immobileDuration = countdownTimer;
+        player1.preventMovement = true;
+        
+        (Character localCharacter2, Kart localKart2, RacerState localRacerState2) = SpawnRacer(localRacerSelection, startingGridSpot, true);
+        PlayerController player2 = GameManager.Instance.LocalRacers[1];
+        player2.AssignCharacterAndKart(localCharacter2, localKart2);
+        player2.InitializeMultiCamera(1);
+        player2.AssignRacerState(localRacerState2);
+        
+        // TODO: Change this when we swap to multiplayer
+        // ai countdown timer is handled by the racerController loop
+        player2.immobileDuration = countdownTimer;
+        player2.preventMovement = true;
         
         List<RacerController> racerControllers = GameManager.Instance.GetRacers();
-        racerControllers.Remove(localRacer);
+        racerControllers.Remove(player1);
+        racerControllers.Remove(player2);
         int racerSelectionIndex = 0;
 
         List<Item> items = GameManager.Instance.items;

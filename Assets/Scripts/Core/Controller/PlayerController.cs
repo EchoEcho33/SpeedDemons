@@ -31,11 +31,7 @@ public class PlayerController : RacerController
     private InputAction useItem;
     private InputAction useItem_kbd;
 
-    public override void AssignCharacterAndKart(Character newCharacter, Kart newKart)
-    {
-        base.AssignCharacterAndKart(newCharacter, newKart);
-        // InitializeCamera();
-    }
+    
 
     public override void InitializeDrive()
     {
@@ -84,6 +80,7 @@ public class PlayerController : RacerController
     
             GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
             CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
+            CinemachineCamera.OutputChannel = OutputChannels.Channel01;
             CinemachineCamera.Follow = Kart.kartObject.transform;
 
             // audio stuff
@@ -95,9 +92,13 @@ public class PlayerController : RacerController
             MainCamera = cameraObject.GetComponent<Camera>();
             MainCamera.rect = new Rect(0.5f, 0f, 0.5f, 1f);
     
+            Debug.Log("cinemachine spawning!");
             GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
+            Debug.Log("cinemachine spawned!");
             CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
+            CinemachineCamera.OutputChannel = OutputChannels.Channel02;
             CinemachineCamera.Follow = Kart.kartObject.transform;
+            MainCamera.GetComponent<StudioListener>().SetAttenuationObject(MainCamera.gameObject);
         }
     }
 
