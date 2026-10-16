@@ -39,6 +39,11 @@ public class PlayerController : RacerController
         Drive = Kart.kartObject.AddComponent<Drive>();
         Drive.AssignController(this);
         Drive.Initialize(Character, Kart);
+        
+        // INSANELY HARD CODED.
+        // TODO - Gianluca: Refactor using input manager to avoid having to do this for each additional player
+        // There is a built in split screen thing that can work, but our current UI system would have to change
+        
         if (playerNum == 0)
         {
             accelerate = GameManager.Instance.inputManager.accelerate.action;

@@ -153,7 +153,8 @@ public class RaceManager : MonoBehaviour
             
             remainingStartingGrid.RemoveAt(startingGridIndex);
             
-            // Gianluca - there is a very small chance of a crash because im indexing a list after removing an item. This catches it, but sometimes there are double spawns
+            // Gianluca - there is a very small chance of a crash because im indexing a list after removing an item.
+            // This catches it, but sometimes there are double spawns
             // TODO - fix post m2
             if(remainingStartingGrid.ElementAtOrDefault(startingGridIndex) != null)
             {
