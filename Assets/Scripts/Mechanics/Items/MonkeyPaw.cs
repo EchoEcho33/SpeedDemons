@@ -37,7 +37,7 @@ public class MonkeyPaw : Item
         if (state != State.INACTIVE) { return; }
 
         //temp for test
-        user = FindFirstObjectByType<PlayerController>();
+        user = racer.RacerController;
         baseAccel = user.Kart._maxAcceleration;
         baseSpeed = user.Kart._maxSpeed;
 
