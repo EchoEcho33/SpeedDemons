@@ -33,7 +33,7 @@ public class RacerState : MonoBehaviour
     public void StartRace(StartFinishCheckpoint startFinishCheckpoint)
     {
         CurrCheckpoint = startFinishCheckpoint;
-        currLap = 0;
+        currLap = 1;
         abilityBar = 0;
 
         GameManager.Instance.UIManager.UpdateLap(1);
@@ -84,12 +84,6 @@ public class RacerState : MonoBehaviour
         {
             OnReachedStartFinishCheckpoint?.Invoke(startFinishCheckpoint);
             currLap++;
-            Debug.Log(currLap);
-            if (currLap >= RaceManager.Instance.maxLaps)
-            {
-                Debug.Log(RaceManager.Instance.maxLaps);
-                RaceManager.Instance.FinishRace(this);
-            }
             
             //applies from all racers, change after getting Driver to connect with certain racerStates
             GameManager.Instance.UIManager.UpdateLap(currLap);
@@ -108,15 +102,23 @@ public class RacerState : MonoBehaviour
 
     private IEnumerator RespawnDelay(GameObject racerAndCar, Rigidbody racerAndCarRigidbody)
     {
-        // Pause the racer while respawning
         racerAndCar.SetActive(false);
+        // Pause the racer while respawning
+        racerAndCarRigidbody.constraints = RigidbodyConstraints.FreezePosition;
+        racerAndCarRigidbody.useGravity = false;
+        RacerController.preventMovement = true;
+        racerAndCarRigidbody.linearVelocity = Vector3.zero;
+        racerAndCarRigidbody.angularVelocity = Vector3.zero;
 
         yield return new WaitForSeconds(2.0f);
 
         // Resumes the racer
         racerAndCar.SetActive(true);
+        racerAndCarRigidbody.constraints = RigidbodyConstraints.None;
         racerAndCarRigidbody.linearVelocity = Vector3.zero;
         racerAndCarRigidbody.angularVelocity = Vector3.zero;
+        racerAndCarRigidbody.useGravity = true;
+        RacerController.preventMovement = false;
 
         // Places racer back on the track
         RacerController racerController = RacerController.Character.characterObject.GetComponentInParent<Drive>().Racer;
