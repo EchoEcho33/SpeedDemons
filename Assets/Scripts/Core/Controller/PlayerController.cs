@@ -153,13 +153,10 @@ public class PlayerController : RacerController
         {
             RacerState.UseItem();
         }
-
-        Debug.Log("runnn chekkkk");
         
         float up_dot = Vector3.Dot(transform.up, new Vector3(0,1,0));
         if (up_dot <= 1.0)
         {
-            Debug.Log("runnn");
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward,new Vector3(0,1,0)), Time.deltaTime * 5);
         }
         
