@@ -75,10 +75,10 @@ public class PlayerController : RacerController
             
             // undef values. will get second controller later
             accelerate = GameManager.Instance.inputManager.p2_empty_kbd;
-            brake = GameManager.Instance.inputManager.brake.action;
-            turn = GameManager.Instance.inputManager.turn.action;
-            ability = GameManager.Instance.inputManager.ability.action;
-            useItem = GameManager.Instance.inputManager.useItem.action;
+            brake = GameManager.Instance.inputManager.p2_empty_kbd.action;
+            turn = GameManager.Instance.inputManager.p2_empty_kbd.action;
+            ability = GameManager.Instance.inputManager.p2_empty_kbd.action;
+            useItem = GameManager.Instance.inputManager.p2_empty_kbd.action;
         }
         
     }
