@@ -100,7 +100,7 @@ public class PlayerController : RacerController
             MainCamera = cameraObject.GetComponent<Camera>();
             CinemachineBrain brain = MainCamera.GetComponent<CinemachineBrain>();
             brain.ChannelMask = OutputChannels.Channel01;
-            MainCamera.rect = new Rect(0f, 0f, 0.5f, 1f);
+            MainCamera.rect = new Rect(0f, 0.5f, 1f, 0.5f);
 
     
             GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
@@ -117,7 +117,7 @@ public class PlayerController : RacerController
             MainCamera = cameraObject2.GetComponent<Camera>();
             CinemachineBrain brain = MainCamera.GetComponent<CinemachineBrain>();
             brain.ChannelMask = OutputChannels.Channel02;
-            MainCamera.rect = new Rect(0.5f, 0f, 0.5f, 1f);
+            MainCamera.rect = new Rect(0f, 0f, 1f, 0.5f);
             
             GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
             CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();

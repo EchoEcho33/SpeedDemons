@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
@@ -143,7 +144,7 @@ public class RaceManager : MonoBehaviour
             int startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
             // Gianluca - DELETE THIS IMMEDIATELY. it works tho
             int P2startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
-            if (P2startingGridIndex == startingGridIndex)
+            while (P2startingGridIndex == startingGridIndex)
             {
                 P2startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
             }
@@ -151,7 +152,15 @@ public class RaceManager : MonoBehaviour
             StartingGridSpot P2startingGridSpot = startingGrid[P2startingGridIndex];
             
             remainingStartingGrid.RemoveAt(startingGridIndex);
-            remainingStartingGrid.RemoveAt(P2startingGridIndex);
+            
+            // Gianluca - there is a very small chance of a crash because im indexing a list after removing an item. This catches it, but sometimes there are double spawns
+            // TODO - fix post m2
+            if(remainingStartingGrid.ElementAtOrDefault(startingGridIndex) != null)
+            {
+                remainingStartingGrid.RemoveAt(P2startingGridIndex);
+            }
+
+            
 
             // TODO: There is no multi character select right now, so both players get the same character. 
             RacerSelection localRacerSelection = GameManager.Instance.Player1; // TODO: Currently, the local player selection is the first in the list
