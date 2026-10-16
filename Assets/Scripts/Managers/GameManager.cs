@@ -1,13 +1,14 @@
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
     MainMenu,
     Lobby,
     WaitingToStart,
-    InMatch
+    InMatch,
+    FinishedMatch,
 }
 
 public class GameManager : MonoBehaviour
@@ -76,6 +77,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // Default to singleplayer
+        _singlePlayer = true;
+        
         // For testing purposes, the default value forces a match to start.
         SetGameState(startingGameState);
     }
@@ -105,6 +109,10 @@ public class GameManager : MonoBehaviour
             case GameState.InMatch:
                 HandleGameStateSetInMatch();
                 break;
+            
+            case GameState.FinishedMatch:
+                HandleGameStateSetFinishedMatch();
+                break;
         }
     }
 
@@ -122,7 +130,7 @@ public class GameManager : MonoBehaviour
     {
         InitializeManagers();
         
-        // TODO: This currently how all the players are initialized. This should be instead be populated via fields in a lobby.
+        // TODO: This is currently how all the players are initialized. This should be instead be populated via fields in a lobby.
         // TODO: The Local Player driven by Inputs, maybe multiplayer?
         GameObject playerControllerObject = new GameObject("PlayerController");
         LocalRacer = playerControllerObject.AddComponent<PlayerController>();
@@ -147,6 +155,12 @@ public class GameManager : MonoBehaviour
     {
         UIManager.gameObject.SetActive(true);
         RaceManager.Instance.StartRace();
+    }
+
+    private void HandleGameStateSetFinishedMatch()
+    {
+        SceneManager.LoadSceneAsync("Scenes/Main/StartMenu");
+        SetGameState(GameState.MainMenu);
     }
     
     private void InitializeManagers()
