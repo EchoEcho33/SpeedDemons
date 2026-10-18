@@ -175,7 +175,10 @@ public class NavigationNetwork : MonoBehaviour
             }
         }
 
+#if UNITY_EDITOR
         networkWaypoints.Clear();
+#endif
+        
         checkpointWaypoints.Clear();
         head = null;
     }
