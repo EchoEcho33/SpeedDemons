@@ -21,7 +21,6 @@ public class NavigationWaypointEditor : Editor
             }
         }
 
-
         if (selectedWaypoint != null)
         {
             EditorGUI.BeginChangeCheck();
@@ -29,7 +28,7 @@ public class NavigationWaypointEditor : Editor
 
             if (EditorGUI.EndChangeCheck())
             {
-                Undo.RecordObject(selectedWaypoint, "Change position");     // this is so undo and redo works with these changes
+                Undo.RecordObject(selectedWaypoint, "Change position"); // this is so undo and redo works with these changes
                 selectedWaypoint.position = newPosition;
             }
         }
