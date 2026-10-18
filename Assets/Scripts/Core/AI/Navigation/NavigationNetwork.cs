@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 [ExecuteInEditMode]
 public class NavigationNetwork : MonoBehaviour
@@ -35,6 +33,9 @@ public class NavigationNetwork : MonoBehaviour
     [SerializeField] 
     private TextAsset navNetworkJSON;
 
+    /** Callback for when a navigation network is generated. */
+    public event Action OnNetworkGenerated;
+    
     public void Start()
     {
         ClearNetwork();
@@ -116,6 +117,9 @@ public class NavigationNetwork : MonoBehaviour
             NavigationWaypoint startFinishLineWaypoint = CreateCheckpointWaypoint(i, markedWaypoints[i].Next);
             if (startFinishLineWaypoint != null) checkpointWaypoints.Add(startFinishLineWaypoint);
         }
+        
+        OnNetworkGenerated?.Invoke();
+        Debug.LogError("Navigation Network Generated. AI Initialized.");
     }
 
     private NavigationWaypoint CreateWaypoint(Vector3 position)
@@ -291,7 +295,6 @@ public class NavigationNetwork : MonoBehaviour
         }
 
         PopulateWaypointData(afterCheckPointWaypoints, waypoints, head, 0);
-
 
         string relativePath;
 

@@ -199,6 +199,69 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""P2_Accelerate_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9df3f7e-215c-4893-91da-7e21edcbeeeb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""P2_Brake_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""edced1d8-b1a6-4808-921f-b04d45057538"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""P2_TurnRight_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""05638655-5ae0-4b2a-9053-04eb76143565"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""P2_TurnLeft_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""388fac35-574b-4f8f-8609-36fce6d1d244"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""P2_Ability_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""4be629ee-6c35-434b-8a12-7c119e8355d6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""P2_UseItem_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""b66f1105-9262-41f8-9b62-705cdf17d7e4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""P2_Empty_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""223615dd-14b5-4ff8-8bc3-0239372a592c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -333,6 +396,83 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""UseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7efb46c7-6ec7-4d49-b213-b1a87ae55c45"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""P2_Accelerate_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a83d0ecf-aa46-4ded-ac91-98515a450b1d"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""P2_Brake_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7baa7fbd-b19d-4f3a-ba9a-15ea135e7377"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""P2_TurnRight_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef8e3f81-cfef-4ed7-a9e1-3096e9e8e017"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""P2_TurnLeft_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02488f0a-c5c7-4640-9f81-da6b076413d3"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""P2_Ability_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6cee38a4-0c73-4978-ba22-9b346b5c84b0"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""P2_UseItem_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b915a8c2-5046-4bdd-b497-51e06d411aec"",
+                    ""path"": ""<Keyboard>/#(*)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""P2_Empty_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -353,6 +493,13 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Driving_Ability_KBD = m_Driving.FindAction("Ability_KBD", throwIfNotFound: true);
         m_Driving_UseItem_KBD = m_Driving.FindAction("UseItem_KBD", throwIfNotFound: true);
         m_Driving_UseItem = m_Driving.FindAction("UseItem", throwIfNotFound: true);
+        m_Driving_P2_Accelerate_KBD = m_Driving.FindAction("P2_Accelerate_KBD", throwIfNotFound: true);
+        m_Driving_P2_Brake_KBD = m_Driving.FindAction("P2_Brake_KBD", throwIfNotFound: true);
+        m_Driving_P2_TurnRight_KBD = m_Driving.FindAction("P2_TurnRight_KBD", throwIfNotFound: true);
+        m_Driving_P2_TurnLeft_KBD = m_Driving.FindAction("P2_TurnLeft_KBD", throwIfNotFound: true);
+        m_Driving_P2_Ability_KBD = m_Driving.FindAction("P2_Ability_KBD", throwIfNotFound: true);
+        m_Driving_P2_UseItem_KBD = m_Driving.FindAction("P2_UseItem_KBD", throwIfNotFound: true);
+        m_Driving_P2_Empty_KBD = m_Driving.FindAction("P2_Empty_KBD", throwIfNotFound: true);
     }
 
     ~@InputManager()
@@ -445,6 +592,13 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Ability_KBD;
     private readonly InputAction m_Driving_UseItem_KBD;
     private readonly InputAction m_Driving_UseItem;
+    private readonly InputAction m_Driving_P2_Accelerate_KBD;
+    private readonly InputAction m_Driving_P2_Brake_KBD;
+    private readonly InputAction m_Driving_P2_TurnRight_KBD;
+    private readonly InputAction m_Driving_P2_TurnLeft_KBD;
+    private readonly InputAction m_Driving_P2_Ability_KBD;
+    private readonly InputAction m_Driving_P2_UseItem_KBD;
+    private readonly InputAction m_Driving_P2_Empty_KBD;
     /// <summary>
     /// Provides access to input actions defined in input action map "Driving".
     /// </summary>
@@ -504,6 +658,34 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Driving/UseItem".
         /// </summary>
         public InputAction @UseItem => m_Wrapper.m_Driving_UseItem;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/P2_Accelerate_KBD".
+        /// </summary>
+        public InputAction @P2_Accelerate_KBD => m_Wrapper.m_Driving_P2_Accelerate_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/P2_Brake_KBD".
+        /// </summary>
+        public InputAction @P2_Brake_KBD => m_Wrapper.m_Driving_P2_Brake_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/P2_TurnRight_KBD".
+        /// </summary>
+        public InputAction @P2_TurnRight_KBD => m_Wrapper.m_Driving_P2_TurnRight_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/P2_TurnLeft_KBD".
+        /// </summary>
+        public InputAction @P2_TurnLeft_KBD => m_Wrapper.m_Driving_P2_TurnLeft_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/P2_Ability_KBD".
+        /// </summary>
+        public InputAction @P2_Ability_KBD => m_Wrapper.m_Driving_P2_Ability_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/P2_UseItem_KBD".
+        /// </summary>
+        public InputAction @P2_UseItem_KBD => m_Wrapper.m_Driving_P2_UseItem_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/P2_Empty_KBD".
+        /// </summary>
+        public InputAction @P2_Empty_KBD => m_Wrapper.m_Driving_P2_Empty_KBD;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -566,6 +748,27 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
+            @P2_Accelerate_KBD.started += instance.OnP2_Accelerate_KBD;
+            @P2_Accelerate_KBD.performed += instance.OnP2_Accelerate_KBD;
+            @P2_Accelerate_KBD.canceled += instance.OnP2_Accelerate_KBD;
+            @P2_Brake_KBD.started += instance.OnP2_Brake_KBD;
+            @P2_Brake_KBD.performed += instance.OnP2_Brake_KBD;
+            @P2_Brake_KBD.canceled += instance.OnP2_Brake_KBD;
+            @P2_TurnRight_KBD.started += instance.OnP2_TurnRight_KBD;
+            @P2_TurnRight_KBD.performed += instance.OnP2_TurnRight_KBD;
+            @P2_TurnRight_KBD.canceled += instance.OnP2_TurnRight_KBD;
+            @P2_TurnLeft_KBD.started += instance.OnP2_TurnLeft_KBD;
+            @P2_TurnLeft_KBD.performed += instance.OnP2_TurnLeft_KBD;
+            @P2_TurnLeft_KBD.canceled += instance.OnP2_TurnLeft_KBD;
+            @P2_Ability_KBD.started += instance.OnP2_Ability_KBD;
+            @P2_Ability_KBD.performed += instance.OnP2_Ability_KBD;
+            @P2_Ability_KBD.canceled += instance.OnP2_Ability_KBD;
+            @P2_UseItem_KBD.started += instance.OnP2_UseItem_KBD;
+            @P2_UseItem_KBD.performed += instance.OnP2_UseItem_KBD;
+            @P2_UseItem_KBD.canceled += instance.OnP2_UseItem_KBD;
+            @P2_Empty_KBD.started += instance.OnP2_Empty_KBD;
+            @P2_Empty_KBD.performed += instance.OnP2_Empty_KBD;
+            @P2_Empty_KBD.canceled += instance.OnP2_Empty_KBD;
         }
 
         /// <summary>
@@ -613,6 +816,27 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
+            @P2_Accelerate_KBD.started -= instance.OnP2_Accelerate_KBD;
+            @P2_Accelerate_KBD.performed -= instance.OnP2_Accelerate_KBD;
+            @P2_Accelerate_KBD.canceled -= instance.OnP2_Accelerate_KBD;
+            @P2_Brake_KBD.started -= instance.OnP2_Brake_KBD;
+            @P2_Brake_KBD.performed -= instance.OnP2_Brake_KBD;
+            @P2_Brake_KBD.canceled -= instance.OnP2_Brake_KBD;
+            @P2_TurnRight_KBD.started -= instance.OnP2_TurnRight_KBD;
+            @P2_TurnRight_KBD.performed -= instance.OnP2_TurnRight_KBD;
+            @P2_TurnRight_KBD.canceled -= instance.OnP2_TurnRight_KBD;
+            @P2_TurnLeft_KBD.started -= instance.OnP2_TurnLeft_KBD;
+            @P2_TurnLeft_KBD.performed -= instance.OnP2_TurnLeft_KBD;
+            @P2_TurnLeft_KBD.canceled -= instance.OnP2_TurnLeft_KBD;
+            @P2_Ability_KBD.started -= instance.OnP2_Ability_KBD;
+            @P2_Ability_KBD.performed -= instance.OnP2_Ability_KBD;
+            @P2_Ability_KBD.canceled -= instance.OnP2_Ability_KBD;
+            @P2_UseItem_KBD.started -= instance.OnP2_UseItem_KBD;
+            @P2_UseItem_KBD.performed -= instance.OnP2_UseItem_KBD;
+            @P2_UseItem_KBD.canceled -= instance.OnP2_UseItem_KBD;
+            @P2_Empty_KBD.started -= instance.OnP2_Empty_KBD;
+            @P2_Empty_KBD.performed -= instance.OnP2_Empty_KBD;
+            @P2_Empty_KBD.canceled -= instance.OnP2_Empty_KBD;
         }
 
         /// <summary>
@@ -737,5 +961,54 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseItem(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "P2_Accelerate_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnP2_Accelerate_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "P2_Brake_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnP2_Brake_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "P2_TurnRight_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnP2_TurnRight_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "P2_TurnLeft_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnP2_TurnLeft_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "P2_Ability_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnP2_Ability_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "P2_UseItem_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnP2_UseItem_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "P2_Empty_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnP2_Empty_KBD(InputAction.CallbackContext context);
     }
 }

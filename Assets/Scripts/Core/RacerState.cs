@@ -97,8 +97,30 @@ public class RacerState : MonoBehaviour
     {
         GameObject racerAndCar = RacerController.GetCharacterAndKart();
         Rigidbody racerAndCarRigidbody = racerAndCar.GetComponent<Rigidbody>();
+        StartCoroutine(RespawnDelay(racerAndCar, racerAndCarRigidbody));
+    }
+
+    private IEnumerator RespawnDelay(GameObject racerAndCar, Rigidbody racerAndCarRigidbody)
+    {
+        racerAndCar.SetActive(false);
+        // Pause the racer while respawning
+        racerAndCarRigidbody.constraints = RigidbodyConstraints.FreezePosition;
+        racerAndCarRigidbody.useGravity = false;
+        RacerController.preventMovement = true;
         racerAndCarRigidbody.linearVelocity = Vector3.zero;
         racerAndCarRigidbody.angularVelocity = Vector3.zero;
+
+        yield return new WaitForSeconds(2.0f);
+
+        // Resumes the racer
+        racerAndCar.SetActive(true);
+        racerAndCarRigidbody.constraints = RigidbodyConstraints.None;
+        racerAndCarRigidbody.linearVelocity = Vector3.zero;
+        racerAndCarRigidbody.angularVelocity = Vector3.zero;
+        racerAndCarRigidbody.useGravity = true;
+        RacerController.preventMovement = false;
+
+        // Places racer back on the track
         RacerController racerController = RacerController.Character.characterObject.GetComponentInParent<Drive>().Racer;
         TrackCheckpoint currentCheckpoint = racerController.RacerState.CurrCheckpoint;
         racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * RacerController.Character._spawnVerticalDisplacement;

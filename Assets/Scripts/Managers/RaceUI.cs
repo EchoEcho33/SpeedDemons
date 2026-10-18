@@ -36,10 +36,12 @@ public class RaceUI : MonoBehaviour
     {
         _primaryItemIcon.enabled = false;
         _secondaryItemIcon.enabled = false;
+        
     }
     
     IEnumerator TickCountdown(int countdown)
     {
+        
         currCountdownValue = countdown;
         while (currCountdownValue > 0)
         {
@@ -51,6 +53,20 @@ public class RaceUI : MonoBehaviour
         if (currCountdownValue <= 0)
         {
             // cant set active? doing this for now
+            countdownText.enabled = false;
+        }
+    }
+
+    public void TickTimer(int countdown)
+    {
+        currCountdownValue = countdown;
+        if (currCountdownValue > 0)
+        {
+            countdownText.text = currCountdownValue.ToString();
+            countdownText.enabled = true;
+        }
+        else
+        {
             countdownText.enabled = false;
         }
     }
