@@ -176,7 +176,6 @@ public class NavigationNetwork : MonoBehaviour
         }
 
         networkWaypoints.Clear();
-        
         checkpointWaypoints.Clear();
         head = null;
     }
@@ -276,11 +275,9 @@ public class NavigationNetwork : MonoBehaviour
     [ContextMenu("Save Changes to Nav Network JSON")]
     public void SaveNetworkChanges()
     {
-
         if (head == null) return;
 
         List<NavigationWaypointData> waypoints = new();
-
         List<NavigationWaypoint> afterCheckPointWaypoints = new();
 
         foreach (var checkpoint in checkpointWaypoints)
@@ -297,7 +294,6 @@ public class NavigationNetwork : MonoBehaviour
         PopulateWaypointData(afterCheckPointWaypoints, waypoints, head, 0);
 
         string relativePath;
-
         if (navNetworkJSON != null)
         {
             relativePath = AssetDatabase.GetAssetPath(navNetworkJSON).Remove(0, 7); // remove /Assets/
@@ -308,18 +304,14 @@ public class NavigationNetwork : MonoBehaviour
         }
 
         string path = Path.Combine(Application.dataPath, relativePath); // save it to current nav network JSON path 
-
         try
         {
             var navNetworkData = new NavigationNetworkData(waypoints);
             
             string json = JsonUtility.ToJson(navNetworkData);
-            Debug.Log(path);
             File.WriteAllText(path, json);
-
             AssetDatabase.ImportAsset("Assets/" + relativePath);
             AssetDatabase.Refresh();
-
             navNetworkJSON = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/" + relativePath);
 
             Debug.Log($"Navigation network saved to: {path}");
@@ -346,7 +338,6 @@ public class NavigationNetwork : MonoBehaviour
             }
 
             var data = new NavigationWaypointData(curr.position, currCheckpoint);   // need to get checkpoint ID from somewhere
-
             waypoints.Add(data);
         }
 

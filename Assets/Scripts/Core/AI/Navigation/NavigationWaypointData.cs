@@ -13,5 +13,4 @@ public struct NavigationWaypointData
         Position = position;
         CheckpointID = checkpointID;
     }
-
 }
