@@ -7,6 +7,25 @@ public class NavigationWaypointEditor : Editor
 {
     NavigationWaypoint selectedWaypoint;
 
+    private void OnEnable()
+    {
+        Undo.undoRedoPerformed += RebuildLinks;
+    }
+
+    private void OnDisable()
+    {
+        Undo.undoRedoPerformed -= RebuildLinks;
+    }
+
+    // Links between racing lines depend on waypoint positions, so they're recalculated whenever a waypoint moves.
+    private void RebuildLinks()
+    {
+        if (target == null) return;
+
+        ((NavigationNetwork)target).RebuildLinks();
+        SceneView.RepaintAll();
+    }
+
     private void OnSceneGUI()
     {
         NavigationNetwork navNetwork = (NavigationNetwork)target;
@@ -30,6 +49,8 @@ public class NavigationWaypointEditor : Editor
             {
                 Undo.RecordObject(selectedWaypoint, "Change position"); // this is so undo and redo works with these changes
                 selectedWaypoint.position = newPosition;
+                navNetwork.MarkLineEdited(selectedWaypoint.lineIndex);
+                navNetwork.RebuildLinks();
             }
         }
     }

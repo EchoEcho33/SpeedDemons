@@ -28,7 +28,13 @@ public partial class SelectNewWaypointAtCheckpointAction : Action
         checkpoint = Checkpoint.Value;
 
         int checkpointID = checkpoint.CheckpointID;
-        NavigationWaypoint newWaypoint = RaceChoreographer.Instance.network.GetCheckpointWaypoint(checkpointID);
+        NavigationWaypoint newWaypoint = RaceChoreographer.Instance.network.GetCheckpointWaypoint(racer.RacingLineIndex, checkpointID);
+        if (newWaypoint == null)
+        {
+            Debug.LogError($"No respawn waypoint for checkpoint {checkpointID} on racing line {racer.RacingLineIndex}.");
+            return Status.Failure;
+        }
+
         Waypoint.Value = newWaypoint.Next[0];
         return Status.Success;
     }
