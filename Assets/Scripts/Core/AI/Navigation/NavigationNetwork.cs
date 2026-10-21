@@ -53,6 +53,11 @@ public class NavigationNetwork : MonoBehaviour
         {
             GenerateNetworkFromTelemetryJSON();
         }
+
+        if (head == null) return;
+        
+        OnNetworkGenerated?.Invoke();
+        Debug.LogError("Navigation Network Generated. AI Initialized.");
     }
 
     private void GenerateNetworkFromNavNetworkJSON() 
@@ -117,9 +122,6 @@ public class NavigationNetwork : MonoBehaviour
             NavigationWaypoint startFinishLineWaypoint = CreateCheckpointWaypoint(i, markedWaypoints[i].Next);
             if (startFinishLineWaypoint != null) checkpointWaypoints.Add(startFinishLineWaypoint);
         }
-        
-        OnNetworkGenerated?.Invoke();
-        Debug.LogError("Navigation Network Generated. AI Initialized.");
     }
 
     private NavigationWaypoint CreateWaypoint(Vector3 position)
