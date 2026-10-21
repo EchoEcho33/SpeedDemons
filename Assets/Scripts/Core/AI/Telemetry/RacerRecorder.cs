@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -106,15 +109,29 @@ public class RacerRecorder : MonoBehaviour
         List<RacerTelemetryFrame> racerTelemetryCopy = new List<RacerTelemetryFrame>(racerTelemetry);
         
         string trackname = SceneManager.GetActiveScene().name;
-        string path = Path.Combine(Application.persistentDataPath, $"{trackname}_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json");
-        
+        string fileName = $"{trackname}_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
+#if UNITY_EDITOR
+        // In the editor, save straight into the project so the recording can be used as a racing line.
+        const string telemetryFolder = "Assets/RacerTelemetry";
+        string assetPath = $"{telemetryFolder}/{fileName}";
+        string path = Path.Combine(Application.dataPath, "..", assetPath);
+        Directory.CreateDirectory(Path.GetDirectoryName(path));
+#else
+        string path = Path.Combine(Application.persistentDataPath, fileName);
+#endif
+
         await Task.Run(() =>
         {
             RacerTelemetryRecording racerTelemetryRecording = new RacerTelemetryRecording(racerTelemetryCopy);
             string json = JsonUtility.ToJson(racerTelemetryRecording);
             File.WriteAllText(path, json);
         });
+#if UNITY_EDITOR
+        AssetDatabase.ImportAsset(assetPath);   // back on the main thread after the await
+        Debug.Log($"Telemetry saved to: {assetPath}");
+#else
         Debug.Log($"Telemetry saved to: {path}");
+#endif
     }
     
     private void Update()
