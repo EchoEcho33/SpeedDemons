@@ -5,7 +5,10 @@ using UnityEngine.Rendering;
 public class AIController : RacerController
 {
     public BehaviorGraphAgent agent { get; private set; }
-    
+
+    /** Index of the racing line this racer follows, or -1 if it hasn't been assigned one yet. */
+    public int RacingLineIndex { get; private set; } = -1;
+
     public override void InitializeDrive() 
     {
         Drive = Kart.kartObject.AddComponent<Drive>();
@@ -24,7 +27,7 @@ public class AIController : RacerController
             return;
         }
 
-        if (!RaceChoreographer.Instance.network.head)
+        if (RaceChoreographer.Instance.network.RacingLineCount == 0)
         {
             Debug.LogError("No navigation head found. AI disabled.");
             RaceChoreographer.Instance.network.OnNetworkGenerated += InitializeAIBehavior;
@@ -40,8 +43,16 @@ public class AIController : RacerController
         
         agent.Graph = RaceChoreographer.Instance.graph;
 
+        // Only assign once, so the racer keeps its racing line if its kart is ever rebuilt.
+        if (RacingLineIndex < 0) RaceChoreographer.Instance.AssignRacingLine(this);
+
         agent.SetVariableValue("Racer", this);
-        agent.SetVariableValue("CurrentWaypoint", RaceChoreographer.Instance.network.head);
+        agent.SetVariableValue("CurrentWaypoint", RaceChoreographer.Instance.network.GetLineHead(RacingLineIndex));
+    }
+
+    public void AssignRacingLine(int racingLineIndex)
+    {
+        RacingLineIndex = racingLineIndex;
     }
 
     // TODO: This will work for now

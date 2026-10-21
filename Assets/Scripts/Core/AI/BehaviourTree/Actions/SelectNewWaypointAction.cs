@@ -22,7 +22,7 @@ public partial class SelectNewWaypointAction : Action
 
     protected override Status OnUpdate()
     {
-        Waypoint.Value = waypoint == null ? RaceChoreographer.Instance.network.head : waypoint.Next[0]; // TODO: Swap this out when its not just a telemetry recording
+        Waypoint.Value = waypoint == null ? RaceChoreographer.Instance.network.GetLineHead(racer.RacingLineIndex) : waypoint.Next[0]; // TODO: Swap this out when its not just a telemetry recording
         return Status.Success;
     }
 

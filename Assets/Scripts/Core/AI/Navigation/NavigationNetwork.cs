@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,193 +22,142 @@ public class NavigationNetwork : MonoBehaviour
         }
     }
 
-    public NavigationWaypoint head { get ; private set ;}
-    
-    private List<NavigationWaypoint> checkpointWaypoints = new();
+    [SerializeField]
+    private List<RacingLineSource> racingLines = new();
 
-#if UNITY_EDITOR
-    private List<NavigationWaypoint> networkWaypoints = new();  // used for tracking all waypoints for editor
-#endif
+    [SerializeField, Range(0f, 90f), Tooltip("Largest turn, in degrees, a racer has to make to switch onto another racing line.")]
+    private float maxLinkAngle = 25f;
 
-    [SerializeField] 
+    [SerializeField, Min(0f), Tooltip("Longest a link between racing lines can be.")]
+    private float maxLinkDistance = 30f;
+
+    // Single racing line fields from before racing lines were added. Scenes saved with these still load as line 0.
+    [SerializeField, HideInInspector]
     private TextAsset raceTelemetryJSON;
 
-    [SerializeField] 
+    [SerializeField, HideInInspector]
     private TextAsset navNetworkJSON;
+
+    private readonly List<RacingLine> lines = new();
+
+    private readonly List<RacingLineSource> lineSources = new();    // the source each entry in lines was built from
+
+    public int RacingLineCount => lines.Count;
 
     /** Callback for when a navigation network is generated. */
     public event Action OnNetworkGenerated;
-    
+
     public void Start()
     {
         ClearNetwork();
         GenerateNetwork();
     }
-    
-    // TODO: Change this to be more than just a network from a recording from telemetry :D
+
     private void GenerateNetwork()
     {
-        if (navNetworkJSON != null)
+#if UNITY_EDITOR
+        generatedSources = GetSourceFiles();
+#endif
+        foreach (RacingLineSource source in GetLineSources())
         {
-            GenerateNetworkFromNavNetworkJSON();
-        } 
-        else if (raceTelemetryJSON != null)
-        {
-            GenerateNetworkFromTelemetryJSON();
-        }
-    }
+            if (source == null || !source.HasData) continue;
 
-    private void GenerateNetworkFromNavNetworkJSON() 
-    {
-        NavigationNetworkData navNet = JsonUtility.FromJson<NavigationNetworkData>(navNetworkJSON.text);
-        NavigationWaypoint curr = CreateWaypoint(navNet.waypoints[0].Position);
-        head = curr;
+            RacingLine line = RacingLine.Build(lines.Count, source.LoadWaypointData(), GetCheckpointPosition);
+            if (line.Head == null) continue;
 
-        int checkpointCounter = 0;
-        List<NavigationWaypoint> markedWaypoints = new List<NavigationWaypoint> { curr };
-
-        for (int i = 1; i < navNet.waypoints.Count; i++)
-        {
-            NavigationWaypointData waypointData = navNet.waypoints[i];
-            NavigationWaypoint next = CreateWaypoint(navNet.waypoints[i].Position);
-            curr.SetNext(next);
-            curr = next;
-
-            if (checkpointCounter != waypointData.CheckpointID)
-            {
-                checkpointCounter++;
-                markedWaypoints.Add(curr);
-            }
+            lines.Add(line);
+            lineSources.Add(source);
         }
 
-        curr.SetNext(head);
+        if (lines.Count == 0) return;
 
-        for (int i = 0; i < markedWaypoints.Count; i++)
-        {
-            NavigationWaypoint startFinishLineWaypoint = CreateCheckpointWaypoint(i, markedWaypoints[i].Next);
-            if (startFinishLineWaypoint != null) checkpointWaypoints.Add(startFinishLineWaypoint);
-        }
-    }
-
-    private void GenerateNetworkFromTelemetryJSON()
-    {
-        RacerTelemetryRecording recording = JsonUtility.FromJson<RacerTelemetryRecording>(raceTelemetryJSON.text);
-        NavigationWaypoint curr = CreateWaypoint(recording.frames[0].RacerPosition);
-        head = curr;
-
-        int checkpointCounter = 0;
-        List<NavigationWaypoint> markedWaypoints = new List<NavigationWaypoint> { curr };
-
-        for (int i = 1; i < recording.frames.Count; i++)
-        {
-            RacerTelemetryFrame frame = recording.frames[i];
-            NavigationWaypoint next = CreateWaypoint(recording.frames[i].RacerPosition);
-            curr.SetNext(next);
-            curr = next;
-
-            if (checkpointCounter != frame.CheckpointID)
-            {
-                checkpointCounter++;
-                markedWaypoints.Add(curr);
-            }
-        }
-
-        curr.SetNext(head);
-
-        for (int i = 0; i < markedWaypoints.Count; i++)
-        {
-            NavigationWaypoint startFinishLineWaypoint = CreateCheckpointWaypoint(i, markedWaypoints[i].Next);
-            if (startFinishLineWaypoint != null) checkpointWaypoints.Add(startFinishLineWaypoint);
-        }
-        
+        RebuildLinks();
         OnNetworkGenerated?.Invoke();
         Debug.LogError("Navigation Network Generated. AI Initialized.");
     }
 
-    private NavigationWaypoint CreateWaypoint(Vector3 position)
+    /// <summary>
+    /// Recalculates the links between racing lines, e.g. after waypoints have been moved.
+    /// </summary>
+    public void RebuildLinks()
     {
-        NavigationWaypoint waypoint = ScriptableObject.CreateInstance<NavigationWaypoint>();
-        waypoint.position = position;
+        RacingLineLinker.Link(lines, maxLinkAngle, maxLinkDistance);
+    }
 
-#if UNITY_EDITOR
-        networkWaypoints.Add(waypoint);
-#endif
-        return waypoint;
-    }
-    
-    private NavigationWaypoint CreateCheckpointWaypoint(int checkpointID, NavigationWaypoint[] nextWaypoints)
+    private List<RacingLineSource> GetLineSources()
     {
-        if (nextWaypoints == null) return null;
-        
-        NavigationWaypoint waypoint = ScriptableObject.CreateInstance<NavigationWaypoint>();
+        if (racingLines.Count > 0) return racingLines;
+
+        List<RacingLineSource> legacySources = new();
+        if (raceTelemetryJSON != null || navNetworkJSON != null)
+        {
+            legacySources.Add(new RacingLineSource { raceTelemetryJSON = raceTelemetryJSON, navNetworkJSON = navNetworkJSON });
+        }
+        return legacySources;
+    }
+
+    private static Vector3? GetCheckpointPosition(int checkpointID)
+    {
+        if (RaceManager.Instance == null) return null;
+
         TrackCheckpoint checkpoint = RaceManager.Instance.GetCheckpoint(checkpointID);
-        if (checkpoint == null) return null;
-        
-        waypoint.position = checkpoint.GetPosition();
-        waypoint.SetNext(nextWaypoints);
-        return waypoint;
+        return checkpoint != null ? checkpoint.GetPosition() : null;
     }
-    
-    public NavigationWaypoint GetCheckpointWaypoint(int checkpointID)
+
+    public NavigationWaypoint GetLineHead(int lineIndex)
     {
-        if (checkpointID < 0 || checkpointWaypoints.Count <= checkpointID) return null;
-        
-        return checkpointWaypoints[checkpointID];
+        if (lineIndex < 0 || lines.Count <= lineIndex) return null;
+
+        return lines[lineIndex].Head;
+    }
+
+    public NavigationWaypoint GetCheckpointWaypoint(int lineIndex, int checkpointID)
+    {
+        if (lineIndex < 0 || lines.Count <= lineIndex) return null;
+
+        return lines[lineIndex].GetCheckpointWaypoint(checkpointID);
     }
 
     private void ClearNetwork()
     {
-        if (head != null)
+        foreach (RacingLine line in lines)
         {
-            HashSet<NavigationWaypoint> visited = new();
-            ClearNetworkHelper(head, visited);
-        }
-        
-        foreach (NavigationWaypoint waypoint in checkpointWaypoints)
-        {
-            if (waypoint == null) continue;
-
-            if (Application.isPlaying)
-            {
-                Destroy(waypoint);
-            }
-            else
-            {
-                DestroyImmediate(waypoint);
-            }
+            line.Destroy();
         }
 
+        lines.Clear();
+        lineSources.Clear();
 #if UNITY_EDITOR
-        networkWaypoints.Clear();
+        editedLines.Clear();
 #endif
-        
-        checkpointWaypoints.Clear();
-        head = null;
     }
 
-    private void ClearNetworkHelper(NavigationWaypoint curr, HashSet<NavigationWaypoint> visited)
-    {
-        if (curr == null || !visited.Add(curr)) return;
-
-        if (curr.Next != null)
-        {
-            foreach (NavigationWaypoint nextWaypoint in curr.Next)
-            {
-                ClearNetworkHelper(nextWaypoint, visited);
-            }
-        }
-
-        if (Application.isPlaying)
-        {
-            Destroy(curr);
-        }
-        else
-        {
-            DestroyImmediate(curr);
-        }
-    }
-    
 #if UNITY_EDITOR
+    private static readonly Color[] LineColors =
+    {
+        new(0f, .5f, 1f, 0.5f),
+        new(1f, .5f, 0f, 0.5f),
+        new(.6f, 0f, 1f, 0.5f),
+        new(0f, 1f, .5f, 0.5f),
+    };
+
+    private static readonly Color LinkColor = new(1f, 1f, 1f, 0.35f);
+
+    private List<TextAsset> generatedSources = new();     // the files the current racing lines were generated from
+
+    private readonly HashSet<int> editedLines = new();      // racing lines with moved waypoints that haven't been saved yet
+
+    private List<TextAsset> GetSourceFiles()
+    {
+        List<TextAsset> files = new();
+        foreach (RacingLineSource source in GetLineSources())
+        {
+            files.Add(source?.raceTelemetryJSON);
+            files.Add(source?.navNetworkJSON);
+        }
+        return files;
+    }
+
     [ContextMenu("Regenerate Network")]
     private void RegenerateNetwork()
     {
@@ -215,10 +167,32 @@ public class NavigationNetwork : MonoBehaviour
 
     private void OnValidate()
     {
-        if (raceTelemetryJSON == null)
+        // Move the single racing line fields into the racing lines list so they show up in the inspector.
+        if (racingLines.Count == 0 && (raceTelemetryJSON != null || navNetworkJSON != null))
         {
-            ClearNetwork();
+            racingLines.Add(new RacingLineSource { raceTelemetryJSON = raceTelemetryJSON, navNetworkJSON = navNetworkJSON });
+            raceTelemetryJSON = null;
+            navNetworkJSON = null;
         }
+
+        // If only the link settings changed, just relink so unsaved waypoint edits aren't thrown away.
+        if (GetSourceFiles().SequenceEqual(generatedSources))
+        {
+            RebuildLinks();
+            SceneView.RepaintAll();
+            return;
+        }
+
+        // Regenerating destroys waypoints, which isn't allowed during OnValidate, so wait until after it.
+        EditorApplication.delayCall -= RegenerateAfterValidate;
+        EditorApplication.delayCall += RegenerateAfterValidate;
+    }
+
+    private void RegenerateAfterValidate()
+    {
+        if (this == null || !isActiveAndEnabled || Application.isPlaying) return;
+
+        RegenerateNetwork();
     }
 
     private void OnEnable()
@@ -231,127 +205,112 @@ public class NavigationNetwork : MonoBehaviour
     {
         ClearNetwork();
     }
-    
+
     private void OnDrawGizmos()
     {
-        if (Application.isPlaying || head == null) return;
-        
-        Gizmos.color = new Color(0f, .5f, 1f, 0.5f);
-        DrawWaypoint(head);
-        
-        foreach (NavigationWaypoint waypoint in checkpointWaypoints)
+        if (Application.isPlaying) return;
+
+        foreach (RacingLine line in lines)
         {
-            Gizmos.DrawSphere(waypoint.position, 1f);
-            
-            if (waypoint.Next == null) continue;
-            foreach (NavigationWaypoint nextWaypoint in waypoint.Next)
+            Gizmos.color = LineColors[line.Index % LineColors.Length];
+
+            foreach (NavigationWaypoint waypoint in line.Waypoints)
             {
-                Gizmos.DrawLine(waypoint.position, nextWaypoint.position);
+                Gizmos.DrawSphere(waypoint.position, 1f);
+                if (waypoint.Next?[0] != null) Gizmos.DrawLine(waypoint.position, waypoint.Next[0].position);
+            }
+
+            foreach (NavigationWaypoint waypoint in line.CheckpointWaypoints)
+            {
+                Gizmos.DrawSphere(waypoint.position, 1f);
+                if (waypoint.Next?[0] != null) Gizmos.DrawLine(waypoint.position, waypoint.Next[0].position);
             }
         }
-    }
 
-    private void DrawWaypoint(NavigationWaypoint curr)
-    {
-        if (curr == null) return;
-        Vector3 currPos = curr.position;
-        Gizmos.DrawSphere(currPos, 1f);
-        
-        if (curr.Next == null) return;
-        
-        foreach (NavigationWaypoint next in curr.Next)
+        // Links to other racing lines are everything after Next[0].
+        Gizmos.color = LinkColor;
+        foreach (RacingLine line in lines)
         {
-            if (next == null) continue;
-            
-            Vector3 nextPos = next.position;
-            Gizmos.DrawLine(currPos, nextPos);
-            if (next == head) continue;
-            DrawWaypoint(next);
+            foreach (NavigationWaypoint waypoint in line.Waypoints)
+            {
+                if (waypoint.Next == null) continue;
+
+                for (int i = 1; i < waypoint.Next.Length; i++)
+                {
+                    if (waypoint.Next[i] != null) Gizmos.DrawLine(waypoint.position, waypoint.Next[i].position);
+                }
+            }
         }
     }
 
     public List<NavigationWaypoint> GetNetworkWaypoints()
     {
-        return networkWaypoints;
+        List<NavigationWaypoint> waypoints = new();
+        foreach (RacingLine line in lines)
+        {
+            waypoints.AddRange(line.Waypoints);
+        }
+        return waypoints;
     }
 
+    public void MarkLineEdited(int lineIndex)
+    {
+        editedLines.Add(lineIndex);
+    }
+
+    /// <summary>
+    /// Saves each racing line with moved waypoints to its nav network JSON. Links between racing lines aren't saved,
+    /// they're rebuilt from waypoint positions on load, so lines that weren't edited don't need saving.
+    /// </summary>
     [ContextMenu("Save Changes to Nav Network JSON")]
     public void SaveNetworkChanges()
     {
-        if (head == null) return;
-
-        List<NavigationWaypointData> waypoints = new();
-        List<NavigationWaypoint> afterCheckPointWaypoints = new();
-
-        foreach (var checkpoint in checkpointWaypoints)
+        if (editedLines.Count == 0)
         {
-            if (checkpoint.Next != null)
-            {
-                foreach (var waypoint in checkpoint.Next)
-                {
-                    afterCheckPointWaypoints.Add(waypoint);
-                }
-            }
+            Debug.Log("No racing lines have been edited, nothing to save.");
+            return;
         }
 
-        PopulateWaypointData(afterCheckPointWaypoints, waypoints, head, 0);
-
-        string relativePath;
-        if (navNetworkJSON != null)
+        foreach (int lineIndex in editedLines.ToList())
         {
-            relativePath = AssetDatabase.GetAssetPath(navNetworkJSON).Remove(0, 7); // remove /Assets/
-        } 
+            if (SaveLine(lines[lineIndex], lineSources[lineIndex])) editedLines.Remove(lineIndex);
+        }
+
+        // Saving can assign new nav network JSONs, which shouldn't count as a source change that regenerates the network.
+        generatedSources = GetSourceFiles();
+        EditorUtility.SetDirty(this);
+    }
+
+    private bool SaveLine(RacingLine line, RacingLineSource source)
+    {
+        string relativePath;
+        if (source.navNetworkJSON != null)
+        {
+            relativePath = AssetDatabase.GetAssetPath(source.navNetworkJSON).Remove(0, 7); // remove /Assets/
+        }
         else
         {
-            relativePath = $"{SceneManager.GetActiveScene().name}_NavNetwork_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
+            relativePath = $"{SceneManager.GetActiveScene().name}_NavNetwork_Line{line.Index}_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
         }
 
-        string path = Path.Combine(Application.dataPath, relativePath); // save it to current nav network JSON path 
+        string path = Path.Combine(Application.dataPath, relativePath); // save it to current nav network JSON path
         try
         {
-            var navNetworkData = new NavigationNetworkData(waypoints);
-            
+            var navNetworkData = new NavigationNetworkData(line.ToWaypointData());
+
             string json = JsonUtility.ToJson(navNetworkData);
             File.WriteAllText(path, json);
             AssetDatabase.ImportAsset("Assets/" + relativePath);
             AssetDatabase.Refresh();
-            navNetworkJSON = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/" + relativePath);
+            source.navNetworkJSON = AssetDatabase.LoadAssetAtPath<TextAsset>("Assets/" + relativePath);
 
-            Debug.Log($"Navigation network saved to: {path}");
+            Debug.Log($"Racing line {line.Index} saved to: {path}");
+            return true;
         }
         catch (Exception e)
         {
             Debug.LogError(e);
-        }
-    }
-
-    private void PopulateWaypointData(List<NavigationWaypoint> afterCheckPointWaypoints, List<NavigationWaypointData> waypoints, NavigationWaypoint curr, int currCheckpoint)
-    {
-        if (curr == null) return;
-
-        if (!checkpointWaypoints.Contains(curr)) 
-        {
-            if (curr != head && curr.Next != null && curr.Next[0] != null)
-            {
-                if (afterCheckPointWaypoints.Contains(curr.Next[0]))
-                {
-                    currCheckpoint++;
-
-                }
-            }
-
-            var data = new NavigationWaypointData(curr.position, currCheckpoint);   // need to get checkpoint ID from somewhere
-            waypoints.Add(data);
-        }
-
-        if (curr.Next == null) return;
-
-        foreach (NavigationWaypoint next in curr.Next)
-        {
-            if (next == null) continue;
-            if (next == head) continue;
-
-            PopulateWaypointData(afterCheckPointWaypoints, waypoints, next, currCheckpoint);
+            return false;
         }
     }
 #endif
