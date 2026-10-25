@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class RacerState : MonoBehaviour
@@ -22,6 +23,7 @@ public class RacerState : MonoBehaviour
     private Item _secondaryItem = null;
     private float _itemCooldown = 0.5f;
     private bool _onItemCooldown = false;
+    private Item _usingItem;
     
     public void AssignController(RacerController newRacerController)
     {
@@ -87,6 +89,48 @@ public class RacerState : MonoBehaviour
             GameManager.Instance.UIManager.UpdateLap(currLap);
         }
     }
+    
+    /// <summary>
+    /// Respawns the racer at their last checkpoint.
+    /// </summary>
+    public void Respawn()
+    {
+        GameObject racerAndCar = RacerController.GetCharacterAndKart();
+        Rigidbody racerAndCarRigidbody = racerAndCar.GetComponent<Rigidbody>();
+        StartCoroutine(RespawnDelay(racerAndCar, racerAndCarRigidbody));
+    }
+
+    private IEnumerator RespawnDelay(GameObject racerAndCar, Rigidbody racerAndCarRigidbody)
+    {
+        racerAndCar.SetActive(false);
+        // Pause the racer while respawning
+        racerAndCarRigidbody.constraints = RigidbodyConstraints.FreezePosition;
+        racerAndCarRigidbody.useGravity = false;
+        RacerController.preventMovement = true;
+        racerAndCarRigidbody.linearVelocity = Vector3.zero;
+        racerAndCarRigidbody.angularVelocity = Vector3.zero;
+
+        yield return new WaitForSeconds(2.0f);
+
+        // Resumes the racer
+        racerAndCar.SetActive(true);
+        racerAndCarRigidbody.constraints = RigidbodyConstraints.None;
+        racerAndCarRigidbody.linearVelocity = Vector3.zero;
+        racerAndCarRigidbody.angularVelocity = Vector3.zero;
+        racerAndCarRigidbody.useGravity = true;
+        RacerController.preventMovement = false;
+
+        // Places racer back on the track
+        RacerController racerController = RacerController.Character.characterObject.GetComponentInParent<Drive>().Racer;
+        TrackCheckpoint currentCheckpoint = racerController.RacerState.CurrCheckpoint;
+        racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * RacerController.Character._spawnVerticalDisplacement;
+        racerAndCar.transform.rotation = currentCheckpoint.GetTrackForwardDirection();
+
+        if (RacerController is AIController aiController)
+        {
+            RaceChoreographer.Instance.SendRacerRespawnEvent(aiController, currentCheckpoint);
+        }
+    }
 
     //filler method for ability bar, im guessing the bar updates additively/subtractively
     public void updateBar(int add)
@@ -112,7 +156,8 @@ public class RacerState : MonoBehaviour
         if (!_onItemCooldown && _primaryItem != null)
         {
             _onItemCooldown = true;
-            _primaryItem.Use();
+            Item instantiatedItem = Instantiate(_primaryItem, RacerController.transform);
+            instantiatedItem.Use(this);
             GameManager.Instance.UIManager.UseItem();
             _primaryItem = _secondaryItem;
             _secondaryItem = null;

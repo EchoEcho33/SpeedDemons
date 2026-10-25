@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 public class Drive : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class Drive : MonoBehaviour
     private float m_turnSpeed = 0.0f;
     private bool m_isDrifting = false;
     private int m_driftAngle = 0;
+    public StudioEventEmitter drivingAudio;
 
     public void AssignController(RacerController newRacerController)
     {
@@ -24,6 +27,8 @@ public class Drive : MonoBehaviour
     {
         character = newCharacter;
         kart = newKart;
+        drivingAudio = AudioManager.instance.createEmitter(AudioEvents.instance.basicCarDrive, this.gameObject);
+        drivingAudio.Play();
     }
 
     public void Accelerate(float amplitude)
@@ -43,6 +48,7 @@ public class Drive : MonoBehaviour
         
 
         transform.position += transform.forward * velocityUpdate;
+        UpdateSound(1);
     }
 
     public void Decelerate(float amplitude, float a)
@@ -56,6 +62,7 @@ public class Drive : MonoBehaviour
         float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime;
 
         transform.position += transform.forward * velocityUpdate;
+        UpdateSound(-1);
     }
 
     public void Turn(float turnDirection, float turnMultiplier = 1.0f)
@@ -106,6 +113,12 @@ public class Drive : MonoBehaviour
         transform.position += transform.forward * velocityUpdate;
     }
 
+    public void PreventMovement()
+    {
+        if (!IsGrounded()) return;
+        m_currentSpeed = 0;
+    }
+
     // TODO: Check that wheels are grounded
     private bool IsGrounded()
     {
@@ -151,5 +164,11 @@ public class Drive : MonoBehaviour
         }
 
         transform.Rotate(0, m_driftAngle / 10.0f, 0, Space.Self);
+    }
+    
+    // Audio
+    public void UpdateSound(int dir) 
+    {
+        drivingAudio.SetParameter("Driving", m_currentSpeed * dir);
     }
 }

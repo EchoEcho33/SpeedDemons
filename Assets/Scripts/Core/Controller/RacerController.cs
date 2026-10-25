@@ -13,6 +13,11 @@ public abstract class RacerController : MonoBehaviour
     public bool SpinOut = false;
     public float SpinOutDuration = 0;
     
+    public bool preventMovement = false;
+    public float immobileDuration = 0;
+
+    public bool activatedRF = false; // RF = Rabbit's Foot
+    
     public float Steering { get; protected set; }
     
     public float Throttle { get; protected set; }

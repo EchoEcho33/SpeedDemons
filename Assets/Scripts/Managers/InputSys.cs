@@ -36,4 +36,26 @@ public class InputSys : MonoBehaviour
 
     [SerializeField]
     public InputActionReference useItem_kbd;
+    
+    [Header("Player 2 Keyboard Controls")]
+    [SerializeField]
+    public InputActionReference p2_accelerate_kbd;
+
+    [SerializeField]
+    public InputActionReference p2_brake_kbd;
+
+    [SerializeField]
+    public InputActionReference p2_turnRight_kbd;
+
+    [SerializeField]
+    public InputActionReference p2_turnLeft_kbd;
+
+    [SerializeField]
+    public InputActionReference p2_ability_kbd;
+
+    [SerializeField]
+    public InputActionReference p2_useItem_kbd;
+    
+    [SerializeField]
+    public InputActionReference p2_empty_kbd;
 }

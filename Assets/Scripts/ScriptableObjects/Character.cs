@@ -32,7 +32,7 @@ public class Character : ScriptableObject
     [HideInInspector]
     public GameObject characterObject;
     
-    private readonly int _spawnVerticalDisplacement = 2;
+    public readonly int _spawnVerticalDisplacement = 2;
 
     private GameObject snowball;
 
@@ -44,28 +44,6 @@ public class Character : ScriptableObject
     public void TriggerAbility()
     {
         ability.TriggerAbility();
-    }
-
-    /// <summary>
-    /// Provides the parent GameObject that holds both the racer and the car that are controlled by the player/AI
-    /// </summary>
-    /// <returns>parent RacerAndCar GameObject of the Character</returns>
-    public GameObject GetRacerAndCar()
-    {
-        return characterObject.transform.root.gameObject;
-    }
-
-    public void Respawn()
-    {
-        Debug.Log("Respawning racer");
-        GameObject racerAndCar = GetRacerAndCar();
-        Rigidbody racerAndCarRigidbody = racerAndCar.GetComponent<Rigidbody>();
-        racerAndCarRigidbody.linearVelocity = Vector3.zero;
-        racerAndCarRigidbody.angularVelocity = Vector3.zero;
-        RacerController racerController = characterObject.GetComponentInParent<Drive>().Racer;
-        TrackCheckpoint currentCheckpoint = racerController.RacerState.CurrCheckpoint;
-        racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * _spawnVerticalDisplacement;
-        racerAndCar.transform.rotation = currentCheckpoint.GetTrackForwardDirection();
     }
     
     // Some getters necessary for the character selection UI.

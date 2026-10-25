@@ -32,12 +32,12 @@ public class MonkeyPaw : Item
 
     private State state = State.INACTIVE;
 
-    public override void Use()
+    public override void Use(RacerState racer)
     {
         if (state != State.INACTIVE) { return; }
 
         //temp for test
-        user = FindFirstObjectByType<PlayerController>();
+        user = racer.RacerController;
         baseAccel = user.Kart._maxAcceleration;
         baseSpeed = user.Kart._maxSpeed;
 
@@ -59,6 +59,11 @@ public class MonkeyPaw : Item
 
             if (timeRemaining < 0)
             {
+                if (user.activatedRF) {
+                    timeRemaining = -3; // arbitrary number less than -2 here
+                    user.activatedRF = false;
+                }
+
                 if (state == State.BOOST)
                 {
                     user.Kart._maxAcceleration = decel_calc;
@@ -71,8 +76,6 @@ public class MonkeyPaw : Item
                     user.Kart._maxSpeed = baseSpeed * decel;
 
                 }
-
-
             }
         }
         else

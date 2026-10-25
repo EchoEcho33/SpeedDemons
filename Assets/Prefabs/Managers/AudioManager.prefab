@@ -64,3 +64,17 @@ MonoBehaviour:
       Data3: 1387872911
       Data4: 663322059
     Path: event:/PlaySeanHonk
+  <basicCarDrive>k__BackingField:
+    Guid:
+      Data1: -1110815782
+      Data2: 1301120120
+      Data3: -343682916
+      Data4: 185067438
+    Path: event:/Driving/BasicCarDriving
+  <characterSelectMusic>k__BackingField:
+    Guid:
+      Data1: 38521660
+      Data2: 1230269422
+      Data3: -2088963152
+      Data4: 1841431524
+    Path: event:/Music/CharacterSelectMusic
