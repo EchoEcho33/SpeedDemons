@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Drive : MonoBehaviour
@@ -10,6 +12,8 @@ public class Drive : MonoBehaviour
 
     public float m_currentSpeed = 0.0f;
     private float m_turnSpeed = 0.0f;
+    private bool m_isDrifting = false;
+    private int m_driftAngle = 0;
 
     public void AssignController(RacerController newRacerController)
     {
@@ -58,12 +62,28 @@ public class Drive : MonoBehaviour
     {
         if (IsGrounded())
         {
+            if (m_driftAngle != 0)
+            {
+                OrientTowardsVelocity();
+            }
+            
             if (turnDirection != 0)
             {
                 transform.position += Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime / 100;
                 transform.Rotate(0, kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime, 0, Space.Self);
-            } 
+            }
+
+            if (turnMultiplier != 1.0f)
+            {
+                OrientForDrift(turnDirection);
+                Debug.Log("Drifting...");
+            }
+            else if (m_driftAngle != 0)
+            {
+                CenterOrientation();
+            }
         }
+
 
         // x = horizontal (- left + right) y = vertical (- down + up)
         
@@ -95,5 +115,41 @@ public class Drive : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return m_currentSpeed;
+    }
+
+    private void OrientTowardsVelocity()
+    {
+        transform.Rotate(0, -m_driftAngle / 10.0f, 0, Space.Self);
+    }
+
+    private void OrientForDrift(float turnDirection)
+    {
+        if (Math.Abs(m_driftAngle) < 300)
+        {
+            if (turnDirection > 0)
+            {
+                ++m_driftAngle;
+            }
+            else
+            {
+                --m_driftAngle;
+            }
+        }
+
+        transform.Rotate(0, m_driftAngle / 10.0f, 0, Space.Self);
+    }
+
+    private void CenterOrientation()
+    {
+        if (m_driftAngle > 0)
+        {
+            --m_driftAngle;
+        }
+        else
+        {
+            ++m_driftAngle;
+        }
+
+        transform.Rotate(0, m_driftAngle / 10.0f, 0, Space.Self);
     }
 }

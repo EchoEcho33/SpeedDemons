@@ -109,17 +109,38 @@ public class PlayerController : RacerController
         if (turn.IsPressed())
         {
             Steering = turn.ReadValue<Vector2>().x;
-            Drive.Turn(Steering);
+            if (accelerate.IsPressed() && brake.IsPressed())
+            {
+                Drive.Turn(Steering, 1.5f);
+            }
+            else
+            {
+                Drive.Turn(Steering); 
+            }
         } 
         else if (turnRight_kbd.IsPressed())
         {
             Steering = 1.0f;
-            Drive.Turn(Steering);
+            if (accelerate_kbd.IsPressed() && brake_kbd.IsPressed())
+            {
+                Drive.Turn(Steering, 1.5f);
+            }
+            else
+            {
+                Drive.Turn(Steering);
+            }
         } 
         else if (turnLeft_kbd.IsPressed())
         {
             Steering = -1.0f;
-            Drive.Turn(Steering);
+            if (accelerate_kbd.IsPressed() && brake_kbd.IsPressed())
+            {
+                Drive.Turn(Steering, 1.5f);
+            }
+            else
+            {
+                Drive.Turn(Steering);
+            }
         }
 
         // Ability
