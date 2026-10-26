@@ -30,9 +30,10 @@ public class NavigationNetwork : MonoBehaviour
     [SerializeField] 
     private TextAsset raceTelemetryJSON;
 
+
     [SerializeField] 
     private TextAsset navNetworkJSON;
-
+    
     /** Callback for when a navigation network is generated. */
     public event Action OnNetworkGenerated;
     
