@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 [ExecuteAlways]
@@ -27,7 +28,8 @@ public class RaceManager : MonoBehaviour
 
     [SerializeField] public int maxLaps = 3;
 
-    [SerializeField] public int countdownTimer = 3;  
+    [SerializeField] public int countdownTimer = 3;
+    [SerializeField] private float itemRespawnTime = 10.0f;
 
     // TODO: This is just a temporary count of how many racers should the manager spawn. The real count is the # of racers in _racerStates
     public int racerCount = 1;
@@ -306,5 +308,15 @@ public class RaceManager : MonoBehaviour
         if (id < 0 || trackCheckpoints.Count <= id) return null;
         
         return trackCheckpoints[id];
+    }
+
+    public void RespawnSelf(GameObject gameObject)
+    {
+        StartCoroutine(RespawnTimer(gameObject));
+    }
+    private IEnumerator<WaitForSeconds> RespawnTimer(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(itemRespawnTime);
+        gameObject.SetActive(true);
     }
 }
