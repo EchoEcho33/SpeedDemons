@@ -24,7 +24,6 @@ public class RacerState : MonoBehaviour
     private Item _secondaryItem = null;
     private float _itemCooldown = 0.5f;
     private bool _onItemCooldown = false;
-    private Item _usingItem;
 
     public enum Debuff
     {
@@ -190,6 +189,32 @@ public class RacerState : MonoBehaviour
     }
 
     public void ApplyDebuff(Debuff debuff)
+    {
+        if (activatedRF)
+        {
+            activatedRF = false;
+            Destroy(currVFX);
+            return;
+        }
+
+        switch (debuff)
+        {
+            case Debuff.SPEEDREDUCTION:
+                DebuffSpeedReduction();
+                break;
+
+            case Debuff.SPINOUT:
+                DebuffSpinout();
+                break;
+        }
+    }
+
+    private void DebuffSpinout()
+    {
+        
+    }
+
+    private void DebuffSpeedReduction()
     {
         
     }
