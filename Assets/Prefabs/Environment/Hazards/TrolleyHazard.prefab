@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9149138942490726607}
   - component: {fileID: 2877057157769440068}
   - component: {fileID: -4756680905591255435}
+  - component: {fileID: 2846172951602232863}
   m_Layer: 0
   m_Name: TrolleyHazard
   m_TagString: Untagged
@@ -125,3 +126,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac4e9a2196ca2acb8fb5139745bd014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrolleyScript
+--- !u!114 &2846172951602232863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5491999357052229251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineAnimate
+  m_Target: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_LoopMode: 1
+  m_Method: 0
+  m_Duration: 1
+  m_MaxSpeed: 10
+  m_EasingMode: 0
+  m_AlignmentMode: 1
+  m_ObjectForwardAxis: 2
+  m_ObjectUpAxis: 1
+  m_StartOffset: 0
