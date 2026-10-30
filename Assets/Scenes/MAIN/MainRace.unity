@@ -4663,6 +4663,219 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3616519339834706468, guid: 6ed286deae88afc42905791d1994175a, type: 3}
   m_PrefabInstance: {fileID: 484273958}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &487108015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 487108017}
+  - component: {fileID: 487108016}
+  m_Layer: 0
+  m_Name: TrolleyPath
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &487108016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487108015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineContainer
+  m_Spline:
+    m_EditModeType: 1
+    m_Knots: []
+    m_MetaData: []
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
+  m_Splines:
+  - m_EditModeType: 1
+    m_Knots:
+    - Position:
+        x: 0
+        y: 0
+        z: 0
+      TangentIn:
+        x: 0
+        y: 0
+        z: -0
+      TangentOut:
+        x: 0
+        y: 0
+        z: 24.212337
+      Rotation:
+        value:
+          x: 0
+          y: 0.78688174
+          z: 0
+          w: 0.6171038
+    - Position:
+        x: 23.514381
+        y: 0.000019073486
+        z: -5.7714386
+      TangentIn:
+        x: -0
+        y: -0
+        z: -8.828795
+      TangentOut:
+        x: 0
+        y: 0
+        z: 11.985848
+      Rotation:
+        value:
+          x: -0.000000062848045
+          y: 0.87466997
+          z: 0.00000012504725
+          w: 0.48471892
+    - Position:
+        x: 52.058723
+        y: 0.0000076293945
+        z: -40.072205
+      TangentIn:
+        x: -0
+        y: -0
+        z: -13.599757
+      TangentOut:
+        x: 0
+        y: 0
+        z: 12.787588
+      Rotation:
+        value:
+          x: 0.00000001860751
+          y: 0.9842215
+          z: -0.000000091745726
+          w: 0.1769403
+    - Position:
+        x: 52.7472
+        y: 0.0000038146973
+        z: -79.519714
+      TangentIn:
+        x: -0
+        y: -0
+        z: -10.862686
+      TangentOut:
+        x: 0
+        y: 0
+        z: 8.514946
+      Rotation:
+        value:
+          x: 0.000000027808584
+          y: 0.9863249
+          z: 0.0000002663359
+          w: -0.16481224
+    - Position:
+        x: 37.50901
+        y: 0.000030517578
+        z: -98.37416
+      TangentIn:
+        x: -0
+        y: -0
+        z: -7.080475
+      TangentOut:
+        x: 0
+        y: 0
+        z: 10.131601
+      Rotation:
+        value:
+          x: 0.000000026037492
+          y: 0.76126504
+          z: 0.00000009083391
+          w: -0.6484408
+    - Position:
+        x: -4.2370834
+        y: -0.000011444092
+        z: -71.52073
+      TangentIn:
+        x: -0
+        y: -0
+        z: -14.655892
+      TangentOut:
+        x: 0
+        y: 0
+        z: 12.834512
+      Rotation:
+        value:
+          x: 0.0000003293309
+          y: -0.3322003
+          z: 0.00000013306908
+          w: 0.9432088
+    - Position:
+        x: -17.48159
+        y: -0.000030517578
+        z: -35.832825
+      TangentIn:
+        x: -0
+        y: -0
+        z: -11.799105
+      TangentOut:
+        x: 0
+        y: 0
+        z: 12.075371
+      Rotation:
+        value:
+          x: -0.000000069448035
+          y: 0.024629451
+          z: 0.00000010036891
+          w: 0.9996967
+    m_MetaData:
+    - Mode: 3
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    m_Closed: 1
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
+  m_Knots:
+    m_KnotsLink: []
+--- !u!4 &487108017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487108015}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -7.1054274e-15, w: 1}
+  m_LocalPosition: {x: 110.505135, y: 50.859997, z: 191.8787}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1436603621}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &498108747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20739,6 +20952,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
+      propertyPath: _singlePlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
       propertyPath: 'items.Array.data[2]'
       value: 
       objectReference: {fileID: 2018730163724020607, guid: 164b0bfe776de41ebad554553f94ab06, type: 3}
@@ -22732,6 +22949,96 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7311068376488764031, guid: 41dbbaac6dadf194bb66944567dbd7ea, type: 3}
   m_PrefabInstance: {fileID: 1421984847}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1436603620
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 487108017}
+    m_Modifications:
+    - target: {fileID: 2846172951602232863, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_Target
+      value: 
+      objectReference: {fileID: 487108016}
+    - target: {fileID: 2846172951602232863, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_Duration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846172951602232863, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_MaxSpeed
+      value: 8.831716
+      objectReference: {fileID: 0}
+    - target: {fileID: 5491999357052229251, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_Name
+      value: TrolleyHazard (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.247536e-13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5702994e-12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6171038
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7868818
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -4.2351647e-22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+--- !u!4 &1436603621 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+  m_PrefabInstance: {fileID: 1436603620}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1444079107
 GameObject:
@@ -28296,3 +28603,26 @@ SceneRoots:
   - {fileID: 1444079110}
   - {fileID: 320386834}
   - {fileID: 1415641637}
+  - {fileID: 802013026}
+  - {fileID: 1580927579}
+  - {fileID: 1650202425}
+  - {fileID: 444732269}
+  - {fileID: 428675415}
+  - {fileID: 1514984163}
+  - {fileID: 619415973}
+  - {fileID: 48246166}
+  - {fileID: 2023187111}
+  - {fileID: 19918557}
+  - {fileID: 333883766}
+  - {fileID: 1332129150}
+  - {fileID: 866733314}
+  - {fileID: 1491682905}
+  - {fileID: 1402075573}
+  - {fileID: 823768412}
+  - {fileID: 1764770669}
+  - {fileID: 54593112}
+  - {fileID: 225304826}
+  - {fileID: 2011558541}
+  - {fileID: 487108017}
+  - {fileID: 81700164}
+  - {fileID: 1513082731}
