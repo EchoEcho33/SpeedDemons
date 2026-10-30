@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
@@ -24,6 +25,16 @@ public class RacerState : MonoBehaviour
     private float _itemCooldown = 0.5f;
     private bool _onItemCooldown = false;
     private Item _usingItem;
+
+    public enum Debuff
+    {
+        SPINOUT,
+        SPEEDREDUCTION
+    }
+
+    private GameObject currVFX;
+    private bool activatedRF = false;
+
     
     public void AssignController(RacerController newRacerController)
     {
@@ -171,5 +182,15 @@ public class RacerState : MonoBehaviour
     {
         yield return new WaitForSeconds(_itemCooldown);
         _onItemCooldown = false;
+    }
+
+    public void ApplyVFX(GameObject particleSys)
+    {
+        currVFX = Instantiate(particleSys, RacerController.Drive.gameObject.transform);
+    }
+
+    public void ApplyDebuff(Debuff debuff)
+    {
+        
     }
 }

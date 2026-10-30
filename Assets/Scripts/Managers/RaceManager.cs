@@ -200,7 +200,6 @@ public class RaceManager : MonoBehaviour
 
             List<Item> items = GameManager.Instance.items;
             
-            Debug.Log("tick countdown should've been called");
             GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
             
             foreach (RacerController racer in racerControllers)
@@ -314,6 +313,7 @@ public class RaceManager : MonoBehaviour
     {
         StartCoroutine(RespawnTimer(gameObject));
     }
+
     private IEnumerator<WaitForSeconds> RespawnTimer(GameObject gameObject)
     {
         yield return new WaitForSeconds(itemRespawnTime);
