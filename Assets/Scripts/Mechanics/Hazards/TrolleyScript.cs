@@ -7,11 +7,17 @@ public class TrolleyScript : MonoBehaviour
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("AI"))
         {
             // Component should be safe considering nothing else uses this tag -Gianluca
-            RacerController collisionRacer = other.gameObject.GetComponent<Drive>().Racer;
-            if (!collisionRacer.SpinOut)
+            Drive collisionRacer = other.gameObject.GetComponent<Drive>();
+            
+            if (!collisionRacer.Racer.SpinOut)
             {
-                collisionRacer.SpinOut = true;
-                collisionRacer.SpinOutDuration = 3.0f;    
+                // play animation
+                if (collisionRacer.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
+                {
+                    animator.SetBool("SpinOut", true);
+                }
+                collisionRacer.Racer.SpinOut = true;
+                collisionRacer.Racer.SpinOutDuration = 3.0f;
             }
             
         }
