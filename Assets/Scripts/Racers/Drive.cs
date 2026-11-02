@@ -13,10 +13,12 @@ public class Drive : MonoBehaviour
     private Kart kart;
 
     public float m_currentSpeed = 0.0f;
+    private float m_speedModifier = 1.0f;
     private float m_turnSpeed = 0.0f;
     private bool m_isDrifting = false;
     private int m_driftAngle = 0;
     public StudioEventEmitter drivingAudio;
+    private Rigidbody rigidbody;
 
     public void AssignController(RacerController newRacerController)
     {
@@ -29,6 +31,7 @@ public class Drive : MonoBehaviour
         kart = newKart;
         drivingAudio = AudioManager.instance.createEmitter(AudioEvents.instance.basicCarDrive, this.gameObject);
         drivingAudio.Play();
+        rigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
     public void Accelerate(float amplitude)
@@ -77,6 +80,8 @@ public class Drive : MonoBehaviour
             if (turnDirection != 0)
             {
                 transform.position += Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime / 100;
+                //rigidbody.linearVelocity = kart._turnRadius * turnDirection * turnMultiplier * rigidbody.linearVelocity * Time.deltaTime / 100;
+
                 transform.Rotate(0, kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime, 0, Space.Self);
             }
 

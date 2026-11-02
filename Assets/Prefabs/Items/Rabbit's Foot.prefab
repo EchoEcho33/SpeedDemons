@@ -47,3 +47,4 @@ MonoBehaviour:
   _itemId: Rabbit's Foot
   _rarity: 1
   _icon: {fileID: 21300000, guid: 56f1e8a03b0134794b8a3c2f27f64bdf, type: 3}
+  cloverVFX: {fileID: 9042666889275632933, guid: 26c48718f6c265f42a51b142a10448ff, type: 3}
