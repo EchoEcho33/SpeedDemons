@@ -7,7 +7,7 @@ public class RabbitsFoot : Item
 
     public override void Use(RacerState racer)
     {
-        racer.RacerController.activatedRF = true;
+        racer.ApplyBuff(RacerState.Buff.BARRIER);
         racer.ApplyVFX(cloverVFX);
     }
 }

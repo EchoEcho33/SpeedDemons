@@ -13,6 +13,7 @@ public class Drive : MonoBehaviour
     private Kart kart;
 
     public float m_currentSpeed = 0.0f;
+    private float m_speedModifier = 1.0f;
     private float m_turnSpeed = 0.0f;
     private bool m_isDrifting = false;
     private int m_driftAngle = 0;
