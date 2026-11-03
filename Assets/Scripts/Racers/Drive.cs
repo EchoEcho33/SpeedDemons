@@ -43,7 +43,14 @@ public class Drive : MonoBehaviour
         m_currentSpeed += kart._maxAcceleration * amplitude * Time.deltaTime * m_speedModifier;
 
         if (m_currentSpeed > kart._maxSpeed * m_speedModifier)
+        {
             m_currentSpeed = kart._maxSpeed * m_speedModifier;
+            m_currentSpeed -= Time.deltaTime * m_speedModifier * kart._maxAcceleration;
+            if (m_currentSpeed < kart._maxSpeed)
+            {
+                m_currentSpeed = kart._maxSpeed * m_speedModifier;
+            }
+        }
 
         if (m_currentSpeed < -kart._maxSpeed * m_speedModifier / 2)
             m_currentSpeed = -kart._maxSpeed * m_speedModifier / 2;
@@ -209,6 +216,7 @@ public class Drive : MonoBehaviour
         StartCoroutine(ResetTimer(timer));
     }
 
+    // Resets the speed modifier with a given timer
     public IEnumerator ResetTimer(float timer)
     {
         yield return new WaitForSeconds(timer);
