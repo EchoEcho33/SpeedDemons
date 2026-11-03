@@ -242,7 +242,10 @@ public class RacerState : MonoBehaviour
 
     private void DebuffSpeedReduction(float timer, float multiplier)
     {
-        
+        if (multiplier > 1.0f)
+            multiplier = 0.8f;
+
+        RacerController.Drive.ApplyMultiplier(timer, multiplier);
     }
 
     public void ApplyBuff(Buff buff)
@@ -279,7 +282,10 @@ public class RacerState : MonoBehaviour
 
     private void BuffSpeed(float timer, float multiplier)
     {
-        
+        if (multiplier < 1.0f)
+            multiplier = 1.2f;
+
+        RacerController.Drive.ApplyMultiplier(timer, multiplier);
     }
 
     public void ApplyVFX(GameObject particleSys)
