@@ -13,7 +13,7 @@ public class RacerState : MonoBehaviour
     public Action<TrackCheckpoint> OnReachedCheckpoint;
     
     public Action<StartFinishCheckpoint> OnReachedStartFinishCheckpoint;
-
+    private bool isPlayer;
     public int currLap { get; private set;}
 
     public int currAbilityCharge {get; private set;}
@@ -42,6 +42,7 @@ public class RacerState : MonoBehaviour
     public void AssignController(RacerController newRacerController)
     {
         RacerController = newRacerController;
+        isPlayer = RacerController.GetType() == typeof(PlayerController);
     }
 
     public void StartRace(StartFinishCheckpoint startFinishCheckpoint)
@@ -91,7 +92,7 @@ public class RacerState : MonoBehaviour
     public void ReachCheckpoint(TrackCheckpoint checkpoint)
     {
         OnReachedCheckpoint?.Invoke(checkpoint);
-        if (RacerController.GetType() == typeof(PlayerController))
+        if (isPlayer)
             UpdateBar(2);
 
         CurrCheckpoint = checkpoint;
@@ -101,7 +102,7 @@ public class RacerState : MonoBehaviour
             currLap++;
             
             //applies from all racers, change after getting Driver to connect with certain racerStates
-            if (RacerController.GetType() == typeof(PlayerController))
+            if (isPlayer)
                 GameManager.Instance.UIManager.UpdateLap(currLap);
         }
     }

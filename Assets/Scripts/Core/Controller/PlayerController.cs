@@ -9,6 +9,7 @@ public class PlayerController : RacerController
 {
     public Camera MainCamera { get; private set; }
     public CinemachineCamera CinemachineCamera;
+    public RaceUI raceUI;
     
     private InputAction accelerate;
 
