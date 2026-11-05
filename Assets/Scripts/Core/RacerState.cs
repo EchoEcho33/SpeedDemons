@@ -16,9 +16,7 @@ public class RacerState : MonoBehaviour
 
     public int currLap { get; private set;}
 
-    //arbitrary max value
-    public int abilityMaxValue = 10;
-    public int abilityBar { get; private set; }
+    public int currAbilityCharge {get; private set;}
 
     private Item _primaryItem = null;
     private Item _secondaryItem = null;
@@ -50,7 +48,7 @@ public class RacerState : MonoBehaviour
     {
         CurrCheckpoint = startFinishCheckpoint;
         currLap = 1;
-        abilityBar = 0;
+        currAbilityCharge = 0;
 
         GameManager.Instance.UIManager.UpdateLap(1);
     }
@@ -93,7 +91,8 @@ public class RacerState : MonoBehaviour
     public void ReachCheckpoint(TrackCheckpoint checkpoint)
     {
         OnReachedCheckpoint?.Invoke(checkpoint);
-        updateBar(2);
+        if (RacerController.GetType() == typeof(PlayerController))
+            UpdateBar(2);
 
         CurrCheckpoint = checkpoint;
         if (checkpoint is StartFinishCheckpoint startFinishCheckpoint)
@@ -102,7 +101,8 @@ public class RacerState : MonoBehaviour
             currLap++;
             
             //applies from all racers, change after getting Driver to connect with certain racerStates
-            GameManager.Instance.UIManager.UpdateLap(currLap);
+            if (RacerController.GetType() == typeof(PlayerController))
+                GameManager.Instance.UIManager.UpdateLap(currLap);
         }
     }
     
@@ -148,12 +148,18 @@ public class RacerState : MonoBehaviour
         }
     }
 
-    //filler method for ability bar, im guessing the bar updates additively/subtractively
-    public void updateBar(int add)
+    public void UpdateBar(int add)
     {
-        abilityBar = Mathf.Clamp(0, abilityBar + add, abilityMaxValue);
+        currAbilityCharge = Mathf.Clamp(0, currAbilityCharge + add, RacerController.Character.abilityCharge);
+        GameManager.Instance.UIManager.UpdateBar(currAbilityCharge, RacerController.Character.abilityCharge);
+        Debug.Log(currAbilityCharge);
+    }
 
-        GameManager.Instance.UIManager.UpdateBar(abilityBar, abilityMaxValue);
+    public void ResetBar()
+    {
+        currAbilityCharge = 0;
+        GameManager.Instance.UIManager.UpdateBar(currAbilityCharge, RacerController.Character.abilityCharge);
+        Debug.Log(currAbilityCharge);
     }
 
     public void PickUpItem(Item item)

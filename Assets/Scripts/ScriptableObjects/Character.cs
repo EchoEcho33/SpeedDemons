@@ -34,6 +34,8 @@ public class Character : ScriptableObject
     
     public readonly int _spawnVerticalDisplacement = 2;
 
+    public readonly int abilityCharge = 10;
+
     private GameObject snowball;
 
     public ECharacterType GetCharacterType()
@@ -41,9 +43,9 @@ public class Character : ScriptableObject
         return characterType;
     }
 
-    public void TriggerAbility()
+    public void TriggerAbility(RacerState state)
     {
-        ability.TriggerAbility();
+        ability.TriggerAbility(state);
     }
     
     // Some getters necessary for the character selection UI.

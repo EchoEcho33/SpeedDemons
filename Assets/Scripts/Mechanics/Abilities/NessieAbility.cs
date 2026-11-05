@@ -10,9 +10,9 @@ public class NessieAbility : Ability
         return 0;
     }
 
-    public override void TriggerAbility() {
-        // This Spawn Code is Untested, If it breaks, whoopsies -Kenneth
-        Vector3 playerPosition = this.gameObject.transform.root.position;
-        Instantiate(puddle, new Vector3(0, 0, -2), Quaternion.identity);
+    public override void TriggerAbility(RacerState state) {
+        Drive drive = state.RacerController.Drive;
+        Vector3 playerPosition = state.RacerController.Drive.transform.position;
+        Instantiate(puddle, playerPosition - drive.transform.forward * 4, Quaternion.identity);
     }
 }
