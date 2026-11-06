@@ -8,6 +8,9 @@ public class PlayerController : RacerController
 {
     public Camera MainCamera { get; private set; }
     public CinemachineCamera CinemachineCamera;
+
+    [SerializeField]
+    private InputActionAsset inputList;
     
     private InputAction accelerate;
 
@@ -39,6 +42,12 @@ public class PlayerController : RacerController
         Drive = Kart.kartObject.AddComponent<Drive>();
         Drive.AssignController(this);
         Drive.Initialize(Character, Kart);
+
+        // manages inputs for now
+        PlayerInput input = Kart.kartObject.AddComponent<PlayerInput>();
+        input.actions = inputList;
+        input.camera = MainCamera;
+        
         
         // INSANELY HARD CODED.
         // TODO - Gianluca: Refactor using input manager to avoid having to do this for each additional player
@@ -46,7 +55,7 @@ public class PlayerController : RacerController
         
         if (playerNum == 0)
         {
-            accelerate = GameManager.Instance.inputManager.accelerate.action;
+            accelerate = input.actions.FindAction("accelerate"); 
             brake = GameManager.Instance.inputManager.brake.action;
             turn = GameManager.Instance.inputManager.turn.action;
 

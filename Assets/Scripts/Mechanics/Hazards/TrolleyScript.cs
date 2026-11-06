@@ -16,7 +16,7 @@ public class SpinOut : MonoBehaviour
             // Component should be safe considering nothing else uses this tag -Gianluca
             Drive collisionRacer = other.gameObject.GetComponent<Drive>();
             
-            if (!collisionRacer.Racer.SpinOut)
+            if (!collisionRacer.Racer.SpinOut && !collisionRacer.Racer.invulnerable)
             {
                 collisionRacer.Racer.RacerState.ApplyDebuff(RacerState.Debuff.SPINOUT);
             }
