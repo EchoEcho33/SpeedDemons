@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
@@ -82,6 +83,7 @@ public class RaceManager : MonoBehaviour
         // this is the game's original code prior to the multiplayer split. depends on _singlePlayer
         if (GameManager.Instance._singlePlayer)
         {
+            GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().splitScreen = false;  
             if (racerSelections.Count == 0) return;
 
         // TODO: Mike - This only spawns 1 drive script for a singleplayer game. Change this for multiplayer!
@@ -100,6 +102,7 @@ public class RaceManager : MonoBehaviour
         PlayerController localRacer = GameManager.Instance.LocalRacers[0];
         localRacer.AssignCharacterAndKart(localCharacter, localKart);
         localRacer.InitializeSingleCamera();
+        localRacer.input.enabled = true; 
         localRacer.AssignRacerState(localRacerState);
         
         // TODO: Change this when we swap to multiplayer
@@ -145,6 +148,7 @@ public class RaceManager : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().splitScreen = true; 
             if (racerSelections.Count == 0) return;
             
             List<StartingGridSpot> remainingStartingGrid = startingGrid;

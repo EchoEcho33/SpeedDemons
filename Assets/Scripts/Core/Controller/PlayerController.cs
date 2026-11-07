@@ -8,9 +8,8 @@ public class PlayerController : RacerController
 {
     public Camera MainCamera { get; private set; }
     public CinemachineCamera CinemachineCamera;
-
-    [SerializeField]
-    private InputActionAsset inputList;
+    
+    public PlayerInput input;
     
     private InputAction accelerate;
 
@@ -44,33 +43,22 @@ public class PlayerController : RacerController
         Drive.Initialize(Character, Kart);
 
         // manages inputs for now
-        PlayerInput input = Kart.kartObject.AddComponent<PlayerInput>();
-        input.actions = inputList;
-        input.camera = MainCamera;
+        input = Kart.kartObject.AddComponent<PlayerInput>();
+        input.actions = GameManager.Instance.inputList.GetInputList();
+        input.defaultControlScheme = "Gamepad";
         
+        input.defaultActionMap = "Driving";
+        input.SwitchCurrentControlScheme("Gamepad");
+        input.SwitchCurrentActionMap("Driving");
+        
+        Debug.Log(input.currentControlScheme);
         
         // INSANELY HARD CODED.
         // TODO - Gianluca: Refactor using input manager to avoid having to do this for each additional player
         // There is a built in split screen thing that can work, but our current UI system would have to change
         
-        if (playerNum == 0)
+        /*if (playerNum == 0)
         {
-            // refactor all to use input.actions
-            accelerate = input.actions.FindAction("Accelerate");
-            brake = input.actions.FindAction("Brake");
-            turn = input.actions.FindAction("Turn");
-
-            /*accelerate_kbd = GameManager.Instance.inputManager.accelerate_kbd.action;
-            brake_kbd = GameManager.Instance.inputManager.brake_kbd.action;
-            turnRight_kbd = GameManager.Instance.inputManager.turnRight_kbd.action;
-            turnLeft_kbd = GameManager.Instance.inputManager.turnLeft_kbd.action;
-            */
-        
-            ability = input.actions.FindAction("Ability");
-            // ability_kbd = GameManager.Instance.inputManager.ability_kbd.action;
-
-            useItem = input.actions.FindAction("UseItem");
-            // useItem_kbd = GameManager.Instance.inputManager.useItem_kbd.action;
         }
         else
         {
@@ -82,7 +70,7 @@ public class PlayerController : RacerController
             ability_kbd = GameManager.Instance.inputManager.ability_kbd.action;
 
             
-            useItem_kbd = GameManager.Instance.inputManager.p2_useItem_kbd.action;*/
+            useItem_kbd = GameManager.Instance.inputManager.p2_useItem_kbd.action;#1#
             
             // undef values. will get second controller later
             // "Empty" is just some inaccessible keyboard key so we don't get null reference errors
@@ -91,14 +79,32 @@ public class PlayerController : RacerController
             turn = GameManager.Instance.inputManager.p2_empty_kbd.action;
             ability = GameManager.Instance.inputManager.p2_empty_kbd.action;
             useItem = GameManager.Instance.inputManager.p2_empty_kbd.action;
-        }
+        }*/
         
+        // refactor all to use input.actions
+        accelerate = input.actions.FindAction("Accelerate");
+        Debug.Log("Accelerate is equal to" + accelerate);
+        brake = input.actions.FindAction("Brake");
+        turn = input.actions.FindAction("Turn");
+
+        /*accelerate_kbd = GameManager.Instance.inputManager.accelerate_kbd.action;
+        brake_kbd = GameManager.Instance.inputManager.brake_kbd.action;
+        turnRight_kbd = GameManager.Instance.inputManager.turnRight_kbd.action;
+        turnLeft_kbd = GameManager.Instance.inputManager.turnLeft_kbd.action;
+        */
+        
+        ability = input.actions.FindAction("Ability");
+        // ability_kbd = GameManager.Instance.inputManager.ability_kbd.action;
+
+        useItem = input.actions.FindAction("UseItem");
+        // useItem_kbd = GameManager.Instance.inputManager.useItem_kbd.action;
     }
 
     public void InitializeSingleCamera()
     {
             GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
             MainCamera = cameraObject.GetComponent<Camera>();
+            input.camera = MainCamera;
     
             GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
             CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
@@ -144,6 +150,7 @@ public class PlayerController : RacerController
     }
     private void FixedUpdate()
     {
+        
         var old_transform_position = transform.position;
         // Spin Out Handler
         if (base.SpinOut)

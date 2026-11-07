@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set;}
 
-    public InputSys inputManager { get; private set;}
+    public InputSys inputList { get; private set;}
 
     public RaceUI UIManager { get; private set;}
     
@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour
         GameObject UIManagerObject = Instantiate(UIManagerPrefab, gameObject.transform);
         GameObject audioManagerObject = Instantiate(AudioManagerPrefab, gameObject.transform);
         
-        inputManager = inputManagerObject.GetComponent<InputSys>();
+        inputList = inputManagerObject.GetComponent<InputSys>();
         UIManager = UIManagerObject.GetComponent<RaceUI>();
         audioManager = audioManagerObject.GetComponent<AudioManager>();
 
