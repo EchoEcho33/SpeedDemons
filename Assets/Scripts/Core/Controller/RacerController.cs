@@ -13,6 +13,9 @@ public abstract class RacerController : MonoBehaviour
     public bool SpinOut = false;
     public float SpinOutDuration = 0;
     
+    // just cancels the spinout check - gianluca
+    public bool invulnerable = false;
+    
     public bool preventMovement = false;
     public float immobileDuration = 0;
 
