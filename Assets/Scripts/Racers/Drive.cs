@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 
 public class Drive : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class Drive : MonoBehaviour
     public float m_currentSpeed = 0.0f;
     private float m_speedModifier = 1.0f;
     private Coroutine m_resetTimer;
-    private float m_turnSpeed = 0.0f;
-    private bool m_isDrifting = false;
+    // private float m_turnSpeed = 0.0f;
+    // private bool m_isDrifting = false;
     private int m_driftAngle = 0;
     public StudioEventEmitter drivingAudio;
     private Rigidbody rigidbody;
@@ -135,6 +136,9 @@ public class Drive : MonoBehaviour
     // TODO: Check that wheels are grounded
     private bool IsGrounded()
     {
+        Debug.Log("This is being called" + transform.position);
+        Ray groundCheck = new Ray(transform.position + Vector3.up * 0.4f, Vector3.down);
+        Debug.DrawRay(transform.position + Vector3.up * 0.4f, Vector3.down * 0.4f, Color.red, 0.25f);
         return true;
     }
 
