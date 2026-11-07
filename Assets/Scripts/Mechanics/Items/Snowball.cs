@@ -47,23 +47,28 @@ public class Snowball : Item
     {
         if (sphereObject.activeSelf)
         {
-            // Grow sphere based on growth scale
-            sphereObject.transform.localScale += new Vector3(growthscale, growthscale, growthscale) * Time.deltaTime;
-            sphereObject.transform.rotation *= Quaternion.AngleAxis(10 * racer.RacerController.Drive.GetCurrentSpeed() * Time.deltaTime, 
-                                            Quaternion.LookRotation(racer.RacerController.gameObject.transform.forward, 
-                                            racer.RacerController.gameObject.transform.up) * Vector3.right);
-
-            if (follow != null) follow.Radius = basefollowr + sphereObject.transform.localScale.x;
-            
-            // When the sphere reaches it's maximum size threshold, player returns to normal
-            if (sphereObject.transform.localScale.x >= maxsize)
-            {
-                sphereObject.SetActive(false);
-                if (follow != null) follow.Radius = basefollowr;
-                sphereObject.transform.localScale = new Vector3(startsize, startsize, startsize);
-            }
+            Roll();
         }
 
+    }
+
+    private void Roll()
+    {
+        // Grow sphere based on growth scale
+        sphereObject.transform.localScale += new Vector3(growthscale, growthscale, growthscale) * Time.deltaTime;
+        sphereObject.transform.rotation *= Quaternion.AngleAxis(10 * racer.RacerController.Drive.GetCurrentSpeed() * Time.deltaTime, 
+                                        Quaternion.LookRotation(racer.RacerController.gameObject.transform.forward, 
+                                        racer.RacerController.gameObject.transform.up) * Vector3.right);
+
+        if (follow != null) follow.Radius = basefollowr + sphereObject.transform.localScale.x;
+        
+        // When the sphere reaches it's maximum size threshold, player returns to normal
+        if (sphereObject.transform.localScale.x >= maxsize)
+        {
+            sphereObject.SetActive(false);
+            if (follow != null) follow.Radius = basefollowr;
+            sphereObject.transform.localScale = new Vector3(startsize, startsize, startsize);
+        }
     }
 
     //event for hitting other drivers
@@ -79,8 +84,6 @@ public class Snowball : Item
             return;
         }
 
-        //placeholder for spinout
-        racer.SpinOut = true;
-        racer.SpinOutDuration = 3.0f;
+        drive.Racer.RacerState.ApplyDebuff(RacerState.Debuff.SPINOUT);
     }
 }

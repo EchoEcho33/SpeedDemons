@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce81eed1fea789419ed100bee514345, type: 3}
+  m_Name: GradientFogRenderer
+  m_EditorClassIdentifier: Assembly-CSharp::GradientFogRenderer
+  m_Active: 1
+  settings:
+    ShaderFogGraph: {fileID: -6465566751694194690, guid: ff925979627e467458ec78294ef8d074, type: 3}
+    StartDistance: 10
+    EndDistance: 100
+    NearColor: {r: 0.20097543, g: 0.20449762, b: 0.3660378, a: 1}
+    MiddleColor: {r: 0.5471698, g: 0.26739052, b: 0.3828803, a: 1}
+    FarColor: {r: 0.1281145, g: 0.1276824, b: 0.2981131, a: 1}
+    FogStart: 0.068
+    FogMax: 1
+    FirstColorThreshold: 0.154
+    SecondColorThreshold: 0.769
+    MaxOpacity: 0.641

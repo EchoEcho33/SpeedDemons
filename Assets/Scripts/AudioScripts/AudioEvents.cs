@@ -10,6 +10,9 @@ public class AudioEvents : MonoBehaviour
     [field: SerializeField] public EventReference basicCarDrive {get; private set;}
     public static AudioEvents instance {get; private set;}
 
+    [field: Header("Music")]
+    [field: SerializeField] public EventReference characterSelectMusic {get; private set;}
+
     private void Awake()
     {
         if(instance != null)

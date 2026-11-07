@@ -200,7 +200,7 @@ public class PlayerController : RacerController
             Steering = turn.ReadValue<Vector2>().x;
             if (accelerate.IsPressed() && brake.IsPressed())
             {
-                Drive.Turn(Steering);
+                Drive.Turn(Steering, 1.5f);
             }
             else
             {

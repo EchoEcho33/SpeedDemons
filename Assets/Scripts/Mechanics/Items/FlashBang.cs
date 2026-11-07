@@ -25,14 +25,19 @@ public class FlashBang : Item
         //flash the camera
         if (victim is PlayerController)
         {
-            imageObject = new GameObject("DaFlash");
-            imageObject.transform.SetParent(GameManager.Instance.UIManager.MainRaceCanvas.transform, false);
+            if (victim.activatedRF) {
+                imageObject = new GameObject("DaFlash");
+                imageObject.transform.SetParent(GameManager.Instance.UIManager.MainRaceCanvas.transform, false);
 
-            RectTransform rectTransform = imageObject.AddComponent<RectTransform>();
-            rectTransform.sizeDelta = new Vector2(1920 * 1.5f, 1080 * 1.5f);
+                RectTransform rectTransform = imageObject.AddComponent<RectTransform>();
+                rectTransform.sizeDelta = new Vector2(1920 * 1.5f, 1080 * 1.5f);
 
-            Image image = imageObject.AddComponent<Image>();
-            image.color = new Color(1, 1, 1, 1);
+                Image image = imageObject.AddComponent<Image>();
+                image.color = new Color(1, 1, 1, 1);
+            } else {
+                victim.activatedRF = false;
+                timeRemaining = 0;
+            }
          
         }
         //blind the AI someway somehow

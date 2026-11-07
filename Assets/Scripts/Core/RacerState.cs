@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
@@ -23,7 +24,22 @@ public class RacerState : MonoBehaviour
     private Item _secondaryItem = null;
     private float _itemCooldown = 0.5f;
     private bool _onItemCooldown = false;
-    private Item _usingItem;
+
+    public enum Debuff
+    {
+        SPINOUT,
+        SPEEDREDUCTION
+    }
+
+    public enum Buff
+    {
+        BARRIER,
+        SPEEDBOOST
+    }
+
+    private GameObject currVFX;
+    private bool activatedRF = false;
+
     
     public void AssignController(RacerController newRacerController)
     {
@@ -171,5 +187,109 @@ public class RacerState : MonoBehaviour
     {
         yield return new WaitForSeconds(_itemCooldown);
         _onItemCooldown = false;
+    }
+
+    public void ApplyDebuff(Debuff debuff)
+    {
+        if (activatedRF)
+        {
+            activatedRF = false;
+            Destroy(currVFX);
+            return;
+        }
+
+        switch (debuff)
+        {
+            case Debuff.SPINOUT:
+                DebuffSpinout();
+                break;
+            case Debuff.SPEEDREDUCTION:
+                DebuffSpeedReduction(2f, 0.8f);
+                break;
+        }
+    }
+
+    public void ApplyDebuff(Debuff debuff, float timer, float multiplier)
+    {
+        if (activatedRF)
+        {
+            activatedRF = false;
+            Destroy(currVFX);
+            return;
+        }
+
+        switch (debuff)
+        {
+            case Debuff.SPINOUT:
+                DebuffSpinout();
+                Debug.LogError("Timer and Multiplier not necessary for Spinout.");
+                break;
+            case Debuff.SPEEDREDUCTION:
+                DebuffSpeedReduction(timer, multiplier);
+                break;
+        }
+    }
+
+    private void DebuffSpinout()
+    {
+        if (RacerController.Drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
+        {
+            animator.SetBool("SpinOut", true);
+        }
+        RacerController.SpinOut = true;
+        RacerController.SpinOutDuration = 3.0f;
+    }
+
+    private void DebuffSpeedReduction(float timer, float multiplier)
+    {
+        if (multiplier > 1.0f)
+            multiplier = 0.8f;
+
+        RacerController.Drive.ApplyMultiplier(timer, multiplier);
+    }
+
+    public void ApplyBuff(Buff buff)
+    {
+        switch (buff)
+        {
+            case Buff.BARRIER:
+                AddRabbitsFoot();
+                break;
+            case Buff.SPEEDBOOST:
+                BuffSpeed(2f, 1.2f);
+                break;
+        }
+    }
+
+    public void ApplyBuff(Buff buff, float timer, float multiplier)
+    {
+        switch (buff)
+        {
+            case Buff.BARRIER:
+                AddRabbitsFoot();
+                Debug.LogError("Timer and Multiplier not necessary for Barrier.");
+                break;
+            case Buff.SPEEDBOOST:
+                BuffSpeed(timer, multiplier);
+                break;
+        }
+    }
+
+    private void AddRabbitsFoot()
+    {
+        activatedRF = true;
+    }
+
+    private void BuffSpeed(float timer, float multiplier)
+    {
+        if (multiplier < 1.0f)
+            multiplier = 1.2f;
+
+        RacerController.Drive.ApplyMultiplier(timer, multiplier);
+    }
+
+    public void ApplyVFX(GameObject particleSys)
+    {
+        currVFX = Instantiate(particleSys, RacerController.Drive.gameObject.transform);
     }
 }

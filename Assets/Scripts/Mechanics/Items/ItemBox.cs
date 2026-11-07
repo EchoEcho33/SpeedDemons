@@ -15,14 +15,14 @@ public class ItemBox : MonoBehaviour
 
             if (other.gameObject.CompareTag("Player"))
             {
-                Debug.Log("Hit!");
                 GameManager.Instance.UIManager.PickUpItem(randomItem);
             }
 
             Drive controller = other.gameObject.GetComponent<Drive>();
             controller.Racer.RacerState.PickUpItem(randomItem);
             
-            Destroy(gameObject);
+            RaceManager.Instance.RespawnSelf(gameObject);
+            gameObject.SetActive(false);
         } 
     }
 }
