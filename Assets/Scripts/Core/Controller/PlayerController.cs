@@ -268,6 +268,7 @@ public class PlayerController : RacerController
      * The output channel is an enum and manually indexing was not working.
      * This is an ugly switch statement that takes our value and turns it into the appropriate channel.
      * There will only be 4 players so there's 4 cases.
+     * idk why standard indexing doesn't work, but this does. 
      * - Gianluca
      */
     private OutputChannels indexChannel(int index)

@@ -20344,6 +20344,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
+      propertyPath: numPlayers
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
       propertyPath: _singlePlayer
       value: 0
       objectReference: {fileID: 0}
@@ -27688,6 +27692,10 @@ PrefabInstance:
       propertyPath: startFinishCheckpoint
       value: 
       objectReference: {fileID: 1332032555}
+    - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
+      propertyPath: racerSelections.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: 'startingGrid.Array.data[0]'
       value: 

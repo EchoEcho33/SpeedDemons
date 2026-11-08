@@ -81,7 +81,7 @@ public class RaceManager : MonoBehaviour
     public void StartRace()
     {     
         // this is the game's original code prior to the multiplayer split. depends on _singlePlayer
-        if (GameManager.Instance._singlePlayer)
+        /*if (GameManager.Instance._singlePlayer)
         {
             if (racerSelections.Count == 0) return;
 
@@ -131,9 +131,70 @@ public class RaceManager : MonoBehaviour
             racer.preventMovement = true;
             
             racerSelectionIndex++;
-        }
+        }*/
         
+        if (racerSelections.Count == 0) return;
+        List<RacerController> racerControllers = GameManager.Instance.GetRacers();
 
+        List<StartingGridSpot> remainingStartingGrid = startingGrid;
+        int[] excluded = new int[startingGrid.Count];
+        
+        for (int i = 0; i < GameManager.Instance.numPlayers; i++)
+        {
+            int startingGridIndex = RandomExceptList(0, startingGrid.Count, excluded);
+            // excluded.Add(startingGridIndex);
+            
+            // DELETE THIS
+            StartingGridSpot startingGridSpot = startingGrid[i];
+            
+            remainingStartingGrid.Remove(startingGridSpot);
+            
+            // TODO: There is no multi character select right now, so all players get the same character. 
+            RacerSelection localRacerSelection = GameManager.Instance.Player1; // TODO: Currently, the local player selection is the first in the list
+            if (localRacerSelection.kart == null || localRacerSelection.character == null)
+            {
+                Debug.LogError("Player" + i + "Character Selection not found.");
+                localRacerSelection = racerSelections[0];
+            }
+            (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
+            PlayerController player = GameManager.Instance.LocalRacers[i];
+            player.AssignCharacterAndKart(localCharacter, localKart);
+            player.InitializeSingleCamera();
+            player.AssignRacerState(localRacerState);
+            
+            // TODO: Change this to a loop when we swap to multiplayer more than 2
+            // ai countdown timer is handled by the racerController loop
+            player.immobileDuration = countdownTimer;
+            player.preventMovement = true;
+
+            
+            racerControllers.Remove(player);
+        }
+            
+        int racerSelectionIndex = 0;
+
+        List<Item> items = GameManager.Instance.items;
+            
+        GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
+            
+        /*foreach (RacerController racer in racerControllers)
+        {
+            // int startingGridIndex = random_except_list(startingGrid.Count, excluded);
+            // excluded.Add(startingGridIndex);
+            
+            // FIX
+            StartingGridSpot startingGridSpot = startingGrid[0];
+                
+                
+            (Character character, Kart kart, RacerState racerState) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot, false);
+            racer.AssignCharacterAndKart(character, kart);
+            racer.AssignRacerState(racerState);
+                
+            racer.immobileDuration = countdownTimer;
+            racer.preventMovement = true;
+                
+            racerSelectionIndex++;
+        }*/
         // foreach (Item item in items)
         // {
         //     item.spawnItem();
@@ -144,106 +205,11 @@ public class RaceManager : MonoBehaviour
         // }
         
         OnRaceStart?.Invoke();
-        }
-        else
-        {
-            if (racerSelections.Count == 0) return;
-
             
-            
-            List<StartingGridSpot> remainingStartingGrid = startingGrid;
-            int startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
-            // Gianluca - DELETE THIS IMMEDIATELY. it works tho
-            int P2startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
-            while (P2startingGridIndex == startingGridIndex)
-            {
-                P2startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
-            }
-            StartingGridSpot startingGridSpot = startingGrid[startingGridIndex];
-            StartingGridSpot P2startingGridSpot = startingGrid[P2startingGridIndex];
-            
-            remainingStartingGrid.RemoveAt(startingGridIndex);
-            // This may be slow but prevents crashing
-            remainingStartingGrid.Remove(P2startingGridSpot);
-            
-            // TODO: There is no multi character select right now, so both players get the same character. 
-            RacerSelection localRacerSelection = GameManager.Instance.Player1; // TODO: Currently, the local player selection is the first in the list
-            if (localRacerSelection.kart == null || localRacerSelection.character == null)
-            {
-                Debug.LogError("Player 1 Character Selection not found.");
-                localRacerSelection = racerSelections[0];
-            }
-            (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
-            PlayerController player1 = GameManager.Instance.LocalRacers[0];
-            player1.AssignCharacterAndKart(localCharacter, localKart);
-            player1.InitializeSingleCamera();
-            player1.AssignRacerState(localRacerState);
-            
-            // TODO: Change this to a loop when we swap to multiplayer more than 2
-            // ai countdown timer is handled by the racerController loop
-            player1.immobileDuration = countdownTimer;
-            player1.preventMovement = true;
-            
-            GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().JoinPlayer(0, 0, "Keyboard");
-            
-            (Character localCharacter2, Kart localKart2, RacerState localRacerState2) = SpawnRacer(localRacerSelection, P2startingGridSpot, true);
-            
-            PlayerController player2 = GameManager.Instance.LocalRacers[1];
-            player2.AssignCharacterAndKart(localCharacter2, localKart2);
-            // Check the script, but this is currently hardcoded for 2 players. 
-            player2.InitializeSingleCamera();
-            player2.AssignRacerState(localRacerState2);
-            
-            // TODO: Change this to a loop when we swap to multiplayer more than 2
-            // ai countdown timer is handled by the racerController loop
-            player2.immobileDuration = countdownTimer;
-            player2.preventMovement = true;
-            
-            List<RacerController> racerControllers = GameManager.Instance.GetRacers();
-            racerControllers.Remove(player1);
-            racerControllers.Remove(player2);
-            int racerSelectionIndex = 0;
-
-            List<Item> items = GameManager.Instance.items;
-            
-            GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
-            
-            foreach (RacerController racer in racerControllers)
-            {
-                startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
-                startingGridSpot = startingGrid[startingGridIndex];
-                remainingStartingGrid.RemoveAt(startingGridIndex);
-                
-                
-                (Character character, Kart kart, RacerState racerState) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot, false);
-                racer.AssignCharacterAndKart(character, kart);
-                racer.AssignRacerState(racerState);
-                
-                racer.immobileDuration = countdownTimer;
-                racer.preventMovement = true;
-                
-                racerSelectionIndex++;
-            }
-            
-
-            // foreach (Item item in items)
-            // {
-            //     item.spawnItem();
-            //     //Transform transform = item.itemObject.GetComponent<Transform>();
-            //     int xCoord = 40 + ((int) (Random.value * 6) * 5);
-            //     int zCoord = -100 - ((int) (Random.value * 6) * 5);
-            //     transform.Translate(xCoord, 0, zCoord);
-            // }
-            
-            
-            
-            OnRaceStart?.Invoke();
-            
-            // DO NOT modify the splitscreen setting in the editor.
-            // Must ensure that the splitscreen handler is called after initializing all the cameras.
-            // - Gianluca
-            GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().splitScreen = true;
-        }
+        // DO NOT modify the splitscreen setting in the editor.
+        // Must ensure that the splitscreen handler is called after initializing all the cameras.
+        // - Gianluca
+        GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().splitScreen = true;
        
     }
 
@@ -285,7 +251,7 @@ public class RaceManager : MonoBehaviour
         {
             finishedPlayerRacers.Add(racerState);
 
-            if (GameManager.Instance._singlePlayer || finishedPlayerRacers.Count >= 2) // TODO: Mike - This only works for 2-player rn
+            if (finishedPlayerRacers.Count >= GameManager.Instance.numPlayers)
             {
                 FinishRaceTimer();
             }
@@ -337,4 +303,37 @@ public class RaceManager : MonoBehaviour
         yield return new WaitForSeconds(itemRespawnTime);
         gameObject.SetActive(true);
     }
+
+    // lowkey copied this from stack overflow
+    // - gianluca
+
+    public static int RandomExceptList(int min, int max, int[] forbiddenElements) 
+    {
+        bool numberAllowed = true;
+        
+        if (forbiddenElements.Length>=1)
+        {
+            //this part here checks indefinitely for an allowed randomly generated number (outside "forbiddenElements" array). Eventually it will find it and return it and therefore terminate the loop.
+            while(true)
+            {
+                numberAllowed=true;
+            
+                int r = Random.Range(min,max+1);
+        
+                for(int i=0;i<forbiddenElements.Length;i++)
+                {
+                    if (r==forbiddenElements[i])
+                        numberAllowed=false;
+                }
+                if(numberAllowed)
+                    return r;
+            }
+        }
+        else
+        {
+            int r = Random.Range(min,max+1);
+            return r;
+        }
+    }
+
 }

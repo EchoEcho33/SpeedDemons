@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     public GameState startingGameState = GameState.Lobby;
     
     // default to multiplayer
-    [SerializeField] public bool _singlePlayer = false;
+    [SerializeField] public int numPlayers = 1;
 
     public GameState GameState { get; private set; }
 
@@ -133,51 +133,26 @@ public class GameManager : MonoBehaviour
     private void HandleGameStateSetWaitingToStart()
     {
         InitializeManagers();
-        // This is the original non multiplayer code
-        if (_singlePlayer)
-        {
-            // TODO: This is currently how all the players are initialized. This should be instead be populated via fields in a lobby.
-            // TODO: The Local Player driven by Inputs, maybe multiplayer?
-            GameObject playerControllerObject = new GameObject("PlayerController");
-            LocalRacers.Insert(0, playerControllerObject.AddComponent<PlayerController>());
-            _racers.Add(LocalRacers[0]);
 
-            // TODO: AI Racers
-            int totalRacerCount = RaceManager.Instance.racerCount;
-            int racerCount = --totalRacerCount;
-            while (racerCount > 0)
-            {
-                GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
-                AIController aiController = aiControllerObject.AddComponent<AIController>();
-                _racers.Add(aiController);
-                racerCount--;
-            }
+        
+        
+        for (int i = 0; i < numPlayers; i++)
+        {
+            GameObject playerControllerObject = new GameObject("PlayerController");
+            LocalRacers.Insert(i, playerControllerObject.AddComponent<PlayerController>());
+            _racers.Add(LocalRacers[i]);
         }
-        else
+        
+        
+        // TODO: AI Racers
+        int totalRacerCount = RaceManager.Instance.racerCount;
+        int racerCount = --totalRacerCount;
+        while (racerCount > 0)
         {
-            // TODO: This currently how all the players are initialized. This should be instead be populated via fields in a lobby.
-            // TODO: The Local Player driven by Inputs, maybe multiplayer?
-            GameObject playerControllerObject = new GameObject("PlayerController");
-            LocalRacers.Insert(0, playerControllerObject.AddComponent<PlayerController>());
-            LocalRacers[0].playerNum = 0;
-            _racers.Add(LocalRacers[0]);
-
-            GameObject p2PlayerControllerObject = new GameObject("PlayerController2");
-            LocalRacers.Insert(1, p2PlayerControllerObject.AddComponent<PlayerController>());
-            LocalRacers[1].playerNum = 1;
-            _racers.Add(LocalRacers[1]);
-
-            // TODO: AI Racers
-            int totalRacerCount = RaceManager.Instance.racerCount;
-            int racerCount = --totalRacerCount;
-            while (racerCount > 0)
-            {
-                GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
-                AIController aiController = aiControllerObject.AddComponent<AIController>();
-                _racers.Add(aiController);
-                racerCount--;
-            }
-            
+            GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
+            AIController aiController = aiControllerObject.AddComponent<AIController>();
+            _racers.Add(aiController);
+            racerCount--;
         }
         SetGameState(GameState.InMatch);
     }
@@ -185,6 +160,12 @@ public class GameManager : MonoBehaviour
     private void HandleGameStateSetInMatch()
     {
         UIManager.gameObject.SetActive(true);
+        // checks to make sure we at least have enough normal players to instantiate. will be better later
+        // gianluca
+        if (numPlayers > RaceManager.Instance.racerCount)
+        {
+            RaceManager.Instance.racerCount = numPlayers;
+        }
         RaceManager.Instance.StartRace();
     }
 
@@ -229,10 +210,5 @@ public class GameManager : MonoBehaviour
     {
         Player1 = player1;
         Player2 = player2;
-    }
-
-    public void SetSingleplayer(bool IsSingleplayer)
-    {
-        _singlePlayer = IsSingleplayer;
     }
 }
