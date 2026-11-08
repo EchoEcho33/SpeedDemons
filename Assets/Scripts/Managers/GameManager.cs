@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public enum GameState
@@ -65,6 +66,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public List<Kart> karts;
+    
+    // for cinemachine brain channel setup
+    public int currentCameraChannel = 1;
 
     private void Awake()
     {

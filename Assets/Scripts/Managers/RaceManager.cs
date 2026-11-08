@@ -83,7 +83,6 @@ public class RaceManager : MonoBehaviour
         // this is the game's original code prior to the multiplayer split. depends on _singlePlayer
         if (GameManager.Instance._singlePlayer)
         {
-            GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().splitScreen = false;  
             if (racerSelections.Count == 0) return;
 
         // TODO: Mike - This only spawns 1 drive script for a singleplayer game. Change this for multiplayer!
@@ -148,8 +147,9 @@ public class RaceManager : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().splitScreen = true; 
             if (racerSelections.Count == 0) return;
+
+            
             
             List<StartingGridSpot> remainingStartingGrid = startingGrid;
             int startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
@@ -176,7 +176,7 @@ public class RaceManager : MonoBehaviour
             (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
             PlayerController player1 = GameManager.Instance.LocalRacers[0];
             player1.AssignCharacterAndKart(localCharacter, localKart);
-            player1.InitializeMultiCamera(0);
+            player1.InitializeSingleCamera();
             player1.AssignRacerState(localRacerState);
             
             // TODO: Change this to a loop when we swap to multiplayer more than 2
@@ -184,12 +184,14 @@ public class RaceManager : MonoBehaviour
             player1.immobileDuration = countdownTimer;
             player1.preventMovement = true;
             
+            GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().JoinPlayer(0, 0, "Keyboard");
+            
             (Character localCharacter2, Kart localKart2, RacerState localRacerState2) = SpawnRacer(localRacerSelection, P2startingGridSpot, true);
             
             PlayerController player2 = GameManager.Instance.LocalRacers[1];
             player2.AssignCharacterAndKart(localCharacter2, localKart2);
             // Check the script, but this is currently hardcoded for 2 players. 
-            player2.InitializeMultiCamera(1);
+            player2.InitializeSingleCamera();
             player2.AssignRacerState(localRacerState2);
             
             // TODO: Change this to a loop when we swap to multiplayer more than 2
@@ -212,6 +214,7 @@ public class RaceManager : MonoBehaviour
                 startingGridSpot = startingGrid[startingGridIndex];
                 remainingStartingGrid.RemoveAt(startingGridIndex);
                 
+                
                 (Character character, Kart kart, RacerState racerState) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot, false);
                 racer.AssignCharacterAndKart(character, kart);
                 racer.AssignRacerState(racerState);
@@ -232,7 +235,14 @@ public class RaceManager : MonoBehaviour
             //     transform.Translate(xCoord, 0, zCoord);
             // }
             
+            
+            
             OnRaceStart?.Invoke();
+            
+            // DO NOT modify the splitscreen setting in the editor.
+            // Must ensure that the splitscreen handler is called after initializing all the cameras.
+            // - Gianluca
+            GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().splitScreen = true;
         }
        
     }
@@ -244,6 +254,10 @@ public class RaceManager : MonoBehaviour
         
         // Initialize kart + character.
         GameObject kartObject = Instantiate(kart.kartPrefab, startingGridSpot.GetSpawnPoint(), kart.kartPrefab.transform.rotation);
+        if (!isPlayer)
+        {
+            Destroy(kartObject.GetComponent<PlayerInput>());
+        }
         GameObject characterSlot = kartObject.transform.Find("Model").Find("CharacterSocket").gameObject; // Finds Kart Model and Character Socket to Place Character
         GameObject characterObject = Instantiate(character.characterPrefab, Vector3.zero, character.characterPrefab.transform.rotation); // TODO: Mike - The rotation of the character is currently just based on the prefab. 
         characterObject.transform.SetParent(characterSlot.transform, false);

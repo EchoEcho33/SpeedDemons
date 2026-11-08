@@ -43,13 +43,7 @@ public class PlayerController : RacerController
         Drive.Initialize(Character, Kart);
 
         // manages inputs for now
-        input = Kart.kartObject.AddComponent<PlayerInput>();
-        input.actions = GameManager.Instance.inputList.GetInputList();
-        input.defaultControlScheme = "Gamepad";
-        
-        input.defaultActionMap = "Driving";
-        input.SwitchCurrentControlScheme("Gamepad");
-        input.SwitchCurrentActionMap("Driving");
+        input = Kart.kartObject.GetComponent<PlayerInput>();
         
         Debug.Log(input.currentControlScheme);
         
@@ -105,16 +99,30 @@ public class PlayerController : RacerController
             GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
             MainCamera = cameraObject.GetComponent<Camera>();
             input.camera = MainCamera;
+            CinemachineBrain brain = MainCamera.GetComponent<CinemachineBrain>();
+            
+            // From outputchannels source:
+            // channels are designated by an enum in powers of two, so if we cast it, it should increment correctly
+            // - gianluca
     
             GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
             CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
+            
             CinemachineCamera.Follow = Kart.kartObject.transform;
 
             // audio stuff
             MainCamera.GetComponent<StudioListener>().SetAttenuationObject(MainCamera.gameObject);
+            
+            brain.ChannelMask = indexChannel(GameManager.Instance.currentCameraChannel);
+            CinemachineCamera.OutputChannel = indexChannel(GameManager.Instance.currentCameraChannel);
+
+            GameManager.Instance.currentCameraChannel++;
     }
 
-    public void InitializeMultiCamera(int playerIndex)
+    // TODO: delete this function as the inputsys will handle splitting the viewport
+    // probably remove the camera channels? i dont know if that interferes
+    // im not sure how 
+    /*public void InitializeMultiCamera(int playerIndex)
     {
         // this is hardcoded and bad. currently two player
         if (playerIndex == 0)
@@ -124,7 +132,6 @@ public class PlayerController : RacerController
             CinemachineBrain brain = MainCamera.GetComponent<CinemachineBrain>();
             brain.ChannelMask = OutputChannels.Channel01;
             MainCamera.rect = new Rect(0f, 0.5f, 1f, 0.5f);
-
     
             GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
             CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
@@ -147,7 +154,7 @@ public class PlayerController : RacerController
             CinemachineCamera.OutputChannel = OutputChannels.Channel02;
             CinemachineCamera.Follow = Kart.kartObject.transform;
         }
-    }
+    }*/
     private void FixedUpdate()
     {
         
@@ -254,6 +261,29 @@ public class PlayerController : RacerController
             {
                 Drive.Decelerate(Brake, Kart._brakeStrength);
             }
+        }
+    }
+
+    /*
+     * The output channel is an enum and manually indexing was not working.
+     * This is an ugly switch statement that takes our value and turns it into the appropriate channel.
+     * There will only be 4 players so there's 4 cases.
+     * - Gianluca
+     */
+    private OutputChannels indexChannel(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                return OutputChannels.Channel01;
+            case 2:
+                return OutputChannels.Channel02;
+            case 3:
+                return OutputChannels.Channel03;
+            case 4:
+                return OutputChannels.Channel04;
+            default:
+                return OutputChannels.Default;
         }
     }
 }

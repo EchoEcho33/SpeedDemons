@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class CharButton : Button
 {
@@ -79,7 +80,12 @@ public class CharButton : Button
     private void SpawnRacerModel(Character character, Kart kart, GameObject spawnLocation)
     {
         // Initialize kart + character.
-        GameObject kartObject = Instantiate(kart.kartPrefab, spawnLocation.transform);
+        GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().playerPrefab = kart.kartPrefab;
+        GameObject kartObject = GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().JoinPlayer().gameObject;
+        
+        kartObject.transform.position = spawnLocation.transform.position;
+        
+        // GameObject kartObject = Instantiate(kart.kartPrefab, spawnLocation.transform);
         // TODO - Gianluca: Had to change this to be 2 since one of the powerups messed up the order.
         // need a guaranteed way to get the characterslot object instead
         GameObject characterSlot = kartObject.transform.GetChild(2).transform.GetChild(0).gameObject; // First child should be the CharacterSlot!
