@@ -25,6 +25,7 @@ public class Drive : MonoBehaviour
     private int m_driftAngle = 0;
     public StudioEventEmitter drivingAudio;
     private Rigidbody rigidbody;
+    public LayerMask ground;
 
     public void AssignController(RacerController newRacerController)
     {
@@ -38,6 +39,7 @@ public class Drive : MonoBehaviour
         drivingAudio = AudioManager.instance.createEmitter(AudioEvents.instance.basicCarDrive, this.gameObject);
         drivingAudio.Play();
         rigidbody = gameObject.GetComponent<Rigidbody>();
+        ground = LayerMask.GetMask("GroundLayer");
     }
 
     public void Accelerate(float amplitude)
@@ -60,10 +62,15 @@ public class Drive : MonoBehaviour
         if (m_currentSpeed < -kart._maxSpeed * m_speedModifier / 2)
             m_currentSpeed = -kart._maxSpeed * m_speedModifier / 2;
 
-        float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime * m_speedModifier;
-        
+        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime * m_speedModifier;
+        //transform.position += transform.forward * velocityUpdate;
+        float speed = (m_currentSpeed + initialFrameSpeed) / 2 * m_speedModifier;
+        Vector3 forward = rigidbody.rotation * Vector3.forward;
 
-        transform.position += transform.forward * velocityUpdate;
+        Vector3 velocity = speed * forward;
+        velocity.y = rigidbody.linearVelocity.y;
+        rigidbody.linearVelocity = velocity;
+
         UpdateSound(1);
     }
 
@@ -75,9 +82,14 @@ public class Drive : MonoBehaviour
         if (m_currentSpeed < 0)
             m_currentSpeed = 0;
 
-        float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime * m_speedModifier;
+        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime * m_speedModifier;
+        //transform.position += transform.forward * velocityUpdate;
+        float speed = (m_currentSpeed + initialFrameSpeed) / 2 * m_speedModifier;
+        Vector3 forward = rigidbody.rotation * Vector3.forward;
 
-        transform.position += transform.forward * velocityUpdate;
+        Vector3 velocity = speed * forward;
+        velocity.y = rigidbody.linearVelocity.y;
+        rigidbody.linearVelocity = velocity;
         UpdateSound(-1);
     }
 
@@ -91,10 +103,18 @@ public class Drive : MonoBehaviour
             
         if (turnDirection != 0)
         {
-            transform.position += Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime / 100;
+
+            //transform.position += Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime / 100;
+
             //rigidbody.linearVelocity = kart._turnRadius * turnDirection * turnMultiplier * rigidbody.linearVelocity * Time.deltaTime / 100;
 
-            transform.Rotate(0, kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime, 0, Space.Self);
+
+            // transform.Rotate(0, kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime, 0, Space.Self);
+            float turnAmount = kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.fixedDeltaTime;
+            rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(0, turnAmount, 0));
+
+            Vector3 turnVelocity = Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed / 100f;
+            rigidbody.linearVelocity += turnVelocity;
         }
 
         if (turnMultiplier != 1.0f)
@@ -124,9 +144,14 @@ public class Drive : MonoBehaviour
         if (m_currentSpeed < 0)
             m_currentSpeed = 0;
 
-        float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime;
+        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime;
+        //transform.position += transform.forward * velocityUpdate;
+        float speed = (m_currentSpeed + initialFrameSpeed) / 2;
+        Vector3 forward = rigidbody.rotation * Vector3.forward;
 
-        transform.position += transform.forward * velocityUpdate;
+        Vector3 velocity = speed * forward;
+        velocity.y = rigidbody.linearVelocity.y;
+        rigidbody.linearVelocity = velocity;
     }
 
     public void PreventMovement()
@@ -141,12 +166,13 @@ public class Drive : MonoBehaviour
     {
         // Debug.Log("This is being called" + transform.position);
 
-        Vector3 down = -transform.up;
+        Vector3 down = Vector3.down;
 
         Ray groundCheck = new Ray(transform.position + transform.up * 0.8f, down);
-        Debug.DrawRay(transform.position + transform.up * 0.8f, down * 0.9f, Color.red, 0.25f);
-        isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, 0.9f);
-        print(isGrounded);
+        Debug.DrawRay(transform.position + transform.up * 0.8f, down * 1.6f, Color.red, 0.25f);
+        isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, 1.6f, ground);
+        print(groundHitInfo.collider);
+        // Add mask for ground layer.
     }
 
     public void setNormalRotation()
@@ -171,7 +197,8 @@ public class Drive : MonoBehaviour
 
     private void OrientTowardsVelocity()
     {
-        transform.Rotate(0, -m_driftAngle / 10.0f, 0, Space.Self);
+        // transform.Rotate(0, -m_driftAngle / 10.0f, 0, Space.Self);
+        rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(0, -m_driftAngle / 10.0f, 0));
     }
 
     private void OrientForDrift(float turnDirection)
@@ -188,7 +215,8 @@ public class Drive : MonoBehaviour
             }
         }
 
-        transform.Rotate(0, m_driftAngle / 10.0f, 0, Space.Self);
+        // transform.Rotate(0, m_driftAngle / 10.0f, 0, Space.Self);
+        rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(0, m_driftAngle / 10.0f, 0));
     }
 
     private void CenterOrientation()
@@ -202,7 +230,8 @@ public class Drive : MonoBehaviour
             ++m_driftAngle;
         }
 
-        transform.Rotate(0, m_driftAngle / 10.0f, 0, Space.Self);
+        // transform.Rotate(0, m_driftAngle / 10.0f, 0, Space.Self);
+        rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(0, m_driftAngle / 10.0f, 0));
     }
     
     // Audio
