@@ -168,6 +168,11 @@ public class PlayerController : RacerController
             return; // prevent any movement in update
         }
 
+        // Check if the kart's grounded.
+        Drive.CheckGrounded();
+        // Normal Rotation.
+        Drive.setNormalRotation();
+
         // Brake and Accelerate
         if (accelerate.IsPressed() || brake.IsPressed())
         {
@@ -223,6 +228,7 @@ public class PlayerController : RacerController
                 Drive.Turn(Steering);
             }
         }
+
 
         // Ability
         if (ability.IsPressed() || ability_kbd.IsPressed())

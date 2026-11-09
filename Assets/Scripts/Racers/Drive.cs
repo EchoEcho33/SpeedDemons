@@ -4,6 +4,7 @@ using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
+using Unity.VisualScripting;
 
 public class Drive : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class Drive : MonoBehaviour
     private Kart kart;
 
     public float m_currentSpeed = 0.0f;
+    private bool isGrounded = false;
+    private RaycastHit groundHitInfo;
+
     private float m_speedModifier = 1.0f;
     private Coroutine m_resetTimer;
     // private float m_turnSpeed = 0.0f;
@@ -38,7 +42,7 @@ public class Drive : MonoBehaviour
 
     public void Accelerate(float amplitude)
     {
-        if (!IsGrounded()) return;
+        if (!isGrounded) return;
         
         float initialFrameSpeed = m_currentSpeed;
         m_currentSpeed += kart._maxAcceleration * amplitude * Time.deltaTime * m_speedModifier;
@@ -79,30 +83,28 @@ public class Drive : MonoBehaviour
 
     public void Turn(float turnDirection, float turnMultiplier = 1.0f)
     {
-        if (IsGrounded())
+        if (!isGrounded) return;
+        if (m_driftAngle != 0)
         {
-            if (m_driftAngle != 0)
-            {
-                OrientTowardsVelocity();
-            }
+            OrientTowardsVelocity();
+        }
             
-            if (turnDirection != 0)
-            {
-                transform.position += Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime / 100;
-                //rigidbody.linearVelocity = kart._turnRadius * turnDirection * turnMultiplier * rigidbody.linearVelocity * Time.deltaTime / 100;
+        if (turnDirection != 0)
+        {
+            transform.position += Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime / 100;
+            //rigidbody.linearVelocity = kart._turnRadius * turnDirection * turnMultiplier * rigidbody.linearVelocity * Time.deltaTime / 100;
 
-                transform.Rotate(0, kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime, 0, Space.Self);
-            }
+            transform.Rotate(0, kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime, 0, Space.Self);
+        }
 
-            if (turnMultiplier != 1.0f)
-            {
-                OrientForDrift(turnDirection);
-                Debug.Log("Drifting...");
-            }
-            else if (m_driftAngle != 0)
-            {
-                CenterOrientation();
-            }
+        if (turnMultiplier != 1.0f)
+        {
+            OrientForDrift(turnDirection);
+            Debug.Log("Drifting...");
+        }
+        else if (m_driftAngle != 0)
+        {
+            CenterOrientation();
         }
 
 
@@ -112,7 +114,7 @@ public class Drive : MonoBehaviour
 
     public void SpinOut()
     {
-        if (!IsGrounded()) return;
+        if (!isGrounded) return;
 
         float initialFrameSpeed = m_currentSpeed;
         float slowdownSpeed = 20;
@@ -129,17 +131,37 @@ public class Drive : MonoBehaviour
 
     public void PreventMovement()
     {
-        if (!IsGrounded()) return;
+        if (!isGrounded) return;
         m_currentSpeed = 0;
     }
 
-    // TODO: Check that wheels are grounded
-    private bool IsGrounded()
+    // TODO: Grounded function is set for now at a set height.
+    // Make it customizable for different karts at different heights.
+    public void CheckGrounded()
     {
-        Debug.Log("This is being called" + transform.position);
-        Ray groundCheck = new Ray(transform.position + Vector3.up * 0.4f, Vector3.down);
-        Debug.DrawRay(transform.position + Vector3.up * 0.4f, Vector3.down * 0.4f, Color.red, 0.25f);
-        return true;
+        // Debug.Log("This is being called" + transform.position);
+
+        Vector3 down = -transform.up;
+
+        Ray groundCheck = new Ray(transform.position + transform.up * 0.8f, down);
+        Debug.DrawRay(transform.position + transform.up * 0.8f, down * 0.9f, Color.red, 0.25f);
+        isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, 0.9f);
+        print(isGrounded);
+    }
+
+    public void setNormalRotation()
+    {
+        if (!isGrounded) return;
+        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, groundHitInfo.normal).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(forward, groundHitInfo.normal);
+
+        rigidbody.MoveRotation(
+            Quaternion.Slerp(
+                rigidbody.rotation,
+                targetRotation,
+                Time.deltaTime * 4f
+            )
+        );
     }
 
     public float GetCurrentSpeed()
