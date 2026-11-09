@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6453058d70d6b5f43b778152670d391e, type: 3}
   m_Name: YetiKart
   m_EditorClassIdentifier: Assembly-CSharp::Kart
-  _maxSpeed: 20
+  _maxSpeed: 30
   _maxAcceleration: 15
   _brakeStrength: 30
   _drag: 6
