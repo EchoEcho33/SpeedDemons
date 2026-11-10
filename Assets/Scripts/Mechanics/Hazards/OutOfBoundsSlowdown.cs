@@ -20,13 +20,13 @@ public class OutOfBoundsSlowdown : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("AI"))
+        Drive collisionRacer = other.gameObject.GetComponent<Drive>();
+
+        if (collisionRacer != null)
         {
-            Drive collisionRacer = other.gameObject.GetComponent<Drive>();
-            
             if (!collisionRacer.Racer.SpinOut)
             {
-                collisionRacer.Racer.RacerState.ApplyDebuff(RacerState.Debuff.SPEEDREDUCTION, 1000000f, 0.75f);
+                collisionRacer.Racer.RacerState.GrassSlowdown(0.75f);
             }
             
         }
@@ -34,13 +34,13 @@ public class OutOfBoundsSlowdown : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("AI"))
+        Drive collisionRacer = other.gameObject.GetComponent<Drive>();
+
+        if (collisionRacer != null)
         {
-            Drive collisionRacer = other.gameObject.GetComponent<Drive>();
-            
             if (!collisionRacer.Racer.SpinOut)
             {
-                collisionRacer.Racer.RacerState.ApplyBuff(RacerState.Buff.SPEEDBOOST, 1000000f, 1.00001f);
+                collisionRacer.Racer.RacerState.RemoveSpeedDebuff();
             }
             
         }

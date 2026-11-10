@@ -237,6 +237,18 @@ public class RacerState : MonoBehaviour
         }
     }
 
+    public void GrassSlowdown(float multiplier)
+    {
+        if (RacerController.Drive.Multiplier() <= 0)
+            RacerController.Drive.OverrideSlowdown(multiplier);
+    }
+
+    public void RemoveSpeedDebuff()
+    {
+        if (RacerController.Drive.Multiplier() < 0)
+            RacerController.Drive.ResetMultipliers();
+    }
+
     private void DebuffSpinout()
     {
         if (RacerController.Drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
