@@ -2062,8 +2062,8 @@ GameObject:
   - component: {fileID: 276748996}
   - component: {fileID: 276748995}
   - component: {fileID: 276748994}
-  m_Layer: 0
-  m_Name: Cube (29)
+  m_Layer: 8
+  m_Name: Ramp Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3421,8 +3421,8 @@ GameObject:
   - component: {fileID: 344317385}
   - component: {fileID: 344317384}
   - component: {fileID: 344317383}
-  m_Layer: 0
-  m_Name: Cube (19)
+  m_Layer: 8
+  m_Name: Ramp Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

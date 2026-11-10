@@ -331,9 +331,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7603069183561121243}
   serializedVersion: 5
-  m_Mass: 100
+  m_Mass: 500
   m_LinearDamping: 0
-  m_AngularDamping: 18.46
+  m_AngularDamping: 15
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -365,12 +365,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.44, y: 0.9, z: 2.85}
-  m_Center: {x: 0, y: 0.45, z: -0.075}
+  m_Size: {x: 1.44, y: 0.62, z: 2.8}
+  m_Center: {x: 0, y: 0.45, z: 0}
 --- !u!114 &-707341542021437086
 MonoBehaviour:
   m_ObjectHideFlags: 0
