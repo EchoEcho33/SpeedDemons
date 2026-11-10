@@ -52,7 +52,12 @@ public class RacerState : MonoBehaviour
         currLap = 1;
         abilityBar = 0;
 
-        GameManager.Instance.UIManager.UpdateLap(1);
+        if (RacerController is PlayerController)
+        {
+            PlayerController playerController = RacerController as PlayerController;
+            playerController.playerUI.UpdateLap(1);
+        }
+        
     }
     
 #if UNITY_EDITOR
@@ -102,7 +107,12 @@ public class RacerState : MonoBehaviour
             currLap++;
             
             //applies from all racers, change after getting Driver to connect with certain racerStates
-            GameManager.Instance.UIManager.UpdateLap(currLap);
+            
+            if (RacerController is PlayerController)
+            {
+                PlayerController playerController = RacerController as PlayerController;
+                playerController.playerUI.UpdateLap(currLap);
+            }
         }
     }
     
@@ -152,8 +162,11 @@ public class RacerState : MonoBehaviour
     public void updateBar(int add)
     {
         abilityBar = Mathf.Clamp(0, abilityBar + add, abilityMaxValue);
-
-        GameManager.Instance.UIManager.UpdateBar(abilityBar, abilityMaxValue);
+        if (RacerController is PlayerController)
+        {
+            PlayerController playerController = RacerController as PlayerController;
+            playerController.playerUI.UpdateBar(abilityBar, abilityMaxValue);
+        }
     }
 
     public void PickUpItem(Item item)
@@ -165,6 +178,11 @@ public class RacerState : MonoBehaviour
         {
             _secondaryItem = item;
         }
+        if (RacerController is PlayerController)
+        {
+            PlayerController playerController = RacerController as PlayerController;
+            playerController.playerUI.PickUpItem(item);
+        }
     }
 
     public bool UseItem()
@@ -174,7 +192,12 @@ public class RacerState : MonoBehaviour
             _onItemCooldown = true;
             Item instantiatedItem = Instantiate(_primaryItem, RacerController.transform);
             instantiatedItem.Use(this);
-            GameManager.Instance.UIManager.UseItem();
+            
+            if (RacerController is PlayerController)
+            {
+                PlayerController playerController = RacerController as PlayerController;
+                playerController.playerUI.UseItem();
+            }
             _primaryItem = _secondaryItem;
             _secondaryItem = null;
             StartCoroutine(ItemCooldown());

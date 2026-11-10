@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FMODUnity;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -42,6 +43,8 @@ public class RaceManager : MonoBehaviour
     private List<RacerState> finishedPlayerRacers = new();
     
     public static RaceManager Instance { get; private set; }
+
+    [Header("Player UI")] [SerializeField] private GameObject PlayerUIPrefab; 
     
     private void Awake()
     {
@@ -158,8 +161,15 @@ public class RaceManager : MonoBehaviour
                 localRacerSelection = racerSelections[0];
             }
             (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
+            
             PlayerController player = GameManager.Instance.LocalRacers[i];
             player.AssignCharacterAndKart(localCharacter, localKart);
+            player.MainCamera = localKart.kartObject.GetComponent<PlayerInput>().camera;
+            
+            // per player ui setup
+            player.playerUI = Instantiate(PlayerUIPrefab).GetComponent<RaceUI>();
+            player.playerUI.MainRaceCanvas.worldCamera = player.MainCamera;
+            player.playerUI.MainRaceCanvas.planeDistance = 1;
             
             player.AssignRacerState(localRacerState);
             
@@ -170,6 +180,7 @@ public class RaceManager : MonoBehaviour
 
             
             racerControllers.Remove(player);
+            
         }
             
         int racerSelectionIndex = 0;
@@ -229,8 +240,6 @@ public class RaceManager : MonoBehaviour
         {
             Destroy(kartObject.GetComponent<PlayerInput>());
         }
-
-        kartObject.GetComponent<PlayerInput>();
         
         GameObject characterSlot = kartObject.transform.Find("Model").Find("CharacterSocket").gameObject; // Finds Kart Model and Character Socket to Place Character
         GameObject characterObject = Instantiate(character.characterPrefab, Vector3.zero, character.characterPrefab.transform.rotation); // TODO: Mike - The rotation of the character is currently just based on the prefab. 
@@ -267,7 +276,7 @@ public class RaceManager : MonoBehaviour
         }
         
         // Setup racer state.
-        GameObject racerObject = new GameObject();
+        GameObject racerObject = new GameObject("RacerStateObject");
         RacerState racerState = racerObject.AddComponent<RacerState>();
         racerState.StartRace(startFinishCheckpoint);
         

@@ -3085,6 +3085,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sky
       objectReference: {fileID: 0}
+    - target: {fileID: 9115601680618778869, guid: ab5263b78f4f45540b3ea55e634d132c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20352,6 +20356,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
+      propertyPath: UIManagerPrefab
+      value: 
+      objectReference: {fileID: 6641532586504146744, guid: aa1963f61ee54efb8aa2ba96458af93d, type: 3}
+    - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
       propertyPath: 'items.Array.data[2]'
       value: 
       objectReference: {fileID: 2018730163724020607, guid: 164b0bfe776de41ebad554553f94ab06, type: 3}
@@ -27688,6 +27696,10 @@ PrefabInstance:
       propertyPath: racerCount
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
+      propertyPath: PlayerUIPrefab
+      value: 
+      objectReference: {fileID: 6641532586504146744, guid: 7c7ca0cecf892cd4da0e904b19693205, type: 3}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: startFinishCheckpoint
       value: 

@@ -6,10 +6,12 @@ using FMODUnity;
 
 public class PlayerController : RacerController
 {
-    public Camera MainCamera { get; private set; }
-    public CinemachineCamera CinemachineCamera;
+    public Camera MainCamera { get;  set; }
+    // public CinemachineCamera CinemachineCamera { get; set; }
     
     public PlayerInput input;
+
+    public RaceUI playerUI; 
     
     private InputAction accelerate;
 

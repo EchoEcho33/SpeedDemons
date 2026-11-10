@@ -13,10 +13,10 @@ public class ItemBox : MonoBehaviour
         {
             Item randomItem = GameManager.Instance.GetRandomItem();
 
-            if (other.gameObject.CompareTag("Player"))
-            {
-                GameManager.Instance.UIManager.PickUpItem(randomItem);
-            }
+            // if (other.gameObject.CompareTag("Player"))
+            // {
+            //     GameManager.Instance.UIManager.PickUpItem(randomItem);
+            // }
 
             Drive controller = other.gameObject.GetComponent<Drive>();
             controller.Racer.RacerState.PickUpItem(randomItem);

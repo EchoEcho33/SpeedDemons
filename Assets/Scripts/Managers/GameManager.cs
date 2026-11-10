@@ -17,7 +17,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set;}
 
-    public RaceUI UIManager { get; private set;}
+    // TODO: change this to a global ui that is separate from all players. each player will have their own ui instead
+    public GlobalRaceUI UIManager { get; private set;}
+    
+    // player ui will be instantiated as a child of this for organization purposes
+    public GameObject UIManagerObject; 
     
     public AudioManager audioManager { get; private set;}
     
@@ -158,7 +162,7 @@ public class GameManager : MonoBehaviour
     private void HandleGameStateSetInMatch()
     {
         UIManager.gameObject.SetActive(true);
-        // checks to make sure we at least have enough normal players to instantiate. will be better later
+        // checks to make sure we at least have enough human players to instantiate. will be better later
         // gianluca
         if (numPlayers > RaceManager.Instance.racerCount)
         {
@@ -176,11 +180,11 @@ public class GameManager : MonoBehaviour
     private void InitializeManagers()
     {
         // GameObject inputManagerObject = Instantiate(inputManagerPrefab, gameObject.transform);
-        GameObject UIManagerObject = Instantiate(UIManagerPrefab, gameObject.transform);
+        UIManagerObject = Instantiate(UIManagerPrefab, gameObject.transform);
         GameObject audioManagerObject = Instantiate(AudioManagerPrefab, gameObject.transform);
         
         // inputList = inputManagerObject.GetComponent<InputSys>();
-        UIManager = UIManagerObject.GetComponent<RaceUI>();
+        UIManager = UIManagerObject.GetComponent<GlobalRaceUI>();
         audioManager = audioManagerObject.GetComponent<AudioManager>();
 
         UIManager.gameObject.SetActive(false);
