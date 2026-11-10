@@ -141,13 +141,14 @@ public class RaceManager : MonoBehaviour
         if (racerSelections.Count == 0) return;
         List<RacerController> racerControllers = GameManager.Instance.GetRacers();
 
+        // TODO: this isnt used anymore, could remove
         List<StartingGridSpot> remainingStartingGrid = startingGrid;
-        int[] excluded = new int[startingGrid.Count];
+        List<int> excluded = new List<int>(); 
         
         for (int i = 0; i < GameManager.Instance.numPlayers; i++)
         {
-            int startingGridIndex = RandomExceptList(0, startingGrid.Count, excluded);
-            // excluded.Add(startingGridIndex);
+            int startingGridIndex = RandomRangeExcept(0, startingGrid.Count, excluded);
+            excluded.Add(startingGridIndex);
             
             StartingGridSpot startingGridSpot = startingGrid[i];
             
@@ -183,21 +184,22 @@ public class RaceManager : MonoBehaviour
             
         }
             
-        int racerSelectionIndex = 0;
+        // start after the local selections
+        int racerSelectionIndex = GameManager.Instance.numPlayers;
 
         List<Item> items = GameManager.Instance.items;
             
         GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
             
-        /*foreach (RacerController racer in racerControllers)
+        foreach (RacerController racer in racerControllers)
         {
-            // int startingGridIndex = random_except_list(startingGrid.Count, excluded);
-            // excluded.Add(startingGridIndex);
+            int startingGridIndex = RandomRangeExcept(0, startingGrid.Count, excluded);
+            excluded.Add(startingGridIndex);
             
             // FIX
-            StartingGridSpot startingGridSpot = startingGrid[0];
+            StartingGridSpot startingGridSpot = startingGrid[startingGridIndex];
                 
-                
+            // TODO: make a preset of ai characters, just so we don't 
             (Character character, Kart kart, RacerState racerState) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot, false);
             racer.AssignCharacterAndKart(character, kart);
             racer.AssignRacerState(racerState);
@@ -206,7 +208,7 @@ public class RaceManager : MonoBehaviour
             racer.preventMovement = true;
                 
             racerSelectionIndex++;
-        }*/
+        }
         // foreach (Item item in items)
         // {
         //     item.spawnItem();
@@ -220,7 +222,7 @@ public class RaceManager : MonoBehaviour
         
         // Must ensure that the splitscreen handler is only created after initializing all the cameras. Otherwise, splitscreen breaks
         // - Gianluca
-        PlayerInputManager inputManager = Instantiate(GameManager.Instance.inputManagerPrefab).GetComponent<PlayerInputManager>();
+        PlayerInputManager inputManager = Instantiate(GameManager.Instance.inputManagerPrefab).GetComponent/**/<PlayerInputManager>();
         inputManager.splitScreen = true;
 
     }
@@ -349,37 +351,25 @@ public class RaceManager : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    // lowkey copied this from stack overflow
+    // lowkey copied this from unity forums
     // - gianluca
 
-    public static int RandomExceptList(int min, int max, int[] forbiddenElements) 
+    public static int RandomRangeExcept(int minInclusive, int maxExclusive, List<int> except = null)
     {
-        bool numberAllowed = true;
-        
-        if (forbiddenElements.Length>=1)
+        IEnumerable<int> allowedRandomNumbers = Enumerable.Range(minInclusive, maxExclusive - minInclusive);
+        if (except != null)
         {
-            //this part here checks indefinitely for an allowed randomly generated number (outside "forbiddenElements" array). Eventually it will find it and return it and therefore terminate the loop.
-            while(true)
-            {
-                numberAllowed=true;
-            
-                int r = Random.Range(min,max+1);
-        
-                for(int i=0;i<forbiddenElements.Length;i++)
-                {
-                    if (r==forbiddenElements[i])
-                        numberAllowed=false;
-                }
-                if(numberAllowed)
-                    return r;
-            }
+            allowedRandomNumbers = allowedRandomNumbers.Except(except);
         }
-        else
+        if (allowedRandomNumbers.Count() == 0)
         {
-            int r = Random.Range(min,max+1);
-            return r;
+            Debug.LogError("Allowed numbers array is empty! Returning 0");
+            return 0;
         }
+        int randomIndex = Random.Range(0, allowedRandomNumbers.Count());
+        return allowedRandomNumbers.ElementAt(randomIndex);
     }
+    
     /*
      * The output channel is an enum and manually indexing was not working.
      * This is an ugly switch statement that takes our value and turns it into the appropriate channel.

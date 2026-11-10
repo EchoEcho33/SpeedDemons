@@ -21785,6 +21785,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 466986241}
     m_Modifications:
+    - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
+      propertyPath: _singlePlayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3540477030630903446, guid: 6e7cb0a601c16d9408a43fc2be94807f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -88.43001
@@ -21828,10 +21832,6 @@ PrefabInstance:
     - target: {fileID: 6161702022744575947, guid: 6e7cb0a601c16d9408a43fc2be94807f, type: 3}
       propertyPath: m_Name
       value: Speed Demons Streetlamp (09)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
-      propertyPath: _singlePlayer
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27702,7 +27702,7 @@ PrefabInstance:
       objectReference: {fileID: 1332032555}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: racerSelections.Array.size
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: 'startingGrid.Array.data[0]'
@@ -27736,6 +27736,38 @@ PrefabInstance:
       propertyPath: 'startingGrid.Array.data[7]'
       value: 
       objectReference: {fileID: 1514147225}
+    - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
+      propertyPath: racerSelections.Array.data[8].kart
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+    - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
+      propertyPath: racerSelections.Array.data[9].kart
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+    - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
+      propertyPath: racerSelections.Array.data[4].character
+      value: 
+      objectReference: {fileID: 11400000, guid: 401325ccb94698a668a94dd4270c9c18, type: 2}
+    - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
+      propertyPath: racerSelections.Array.data[5].character
+      value: 
+      objectReference: {fileID: 11400000, guid: 401325ccb94698a668a94dd4270c9c18, type: 2}
+    - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
+      propertyPath: racerSelections.Array.data[6].character
+      value: 
+      objectReference: {fileID: 11400000, guid: 401325ccb94698a668a94dd4270c9c18, type: 2}
+    - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
+      propertyPath: racerSelections.Array.data[7].character
+      value: 
+      objectReference: {fileID: 11400000, guid: 401325ccb94698a668a94dd4270c9c18, type: 2}
+    - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
+      propertyPath: racerSelections.Array.data[8].character
+      value: 
+      objectReference: {fileID: 11400000, guid: 401325ccb94698a668a94dd4270c9c18, type: 2}
+    - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
+      propertyPath: racerSelections.Array.data[9].character
+      value: 
+      objectReference: {fileID: 11400000, guid: 401325ccb94698a668a94dd4270c9c18, type: 2}
     - target: {fileID: 4863894500368768270, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: m_Name
       value: RaceManager
