@@ -160,6 +160,8 @@ public class RaceManager : MonoBehaviour
             PlayerController player = GameManager.Instance.LocalRacers[i];
             player.AssignCharacterAndKart(localCharacter, localKart);
             player.InitializeSingleCamera();
+            
+            
             player.AssignRacerState(localRacerState);
             
             // TODO: Change this to a loop when we swap to multiplayer more than 2
@@ -210,7 +212,7 @@ public class RaceManager : MonoBehaviour
         // Must ensure that the splitscreen handler is called after initializing all the cameras.
         // - Gianluca
         GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().splitScreen = true;
-       
+        
     }
 
     private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot, bool isPlayer)
@@ -335,5 +337,6 @@ public class RaceManager : MonoBehaviour
             return r;
         }
     }
+    
 
 }
