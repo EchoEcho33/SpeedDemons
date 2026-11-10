@@ -94,31 +94,6 @@ public class PlayerController : RacerController
         // useItem_kbd = GameManager.Instance.inputManager.useItem_kbd.action;
     }
 
-    public void InitializeSingleCamera()
-    {
-            GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
-            MainCamera = cameraObject.GetComponent<Camera>();
-            input.camera = MainCamera;
-            CinemachineBrain brain = MainCamera.GetComponent<CinemachineBrain>();
-            
-            // From outputchannels source:
-            // channels are designated by an enum in powers of two, so if we cast it, it should increment correctly
-            // - gianluca
-    
-            GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
-            CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
-            
-            CinemachineCamera.Follow = Kart.kartObject.transform;
-
-            // audio stuff
-            MainCamera.GetComponent<StudioListener>().SetAttenuationObject(MainCamera.gameObject);
-            
-            brain.ChannelMask = indexChannel(GameManager.Instance.currentCameraChannel);
-            CinemachineCamera.OutputChannel = indexChannel(GameManager.Instance.currentCameraChannel);
-
-            GameManager.Instance.currentCameraChannel++;
-    }
-
     // TODO: delete this function as the inputsys will handle splitting the viewport
     // probably remove the camera channels? i dont know if that interferes
     // im not sure how 
@@ -264,27 +239,5 @@ public class PlayerController : RacerController
         }
     }
 
-    /*
-     * The output channel is an enum and manually indexing was not working.
-     * This is an ugly switch statement that takes our value and turns it into the appropriate channel.
-     * There will only be 4 players so there's 4 cases.
-     * idk why standard indexing doesn't work, but this does. 
-     * - Gianluca
-     */
-    private OutputChannels indexChannel(int index)
-    {
-        switch (index)
-        {
-            case 1:
-                return OutputChannels.Channel01;
-            case 2:
-                return OutputChannels.Channel02;
-            case 3:
-                return OutputChannels.Channel03;
-            case 4:
-                return OutputChannels.Channel04;
-            default:
-                return OutputChannels.Default;
-        }
-    }
+    
 }

@@ -55,6 +55,7 @@ public class RaceUI : MonoBehaviour
         {
             // cant set active? doing this for now
             countdownText.enabled = false;
+            
         }
     }
 

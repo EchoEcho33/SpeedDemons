@@ -80,8 +80,10 @@ public class CharButton : Button
     private void SpawnRacerModel(Character character, Kart kart, GameObject spawnLocation)
     {
         // Initialize kart + character.
-        GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().playerPrefab = kart.kartPrefab;
-        GameObject kartObject = GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().JoinPlayer().gameObject;
+        GameObject kartObject = Instantiate(kart.kartPrefab, spawnLocation.transform);
+        // ensures player cannot control the default playerinput
+        Destroy(kartObject.GetComponent<PlayerInput>());
+        
         
         kartObject.transform.position = spawnLocation.transform.position;
         

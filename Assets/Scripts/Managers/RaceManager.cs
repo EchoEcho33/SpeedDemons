@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FMODUnity;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -144,7 +146,6 @@ public class RaceManager : MonoBehaviour
             int startingGridIndex = RandomExceptList(0, startingGrid.Count, excluded);
             // excluded.Add(startingGridIndex);
             
-            // DELETE THIS
             StartingGridSpot startingGridSpot = startingGrid[i];
             
             remainingStartingGrid.Remove(startingGridSpot);
@@ -159,8 +160,6 @@ public class RaceManager : MonoBehaviour
             (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
             PlayerController player = GameManager.Instance.LocalRacers[i];
             player.AssignCharacterAndKart(localCharacter, localKart);
-            player.InitializeSingleCamera();
-            
             
             player.AssignRacerState(localRacerState);
             
@@ -207,12 +206,12 @@ public class RaceManager : MonoBehaviour
         // }
         
         OnRaceStart?.Invoke();
-            
-        // DO NOT modify the splitscreen setting in the editor.
-        // Must ensure that the splitscreen handler is called after initializing all the cameras.
-        // - Gianluca
-        GameManager.Instance.inputManagerPrefab.GetComponent<PlayerInputManager>().splitScreen = true;
         
+        // Must ensure that the splitscreen handler is only created after initializing all the cameras. Otherwise, splitscreen breaks
+        // - Gianluca
+        PlayerInputManager inputManager = Instantiate(GameManager.Instance.inputManagerPrefab).GetComponent<PlayerInputManager>();
+        inputManager.splitScreen = true;
+
     }
 
     private (Character, Kart, RacerState) SpawnRacer(RacerSelection racerSelection, StartingGridSpot startingGridSpot, bool isPlayer)
@@ -221,16 +220,51 @@ public class RaceManager : MonoBehaviour
         Kart kart = Instantiate(racerSelection.kart);
         
         // Initialize kart + character.
-        GameObject kartObject = Instantiate(kart.kartPrefab, startingGridSpot.GetSpawnPoint(), kart.kartPrefab.transform.rotation);
+        // The PlayerInputManager requires JoinPlayer to be used for splitscreen, so if this is a player, we instantiate via that method
+        // - Gianluca
+        // The racerselection should eventually contain a new field that holds the input preference of this player for 4 players. 
+         GameObject kartObject = Instantiate(kart.kartPrefab, startingGridSpot.GetSpawnPoint(), kart.kartPrefab.transform.rotation);
+       
         if (!isPlayer)
         {
             Destroy(kartObject.GetComponent<PlayerInput>());
         }
+
+        kartObject.GetComponent<PlayerInput>();
+        
         GameObject characterSlot = kartObject.transform.Find("Model").Find("CharacterSocket").gameObject; // Finds Kart Model and Character Socket to Place Character
         GameObject characterObject = Instantiate(character.characterPrefab, Vector3.zero, character.characterPrefab.transform.rotation); // TODO: Mike - The rotation of the character is currently just based on the prefab. 
         characterObject.transform.SetParent(characterSlot.transform, false);
         character.characterObject = characterObject;
         kart.kartObject = kartObject;
+        
+        // setup camera for players. effectively equal to InitializeCamera, which was a method that was only ever called once.
+        // moved it here to prevent race conditions. - Gianluca
+        if (isPlayer)
+        {
+            GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
+            Camera mainCamera = cameraObject.GetComponent<Camera>();
+            kartObject.GetComponent<PlayerInput>().camera = mainCamera; 
+            
+            CinemachineBrain brain = mainCamera.GetComponent<CinemachineBrain>();
+            
+            // From outputchannels source:
+            // channels are designated by an enum in powers of two, so if we cast it, it should increment correctly
+            // - gianluca
+    
+            GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
+            CinemachineCamera cinemachine = cinemachineCameraObject.GetComponent<CinemachineCamera>();
+            
+            cinemachine.Follow = kart.kartObject.transform;
+
+            // audio stuff
+            mainCamera.GetComponent<StudioListener>().SetAttenuationObject(mainCamera.gameObject);
+            
+            brain.ChannelMask = indexChannel(GameManager.Instance.currentCameraChannel);
+            cinemachine.OutputChannel = indexChannel(GameManager.Instance.currentCameraChannel);
+
+            GameManager.Instance.currentCameraChannel++;
+        }
         
         // Setup racer state.
         GameObject racerObject = new GameObject();
@@ -337,6 +371,28 @@ public class RaceManager : MonoBehaviour
             return r;
         }
     }
-    
+    /*
+     * The output channel is an enum and manually indexing was not working.
+     * This is an ugly switch statement that takes our value and turns it into the appropriate channel.
+     * There will only be 4 players so there's 4 cases.
+     * idk why standard indexing doesn't work, but this does.
+     * - Gianluca
+     */
+    private OutputChannels indexChannel(int index)
+    {
+        switch (index)
+        {
+            case 1:
+                return OutputChannels.Channel01;
+            case 2:
+                return OutputChannels.Channel02;
+            case 3:
+                return OutputChannels.Channel03;
+            case 4:
+                return OutputChannels.Channel04;
+            default:
+                return OutputChannels.Default;
+        }
+    }
 
 }

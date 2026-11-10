@@ -17,8 +17,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set;}
 
-    public InputSys inputList { get; private set;}
-
     public RaceUI UIManager { get; private set;}
     
     public AudioManager audioManager { get; private set;}
@@ -177,11 +175,11 @@ public class GameManager : MonoBehaviour
     
     private void InitializeManagers()
     {
-        GameObject inputManagerObject = Instantiate(inputManagerPrefab, gameObject.transform);
+        // GameObject inputManagerObject = Instantiate(inputManagerPrefab, gameObject.transform);
         GameObject UIManagerObject = Instantiate(UIManagerPrefab, gameObject.transform);
         GameObject audioManagerObject = Instantiate(AudioManagerPrefab, gameObject.transform);
         
-        inputList = inputManagerObject.GetComponent<InputSys>();
+        // inputList = inputManagerObject.GetComponent<InputSys>();
         UIManager = UIManagerObject.GetComponent<RaceUI>();
         audioManager = audioManagerObject.GetComponent<AudioManager>();
 
