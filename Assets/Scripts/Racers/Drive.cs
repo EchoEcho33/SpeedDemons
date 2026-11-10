@@ -169,9 +169,9 @@ public class Drive : MonoBehaviour
         Vector3 down = Vector3.down;
 
         Ray groundCheck = new Ray(transform.position + transform.up * 0.8f, down);
-        Debug.DrawRay(transform.position + transform.up * 0.8f, down * 1.6f, Color.red, 0.25f);
+        // Debug.DrawRay(transform.position + transform.up * 0.8f, down * 1.6f, Color.red, 0.25f);
         isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, 1.6f, ground);
-        print(groundHitInfo.collider);
+        // print(groundHitInfo.collider);
         // Add mask for ground layer.
     }
 

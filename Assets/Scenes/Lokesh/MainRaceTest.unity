@@ -2994,7 +2994,7 @@ MonoBehaviour:
   m_Container: {fileID: 311519454}
   m_ItemsToInstantiate:
   - prefab: {fileID: 0}
-    Prefab: {fileID: 2513456922588543465, guid: c305d6746bcbd514bac211a36e4a0c37, type: 3}
+    Prefab: {fileID: 2513456922588543465, guid: b3c2b682f0be50743a96b7531f216985, type: 3}
     probability: 0
     Probability: 0
   m_Method: 1
@@ -14435,7 +14435,7 @@ MonoBehaviour:
   m_Container: {fileID: 1119903516}
   m_ItemsToInstantiate:
   - prefab: {fileID: 0}
-    Prefab: {fileID: 2513456922588543465, guid: c305d6746bcbd514bac211a36e4a0c37, type: 3}
+    Prefab: {fileID: 2513456922588543465, guid: b3c2b682f0be50743a96b7531f216985, type: 3}
     probability: 0
     Probability: 0
   m_Method: 1
@@ -22593,6 +22593,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrolleyHazard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5491999357052229251, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5865355317736953321, guid: 601daac41b3bd9824bb99a4f89dc2685, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -24523,7 +24527,7 @@ MonoBehaviour:
   m_Container: {fileID: 1617799267}
   m_ItemsToInstantiate:
   - prefab: {fileID: 0}
-    Prefab: {fileID: 2513456922588543465, guid: c305d6746bcbd514bac211a36e4a0c37, type: 3}
+    Prefab: {fileID: 2513456922588543465, guid: b3c2b682f0be50743a96b7531f216985, type: 3}
     probability: 0
     Probability: 0
   m_Method: 1
