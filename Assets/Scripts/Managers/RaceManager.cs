@@ -168,8 +168,8 @@ public class RaceManager : MonoBehaviour
             
             // per player ui setup
             player.playerUI = Instantiate(PlayerUIPrefab).GetComponent<RaceUI>();
-            player.playerUI.MainRaceCanvas.worldCamera = player.MainCamera;
-            player.playerUI.MainRaceCanvas.planeDistance = 1;
+            player.playerUI.playerCamera = player.MainCamera;
+            player.playerUI.viewport.gameObject.SetActive(false);
             
             player.AssignRacerState(localRacerState);
             

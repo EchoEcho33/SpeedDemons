@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
 /*
@@ -11,24 +13,25 @@ using UnityEngine.UI;
  */
 public class GlobalRaceUI : MonoBehaviour
 {
-    [Header("UI Elements")]
-    [SerializeField]
+    [Header("UI Elements")] [SerializeField]
     private Canvas _mainRaceCanvas;
-    
+
     public Canvas MainRaceCanvas => _mainRaceCanvas;
 
-    [SerializeField] private TextMeshProUGUI countdownText; 
-    
+    [SerializeField] private TextMeshProUGUI countdownText;
+
     private int currCountdownValue;
+
+    public event Action CountdownFinished;
 
     public void Start()
     {
-        
+
     }
-    
+
     IEnumerator TickCountdown(int countdown)
     {
-        
+
         currCountdownValue = countdown;
         while (currCountdownValue > 0)
         {
@@ -41,7 +44,7 @@ public class GlobalRaceUI : MonoBehaviour
         {
             // cant set active? doing this for now
             countdownText.enabled = false;
-            
+            CountdownFinished?.Invoke();
         }
     }
 
@@ -58,5 +61,5 @@ public class GlobalRaceUI : MonoBehaviour
             countdownText.enabled = false;
         }
     }
-    
+
 }

@@ -3085,10 +3085,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sky
       objectReference: {fileID: 0}
-    - target: {fileID: 9115601680618778869, guid: ab5263b78f4f45540b3ea55e634d132c, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21789,10 +21785,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 466986241}
     m_Modifications:
-    - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
-      propertyPath: _singlePlayer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3540477030630903446, guid: 6e7cb0a601c16d9408a43fc2be94807f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -88.43001
@@ -21836,6 +21828,10 @@ PrefabInstance:
     - target: {fileID: 6161702022744575947, guid: 6e7cb0a601c16d9408a43fc2be94807f, type: 3}
       propertyPath: m_Name
       value: Speed Demons Streetlamp (09)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
+      propertyPath: _singlePlayer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
