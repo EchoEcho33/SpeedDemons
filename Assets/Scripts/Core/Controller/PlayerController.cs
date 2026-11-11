@@ -139,7 +139,7 @@ public class PlayerController : RacerController
         {
             // Main Spin Out Code
             Drive.SpinOut();
-            base.SpinOutDuration -= Time.deltaTime;
+            base.SpinOutDuration -= Time.fixedDeltaTime;
 
             // Ends Spin Out Animation
             if (SpinOutDuration <= 1 && Drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
@@ -158,7 +158,7 @@ public class PlayerController : RacerController
         if (base.preventMovement)
         {
             Drive.PreventMovement();
-            immobileDuration -= Time.deltaTime;
+            immobileDuration -= Time.fixedDeltaTime;
             
             if (base.immobileDuration <= 0)
             {
@@ -245,10 +245,10 @@ public class PlayerController : RacerController
         float up_dot = Vector3.Dot(transform.up, new Vector3(0,1,0));
         if (up_dot <= 1.0)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward,new Vector3(0,1,0)), Time.deltaTime * 5);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward,new Vector3(0,1,0)), Time.fixedDeltaTime * 5);
         }
         
-        transform.position = new Vector3(transform.position.x, old_transform_position.y - (9.81f * Time.deltaTime), transform.position.z);
+        transform.position = new Vector3(transform.position.x, old_transform_position.y - (9.81f * Time.fixedDeltaTime), transform.position.z);
     }
 
     private void ControllerMove()

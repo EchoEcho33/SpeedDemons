@@ -16,6 +16,7 @@ public class Drive : MonoBehaviour
 
     public float m_currentSpeed = 0.0f;
     private bool isGrounded = false;
+    private bool hasTricked = false;
     private RaycastHit groundHitInfo;
 
     private float m_speedModifier = 1.0f;
@@ -47,12 +48,12 @@ public class Drive : MonoBehaviour
         if (!isGrounded) return;
         
         float initialFrameSpeed = m_currentSpeed;
-        m_currentSpeed += kart._maxAcceleration * amplitude * Time.deltaTime * m_speedModifier;
+        m_currentSpeed += kart._maxAcceleration * amplitude * Time.fixedDeltaTime * m_speedModifier;
 
         if (m_currentSpeed > kart._maxSpeed * m_speedModifier)
         {
             m_currentSpeed = kart._maxSpeed * m_speedModifier;
-            m_currentSpeed -= Time.deltaTime * m_speedModifier * kart._maxAcceleration;
+            m_currentSpeed -= Time.fixedDeltaTime * m_speedModifier * kart._maxAcceleration;
             if (m_currentSpeed < kart._maxSpeed)
             {
                 m_currentSpeed = kart._maxSpeed * m_speedModifier;
@@ -62,7 +63,7 @@ public class Drive : MonoBehaviour
         if (m_currentSpeed < -kart._maxSpeed * m_speedModifier / 2)
             m_currentSpeed = -kart._maxSpeed * m_speedModifier / 2;
 
-        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime * m_speedModifier;
+        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.fixedDeltaTime * m_speedModifier;
         //transform.position += transform.forward * velocityUpdate;
         float speed = (m_currentSpeed + initialFrameSpeed) / 2 * m_speedModifier;
         Vector3 forward = rigidbody.rotation * Vector3.forward;
@@ -77,12 +78,12 @@ public class Drive : MonoBehaviour
     public void Decelerate(float amplitude, float a)
     {
         float initialFrameSpeed = m_currentSpeed;
-        m_currentSpeed += -a * amplitude * Time.deltaTime * m_speedModifier;
+        m_currentSpeed += -a * amplitude * Time.fixedDeltaTime * m_speedModifier;
 
         if (m_currentSpeed < 0)
             m_currentSpeed = 0;
 
-        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime * m_speedModifier;
+        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.fixedDeltaTime * m_speedModifier;
         //transform.position += transform.forward * velocityUpdate;
         float speed = (m_currentSpeed + initialFrameSpeed) / 2 * m_speedModifier;
         Vector3 forward = rigidbody.rotation * Vector3.forward;
@@ -100,16 +101,16 @@ public class Drive : MonoBehaviour
         {
             OrientTowardsVelocity();
         }
-            
+
         if (turnDirection != 0)
         {
 
-            //transform.position += Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime / 100;
+            //transform.position += Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.fixedDeltaTime / 100;
 
-            //rigidbody.linearVelocity = kart._turnRadius * turnDirection * turnMultiplier * rigidbody.linearVelocity * Time.deltaTime / 100;
+            //rigidbody.linearVelocity = kart._turnRadius * turnDirection * turnMultiplier * rigidbody.linearVelocity * Time.fixedDeltaTime / 100;
 
 
-            // transform.Rotate(0, kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime, 0, Space.Self);
+            // transform.Rotate(0, kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.fixedDeltaTime, 0, Space.Self);
             float turnAmount = kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.fixedDeltaTime;
             rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(0, turnAmount, 0));
 
@@ -126,10 +127,7 @@ public class Drive : MonoBehaviour
         {
             CenterOrientation();
         }
-
-
-        // x = horizontal (- left + right) y = vertical (- down + up)
-        
+        // x = horizontal (- left + right) y = vertical (- down + up)   
     }
 
     public void SpinOut()
@@ -139,12 +137,12 @@ public class Drive : MonoBehaviour
         float initialFrameSpeed = m_currentSpeed;
         float slowdownSpeed = 20;
 
-        m_currentSpeed -= slowdownSpeed * Time.deltaTime;
+        m_currentSpeed -= slowdownSpeed * Time.fixedDeltaTime;
 
         if (m_currentSpeed < 0)
             m_currentSpeed = 0;
 
-        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime;
+        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.fixedDeltaTime;
         //transform.position += transform.forward * velocityUpdate;
         float speed = (m_currentSpeed + initialFrameSpeed) / 2;
         Vector3 forward = rigidbody.rotation * Vector3.forward;
@@ -152,6 +150,12 @@ public class Drive : MonoBehaviour
         Vector3 velocity = speed * forward;
         velocity.y = rigidbody.linearVelocity.y;
         rigidbody.linearVelocity = velocity;
+    }
+
+    // Just left or right for now.
+    public void Trick() {
+        if (isGrounded) return;
+        hasTricked = true;
     }
 
     public void PreventMovement()
@@ -185,7 +189,7 @@ public class Drive : MonoBehaviour
             Quaternion.Slerp(
                 rigidbody.rotation,
                 targetRotation,
-                Time.deltaTime * 4f
+                Time.fixedDeltaTime * 4f
             )
         );
     }
