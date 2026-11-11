@@ -115,6 +115,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Trick",
+                    "type": "Button",
+                    "id": "ddaff75a-d1fd-4d85-8824-39630bf4a0df",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Trick_KBD",
+                    "type": "Button",
+                    "id": "0fc86920-48cb-429a-8ef6-6588107d5d91",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "P2_Accelerate_KBD",
                     "type": "Button",
                     "id": "c9df3f7e-215c-4893-91da-7e21edcbeeeb",
@@ -172,6 +190,15 @@
                     "name": "P2_Empty_KBD",
                     "type": "Button",
                     "id": "223615dd-14b5-4ff8-8bc3-0239372a592c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "P2_Trick_KBD",
+                    "type": "Button",
+                    "id": "83096a6a-cb06-44c3-9803-eca7a9943352",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -385,6 +412,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "P2_Empty_KBD",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f321ff43-e4e8-47aa-9858-f9e510423e6c",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Trick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2246e2b4-04d5-4c3c-b673-316c35a99468",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Trick_KBD",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b25c037b-125b-4f23-b3a4-43f33f18e5c3",
+                    "path": "<Keyboard>/period",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P2_Trick_KBD",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

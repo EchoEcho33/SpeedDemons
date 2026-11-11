@@ -201,6 +201,24 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Trick"",
+                    ""type"": ""Button"",
+                    ""id"": ""ddaff75a-d1fd-4d85-8824-39630bf4a0df"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Trick_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""0fc86920-48cb-429a-8ef6-6588107d5d91"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""P2_Accelerate_KBD"",
                     ""type"": ""Button"",
                     ""id"": ""c9df3f7e-215c-4893-91da-7e21edcbeeeb"",
@@ -258,6 +276,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""name"": ""P2_Empty_KBD"",
                     ""type"": ""Button"",
                     ""id"": ""223615dd-14b5-4ff8-8bc3-0239372a592c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""P2_Trick_KBD"",
+                    ""type"": ""Button"",
+                    ""id"": ""83096a6a-cb06-44c3-9803-eca7a9943352"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -473,6 +500,39 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""P2_Empty_KBD"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f321ff43-e4e8-47aa-9858-f9e510423e6c"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Trick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2246e2b4-04d5-4c3c-b673-316c35a99468"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Trick_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b25c037b-125b-4f23-b3a4-43f33f18e5c3"",
+                    ""path"": ""<Keyboard>/period"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""P2_Trick_KBD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -493,6 +553,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Driving_Ability_KBD = m_Driving.FindAction("Ability_KBD", throwIfNotFound: true);
         m_Driving_UseItem_KBD = m_Driving.FindAction("UseItem_KBD", throwIfNotFound: true);
         m_Driving_UseItem = m_Driving.FindAction("UseItem", throwIfNotFound: true);
+        m_Driving_Trick = m_Driving.FindAction("Trick", throwIfNotFound: true);
+        m_Driving_Trick_KBD = m_Driving.FindAction("Trick_KBD", throwIfNotFound: true);
         m_Driving_P2_Accelerate_KBD = m_Driving.FindAction("P2_Accelerate_KBD", throwIfNotFound: true);
         m_Driving_P2_Brake_KBD = m_Driving.FindAction("P2_Brake_KBD", throwIfNotFound: true);
         m_Driving_P2_TurnRight_KBD = m_Driving.FindAction("P2_TurnRight_KBD", throwIfNotFound: true);
@@ -500,6 +562,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Driving_P2_Ability_KBD = m_Driving.FindAction("P2_Ability_KBD", throwIfNotFound: true);
         m_Driving_P2_UseItem_KBD = m_Driving.FindAction("P2_UseItem_KBD", throwIfNotFound: true);
         m_Driving_P2_Empty_KBD = m_Driving.FindAction("P2_Empty_KBD", throwIfNotFound: true);
+        m_Driving_P2_Trick_KBD = m_Driving.FindAction("P2_Trick_KBD", throwIfNotFound: true);
     }
 
     ~@InputManager()
@@ -592,6 +655,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Ability_KBD;
     private readonly InputAction m_Driving_UseItem_KBD;
     private readonly InputAction m_Driving_UseItem;
+    private readonly InputAction m_Driving_Trick;
+    private readonly InputAction m_Driving_Trick_KBD;
     private readonly InputAction m_Driving_P2_Accelerate_KBD;
     private readonly InputAction m_Driving_P2_Brake_KBD;
     private readonly InputAction m_Driving_P2_TurnRight_KBD;
@@ -599,6 +664,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_P2_Ability_KBD;
     private readonly InputAction m_Driving_P2_UseItem_KBD;
     private readonly InputAction m_Driving_P2_Empty_KBD;
+    private readonly InputAction m_Driving_P2_Trick_KBD;
     /// <summary>
     /// Provides access to input actions defined in input action map "Driving".
     /// </summary>
@@ -659,6 +725,14 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @UseItem => m_Wrapper.m_Driving_UseItem;
         /// <summary>
+        /// Provides access to the underlying input action "Driving/Trick".
+        /// </summary>
+        public InputAction @Trick => m_Wrapper.m_Driving_Trick;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/Trick_KBD".
+        /// </summary>
+        public InputAction @Trick_KBD => m_Wrapper.m_Driving_Trick_KBD;
+        /// <summary>
         /// Provides access to the underlying input action "Driving/P2_Accelerate_KBD".
         /// </summary>
         public InputAction @P2_Accelerate_KBD => m_Wrapper.m_Driving_P2_Accelerate_KBD;
@@ -686,6 +760,10 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Driving/P2_Empty_KBD".
         /// </summary>
         public InputAction @P2_Empty_KBD => m_Wrapper.m_Driving_P2_Empty_KBD;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/P2_Trick_KBD".
+        /// </summary>
+        public InputAction @P2_Trick_KBD => m_Wrapper.m_Driving_P2_Trick_KBD;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -748,6 +826,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
+            @Trick.started += instance.OnTrick;
+            @Trick.performed += instance.OnTrick;
+            @Trick.canceled += instance.OnTrick;
+            @Trick_KBD.started += instance.OnTrick_KBD;
+            @Trick_KBD.performed += instance.OnTrick_KBD;
+            @Trick_KBD.canceled += instance.OnTrick_KBD;
             @P2_Accelerate_KBD.started += instance.OnP2_Accelerate_KBD;
             @P2_Accelerate_KBD.performed += instance.OnP2_Accelerate_KBD;
             @P2_Accelerate_KBD.canceled += instance.OnP2_Accelerate_KBD;
@@ -769,6 +853,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @P2_Empty_KBD.started += instance.OnP2_Empty_KBD;
             @P2_Empty_KBD.performed += instance.OnP2_Empty_KBD;
             @P2_Empty_KBD.canceled += instance.OnP2_Empty_KBD;
+            @P2_Trick_KBD.started += instance.OnP2_Trick_KBD;
+            @P2_Trick_KBD.performed += instance.OnP2_Trick_KBD;
+            @P2_Trick_KBD.canceled += instance.OnP2_Trick_KBD;
         }
 
         /// <summary>
@@ -816,6 +903,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
+            @Trick.started -= instance.OnTrick;
+            @Trick.performed -= instance.OnTrick;
+            @Trick.canceled -= instance.OnTrick;
+            @Trick_KBD.started -= instance.OnTrick_KBD;
+            @Trick_KBD.performed -= instance.OnTrick_KBD;
+            @Trick_KBD.canceled -= instance.OnTrick_KBD;
             @P2_Accelerate_KBD.started -= instance.OnP2_Accelerate_KBD;
             @P2_Accelerate_KBD.performed -= instance.OnP2_Accelerate_KBD;
             @P2_Accelerate_KBD.canceled -= instance.OnP2_Accelerate_KBD;
@@ -837,6 +930,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @P2_Empty_KBD.started -= instance.OnP2_Empty_KBD;
             @P2_Empty_KBD.performed -= instance.OnP2_Empty_KBD;
             @P2_Empty_KBD.canceled -= instance.OnP2_Empty_KBD;
+            @P2_Trick_KBD.started -= instance.OnP2_Trick_KBD;
+            @P2_Trick_KBD.performed -= instance.OnP2_Trick_KBD;
+            @P2_Trick_KBD.canceled -= instance.OnP2_Trick_KBD;
         }
 
         /// <summary>
@@ -962,6 +1058,20 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseItem(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "Trick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTrick(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Trick_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTrick_KBD(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "P2_Accelerate_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1010,5 +1120,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnP2_Empty_KBD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "P2_Trick_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnP2_Trick_KBD(InputAction.CallbackContext context);
     }
 }

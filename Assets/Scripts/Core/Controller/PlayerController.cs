@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine.UIElements;
 
 public class PlayerController : RacerController
 {
@@ -29,10 +30,11 @@ public class PlayerController : RacerController
 
     private InputAction useItem;
     private InputAction useItem_kbd;
-    
-    public int playerNum = 0;
 
-    
+    private InputAction trick;
+    private InputAction trick_kbd;
+
+    public int playerNum = 0;
 
     public override void InitializeDrive()
     {
@@ -60,6 +62,9 @@ public class PlayerController : RacerController
 
             useItem = GameManager.Instance.inputManager.useItem.action;
             useItem_kbd = GameManager.Instance.inputManager.useItem_kbd.action;
+
+            trick = GameManager.Instance.inputManager.trick.action;
+            trick_kbd = GameManager.Instance.inputManager.trick_kbd.action;
         }
         else
         {
@@ -69,10 +74,9 @@ public class PlayerController : RacerController
             turnLeft_kbd = GameManager.Instance.inputManager.p2_turnLeft_kbd.action;
             
             ability_kbd = GameManager.Instance.inputManager.ability_kbd.action;
-
-            
             useItem_kbd = GameManager.Instance.inputManager.p2_useItem_kbd.action;
-            
+            trick_kbd = GameManager.Instance.inputManager.p2_trick_kbd.action;
+
             // undef values. will get second controller later
             // "Empty" is just some inaccessible keyboard key so we don't get null reference errors
             accelerate = GameManager.Instance.inputManager.p2_empty_kbd.action;
@@ -80,6 +84,7 @@ public class PlayerController : RacerController
             turn = GameManager.Instance.inputManager.p2_empty_kbd.action;
             ability = GameManager.Instance.inputManager.p2_empty_kbd.action;
             useItem = GameManager.Instance.inputManager.p2_empty_kbd.action;
+            trick = GameManager.Instance.inputManager.p2_empty_kbd.action;
         }
         
     }
@@ -229,6 +234,16 @@ public class PlayerController : RacerController
             }
         }
 
+        // Trick
+        if (Drive.hasTricked && Drive.isGrounded)
+        {
+            Drive.applyTrickMult(0.8f, 1.2f);
+        }
+
+        if (trick.IsPressed() || trick_kbd.IsPressed())
+        {
+            Drive.Trick();
+        }
 
         // Ability
         if (ability.IsPressed() || ability_kbd.IsPressed())

@@ -15,8 +15,8 @@ public class Drive : MonoBehaviour
     private Kart kart;
 
     public float m_currentSpeed = 0.0f;
-    private bool isGrounded = false;
-    private bool hasTricked = false;
+    public bool isGrounded { get; private set; }
+    public bool hasTricked { get; private set; }
     private RaycastHit groundHitInfo;
 
     private float m_speedModifier = 1.0f;
@@ -156,6 +156,12 @@ public class Drive : MonoBehaviour
     public void Trick() {
         if (isGrounded) return;
         hasTricked = true;
+    }
+
+    public void applyTrickMult(float timer, float multiplier)
+    {
+        hasTricked = false;
+        ApplyMultiplier(timer, multiplier);
     }
 
     public void PreventMovement()
