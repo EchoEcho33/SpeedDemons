@@ -126,6 +126,10 @@ public class RacerState : MonoBehaviour
         racerAndCarRigidbody.linearVelocity = Vector3.zero;
         racerAndCarRigidbody.angularVelocity = Vector3.zero;
 
+        Transform model = racerAndCar.transform.Find("Model");
+        model.transform.localPosition = Vector3.zero;
+        model.Find("Model").transform.localRotation = Quaternion.identity;
+
         yield return new WaitForSeconds(2.0f);
 
         // Resumes the racer
