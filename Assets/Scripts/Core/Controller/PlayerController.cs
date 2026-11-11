@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine.UIElements;
+using Unity.AppUI.Core;
 
 public class PlayerController : RacerController
 {
@@ -237,11 +238,30 @@ public class PlayerController : RacerController
         // Trick
         if (Drive.hasTricked && Drive.isGrounded)
         {
-            Drive.applyTrickMult(0.8f, 1.2f);
+            Drive.applyTrickMult(0.5f, 1.2f);
         }
 
         if (trick.IsPressed() || trick_kbd.IsPressed())
         {
+            if (turn.IsPressed()) {
+                int dir = turn.ReadValue<Vector2>().x > 0 ? 1 : -1;
+                Drive.Trick(dir);
+            }
+            else if (!(turnRight_kbd.IsPressed() & turnLeft_kbd.IsPressed()))
+            {
+                if (turnRight_kbd.IsPressed())
+                {
+                    Drive.Trick(1);
+                }
+                else if (turnLeft_kbd.IsPressed())
+                {
+                    Drive.Trick(-1);
+                }
+                else
+                {
+                    Drive.Trick();
+                }
+            }
             Drive.Trick();
         }
 

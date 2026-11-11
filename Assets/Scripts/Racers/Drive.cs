@@ -153,9 +153,21 @@ public class Drive : MonoBehaviour
     }
 
     // Just left or right for now.
-    public void Trick() {
+    public void Trick(int dir = 0) {
         if (isGrounded) return;
+        Debug.Log(dir);
+        if (dir != 0 && transform.Find("Model").TryGetComponent<Animator>(out var animator)) {
+            if (IsSpinning(animator)) return;
+            Debug.Log("The if condition passes.");
+            animator.CrossFade(dir > 0 ? "SpinOut" : "SpinOut_R", 0.1f, 0, 0f);
+        }
         hasTricked = true;
+    }
+
+    private bool IsSpinning(Animator animator) {
+        AnimatorStateInfo info = animator.IsInTransition(0) ? animator.GetNextAnimatorStateInfo(0) : animator.GetCurrentAnimatorStateInfo(0);
+
+        return (info.IsName("SpinOut")) || (info.IsName("SpinOut_R") && info.normalizedTime < 1f);
     }
 
     public void applyTrickMult(float timer, float multiplier)
