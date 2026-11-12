@@ -47,6 +47,10 @@ public class AIController : RacerController
     // TODO: This will work for now
     public void PassInputs(float steering, float throttle, float brake)
     {
+        // Check if the kart's grounded.
+        Drive.CheckGrounded();
+        // Normal Rotation.
+        Drive.setNormalRotation();
         // This check is probably temporary, but it is essentially the same as the Race Countdown handler in PlayerController.
         if (preventMovement)
         {
