@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public List<Kart> karts;
 
+    public string ScenePath {get; private set;}
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -230,5 +232,11 @@ public class GameManager : MonoBehaviour
     public void SetSingleplayer(bool IsSingleplayer)
     {
         _singlePlayer = IsSingleplayer;
+    }
+
+    public void LoadScene(string ScenePath)
+    {
+        this.ScenePath = ScenePath;
+        SceneManager.LoadSceneAsync("Scenes/Main/SceneLoader");
     }
 }
