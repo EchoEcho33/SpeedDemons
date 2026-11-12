@@ -568,7 +568,6 @@ GameObject:
   - component: {fileID: 1001868001}
   - component: {fileID: 1001868000}
   - component: {fileID: 1001867999}
-  - component: {fileID: 1001868003}
   m_Layer: 5
   m_Name: InputSelect
   m_TagString: Untagged
@@ -660,18 +659,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1001868003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1001867997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4471a5d9a14807a668ead7ab4df5b066, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputDetection
 --- !u!1 &1441759555
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1580632534}
+  - component: {fileID: 1580632535}
   m_Layer: 0
   m_Name: InputDetection
   m_TagString: Untagged
@@ -967,6 +955,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1580632535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580632533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4471a5d9a14807a668ead7ab4df5b066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputDetection
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

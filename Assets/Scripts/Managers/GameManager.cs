@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     public GlobalRaceUI UIManager { get; private set;}
     
     // player ui will be instantiated as a child of this for organization purposes
-    private GameObject UIManagerObject; 
     
     public AudioManager audioManager { get; private set;}
     
@@ -32,7 +31,7 @@ public class GameManager : MonoBehaviour
     public GameObject inputManagerPrefab;
     
     [SerializeField]
-    private GameObject GlobalUIManagerPrefab;
+    private GlobalRaceUI GlobalUIManagerPrefab;
     
     [SerializeField]
     public GameObject AudioManagerPrefab;
@@ -143,6 +142,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameStateSetWaitingToStart()
     {
+        ResetRaceSession();
         InitializeManagers();
 
         
@@ -181,12 +181,9 @@ public class GameManager : MonoBehaviour
     
     private void InitializeManagers()
     {
-        // GameObject inputManagerObject = Instantiate(inputManagerPrefab, gameObject.transform);
-        UIManagerObject = Instantiate(GlobalUIManagerPrefab);
+        UIManager = Instantiate(GlobalUIManagerPrefab);
         GameObject audioManagerObject = Instantiate(AudioManagerPrefab);
         
-        // inputList = inputManagerObject.GetComponent<InputSys>();
-        UIManager = UIManagerObject.GetComponent<GlobalRaceUI>();
         audioManager = audioManagerObject.GetComponent<AudioManager>();
     }
     
@@ -212,5 +209,18 @@ public class GameManager : MonoBehaviour
     {
         Player1 = player1;
         Player2 = player2;
+    }
+    
+    private void ResetRaceSession()
+    {
+        foreach (RacerController racer in _racers)
+        {
+            if (racer != null)
+                Destroy(racer.gameObject);
+        }
+
+        _racers.Clear();
+        LocalRacers.Clear();
+        currentCameraChannel = 1;
     }
 }

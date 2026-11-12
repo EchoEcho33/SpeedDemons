@@ -134,7 +134,12 @@ public class RaceManager : MonoBehaviour
             racerControllers.Remove(player);
             
         }
-            
+        
+        // must instantiate inputmanager only after all cameras are created, otherwise splitscreen breaks
+        PlayerInputManager inputManager = Instantiate(GameManager.Instance.inputManagerPrefab).GetComponent<PlayerInputManager>();
+        inputManager.splitScreen = true;    
+        
+        
         // start after the local selections
         int racerSelectionIndex = GameManager.Instance.numPlayers;
 
@@ -170,10 +175,6 @@ public class RaceManager : MonoBehaviour
         // }
         
         OnRaceStart?.Invoke();
-        
-        // Must ensure that the splitscreen handler is only created after initializing all the cameras. Otherwise, splitscreen breaks
-        PlayerInputManager inputManager = Instantiate(GameManager.Instance.inputManagerPrefab).GetComponent<PlayerInputManager>();
-        inputManager.splitScreen = true;
 
     }
 
