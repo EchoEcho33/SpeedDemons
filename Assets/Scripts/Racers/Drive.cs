@@ -306,10 +306,30 @@ public class Drive : MonoBehaviour
         StartCoroutine(ResetTimer(timer));
     }
 
+    public void OverrideSlowdown(float multiplier)
+    {
+        m_speedModifier = multiplier;
+        StopCoroutine(m_resetTimer);
+    }
+
+    public void ResetMultipliers()
+    {
+        m_speedModifier = 1.0f;
+    }
+
     // Resets the speed modifier with a given timer
     public IEnumerator ResetTimer(float timer)
     {
         yield return new WaitForSeconds(timer);
-        m_speedModifier = 1.0f;
+        ResetMultipliers();
+    }
+
+    public int Multiplier()
+    {
+        if (m_speedModifier > 1.0)
+            return 1;
+        if (m_speedModifier < 1.0)
+            return -1;
+        return 0;
     }
 }

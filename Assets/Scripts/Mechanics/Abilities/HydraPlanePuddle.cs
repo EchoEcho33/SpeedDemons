@@ -12,9 +12,11 @@ public class HydraPlanePuddle : MonoBehaviour
     [SerializeField]
     private float puddleHeight;
 
+    private RacerState player;
+
     private void Awake()
     {
-        this.gameObject.transform.localScale = new Vector3(puddleHeight, 0, puddleWidth); // Scales Object to Declared Width/Height
+        gameObject.transform.localScale = new Vector3(puddleHeight, 0, puddleWidth); // Scales Object to Declared Width/Height
     }
     // Update is called once per frame
     void Update()
@@ -23,7 +25,7 @@ public class HydraPlanePuddle : MonoBehaviour
         duration -= Time.deltaTime;
         if (duration <= 0)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -32,22 +34,24 @@ public class HydraPlanePuddle : MonoBehaviour
     {
         Transform parentTransform = other.gameObject.transform.root;
         // Exit if the collision was not triggered by a Racer
-        if (!parentTransform.CompareTag("Racer")) { return; }
+        if (!(parentTransform.CompareTag("Player")  || parentTransform.CompareTag("AI"))) { return; }
 
         // Attempt to get Drive Component & Call SpinOut
         if (parentTransform.TryGetComponent<Drive>(out var drive))
         {
-            drive.Racer.SpinOutDuration = spinOutDuration;
-            drive.Racer.SpinOut = true;
-        }
+            // Ignores the player that deployed the puddle
+            if (!player.Equals(drive.Racer.RacerState))
+            {
+                drive.Racer.RacerState.ApplyDebuff(RacerState.Debuff.SPINOUT);
 
-        // Attempts to Trigger the Spin Out Animation On Racer
-        if (drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
-        {
-            animator.SetBool("SpinOut", true);
+                // Delete After Collision
+                Destroy(gameObject);
+            }
         }
+    }
 
-        // Delete After Collision
-        Destroy(this.gameObject);
+    public void SetPlayerInitializer(RacerState player)
+    {
+        this.player = player;
     }
 }

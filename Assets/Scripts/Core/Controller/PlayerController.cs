@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using FMOD.Studio;
 using FMODUnity;
+using System;
 using UnityEngine.UIElements;
 using Unity.AppUI.Core;
 
@@ -10,6 +11,7 @@ public class PlayerController : RacerController
 {
     public Camera MainCamera { get; private set; }
     public CinemachineCamera CinemachineCamera;
+    public RaceUI raceUI;
     
     private InputAction accelerate;
 
@@ -269,7 +271,11 @@ public class PlayerController : RacerController
         if (ability.IsPressed() || ability_kbd.IsPressed())
         {
             // The Ability Trigger is Not Fully Set Up, So this goes to Comment Jail for now
-            // Character.TriggerAbility();
+            if (RacerState.currAbilityCharge >= Character.abilityCharge)
+            {
+                RacerState.ResetBar();
+                Character.TriggerAbility(RacerState);
+            }
         }
 
         if (useItem.IsPressed() || useItem_kbd.IsPressed())

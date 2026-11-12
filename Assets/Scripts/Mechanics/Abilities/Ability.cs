@@ -3,9 +3,7 @@ using UnityEngine;
 
 public abstract class Ability : MonoBehaviour
 {
-    public abstract int _triggerCost();
-
-    public abstract void TriggerAbility();
+    public abstract void TriggerAbility(RacerState state);
 
     private string abilityName;
     private string description;
