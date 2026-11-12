@@ -205,7 +205,19 @@ public class RaceManager : MonoBehaviour
                 // we dont have any input selected on a player kart. maps the next available input to this new racer
                 if (GameManager.Instance.JoinedInputDevices.Any())
                 {
-                    InputUser.PerformPairingWithDevice(GameManager.Instance.JoinedInputDevices.Dequeue(), kartObject.GetComponent<PlayerInput>().user);    
+                    // ensures singleplayer works
+                    kartObject.GetComponent<PlayerInput>().user.UnpairDevices();
+                    InputDevice device = GameManager.Instance.JoinedInputDevices.Dequeue(); 
+                    if (device is Gamepad)
+                    {
+                        kartObject.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Gamepad");
+                    }
+                    else if (device is Keyboard)
+                    {
+                        kartObject.GetComponent<PlayerInput>().SwitchCurrentControlScheme("Keyboard");
+                    }
+                    InputUser.PerformPairingWithDevice(device, kartObject.GetComponent<PlayerInput>().user);
+                    
                 }
                 
             }
@@ -215,6 +227,8 @@ public class RaceManager : MonoBehaviour
             {
                 Debug.Log(input);
             }
+
+            print(kartObject.GetComponent<PlayerInput>().currentControlScheme);
             
             GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
             Camera mainCamera = cameraObject.GetComponent<Camera>();

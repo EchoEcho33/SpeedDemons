@@ -22,7 +22,7 @@ public class InputDetection : MonoBehaviour
             print("Keyboard joined");
         }
 
-        foreach (var gamepad in Gamepad.all)
+        foreach (Gamepad gamepad in Gamepad.all)
         {
             if (GameManager.Instance.JoinedInputDevices.Contains(gamepad))
             {
