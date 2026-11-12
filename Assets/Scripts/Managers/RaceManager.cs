@@ -84,9 +84,6 @@ public class RaceManager : MonoBehaviour
     
     public void StartRace()
     {     
-        // this is unsafe, but 
-        
-        
         if (racerSelections.Count == 0) return;
         List<RacerController> racerControllers = GameManager.Instance.GetRacers();
 
@@ -359,4 +356,9 @@ public class RaceManager : MonoBehaviour
         }
     }
 
+
+    public List<RacerState> GetRacerStates()
+    {
+        return racerStates;
+    }
 }

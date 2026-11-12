@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,16 +35,46 @@ public class Character : ScriptableObject
     
     public readonly int _spawnVerticalDisplacement = 2;
 
-    private GameObject snowball;
+    public readonly int abilityCharge = 10;
+
+
+    [Serializable]
+    private struct VoiceLine
+    {
+        [SerializeField]
+        private string text;
+        [SerializeField]
+        private AudioClip audioFile;
+    }
+
+    [Serializable]
+    private struct CharacterVoices
+    {
+        [SerializeField]
+        private VoiceLine passing;
+        [SerializeField]
+        private VoiceLine gettingPassed;
+        [SerializeField]
+        private VoiceLine hitting;
+        [SerializeField]
+        private VoiceLine gettingHit;
+        [SerializeField]
+        private VoiceLine ult;
+        [SerializeField]
+        private VoiceLine winning;
+    }
+
+    [SerializeField]
+    private CharacterVoices VoiceLines;
 
     public ECharacterType GetCharacterType()
     {
         return characterType;
     }
 
-    public void TriggerAbility()
+    public void TriggerAbility(RacerState state)
     {
-        ability.TriggerAbility();
+        ability.TriggerAbility(state);
     }
     
     // Some getters necessary for the character selection UI.

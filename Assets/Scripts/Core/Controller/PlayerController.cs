@@ -142,7 +142,11 @@ public class PlayerController : RacerController
         if (ability.IsPressed())
         {
             // The Ability Trigger is Not Fully Set Up, So this goes to Comment Jail for now
-            // Character.TriggerAbility();
+            if (RacerState.currAbilityCharge >= Character.abilityCharge)
+            {
+                RacerState.ResetBar();
+                Character.TriggerAbility(RacerState);
+            }
         }
 
         if (useItem.IsPressed())
