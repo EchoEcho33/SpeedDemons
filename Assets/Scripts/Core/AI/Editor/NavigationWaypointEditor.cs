@@ -30,8 +30,6 @@ public class NavigationWaypointEditor : Editor
         {
             Vector2 endDrag = e.mousePosition;
 
-            Debug.Log((endDrag - startDrag).magnitude);
-
             dragging = false;
 
             Event.current.Use();
@@ -107,8 +105,6 @@ public class NavigationWaypointEditor : Editor
 
             float w = maxX - minX;
             float h = maxY - minY;
-
-            Debug.Log($"{w}, {h}");
 
             Rect r = new Rect(minX, minY, w, h);
 
