@@ -103,7 +103,7 @@ public class RaceManager : MonoBehaviour
             int startingGridIndex = RandomRangeExcept(0, startingGrid.Count, excluded);
             excluded.Add(startingGridIndex);
             
-            StartingGridSpot startingGridSpot = startingGrid[i];
+            StartingGridSpot startingGridSpot = startingGrid[startingGridIndex];
             
             remainingStartingGrid.Remove(startingGridSpot);
             
