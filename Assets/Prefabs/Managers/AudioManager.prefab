@@ -85,6 +85,13 @@ MonoBehaviour:
       Data3: 657699989
       Data4: 541570846
     Path: event:/Car Impact/HitItemBoxAI
+  <useItem>k__BackingField:
+    Guid:
+      Data1: 638935245
+      Data2: 1142395023
+      Data3: 559644323
+      Data4: 348711142
+    Path: event:/MiscSFX/UseItem
   <characterSelectMusic>k__BackingField:
     Guid:
       Data1: 38521660

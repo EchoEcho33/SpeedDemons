@@ -13,6 +13,7 @@ public class AudioEvents : MonoBehaviour
     [field: SerializeField] public EventReference hitItemBoxPlayer {get; private set;}
     [field: SerializeField] public EventReference hitItemBoxAI {get; private set;}
     public static AudioEvents instance {get; private set;}
+    [field: SerializeField] public EventReference useItem {get; private set;}
 
     [field: Header("Music")]
     [field: SerializeField] public EventReference characterSelectMusic {get; private set;}
