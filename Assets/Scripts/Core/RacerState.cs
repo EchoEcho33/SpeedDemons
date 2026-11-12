@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class RacerState : MonoBehaviour
@@ -145,6 +143,10 @@ public class RacerState : MonoBehaviour
         racerAndCarRigidbody.linearVelocity = Vector3.zero;
         racerAndCarRigidbody.angularVelocity = Vector3.zero;
 
+        Transform model = racerAndCar.transform.Find("Model");
+        model.transform.localPosition = Vector3.zero;
+        model.transform.localRotation = Quaternion.identity;
+
         yield return new WaitForSeconds(2.0f);
 
         // Resumes the racer
@@ -156,7 +158,9 @@ public class RacerState : MonoBehaviour
         RacerController.preventMovement = false;
 
         // Places racer back on the track
-        RacerController racerController = RacerController.Character.characterObject.GetComponentInParent<Drive>().Racer;
+        Drive driveScript = RacerController.Character.characterObject.GetComponentInParent<Drive>();
+        driveScript.switchMode(0);
+        RacerController racerController = driveScript.Racer;
         TrackCheckpoint currentCheckpoint = racerController.RacerState.CurrCheckpoint;
         racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * RacerController.Character._spawnVerticalDisplacement;
         racerAndCar.transform.rotation = currentCheckpoint.GetTrackForwardDirection();

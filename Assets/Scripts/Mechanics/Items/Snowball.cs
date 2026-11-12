@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class Snowball : Item
 {
@@ -36,10 +31,11 @@ public class Snowball : Item
         this.racer = racer;
 
         // Enable snowball
-        sphereCollider = racer.RacerController.GetCharacterAndKart().GetComponentInChildren<SphereCollider>(true);
+        sphereCollider = racer.RacerController.GetCharacterAndKart().transform.Find("Snowball").GetComponent<SphereCollider>();
         sphereObject = sphereCollider.gameObject;
 
         sphereObject.SetActive(true);
+        racer.RacerController.Drive.switchMode(1);
     }
 
 
@@ -49,7 +45,6 @@ public class Snowball : Item
         {
             Roll();
         }
-
     }
 
     private void Roll()
@@ -66,6 +61,7 @@ public class Snowball : Item
         if (sphereObject.transform.localScale.x >= maxsize)
         {
             sphereObject.SetActive(false);
+            racer.RacerController.Drive.switchMode(0);
             if (follow != null) follow.Radius = basefollowr;
             sphereObject.transform.localScale = new Vector3(startsize, startsize, startsize);
         }

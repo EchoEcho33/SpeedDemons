@@ -22,6 +22,8 @@ public class PlayerController : RacerController
 
     private InputAction useItem;
 
+    private InputAction trick;
+    
     public override void InitializeDrive()
     {
         Drive = Kart.kartObject.AddComponent<Drive>();
@@ -42,6 +44,8 @@ public class PlayerController : RacerController
         ability = input.actions.FindAction("Ability");
 
         useItem = input.actions.FindAction("UseItem");
+
+        trick = input.actions.FindAction("Trick");
     }
     
     private void FixedUpdate()
@@ -53,7 +57,7 @@ public class PlayerController : RacerController
         {
             // Main Spin Out Code
             Drive.SpinOut();
-            base.SpinOutDuration -= Time.deltaTime;
+            base.SpinOutDuration -= Time.fixedDeltaTime;
 
             // Ends Spin Out Animation
             if (SpinOutDuration <= 1 && Drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
@@ -72,7 +76,7 @@ public class PlayerController : RacerController
         if (base.preventMovement)
         {
             Drive.PreventMovement();
-            immobileDuration -= Time.deltaTime;
+            immobileDuration -= Time.fixedDeltaTime;
             
             if (base.immobileDuration <= 0)
             {
@@ -81,6 +85,11 @@ public class PlayerController : RacerController
 
             return; // prevent any movement in update
         }
+
+        // Check if the kart's grounded.
+        Drive.CheckGrounded();
+        // Normal Rotation.
+        Drive.setNormalRotation();
 
         // Brake and Accelerate
         if (accelerate.IsPressed() || brake.IsPressed())
@@ -111,6 +120,24 @@ public class PlayerController : RacerController
             }
         } 
 
+        // Trick
+        if (Drive.hasTricked && Drive.isGrounded)
+        {
+            Drive.applyTrickMult(0.5f, 1.2f);
+        }
+
+        if (trick.IsPressed())
+        {
+            if (turn.IsPressed()) {
+                int dir = turn.ReadValue<Vector2>().x > 0 ? 1 : -1;
+                Drive.Trick(dir);
+            }
+            else
+            {
+            Drive.Trick();
+            }
+        }
+
         // Ability
         if (ability.IsPressed())
         {
@@ -126,10 +153,10 @@ public class PlayerController : RacerController
         float up_dot = Vector3.Dot(transform.up, new Vector3(0,1,0));
         if (up_dot <= 1.0)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward,new Vector3(0,1,0)), Time.deltaTime * 5);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(transform.forward,new Vector3(0,1,0)), Time.fixedDeltaTime * 5);
         }
         
-        transform.position = new Vector3(transform.position.x, old_transform_position.y - (9.81f * Time.deltaTime), transform.position.z);
+        transform.position = new Vector3(transform.position.x, old_transform_position.y - (9.81f * Time.fixedDeltaTime), transform.position.z);
     }
 
     private void ControllerMove()

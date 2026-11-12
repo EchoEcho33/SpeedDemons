@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputList: {fileID: -944628639613478452, guid: 41a9820487b87304b942d4152c418794, type: 3}
+  trick: {fileID: -7495750825621825404, guid: 41a9820487b87304b942d4152c418794, type: 3}
+  trick_kbd: {fileID: 553356551807852804, guid: 41a9820487b87304b942d4152c418794, type: 3}
+  p2_trick_kbd: {fileID: 3319537752469018320, guid: 41a9820487b87304b942d4152c418794, type: 3}
 --- !u!114 &2792331788568615988
 MonoBehaviour:
   m_ObjectHideFlags: 0
