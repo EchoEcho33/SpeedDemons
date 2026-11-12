@@ -145,6 +145,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Trick"",
+                    ""type"": ""Button"",
+                    ""id"": ""f75dfce3-f711-4e0b-b8e8-38ac1999f952"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -345,6 +354,28 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""UseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be264d78-bd6d-4456-9f41-8c9a04ccdfc6"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Trick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49bbf825-db0c-4f85-8b0d-5a12b2713ef5"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Trick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -407,6 +438,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Driving_Camera = m_Driving.FindAction("Camera", throwIfNotFound: true);
         m_Driving_Ability = m_Driving.FindAction("Ability", throwIfNotFound: true);
         m_Driving_UseItem = m_Driving.FindAction("UseItem", throwIfNotFound: true);
+        m_Driving_Trick = m_Driving.FindAction("Trick", throwIfNotFound: true);
     }
 
     ~@InputManager()
@@ -493,6 +525,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Camera;
     private readonly InputAction m_Driving_Ability;
     private readonly InputAction m_Driving_UseItem;
+    private readonly InputAction m_Driving_Trick;
     /// <summary>
     /// Provides access to input actions defined in input action map "Driving".
     /// </summary>
@@ -528,6 +561,10 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Driving/UseItem".
         /// </summary>
         public InputAction @UseItem => m_Wrapper.m_Driving_UseItem;
+        /// <summary>
+        /// Provides access to the underlying input action "Driving/Trick".
+        /// </summary>
+        public InputAction @Trick => m_Wrapper.m_Driving_Trick;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -572,6 +609,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
+            @Trick.started += instance.OnTrick;
+            @Trick.performed += instance.OnTrick;
+            @Trick.canceled += instance.OnTrick;
         }
 
         /// <summary>
@@ -601,6 +641,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
+            @Trick.started -= instance.OnTrick;
+            @Trick.performed -= instance.OnTrick;
+            @Trick.canceled -= instance.OnTrick;
         }
 
         /// <summary>
@@ -709,5 +752,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseItem(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Trick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTrick(InputAction.CallbackContext context);
     }
 }
