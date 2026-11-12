@@ -211,6 +211,7 @@ public class GameManager : MonoBehaviour
         Player2 = player2;
     }
     
+    // cleanup func for all the new variables
     private void ResetRaceSession()
     {
         foreach (RacerController racer in _racers)
@@ -222,5 +223,6 @@ public class GameManager : MonoBehaviour
         _racers.Clear();
         LocalRacers.Clear();
         currentCameraChannel = 1;
+        InputsInUse.Clear();
     }
 }

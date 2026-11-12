@@ -21,6 +21,7 @@ public class StartRace : MonoBehaviour
         SceneManager.LoadScene("Scenes/MAIN/MainRace");
     }
 
+    // changed the name so its not test track anymore
     private void OnRaceSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name != "MainRace")

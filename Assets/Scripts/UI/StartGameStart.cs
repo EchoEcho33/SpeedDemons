@@ -25,8 +25,9 @@ public class StartGameStart : MonoBehaviour
         // TODO: add UI to set number of players. defaults to whatever is set in gamemanager rn
         // - gianluca
         StartGame();
-        // TODO: need to test, but this is what should handle local players
-        // GameManager.Instance.numPlayers = GameManager.Instance.JoinedInputDevices.Count;
+        
+        // TODO: need to test, but this is what should handle # of local players
+        GameManager.Instance.numPlayers = GameManager.Instance.JoinedInputDevices.Count;
         print("opened charselect");
     }
     

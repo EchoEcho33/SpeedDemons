@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using FMODUnity;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.UIElements;
-using UnityEngine.XR;
 using InputDevice = UnityEngine.InputSystem.InputDevice;
 using Random = UnityEngine.Random;
 
@@ -184,7 +180,6 @@ public class RaceManager : MonoBehaviour
         Kart kart = Instantiate(racerSelection.kart);
         
         // Initialize kart + character.
-        // The PlayerInputManager requires JoinPlayer to be used for splitscreen, so if this is a player, we instantiate via that method
         // - Gianluca
         // The racerselection should eventually contain a new field that holds the input preference of this player for 4 players. 
         GameObject kartObject = Instantiate(kart.kartPrefab, startingGridSpot.GetSpawnPoint(), kart.kartPrefab.transform.rotation);
@@ -229,10 +224,6 @@ public class RaceManager : MonoBehaviour
             kartObject.GetComponent<PlayerInput>().camera = mainCamera; 
             
             CinemachineBrain brain = mainCamera.GetComponent<CinemachineBrain>();
-            
-            // From outputchannels source:
-            // channels are designated by an enum in powers of two, so if we cast it, it should increment correctly
-            // - gianluca
     
             GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
             CinemachineCamera cinemachine = cinemachineCameraObject.GetComponent<CinemachineCamera>();
@@ -240,6 +231,7 @@ public class RaceManager : MonoBehaviour
             cinemachine.Follow = kart.kartObject.transform;
 
             // audio stuff
+            // TODO: with splitscreen, should all have an audio listener? - gianluca
             mainCamera.GetComponent<StudioListener>().SetAttenuationObject(mainCamera.gameObject);
             
             brain.ChannelMask = indexChannel(GameManager.Instance.currentCameraChannel);
@@ -327,7 +319,7 @@ public class RaceManager : MonoBehaviour
     // lowkey copied this from unity forums
     // - gianluca
 
-    public static int RandomRangeExcept(int minInclusive, int maxExclusive, List<int> except = null)
+    private static int RandomRangeExcept(int minInclusive, int maxExclusive, List<int> except = null)
     {
         IEnumerable<int> allowedRandomNumbers = Enumerable.Range(minInclusive, maxExclusive - minInclusive);
         if (except != null)
