@@ -1,6 +1,6 @@
 namespace Mechanics.Abilities
 {
-    public class JackalopeDig : Ability
+    /*public class JackalopeDig : Ability
     {
         private string abilityName = "Jackalope Dig";
         private string description = "Digs underground, making you invulnerable and ending with a shockwave!";
@@ -18,5 +18,5 @@ namespace Mechanics.Abilities
             
         }
         
-    }
+    }*/
 }
