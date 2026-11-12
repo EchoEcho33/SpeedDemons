@@ -3,6 +3,9 @@ using System.Collections;
 using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
+using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class Drive : MonoBehaviour
 {
@@ -13,13 +16,19 @@ public class Drive : MonoBehaviour
     private Kart kart;
 
     public float m_currentSpeed = 0.0f;
+    public bool isGrounded { get; private set; }
+    public bool hasTricked { get; private set; }
+    private RaycastHit groundHitInfo;
+
     private float m_speedModifier = 1.0f;
     private Coroutine m_resetTimer;
-    private float m_turnSpeed = 0.0f;
-    private bool m_isDrifting = false;
+    // private float m_turnSpeed = 0.0f;
+    // private bool m_isDrifting = false;
     private int m_driftAngle = 0;
     public StudioEventEmitter drivingAudio;
     private Rigidbody rigidbody;
+    public LayerMask ground;
+    public int mode { get; private set; }
 
     public void AssignController(RacerController newRacerController)
     {
@@ -33,19 +42,20 @@ public class Drive : MonoBehaviour
         drivingAudio = AudioManager.instance.createEmitter(AudioEvents.instance.basicCarDrive, this.gameObject);
         drivingAudio.Play();
         rigidbody = gameObject.GetComponent<Rigidbody>();
+        ground = LayerMask.GetMask("GroundLayer");
     }
 
     public void Accelerate(float amplitude)
     {
-        if (!IsGrounded()) return;
+        if (!isGrounded) return;
         
         float initialFrameSpeed = m_currentSpeed;
-        m_currentSpeed += kart._maxAcceleration * amplitude * Time.deltaTime * m_speedModifier;
+        m_currentSpeed += kart._maxAcceleration * amplitude * Time.fixedDeltaTime * m_speedModifier;
 
         if (m_currentSpeed > kart._maxSpeed * m_speedModifier)
         {
             m_currentSpeed = kart._maxSpeed * m_speedModifier;
-            m_currentSpeed -= Time.deltaTime * m_speedModifier * kart._maxAcceleration;
+            m_currentSpeed -= Time.fixedDeltaTime * m_speedModifier * kart._maxAcceleration;
             if (m_currentSpeed < kart._maxSpeed)
             {
                 m_currentSpeed = kart._maxSpeed * m_speedModifier;
@@ -55,87 +65,168 @@ public class Drive : MonoBehaviour
         if (m_currentSpeed < -kart._maxSpeed * m_speedModifier / 2)
             m_currentSpeed = -kart._maxSpeed * m_speedModifier / 2;
 
-        float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime * m_speedModifier;
-        
+        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.fixedDeltaTime * m_speedModifier;
+        //transform.position += transform.forward * velocityUpdate;
+        float speed = (m_currentSpeed + initialFrameSpeed) / 2 * m_speedModifier;
+        Vector3 forward = rigidbody.rotation * Vector3.forward;
 
-        transform.position += transform.forward * velocityUpdate;
+        Vector3 velocity = speed * forward;
+        velocity.y = rigidbody.linearVelocity.y;
+        rigidbody.linearVelocity = velocity;
+
         UpdateSound(1);
     }
 
     public void Decelerate(float amplitude, float a)
     {
         float initialFrameSpeed = m_currentSpeed;
-        m_currentSpeed += -a * amplitude * Time.deltaTime * m_speedModifier;
+        m_currentSpeed += -a * amplitude * Time.fixedDeltaTime * m_speedModifier;
 
         if (m_currentSpeed < 0)
             m_currentSpeed = 0;
 
-        float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime * m_speedModifier;
+        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.fixedDeltaTime * m_speedModifier;
+        //transform.position += transform.forward * velocityUpdate;
+        float speed = (m_currentSpeed + initialFrameSpeed) / 2 * m_speedModifier;
+        Vector3 forward = rigidbody.rotation * Vector3.forward;
 
-        transform.position += transform.forward * velocityUpdate;
+        Vector3 velocity = speed * forward;
+        velocity.y = rigidbody.linearVelocity.y;
+        rigidbody.linearVelocity = velocity;
         UpdateSound(-1);
     }
 
     public void Turn(float turnDirection, float turnMultiplier = 1.0f)
     {
-        if (IsGrounded())
+        if (!isGrounded) return;
+        if (m_driftAngle != 0)
         {
-            if (m_driftAngle != 0)
-            {
-                OrientTowardsVelocity();
-            }
-            
-            if (turnDirection != 0)
-            {
-                transform.position += Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime / 100;
-                //rigidbody.linearVelocity = kart._turnRadius * turnDirection * turnMultiplier * rigidbody.linearVelocity * Time.deltaTime / 100;
-
-                transform.Rotate(0, kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.deltaTime, 0, Space.Self);
-            }
-
-            if (turnMultiplier != 1.0f)
-            {
-                OrientForDrift(turnDirection);
-                Debug.Log("Drifting...");
-            }
-            else if (m_driftAngle != 0)
-            {
-                CenterOrientation();
-            }
+            OrientTowardsVelocity();
         }
 
+        if (turnDirection != 0)
+        {
 
-        // x = horizontal (- left + right) y = vertical (- down + up)
-        
+            //transform.position += Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.fixedDeltaTime / 100;
+
+            //rigidbody.linearVelocity = kart._turnRadius * turnDirection * turnMultiplier * rigidbody.linearVelocity * Time.fixedDeltaTime / 100;
+
+
+            // transform.Rotate(0, kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.fixedDeltaTime, 0, Space.Self);
+            float turnAmount = kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed * Time.fixedDeltaTime;
+            rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(0, turnAmount, 0));
+
+            Vector3 turnVelocity = Vector3.forward * kart._turnRadius * turnDirection * turnMultiplier * m_currentSpeed / 100f;
+            rigidbody.linearVelocity += turnVelocity;
+        }
+
+        if (turnMultiplier != 1.0f)
+        {
+            OrientForDrift(turnDirection);
+            Debug.Log("Drifting...");
+        }
+        else if (m_driftAngle != 0)
+        {
+            CenterOrientation();
+        }
+        // x = horizontal (- left + right) y = vertical (- down + up)   
     }
 
     public void SpinOut()
     {
-        if (!IsGrounded()) return;
+        if (!isGrounded) return;
 
         float initialFrameSpeed = m_currentSpeed;
         float slowdownSpeed = 20;
 
-        m_currentSpeed -= slowdownSpeed * Time.deltaTime;
+        m_currentSpeed -= slowdownSpeed * Time.fixedDeltaTime;
 
         if (m_currentSpeed < 0)
             m_currentSpeed = 0;
 
-        float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.deltaTime;
+        //float velocityUpdate = (m_currentSpeed + initialFrameSpeed) / 2 * Time.fixedDeltaTime;
+        //transform.position += transform.forward * velocityUpdate;
+        float speed = (m_currentSpeed + initialFrameSpeed) / 2;
+        Vector3 forward = rigidbody.rotation * Vector3.forward;
 
-        transform.position += transform.forward * velocityUpdate;
+        Vector3 velocity = speed * forward;
+        velocity.y = rigidbody.linearVelocity.y;
+        rigidbody.linearVelocity = velocity;
+    }
+
+    // Just left or right for now.
+    public void Trick(int dir = 0) {
+        if (isGrounded) return;
+        Debug.Log(dir);
+        if (dir != 0 && transform.Find("Model").TryGetComponent<Animator>(out var animator)) {
+            if (IsSpinning(animator)) return;
+            Debug.Log("The if condition passes.");
+            animator.CrossFade(dir > 0 ? "SpinOut" : "SpinOut_R", 0.1f, 0, 0f);
+        }
+        hasTricked = true;
+    }
+
+    private bool IsSpinning(Animator animator) {
+        AnimatorStateInfo info = animator.IsInTransition(0) ? animator.GetNextAnimatorStateInfo(0) : animator.GetCurrentAnimatorStateInfo(0);
+
+        return (info.IsName("SpinOut") || info.IsName("SpinOut_R")) && info.normalizedTime < 1f;
+    }
+
+    public void applyTrickMult(float timer, float multiplier)
+    {
+        hasTricked = false;
+        ApplyMultiplier(timer, multiplier);
+    }
+
+    public void switchMode(int m) {
+        mode = m;
     }
 
     public void PreventMovement()
     {
-        if (!IsGrounded()) return;
+        if (!isGrounded) return;
         m_currentSpeed = 0;
     }
 
-    // TODO: Check that wheels are grounded
-    private bool IsGrounded()
+    // TODO: Grounded function is set for now at a set height.
+    // Make it customizable for different karts at different heights.
+    public void CheckGrounded()
     {
-        return true;
+        // Debug.Log("This is being called" + transform.position);
+
+        Vector3 down = Vector3.down;
+        Ray groundCheck;
+        
+
+        switch (mode)
+        {
+            case 1: // Snowball
+                Transform sb = transform.Find("Snowball");
+                // Treating all scale axis as the same length.
+                float radius = sb.localScale.x;
+                groundCheck = new Ray(sb.position + transform.up * radius, down);
+                isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, 2 * radius, ground);
+                break;
+            default: // Normal
+                groundCheck = new Ray(transform.position + transform.up * 0.8f, down);
+                isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, 1.6f, ground);
+                break;
+        }
+    }
+
+    public void setNormalRotation()
+    {
+        if (!isGrounded) return;
+        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, groundHitInfo.normal).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(forward, groundHitInfo.normal);
+
+        rigidbody.MoveRotation(
+            Quaternion.Slerp(
+                rigidbody.rotation,
+                targetRotation,
+                Time.fixedDeltaTime * 4f
+            )
+        );
     }
 
     public float GetCurrentSpeed()
@@ -145,7 +236,8 @@ public class Drive : MonoBehaviour
 
     private void OrientTowardsVelocity()
     {
-        transform.Rotate(0, -m_driftAngle / 10.0f, 0, Space.Self);
+        // transform.Rotate(0, -m_driftAngle / 10.0f, 0, Space.Self);
+        rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(0, -m_driftAngle / 10.0f, 0));
     }
 
     private void OrientForDrift(float turnDirection)
@@ -162,7 +254,8 @@ public class Drive : MonoBehaviour
             }
         }
 
-        transform.Rotate(0, m_driftAngle / 10.0f, 0, Space.Self);
+        // transform.Rotate(0, m_driftAngle / 10.0f, 0, Space.Self);
+        rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(0, m_driftAngle / 10.0f, 0));
     }
 
     private void CenterOrientation()
@@ -176,7 +269,8 @@ public class Drive : MonoBehaviour
             ++m_driftAngle;
         }
 
-        transform.Rotate(0, m_driftAngle / 10.0f, 0, Space.Self);
+        // transform.Rotate(0, m_driftAngle / 10.0f, 0, Space.Self);
+        rigidbody.MoveRotation(rigidbody.rotation * Quaternion.Euler(0, m_driftAngle / 10.0f, 0));
     }
     
     // Audio

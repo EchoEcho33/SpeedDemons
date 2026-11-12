@@ -17,6 +17,8 @@ public class InputSys : MonoBehaviour
     public InputActionReference ability;
     [SerializeField]
     public InputActionReference useItem;
+    [SerializeField]
+    public InputActionReference trick;
 
     [Header("Keyboard Controls")]
     [SerializeField]
@@ -36,7 +38,10 @@ public class InputSys : MonoBehaviour
 
     [SerializeField]
     public InputActionReference useItem_kbd;
-    
+
+    [SerializeField]
+    public InputActionReference trick_kbd;
+
     [Header("Player 2 Keyboard Controls")]
     [SerializeField]
     public InputActionReference p2_accelerate_kbd;
@@ -58,4 +63,7 @@ public class InputSys : MonoBehaviour
     
     [SerializeField]
     public InputActionReference p2_empty_kbd;
+
+    [SerializeField]
+    public InputActionReference p2_trick_kbd;
 }
