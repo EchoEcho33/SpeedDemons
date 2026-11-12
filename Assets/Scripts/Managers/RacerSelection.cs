@@ -14,7 +14,7 @@ public struct RacerSelection
     
     
     
-    RacerSelection(Character character, Kart kart, InputDevice inputDevice)
+    RacerSelection(Character character, Kart kart,  InputDevice inputDevice)
     {
         this.character = character;
         this.kart = kart;
@@ -25,6 +25,6 @@ public struct RacerSelection
     {
         this.character = character;
         this.kart = kart;
-        this.inputDevice = null;
+        inputDevice = null;
     }
 }

@@ -17,6 +17,18 @@ public class StartRace : MonoBehaviour
         if (UIController.IsSingleplayer())
             GameManager.Instance.SelectCharactersAndKarts(racer);
         
+        SceneManager.sceneLoaded += OnRaceSceneLoaded;
         SceneManager.LoadScene("Scenes/MAIN/MainRace");
+    }
+
+    private void OnRaceSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name != "MainRace")
+        {
+            return;
+        }
+        // protecting the racemaanger init since its takes longer now
+        SceneManager.sceneLoaded -= OnRaceSceneLoaded;
+        GameManager.Instance.SetGameState(GameState.WaitingToStart);
     }
 }

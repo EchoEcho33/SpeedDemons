@@ -26,6 +26,8 @@ public abstract class RacerController : MonoBehaviour
     public float Throttle { get; protected set; }
     
     public float Brake { get; protected set; }
+    
+    public bool respawning = false;
 
     public void AssignRacerState(RacerState newRacerState)
     {

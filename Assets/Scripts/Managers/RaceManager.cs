@@ -6,6 +6,7 @@ using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 using UnityEngine.XR;
@@ -87,6 +88,8 @@ public class RaceManager : MonoBehaviour
     
     public void StartRace()
     {     
+        // this is unsafe, but 
+        
         
         if (racerSelections.Count == 0) return;
         List<RacerController> racerControllers = GameManager.Instance.GetRacers();
@@ -105,7 +108,7 @@ public class RaceManager : MonoBehaviour
             remainingStartingGrid.Remove(startingGridSpot);
             
             // TODO: There is no multi character select right now, so all players get the same character. 
-            RacerSelection localRacerSelection = GameManager.Instance.Player1; // TODO: Currently, the local player selection is the first in the list
+            RacerSelection localRacerSelection = racerSelections[i];
             if (localRacerSelection.kart == null || localRacerSelection.character == null)
             {
                 Debug.LogError("Player" + i + "Character Selection not found.");
@@ -169,11 +172,6 @@ public class RaceManager : MonoBehaviour
         OnRaceStart?.Invoke();
         
         // Must ensure that the splitscreen handler is only created after initializing all the cameras. Otherwise, splitscreen breaks
-        Debug.Log("Printing inputs!");
-        foreach (InputDevice inputDevice in InputSystem.devices)
-        {
-            Debug.Log(inputDevice);
-        }
         PlayerInputManager inputManager = Instantiate(GameManager.Instance.inputManagerPrefab).GetComponent<PlayerInputManager>();
         inputManager.splitScreen = true;
 
@@ -207,32 +205,23 @@ public class RaceManager : MonoBehaviour
         {
             if (racerSelection.inputDevice != null)
             {
-                kartObject.GetComponent<PlayerInput>()
-                    .SwitchCurrentControlScheme(new InputDevice[] { racerSelection.inputDevice });
+                InputUser.PerformPairingWithDevice(racerSelection.inputDevice, kartObject.GetComponent<PlayerInput>().user);
             }
             else
             {
-                
-                // for cases where we dont have any input selected on a player kart. maps the next available input to this new racer
-                foreach (InputDevice inputDevice in InputSystem.devices)
+                // we dont have any input selected on a player kart. maps the next available input to this new racer
+                if (GameManager.Instance.JoinedInputDevices.Any())
                 {
-                    if (!GameManager.Instance.InputsInUse.Contains(inputDevice))
-                    {
-                        kartObject.GetComponent<PlayerInput>()
-                            .SwitchCurrentControlScheme(new InputDevice[] { inputDevice });
-                        GameManager.Instance.InputsInUse.Add(inputDevice);
-                    }
+                    InputUser.PerformPairingWithDevice(GameManager.Instance.JoinedInputDevices.Dequeue(), kartObject.GetComponent<PlayerInput>().user);    
                 }
+                
             }
-
             //TODO: remove debug
             Debug.Log("Printing player's inputs");
             foreach (InputDevice input in kartObject.GetComponent<PlayerInput>().devices)
             {
                 Debug.Log(input);
             }
-            
-            Debug.Log(kartObject.GetComponent<PlayerInput>().inputIsActive);
             
             GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
             Camera mainCamera = cameraObject.GetComponent<Camera>();

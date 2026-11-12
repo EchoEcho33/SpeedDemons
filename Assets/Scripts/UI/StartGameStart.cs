@@ -5,8 +5,13 @@ public class StartGameStart : MonoBehaviour
 {
     private void StartGame()
     {
-        SceneManager.sceneLoaded += LoadTestTrack;
+        // SceneManager.sceneLoaded += LoadTestTrack;
         SceneManager.LoadSceneAsync("Scenes/Main/CharacterSelect");
+    }
+
+    public void InputSelect()
+    {
+        SceneManager.LoadSceneAsync("Scenes/MAIN/InputSelect");
     }
 
     public void StartSinglePlayer()
@@ -20,11 +25,7 @@ public class StartGameStart : MonoBehaviour
         // TODO: add UI to set number of players. defaults to whatever is set in gamemanager rn
         // - gianluca
         StartGame();
+        print("opened charselect");
     }
-
-    public void LoadTestTrack(Scene scene, LoadSceneMode mode)
-    {
-        GameManager.Instance.SetGameState(GameState.WaitingToStart);
-        SceneManager.sceneLoaded -= LoadTestTrack;
-    }
+    
 }

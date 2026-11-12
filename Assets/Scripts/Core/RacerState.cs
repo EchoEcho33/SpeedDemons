@@ -128,7 +128,16 @@ public class RacerState : MonoBehaviour
 
     private IEnumerator RespawnDelay(GameObject racerAndCar, Rigidbody racerAndCarRigidbody)
     {
-        racerAndCar.SetActive(false);
+        if (RacerController.respawning)
+        {
+            yield break;
+        }
+        // this may seem like a strange edit, but disabling a gameobject unpairs its inputdevice.
+        // when respawning, the character is invisible (scale of 0) but still active, so a flag must be set to prevent multiple respawns from 1 contact
+        // -gianluca
+        RacerController.respawning = true;
+        var savedScale = racerAndCar.transform.localScale; 
+        racerAndCar.transform.localScale = new Vector3(0,0,0);
         // Pause the racer while respawning
         racerAndCarRigidbody.constraints = RigidbodyConstraints.FreezePosition;
         racerAndCarRigidbody.useGravity = false;
@@ -139,7 +148,7 @@ public class RacerState : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
 
         // Resumes the racer
-        racerAndCar.SetActive(true);
+        racerAndCar.transform.localScale = savedScale;
         racerAndCarRigidbody.constraints = RigidbodyConstraints.None;
         racerAndCarRigidbody.linearVelocity = Vector3.zero;
         racerAndCarRigidbody.angularVelocity = Vector3.zero;
@@ -156,6 +165,8 @@ public class RacerState : MonoBehaviour
         {
             RaceChoreographer.Instance.SendRacerRespawnEvent(aiController, currentCheckpoint);
         }
+        
+        RacerController.respawning = false;
     }
 
     //filler method for ability bar, im guessing the bar updates additively/subtractively
