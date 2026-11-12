@@ -17,19 +17,21 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set;}
 
+    public List<InputDevice> InputsInUse { get; private set; }
+
     // TODO: change this to a global ui that is separate from all players. each player will have their own ui instead
     public GlobalRaceUI UIManager { get; private set;}
     
     // player ui will be instantiated as a child of this for organization purposes
-    public GameObject UIManagerObject; 
+    private GameObject UIManagerObject; 
     
     public AudioManager audioManager { get; private set;}
     
     [SerializeField]
     public GameObject inputManagerPrefab;
-
+    
     [SerializeField]
-    public GameObject UIManagerPrefab;
+    private GameObject UIManagerPrefab;
     
     [SerializeField]
     public GameObject AudioManagerPrefab;
@@ -82,6 +84,8 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        
+        InputsInUse = new List<InputDevice>();
     }
 
     private void Start()

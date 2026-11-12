@@ -49,7 +49,7 @@ public class RaceUI : MonoBehaviour
         
         // need to delay ui init so that we can get camera rect from the PlayerInputManager's splitscreen
         // this can also be delayed by a certain amount of time if needed. right now it enables after the countdown is complete
-        GameManager.Instance.UIManagerObject.GetComponent<GlobalRaceUI>().CountdownFinished += OnCountdownFinished;
+        GameManager.Instance.UIManager.CountdownFinished += OnCountdownFinished;
         
     }
 

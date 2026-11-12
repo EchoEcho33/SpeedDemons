@@ -8,6 +8,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
+using UnityEngine.XR;
+using InputDevice = UnityEngine.InputSystem.InputDevice;
 using Random = UnityEngine.Random;
 
 [ExecuteAlways]
@@ -85,58 +87,6 @@ public class RaceManager : MonoBehaviour
     
     public void StartRace()
     {     
-        // this is the game's original code prior to the multiplayer split. depends on _singlePlayer
-        /*if (GameManager.Instance._singlePlayer)
-        {
-            if (racerSelections.Count == 0) return;
-
-        // TODO: Mike - This only spawns 1 drive script for a singleplayer game. Change this for multiplayer!
-        List<StartingGridSpot> remainingStartingGrid = startingGrid;
-        int startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
-        StartingGridSpot startingGridSpot = startingGrid[startingGridIndex];
-        remainingStartingGrid.RemoveAt(startingGridIndex);
-
-        RacerSelection localRacerSelection = GameManager.Instance.Player1; // TODO: Currently, the local player selection is the first in the list
-        if (localRacerSelection.kart == null || localRacerSelection.character == null)
-        {
-            Debug.LogError("Player 1 Character Selection not found.");
-            localRacerSelection = racerSelections[0];
-        }
-        (Character localCharacter, Kart localKart, RacerState localRacerState) = SpawnRacer(localRacerSelection, startingGridSpot, true);
-        PlayerController localRacer = GameManager.Instance.LocalRacers[0];
-        localRacer.AssignCharacterAndKart(localCharacter, localKart);
-        localRacer.InitializeSingleCamera();
-        localRacer.input.enabled = true; 
-        localRacer.AssignRacerState(localRacerState);
-        
-        // TODO: Change this when we swap to multiplayer
-        // ai countdown timer is handled by the racerController loop
-        localRacer.immobileDuration = countdownTimer;
-        localRacer.preventMovement = true;
-        
-        List<RacerController> racerControllers = GameManager.Instance.GetRacers();
-        racerControllers.Remove(localRacer);
-        int racerSelectionIndex = 0;
-
-        List<Item> items = GameManager.Instance.items;
-        
-        GameManager.Instance.UIManager.StartCoroutine("TickCountdown", countdownTimer);
-        
-        foreach (RacerController racer in racerControllers)
-        {
-            startingGridIndex = Random.Range(0, remainingStartingGrid.Count);
-            startingGridSpot = startingGrid[startingGridIndex];
-            remainingStartingGrid.RemoveAt(startingGridIndex);
-            
-            (Character character, Kart kart, RacerState racerState) = SpawnRacer(racerSelections[racerSelectionIndex], startingGridSpot, false);
-            racer.AssignCharacterAndKart(character, kart);
-            racer.AssignRacerState(racerState);
-            
-            racer.immobileDuration = countdownTimer;
-            racer.preventMovement = true;
-            
-            racerSelectionIndex++;
-        }*/
         
         if (racerSelections.Count == 0) return;
         List<RacerController> racerControllers = GameManager.Instance.GetRacers();
@@ -174,8 +124,6 @@ public class RaceManager : MonoBehaviour
             
             player.AssignRacerState(localRacerState);
             
-            // TODO: Change this to a loop when we swap to multiplayer more than 2
-            // ai countdown timer is handled by the racerController loop
             player.immobileDuration = countdownTimer;
             player.preventMovement = true;
 
@@ -221,8 +169,12 @@ public class RaceManager : MonoBehaviour
         OnRaceStart?.Invoke();
         
         // Must ensure that the splitscreen handler is only created after initializing all the cameras. Otherwise, splitscreen breaks
-        // - Gianluca
-        PlayerInputManager inputManager = Instantiate(GameManager.Instance.inputManagerPrefab).GetComponent/**/<PlayerInputManager>();
+        Debug.Log("Printing inputs!");
+        foreach (InputDevice inputDevice in InputSystem.devices)
+        {
+            Debug.Log(inputDevice);
+        }
+        PlayerInputManager inputManager = Instantiate(GameManager.Instance.inputManagerPrefab).GetComponent<PlayerInputManager>();
         inputManager.splitScreen = true;
 
     }
@@ -236,7 +188,7 @@ public class RaceManager : MonoBehaviour
         // The PlayerInputManager requires JoinPlayer to be used for splitscreen, so if this is a player, we instantiate via that method
         // - Gianluca
         // The racerselection should eventually contain a new field that holds the input preference of this player for 4 players. 
-         GameObject kartObject = Instantiate(kart.kartPrefab, startingGridSpot.GetSpawnPoint(), kart.kartPrefab.transform.rotation);
+        GameObject kartObject = Instantiate(kart.kartPrefab, startingGridSpot.GetSpawnPoint(), kart.kartPrefab.transform.rotation);
        
         if (!isPlayer)
         {
@@ -253,6 +205,35 @@ public class RaceManager : MonoBehaviour
         // moved it here to prevent race conditions. - Gianluca
         if (isPlayer)
         {
+            if (racerSelection.inputDevice != null)
+            {
+                kartObject.GetComponent<PlayerInput>()
+                    .SwitchCurrentControlScheme(new InputDevice[] { racerSelection.inputDevice });
+            }
+            else
+            {
+                
+                // for cases where we dont have any input selected on a player kart. maps the next available input to this new racer
+                foreach (InputDevice inputDevice in InputSystem.devices)
+                {
+                    if (!GameManager.Instance.InputsInUse.Contains(inputDevice))
+                    {
+                        kartObject.GetComponent<PlayerInput>()
+                            .SwitchCurrentControlScheme(new InputDevice[] { inputDevice });
+                        GameManager.Instance.InputsInUse.Add(inputDevice);
+                    }
+                }
+            }
+
+            //TODO: remove debug
+            Debug.Log("Printing player's inputs");
+            foreach (InputDevice input in kartObject.GetComponent<PlayerInput>().devices)
+            {
+                Debug.Log(input);
+            }
+            
+            Debug.Log(kartObject.GetComponent<PlayerInput>().inputIsActive);
+            
             GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
             Camera mainCamera = cameraObject.GetComponent<Camera>();
             kartObject.GetComponent<PlayerInput>().camera = mainCamera; 
@@ -275,6 +256,8 @@ public class RaceManager : MonoBehaviour
             cinemachine.OutputChannel = indexChannel(GameManager.Instance.currentCameraChannel);
 
             GameManager.Instance.currentCameraChannel++;
+            
+            
         }
         
         // Setup racer state.

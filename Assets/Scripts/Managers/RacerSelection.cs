@@ -10,12 +10,21 @@ public struct RacerSelection
     // the following vars are for when we update the character selection to support input selection
     
     // the device for this racer. will be null if not a player
-    /*public InputDevice inputDevice;*/
+    public InputDevice inputDevice;
     
+    
+    
+    RacerSelection(Character character, Kart kart, InputDevice inputDevice)
+    {
+        this.character = character;
+        this.kart = kart;
+        this.inputDevice = inputDevice;
+    }
     
     RacerSelection(Character character, Kart kart)
     {
         this.character = character;
         this.kart = kart;
+        this.inputDevice = null;
     }
 }
