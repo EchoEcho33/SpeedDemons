@@ -9,8 +9,9 @@ public class InputDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current == null)
+        if (Keyboard.current == null || GameManager.Instance.JoinedInputDevices.Count >= 4)
         {
+            print("keyboard present or max players");
             return;
         }
 
