@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class Snowball : Item
 {
