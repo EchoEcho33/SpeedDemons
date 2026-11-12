@@ -5,6 +5,7 @@ using FMOD.Studio;
 using FMODUnity;
 using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class Drive : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class Drive : MonoBehaviour
     public StudioEventEmitter drivingAudio;
     private Rigidbody rigidbody;
     public LayerMask ground;
+    public int mode { get; private set; }
 
     public void AssignController(RacerController newRacerController)
     {
@@ -176,6 +178,10 @@ public class Drive : MonoBehaviour
         ApplyMultiplier(timer, multiplier);
     }
 
+    public void switchMode(int m) {
+        mode = m;
+    }
+
     public void PreventMovement()
     {
         if (!isGrounded) return;
@@ -189,12 +195,23 @@ public class Drive : MonoBehaviour
         // Debug.Log("This is being called" + transform.position);
 
         Vector3 down = Vector3.down;
+        Ray groundCheck;
+        
 
-        Ray groundCheck = new Ray(transform.position + transform.up * 0.8f, down);
-        // Debug.DrawRay(transform.position + transform.up * 0.8f, down * 1.6f, Color.red, 0.25f);
-        isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, 1.6f, ground);
-        // print(groundHitInfo.collider);
-        // Add mask for ground layer.
+        switch (mode)
+        {
+            case 1: // Snowball
+                Transform sb = transform.Find("Snowball");
+                // Treating all scale axis as the same length.
+                float radius = sb.localScale.x;
+                groundCheck = new Ray(sb.position + transform.up * radius, down);
+                isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, 2 * radius, ground);
+                break;
+            default: // Normal
+                groundCheck = new Ray(transform.position + transform.up * 0.8f, down);
+                isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, 1.6f, ground);
+                break;
+        }
     }
 
     public void setNormalRotation()

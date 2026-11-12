@@ -128,7 +128,7 @@ public class RacerState : MonoBehaviour
 
         Transform model = racerAndCar.transform.Find("Model");
         model.transform.localPosition = Vector3.zero;
-        model.Find("Model").transform.localRotation = Quaternion.identity;
+        model.transform.localRotation = Quaternion.identity;
 
         yield return new WaitForSeconds(2.0f);
 
@@ -141,7 +141,9 @@ public class RacerState : MonoBehaviour
         RacerController.preventMovement = false;
 
         // Places racer back on the track
-        RacerController racerController = RacerController.Character.characterObject.GetComponentInParent<Drive>().Racer;
+        Drive driveScript = RacerController.Character.characterObject.GetComponentInParent<Drive>();
+        driveScript.switchMode(0);
+        RacerController racerController = driveScript.Racer;
         TrackCheckpoint currentCheckpoint = racerController.RacerState.CurrCheckpoint;
         racerAndCar.transform.position = currentCheckpoint.transform.position + Vector3.up * RacerController.Character._spawnVerticalDisplacement;
         racerAndCar.transform.rotation = currentCheckpoint.GetTrackForwardDirection();
