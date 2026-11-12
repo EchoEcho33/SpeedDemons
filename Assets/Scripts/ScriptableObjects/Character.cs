@@ -37,7 +37,6 @@ public class Character : ScriptableObject
 
     public readonly int abilityCharge = 10;
 
-    private GameObject snowball;
 
     [Serializable]
     private struct VoiceLine
