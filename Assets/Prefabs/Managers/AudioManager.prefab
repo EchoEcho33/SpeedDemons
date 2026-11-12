@@ -71,6 +71,20 @@ MonoBehaviour:
       Data3: -343682916
       Data4: 185067438
     Path: event:/Driving/BasicCarDriving
+  <hitItemBoxPlayer>k__BackingField:
+    Guid:
+      Data1: -837090155
+      Data2: 1212528035
+      Data3: 1923460022
+      Data4: 2032494625
+    Path: event:/Car Impact/HitItemBoxPlayer
+  <hitItemBoxAI>k__BackingField:
+    Guid:
+      Data1: -200480201
+      Data2: 1245981447
+      Data3: 657699989
+      Data4: 541570846
+    Path: event:/Car Impact/HitItemBoxAI
   <characterSelectMusic>k__BackingField:
     Guid:
       Data1: 38521660
@@ -78,3 +92,10 @@ MonoBehaviour:
       Data3: -2088963152
       Data4: 1841431524
     Path: event:/Music/CharacterSelectMusic
+  <mainGameMusic>k__BackingField:
+    Guid:
+      Data1: -198168995
+      Data2: 1139158729
+      Data3: -1936969290
+      Data4: -1008638776
+    Path: event:/Music/MainGameMusic
