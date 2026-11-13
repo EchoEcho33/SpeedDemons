@@ -71,6 +71,13 @@ MonoBehaviour:
       Data3: -343682916
       Data4: 185067438
     Path: event:/Driving/BasicCarDriving
+  <carSpinOut>k__BackingField:
+    Guid:
+      Data1: 1725294498
+      Data2: 1227274190
+      Data3: 1670359216
+      Data4: 2112390192
+    Path: event:/Driving/CarSpinOut
   <hitItemBoxPlayer>k__BackingField:
     Guid:
       Data1: -837090155

@@ -8,6 +8,7 @@ public class AudioEvents : MonoBehaviour
 
     [field: Header("Car SFX")]
     [field: SerializeField] public EventReference basicCarDrive {get; private set;}
+    [field: SerializeField] public EventReference carSpinOut {get; private set;}
 
     [field: Header("Car Impact SFX")]
     [field: SerializeField] public EventReference hitItemBoxPlayer {get; private set;}
