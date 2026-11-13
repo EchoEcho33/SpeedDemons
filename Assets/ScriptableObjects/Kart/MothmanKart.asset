@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MothmanKart
   m_EditorClassIdentifier: Assembly-CSharp::Kart
   _maxSpeed: 25
-  _maxAcceleration: 10
+  _maxAcceleration: 15
   _brakeStrength: 10
   _drag: 4
   _turnRadius: 2

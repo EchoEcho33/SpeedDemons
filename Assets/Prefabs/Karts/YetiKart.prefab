@@ -77,9 +77,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7603069183561121243}
   serializedVersion: 5
-  m_Mass: 500
+  m_Mass: 100
   m_LinearDamping: 0
-  m_AngularDamping: 15
+  m_AngularDamping: 21
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -115,7 +115,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.94, z: -3.67}
+  m_Size: {x: 1, y: 0.94, z: 3.4}
   m_Center: {x: 0, y: 0.42, z: -0.2}
 --- !u!114 &-707341542021437086
 MonoBehaviour:
@@ -155,7 +155,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7603069183561121243}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a17c858a12ff44846abd521de9baf099, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -421,6 +421,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: yetikart_wheel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -498,6 +502,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4614f62236ab8864d994524526cd6aed, type: 3}
       propertyPath: m_Name
       value: yetikart_body
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4614f62236ab8864d994524526cd6aed, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -692,6 +700,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: yetikart_wheel
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -770,6 +782,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: yetikart_wheel (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -847,6 +863,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
       propertyPath: m_Name
       value: yetikart_wheel (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
