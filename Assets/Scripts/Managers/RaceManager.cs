@@ -245,7 +245,6 @@ public class RaceManager : MonoBehaviour
         characterObject.transform.SetParent(characterSlot.transform, false);
         character.characterObject = characterObject;
         kart.kartObject = kartObject;
-        
         // Setup racer state.
         GameObject racerObject = new GameObject();
         RacerState racerState = racerObject.AddComponent<RacerState>();
