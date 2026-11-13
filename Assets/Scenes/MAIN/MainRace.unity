@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 47907422}
   - component: {fileID: 47907421}
   - component: {fileID: 47907420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2475,7 +2475,7 @@ GameObject:
   - component: {fileID: 276748996}
   - component: {fileID: 276748995}
   - component: {fileID: 276748994}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (29)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3571,7 +3571,7 @@ GameObject:
   - component: {fileID: 344317385}
   - component: {fileID: 344317384}
   - component: {fileID: 344317383}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20687,6 +20687,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
+      propertyPath: karts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
       propertyPath: 'items.Array.data[2]'
       value: 
       objectReference: {fileID: 2018730163724020607, guid: 164b0bfe776de41ebad554553f94ab06, type: 3}
@@ -20701,7 +20705,11 @@ PrefabInstance:
     - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
       propertyPath: 'karts.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 5fb905ccc699a3444896e81ddbf3c9cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
+    - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
+      propertyPath: 'karts.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 90f0f8fdeacdf604c8ee24ab17f65d49, type: 2}
     - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
       propertyPath: characters.Array.size
       value: 3
@@ -22159,7 +22167,7 @@ GameObject:
   - component: {fileID: 1382028957}
   - component: {fileID: 1382028956}
   - component: {fileID: 1382028955}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28617,7 +28625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: racerCount
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: startFinishCheckpoint
@@ -28658,35 +28666,35 @@ PrefabInstance:
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: racerSelections.Array.data[0].kart
       value: 
-      objectReference: {fileID: 11400000, guid: 5fb905ccc699a3444896e81ddbf3c9cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 90f0f8fdeacdf604c8ee24ab17f65d49, type: 2}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: racerSelections.Array.data[1].kart
       value: 
-      objectReference: {fileID: 11400000, guid: 5fb905ccc699a3444896e81ddbf3c9cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: racerSelections.Array.data[2].kart
       value: 
-      objectReference: {fileID: 11400000, guid: 5fb905ccc699a3444896e81ddbf3c9cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: racerSelections.Array.data[3].kart
       value: 
-      objectReference: {fileID: 11400000, guid: 5fb905ccc699a3444896e81ddbf3c9cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: racerSelections.Array.data[4].kart
       value: 
-      objectReference: {fileID: 11400000, guid: 5fb905ccc699a3444896e81ddbf3c9cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: racerSelections.Array.data[5].kart
       value: 
-      objectReference: {fileID: 11400000, guid: 5fb905ccc699a3444896e81ddbf3c9cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: racerSelections.Array.data[6].kart
       value: 
-      objectReference: {fileID: 11400000, guid: 5fb905ccc699a3444896e81ddbf3c9cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
     - target: {fileID: 1775210060767031954, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: racerSelections.Array.data[7].kart
       value: 
-      objectReference: {fileID: 11400000, guid: 5fb905ccc699a3444896e81ddbf3c9cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 9e9e1000ebc27adecb68562b271a3318, type: 2}
     - target: {fileID: 4863894500368768270, guid: 5e4a81c33d068d845951f4cfb78b0a2d, type: 3}
       propertyPath: m_Name
       value: RaceManager

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: YetiKart
   m_EditorClassIdentifier: Assembly-CSharp::Kart
   _maxSpeed: 30
-  _maxAcceleration: 15
+  _maxAcceleration: 10
   _brakeStrength: 30
   _drag: 6
   _turnRadius: 3

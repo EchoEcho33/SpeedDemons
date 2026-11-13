@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3505323999846997372}
   - component: {fileID: 1625279630982434052}
   - component: {fileID: -707341542021437086}
+  - component: {fileID: 63620776095170268}
   m_Layer: 6
   m_Name: YetiKart
   m_TagString: Racer
@@ -78,7 +79,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 100
   m_LinearDamping: 0
-  m_AngularDamping: 18.46
+  m_AngularDamping: 21
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -93,7 +94,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 10
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!65 &1625279630982434052
 BoxCollider:
@@ -108,14 +109,14 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.6061231, y: 0.45321816, z: 2.75}
-  m_Center: {x: -0.74751043, y: 0.3266091, z: -0.100000024}
+  m_Size: {x: 1, y: 0.94, z: 3.4}
+  m_Center: {x: 0, y: 0.42, z: -0.2}
 --- !u!114 &-707341542021437086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +148,27 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!135 &63620776095170268
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603069183561121243}
+  m_Material: {fileID: 13400000, guid: a17c858a12ff44846abd521de9baf099, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 576
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.6, z: -0.2}
 --- !u!1 &7633962090835233391
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6887578902854444664}
   - component: {fileID: 1301208697832359963}
+  - component: {fileID: 7330161034569361333}
   m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
@@ -173,7 +196,7 @@ Transform:
   m_GameObject: {fileID: 7633962090835233391}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.861, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -207,6 +230,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &7330161034569361333
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7633962090835233391}
+  m_Material: {fileID: 13400000, guid: a17c858a12ff44846abd521de9baf099, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.32, z: -3.67}
+  m_Center: {x: 0, y: 0.3, z: -0.2}
 --- !u!1001 &292095942193197134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -377,40 +421,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: yetikart_wheel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6850511070734881191}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
---- !u!1 &1470753120823281938 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
-  m_PrefabInstance: {fileID: 1776744794605040707}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &6850511070734881191
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470753120823281938}
-  m_Material: {fileID: 13400000, guid: a17c858a12ff44846abd521de9baf099, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.687858
-  m_Center: {x: -0.017422203, y: 0.005424471, z: 0.0055969954}
 --- !u!4 &2243631023659701160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
@@ -484,40 +503,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: yetikart_body
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4614f62236ab8864d994524526cd6aed, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4614f62236ab8864d994524526cd6aed, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6186822730540667097}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4614f62236ab8864d994524526cd6aed, type: 3}
---- !u!1 &1724407300345808510 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4614f62236ab8864d994524526cd6aed, type: 3}
-  m_PrefabInstance: {fileID: 1958848805914737455}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &6186822730540667097
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1724407300345808510}
-  m_Material: {fileID: 13400000, guid: a17c858a12ff44846abd521de9baf099, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 20.548262, y: 9.832099, z: 8.78785}
-  m_Center: {x: 1.3601551, y: -0.48147762, z: -0.822284}
 --- !u!4 &2064201007474384068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4614f62236ab8864d994524526cd6aed, type: 3}
@@ -706,45 +700,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: yetikart_wheel
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2272033903698193607}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
 --- !u!4 &5168583598492355073 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
   m_PrefabInstance: {fileID: 4625414638634364394}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5544405901051187387 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
-  m_PrefabInstance: {fileID: 4625414638634364394}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &2272033903698193607
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5544405901051187387}
-  m_Material: {fileID: 13400000, guid: a17c858a12ff44846abd521de9baf099, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.687858
-  m_Center: {x: -0.017422203, y: 0.005424471, z: 0.0055969954}
 --- !u!1001 &5724628744529614082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -813,40 +782,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: yetikart_wheel (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6621175359996812335}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
---- !u!1 &4877572474161637459 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
-  m_PrefabInstance: {fileID: 5724628744529614082}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &6621175359996812335
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4877572474161637459}
-  m_Material: {fileID: 13400000, guid: a17c858a12ff44846abd521de9baf099, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.687858
-  m_Center: {x: -0.017422203, y: 0.005424471, z: 0.0055969954}
 --- !u!4 &5258883843688035049 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
@@ -920,42 +864,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: yetikart_wheel (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8365057921005888384}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
 --- !u!4 &7185941142299588258 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
   m_PrefabInstance: {fileID: 7220165308573339977}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7562185656966966296 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f2fac441bd8639b48a5beeaaaed2bb3c, type: 3}
-  m_PrefabInstance: {fileID: 7220165308573339977}
-  m_PrefabAsset: {fileID: 0}
---- !u!135 &8365057921005888384
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7562185656966966296}
-  m_Material: {fileID: 13400000, guid: a17c858a12ff44846abd521de9baf099, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.687858
-  m_Center: {x: -0.017422203, y: 0.005424471, z: 0.0055969954}
