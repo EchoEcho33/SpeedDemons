@@ -1,3 +1,13 @@
 fileFormatVersion: 2
 guid: 0c2cd38a964747798dd9d28ea259f250
-timeCreated: 1789199080
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - CinemachineCamera: {instanceID: 0}
+  - inputList: {fileID: -944628639613478452, guid: 41a9820487b87304b942d4152c418794, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

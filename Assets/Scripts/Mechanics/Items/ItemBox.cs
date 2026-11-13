@@ -12,10 +12,9 @@ public class ItemBox : MonoBehaviour
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("AI"))
         {
             Item randomItem = GameManager.Instance.GetRandomItem();
-
+            
             if (other.gameObject.CompareTag("Player"))
             {
-                GameManager.Instance.UIManager.PickUpItem(randomItem);
                 AudioManager.instance.PlayOneShot(AudioEvents.instance.hitItemBoxPlayer, this.transform.position);
             } else
             {

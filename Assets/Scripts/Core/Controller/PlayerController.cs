@@ -3,15 +3,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using FMOD.Studio;
 using FMODUnity;
-using System;
-using UnityEngine.UIElements;
-using Unity.AppUI.Core;
 
 public class PlayerController : RacerController
 {
-    public Camera MainCamera { get; private set; }
-    public CinemachineCamera CinemachineCamera;
-    public RaceUI raceUI;
+    public Camera MainCamera { get;  set; }
+    
+    public PlayerInput input;
+
+    public RaceUI playerUI; 
     
     private InputAction accelerate;
 
@@ -19,128 +18,39 @@ public class PlayerController : RacerController
 
     private InputAction turn; 
 
-    private InputAction accelerate_kbd;
-    
-    private InputAction brake_kbd;
-    
-    private InputAction turnRight_kbd;
-    
-    private InputAction turnLeft_kbd;
-
     private InputAction ability;
 
-    private InputAction ability_kbd;
-
     private InputAction useItem;
-    private InputAction useItem_kbd;
 
     private InputAction trick;
-    private InputAction trick_kbd;
-
-    public int playerNum = 0;
-
+    
     public override void InitializeDrive()
     {
         Drive = Kart.kartObject.AddComponent<Drive>();
         Drive.AssignController(this);
         Drive.Initialize(Character, Kart);
-        
-        // INSANELY HARD CODED.
-        // TODO - Gianluca: Refactor using input manager to avoid having to do this for each additional player
-        // There is a built in split screen thing that can work, but our current UI system would have to change
-        
-        if (playerNum == 0)
-        {
-            accelerate = GameManager.Instance.inputManager.accelerate.action;
-            brake = GameManager.Instance.inputManager.brake.action;
-            turn = GameManager.Instance.inputManager.turn.action;
 
-            accelerate_kbd = GameManager.Instance.inputManager.accelerate_kbd.action;
-            brake_kbd = GameManager.Instance.inputManager.brake_kbd.action;
-            turnRight_kbd = GameManager.Instance.inputManager.turnRight_kbd.action;
-            turnLeft_kbd = GameManager.Instance.inputManager.turnLeft_kbd.action;
+        // manages inputs for now
+        input = Kart.kartObject.GetComponent<PlayerInput>();
         
-            ability = GameManager.Instance.inputManager.ability.action;
-            ability_kbd = GameManager.Instance.inputManager.ability_kbd.action;
-
-            useItem = GameManager.Instance.inputManager.useItem.action;
-            useItem_kbd = GameManager.Instance.inputManager.useItem_kbd.action;
-
-            trick = GameManager.Instance.inputManager.trick.action;
-            trick_kbd = GameManager.Instance.inputManager.trick_kbd.action;
-        }
-        else
-        {
-            accelerate_kbd = GameManager.Instance.inputManager.p2_accelerate_kbd.action;
-            brake_kbd = GameManager.Instance.inputManager.p2_brake_kbd.action;
-            turnRight_kbd = GameManager.Instance.inputManager.p2_turnRight_kbd.action;
-            turnLeft_kbd = GameManager.Instance.inputManager.p2_turnLeft_kbd.action;
-            
-            ability_kbd = GameManager.Instance.inputManager.ability_kbd.action;
-            useItem_kbd = GameManager.Instance.inputManager.p2_useItem_kbd.action;
-            trick_kbd = GameManager.Instance.inputManager.p2_trick_kbd.action;
-
-            // undef values. will get second controller later
-            // "Empty" is just some inaccessible keyboard key so we don't get null reference errors
-            accelerate = GameManager.Instance.inputManager.p2_empty_kbd.action;
-            brake = GameManager.Instance.inputManager.p2_empty_kbd.action;
-            turn = GameManager.Instance.inputManager.p2_empty_kbd.action;
-            ability = GameManager.Instance.inputManager.p2_empty_kbd.action;
-            useItem = GameManager.Instance.inputManager.p2_empty_kbd.action;
-            trick = GameManager.Instance.inputManager.p2_empty_kbd.action;
-        }
+        Debug.Log(input.currentControlScheme);
         
+        // refactor all to use input.actions
+        accelerate = input.actions.FindAction("Accelerate");
+        Debug.Log("Accelerate is equal to" + accelerate);
+        brake = input.actions.FindAction("Brake");
+        turn = input.actions.FindAction("Turn");
+        
+        ability = input.actions.FindAction("Ability");
+
+        useItem = input.actions.FindAction("UseItem");
+
+        trick = input.actions.FindAction("Trick");
     }
-
-    public void InitializeSingleCamera()
-    {
-            GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
-            MainCamera = cameraObject.GetComponent<Camera>();
     
-            GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
-            CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
-            CinemachineCamera.Follow = Kart.kartObject.transform;
-
-            // audio stuff
-            MainCamera.GetComponent<StudioListener>().SetAttenuationObject(MainCamera.gameObject);
-    }
-
-    public void InitializeMultiCamera(int playerIndex)
-    {
-        // this is hardcoded and bad. currently two player
-        if (playerIndex == 0)
-        {
-            GameObject cameraObject = Instantiate(GameManager.Instance.cameraPrefab);
-            MainCamera = cameraObject.GetComponent<Camera>();
-            CinemachineBrain brain = MainCamera.GetComponent<CinemachineBrain>();
-            brain.ChannelMask = OutputChannels.Channel01;
-            MainCamera.rect = new Rect(0f, 0.5f, 1f, 0.5f);
-
-    
-            GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
-            CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
-            CinemachineCamera.OutputChannel = OutputChannels.Channel01;
-            CinemachineCamera.Follow = Kart.kartObject.transform;
-
-            // audio stuff
-            MainCamera.GetComponent<StudioListener>().SetAttenuationObject(MainCamera.gameObject);
-        }
-        else
-        {
-            GameObject cameraObject2 = Instantiate(GameManager.Instance.cameraPrefab);
-            MainCamera = cameraObject2.GetComponent<Camera>();
-            CinemachineBrain brain = MainCamera.GetComponent<CinemachineBrain>();
-            brain.ChannelMask = OutputChannels.Channel02;
-            MainCamera.rect = new Rect(0f, 0f, 1f, 0.5f);
-            
-            GameObject cinemachineCameraObject = Instantiate(GameManager.Instance.cinemachineCameraPrefab);
-            CinemachineCamera = cinemachineCameraObject.GetComponent<CinemachineCamera>();
-            CinemachineCamera.OutputChannel = OutputChannels.Channel02;
-            CinemachineCamera.Follow = Kart.kartObject.transform;
-        }
-    }
     private void FixedUpdate()
     {
+        
         var old_transform_position = transform.position;
         // Spin Out Handler
         if (base.SpinOut)
@@ -186,10 +96,7 @@ public class PlayerController : RacerController
         {
             ControllerMove();
         } 
-        else if (accelerate_kbd.IsPressed() || brake_kbd.IsPressed())
-        {
-            KeyboardMove();
-        } 
+        
         else if (Drive.GetCurrentSpeed() > 0)
         {
             Drive.Decelerate(1.0f, Kart._drag);
@@ -212,30 +119,6 @@ public class PlayerController : RacerController
                 Drive.Turn(Steering); 
             }
         } 
-        else if (turnRight_kbd.IsPressed())
-        {
-            Steering = 1.0f;
-            if (accelerate_kbd.IsPressed() && brake_kbd.IsPressed())
-            {
-                Drive.Turn(Steering, 1.5f);
-            }
-            else
-            {
-                Drive.Turn(Steering);
-            }
-        } 
-        else if (turnLeft_kbd.IsPressed())
-        {
-            Steering = -1.0f;
-            if (accelerate_kbd.IsPressed() && brake_kbd.IsPressed())
-            {
-                Drive.Turn(Steering, 1.5f);
-            }
-            else
-            {
-                Drive.Turn(Steering);
-            }
-        }
 
         // Trick
         if (Drive.hasTricked && Drive.isGrounded)
@@ -243,32 +126,20 @@ public class PlayerController : RacerController
             Drive.applyTrickMult(0.5f, 1.2f);
         }
 
-        if (trick.IsPressed() || trick_kbd.IsPressed())
+        if (trick.IsPressed())
         {
             if (turn.IsPressed()) {
                 int dir = turn.ReadValue<Vector2>().x > 0 ? 1 : -1;
                 Drive.Trick(dir);
             }
-            else if (!(turnRight_kbd.IsPressed() & turnLeft_kbd.IsPressed()))
+            else
             {
-                if (turnRight_kbd.IsPressed())
-                {
-                    Drive.Trick(1);
-                }
-                else if (turnLeft_kbd.IsPressed())
-                {
-                    Drive.Trick(-1);
-                }
-                else
-                {
-                    Drive.Trick();
-                }
-            }
             Drive.Trick();
+            }
         }
 
         // Ability
-        if (ability.IsPressed() || ability_kbd.IsPressed())
+        if (ability.IsPressed())
         {
             // The Ability Trigger is Not Fully Set Up, So this goes to Comment Jail for now
             if (RacerState.currAbilityCharge >= Character.abilityCharge)
@@ -278,7 +149,7 @@ public class PlayerController : RacerController
             }
         }
 
-        if (useItem.IsPressed() || useItem_kbd.IsPressed())
+        if (useItem.IsPressed())
         {
             RacerState.UseItem();
         }
@@ -313,24 +184,5 @@ public class PlayerController : RacerController
         }
     }
 
-    private void KeyboardMove()
-    {
-        if (accelerate_kbd.IsPressed())
-        {
-            Throttle = 1.0f;
-            Drive.Accelerate(Throttle);
-        } 
-        else if (brake_kbd.IsPressed())
-        {
-            Brake = 1.0f;
-            if (Drive.GetCurrentSpeed() <= 0)
-            {
-                Drive.Accelerate(-0.5f);
-            } 
-            else
-            {
-                Drive.Decelerate(Brake, Kart._brakeStrength);
-            }
-        }
-    }
+    
 }

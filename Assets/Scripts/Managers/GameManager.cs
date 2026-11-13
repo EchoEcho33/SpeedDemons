@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public enum GameState
@@ -16,17 +17,21 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set;}
 
-    public InputSys inputManager { get; private set;}
+    public List<InputDevice> InputsInUse { get; private set; }
+    public Queue<InputDevice> JoinedInputDevices;
 
-    public RaceUI UIManager { get; private set;}
+    // TODO: change this to a global ui that is separate from all players. each player will have their own ui instead
+    public GlobalRaceUI UIManager { get; private set;}
+    
+    // player ui will be instantiated as a child of this for organization purposes
     
     public AudioManager audioManager { get; private set;}
     
     [SerializeField]
     public GameObject inputManagerPrefab;
-
+    
     [SerializeField]
-    public GameObject UIManagerPrefab;
+    private GlobalRaceUI GlobalUIManagerPrefab;
     
     [SerializeField]
     public GameObject AudioManagerPrefab;
@@ -44,7 +49,8 @@ public class GameManager : MonoBehaviour
     public GameState startingGameState = GameState.Lobby;
     
     // default to multiplayer
-    [SerializeField] public bool _singlePlayer = false;
+    [SerializeField] public int numPlayers;
+    [SerializeField] public int aiRacers;
 
     public GameState GameState { get; private set; }
 
@@ -65,7 +71,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public List<Kart> karts;
-
+    
+    
+    // for cinemachine brain channel setup
+    [HideInInspector]
+    public int currentCameraChannel = 1; 
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -76,6 +87,9 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        
+        InputsInUse = new List<InputDevice>();
+        JoinedInputDevices = new Queue<InputDevice>();
     }
 
     private void Start()
@@ -128,59 +142,34 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameStateSetWaitingToStart()
     {
+        ResetRaceSession();
         InitializeManagers();
-        // This is the original non multiplayer code
-        if (_singlePlayer)
-        {
-            // TODO: This is currently how all the players are initialized. This should be instead be populated via fields in a lobby.
-            // TODO: The Local Player driven by Inputs, maybe multiplayer?
-            GameObject playerControllerObject = new GameObject("PlayerController");
-            LocalRacers.Insert(0, playerControllerObject.AddComponent<PlayerController>());
-            _racers.Add(LocalRacers[0]);
 
-            // TODO: AI Racers
-            int totalRacerCount = RaceManager.Instance.racerCount;
-            int racerCount = --totalRacerCount;
-            while (racerCount > 0)
-            {
-                GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
-                AIController aiController = aiControllerObject.AddComponent<AIController>();
-                _racers.Add(aiController);
-                racerCount--;
-            }
+        
+        
+        for (int i = 0; i < numPlayers; i++)
+        {
+            GameObject playerControllerObject = new GameObject("PlayerController");
+            LocalRacers.Insert(i, playerControllerObject.AddComponent<PlayerController>());
+            _racers.Add(LocalRacers[i]);
         }
-        else
+        
+        
+        // TODO: AI Racers
+        
+        int racerCount = aiRacers;
+        while (racerCount > 0)
         {
-            // TODO: This currently how all the players are initialized. This should be instead be populated via fields in a lobby.
-            // TODO: The Local Player driven by Inputs, maybe multiplayer?
-            GameObject playerControllerObject = new GameObject("PlayerController");
-            LocalRacers.Insert(0, playerControllerObject.AddComponent<PlayerController>());
-            LocalRacers[0].playerNum = 0;
-            _racers.Add(LocalRacers[0]);
-
-            GameObject p2PlayerControllerObject = new GameObject("PlayerController2");
-            LocalRacers.Insert(1, p2PlayerControllerObject.AddComponent<PlayerController>());
-            LocalRacers[1].playerNum = 1;
-            _racers.Add(LocalRacers[1]);
-
-            // TODO: AI Racers
-            int totalRacerCount = RaceManager.Instance.racerCount;
-            int racerCount = --totalRacerCount;
-            while (racerCount > 0)
-            {
-                GameObject aiControllerObject = new GameObject("AI Controller " + (totalRacerCount - racerCount));
-                AIController aiController = aiControllerObject.AddComponent<AIController>();
-                _racers.Add(aiController);
-                racerCount--;
-            }
-            
+            GameObject aiControllerObject = new GameObject("AI Controller " + (racerCount));
+            AIController aiController = aiControllerObject.AddComponent<AIController>();
+            _racers.Add(aiController);
+            racerCount--;
         }
         SetGameState(GameState.InMatch);
     }
 
     private void HandleGameStateSetInMatch()
     {
-        UIManager.gameObject.SetActive(true);
         RaceManager.Instance.StartRace();
     }
 
@@ -192,15 +181,10 @@ public class GameManager : MonoBehaviour
     
     private void InitializeManagers()
     {
-        GameObject inputManagerObject = Instantiate(inputManagerPrefab, gameObject.transform);
-        GameObject UIManagerObject = Instantiate(UIManagerPrefab, gameObject.transform);
-        GameObject audioManagerObject = Instantiate(AudioManagerPrefab, gameObject.transform);
+        UIManager = Instantiate(GlobalUIManagerPrefab);
+        GameObject audioManagerObject = Instantiate(AudioManagerPrefab);
         
-        inputManager = inputManagerObject.GetComponent<InputSys>();
-        UIManager = UIManagerObject.GetComponent<RaceUI>();
         audioManager = audioManagerObject.GetComponent<AudioManager>();
-
-        UIManager.gameObject.SetActive(false);
     }
     
     public List<RacerController> GetRacers()
@@ -226,9 +210,19 @@ public class GameManager : MonoBehaviour
         Player1 = player1;
         Player2 = player2;
     }
-
-    public void SetSingleplayer(bool IsSingleplayer)
+    
+    // cleanup func for all the new variables
+    private void ResetRaceSession()
     {
-        _singlePlayer = IsSingleplayer;
+        foreach (RacerController racer in _racers)
+        {
+            if (racer != null)
+                Destroy(racer.gameObject);
+        }
+
+        _racers.Clear();
+        LocalRacers.Clear();
+        currentCameraChannel = 1;
+        InputsInUse.Clear();
     }
 }

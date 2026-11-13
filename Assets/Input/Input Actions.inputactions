@@ -34,72 +34,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Camera",
-                    "type": "Value",
-                    "id": "02fa9975-1181-4629-8c41-e2ef6d38622e",
-                    "expectedControlType": "Stick",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Accelerate_KBD",
-                    "type": "Button",
-                    "id": "d1c5e34b-f354-49a2-8eca-dd6406fa3fd0",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Brake_KBD",
-                    "type": "Button",
-                    "id": "1bc243d7-944a-45a6-8812-eda9849c20c4",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TurnRight_KBD",
-                    "type": "Button",
-                    "id": "844432b9-6115-4a8d-b4d9-cff5c0f0bf99",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TurnLeft_KBD",
-                    "type": "Button",
-                    "id": "7ab4bf1f-6962-4f54-ad50-5dd853214aae",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Ability",
                     "type": "Button",
                     "id": "0be9eb94-43e4-465d-bcaa-374dd23cb411",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Ability_KBD",
-                    "type": "Button",
-                    "id": "fe8102a2-c25d-4f60-8d9d-f78491eb4704",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "UseItem_KBD",
-                    "type": "Button",
-                    "id": "5955c590-4278-4986-82af-238800b54128",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -117,88 +54,7 @@
                 {
                     "name": "Trick",
                     "type": "Button",
-                    "id": "ddaff75a-d1fd-4d85-8824-39630bf4a0df",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Trick_KBD",
-                    "type": "Button",
-                    "id": "0fc86920-48cb-429a-8ef6-6588107d5d91",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "P2_Accelerate_KBD",
-                    "type": "Button",
-                    "id": "c9df3f7e-215c-4893-91da-7e21edcbeeeb",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "P2_Brake_KBD",
-                    "type": "Button",
-                    "id": "edced1d8-b1a6-4808-921f-b04d45057538",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "P2_TurnRight_KBD",
-                    "type": "Button",
-                    "id": "05638655-5ae0-4b2a-9053-04eb76143565",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "P2_TurnLeft_KBD",
-                    "type": "Button",
-                    "id": "388fac35-574b-4f8f-8609-36fce6d1d244",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "P2_Ability_KBD",
-                    "type": "Button",
-                    "id": "4be629ee-6c35-434b-8a12-7c119e8355d6",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "P2_UseItem_KBD",
-                    "type": "Button",
-                    "id": "b66f1105-9262-41f8-9b62-705cdf17d7e4",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "P2_Empty_KBD",
-                    "type": "Button",
-                    "id": "223615dd-14b5-4ff8-8bc3-0239372a592c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "P2_Trick_KBD",
-                    "type": "Button",
-                    "id": "83096a6a-cb06-44c3-9803-eca7a9943352",
+                    "id": "f75dfce3-f711-4e0b-b8e8-38ac1999f952",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -209,44 +65,11 @@
                 {
                     "name": "",
                     "id": "a579809d-8c27-4b39-9e0f-eb210b359efa",
-                    "path": "<XInputController>/rightTrigger",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Gamepad",
                     "action": "Accelerate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "30ea1444-1b91-4ca3-b7c4-10c8448e5cf0",
-                    "path": "<XInputController>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Brake",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f9245b9c-b8b1-4dac-966c-7d5290d36ade",
-                    "path": "<XInputController>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Turn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6f88d083-961f-4e08-ba42-a86dbfece12f",
-                    "path": "<XInputController>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Camera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -256,8 +79,19 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Accelerate_KBD",
+                    "groups": ";Keyboard",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "30ea1444-1b91-4ca3-b7c4-10c8448e5cf0",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Brake",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -267,32 +101,54 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Brake_KBD",
+                    "groups": ";Keyboard",
+                    "action": "Brake",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "c14170e2-6775-4791-85b8-56646e9c447f",
-                    "path": "<Keyboard>/d",
+                    "id": "f9245b9c-b8b1-4dac-966c-7d5290d36ade",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "7c9a873a-f9b0-4437-a818-57ec057d6f0d",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TurnRight_KBD",
-                    "isComposite": false,
+                    "action": "Turn",
+                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "c13b23cb-d478-42b3-869d-8d0576722d08",
+                    "name": "left",
+                    "id": "acae90be-5c3e-4191-8493-4c1ea2eaea35",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "TurnLeft_KBD",
+                    "groups": ";Keyboard",
+                    "action": "Turn",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "0350efc4-58fe-44f8-870b-9b8657ee944d",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -300,7 +156,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Gamepad",
                     "action": "Ability",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -311,8 +167,8 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Ability_KBD",
+                    "groups": ";Keyboard",
+                    "action": "Ability",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -322,8 +178,8 @@
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "UseItem_KBD",
+                    "groups": ";Keyboard",
+                    "action": "UseItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -333,123 +189,83 @@
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Gamepad",
                     "action": "UseItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "7efb46c7-6ec7-4d49-b213-b1a87ae55c45",
-                    "path": "<Keyboard>/upArrow",
+                    "id": "6f88d083-961f-4e08-ba42-a86dbfece12f",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "P2_Accelerate_KBD",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a83d0ecf-aa46-4ded-ac91-98515a450b1d",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "P2_Brake_KBD",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7baa7fbd-b19d-4f3a-ba9a-15ea135e7377",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "P2_TurnRight_KBD",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ef8e3f81-cfef-4ed7-a9e1-3096e9e8e017",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "P2_TurnLeft_KBD",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "02488f0a-c5c7-4640-9f81-da6b076413d3",
-                    "path": "<Keyboard>/n",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "P2_Ability_KBD",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6cee38a4-0c73-4978-ba22-9b346b5c84b0",
-                    "path": "<Keyboard>/m",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "P2_UseItem_KBD",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b915a8c2-5046-4bdd-b497-51e06d411aec",
-                    "path": "<Keyboard>/#(*)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "P2_Empty_KBD",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f321ff43-e4e8-47aa-9858-f9e510423e6c",
-                    "path": "<XInputController>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
+                    "groups": ";Gamepad",
                     "action": "Trick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "2246e2b4-04d5-4c3c-b673-316c35a99468",
+                    "id": "49bbf825-db0c-4f85-8b0d-5a12b2713ef5",
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Trick_KBD",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b25c037b-125b-4f23-b3a4-43f33f18e5c3",
-                    "path": "<Keyboard>/period",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "P2_Trick_KBD",
+                    "groups": ";Keyboard",
+                    "action": "Trick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<XInputController>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<DualShockGamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<SwitchProControllerHID>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<WebGLGamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Joystick>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }

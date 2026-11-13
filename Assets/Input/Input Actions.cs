@@ -120,72 +120,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Camera"",
-                    ""type"": ""Value"",
-                    ""id"": ""02fa9975-1181-4629-8c41-e2ef6d38622e"",
-                    ""expectedControlType"": ""Stick"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Accelerate_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""d1c5e34b-f354-49a2-8eca-dd6406fa3fd0"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Brake_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""1bc243d7-944a-45a6-8812-eda9849c20c4"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TurnRight_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""844432b9-6115-4a8d-b4d9-cff5c0f0bf99"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TurnLeft_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""7ab4bf1f-6962-4f54-ad50-5dd853214aae"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Ability"",
                     ""type"": ""Button"",
                     ""id"": ""0be9eb94-43e4-465d-bcaa-374dd23cb411"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Ability_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""fe8102a2-c25d-4f60-8d9d-f78491eb4704"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""UseItem_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""5955c590-4278-4986-82af-238800b54128"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -203,88 +140,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Trick"",
                     ""type"": ""Button"",
-                    ""id"": ""ddaff75a-d1fd-4d85-8824-39630bf4a0df"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Trick_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""0fc86920-48cb-429a-8ef6-6588107d5d91"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""P2_Accelerate_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""c9df3f7e-215c-4893-91da-7e21edcbeeeb"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""P2_Brake_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""edced1d8-b1a6-4808-921f-b04d45057538"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""P2_TurnRight_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""05638655-5ae0-4b2a-9053-04eb76143565"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""P2_TurnLeft_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""388fac35-574b-4f8f-8609-36fce6d1d244"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""P2_Ability_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""4be629ee-6c35-434b-8a12-7c119e8355d6"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""P2_UseItem_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""b66f1105-9262-41f8-9b62-705cdf17d7e4"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""P2_Empty_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""223615dd-14b5-4ff8-8bc3-0239372a592c"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""P2_Trick_KBD"",
-                    ""type"": ""Button"",
-                    ""id"": ""83096a6a-cb06-44c3-9803-eca7a9943352"",
+                    ""id"": ""f75dfce3-f711-4e0b-b8e8-38ac1999f952"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -295,44 +151,11 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a579809d-8c27-4b39-9e0f-eb210b359efa"",
-                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""Accelerate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""30ea1444-1b91-4ca3-b7c4-10c8448e5cf0"",
-                    ""path"": ""<XInputController>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Brake"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f9245b9c-b8b1-4dac-966c-7d5290d36ade"",
-                    ""path"": ""<XInputController>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Turn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6f88d083-961f-4e08-ba42-a86dbfece12f"",
-                    ""path"": ""<XInputController>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -342,8 +165,19 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Accelerate_KBD"",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Accelerate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30ea1444-1b91-4ca3-b7c4-10c8448e5cf0"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Brake"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -353,32 +187,54 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Brake_KBD"",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Brake"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c14170e2-6775-4791-85b8-56646e9c447f"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""id"": ""f9245b9c-b8b1-4dac-966c-7d5290d36ade"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""7c9a873a-f9b0-4437-a818-57ec057d6f0d"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TurnRight_KBD"",
-                    ""isComposite"": false,
+                    ""action"": ""Turn"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""c13b23cb-d478-42b3-869d-8d0576722d08"",
+                    ""name"": ""left"",
+                    ""id"": ""acae90be-5c3e-4191-8493-4c1ea2eaea35"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TurnLeft_KBD"",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Turn"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""0350efc4-58fe-44f8-870b-9b8657ee944d"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -386,7 +242,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""Ability"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -397,8 +253,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Ability_KBD"",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Ability"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -408,8 +264,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UseItem_KBD"",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""UseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -419,150 +275,94 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""UseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7efb46c7-6ec7-4d49-b213-b1a87ae55c45"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""id"": ""6f88d083-961f-4e08-ba42-a86dbfece12f"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""P2_Accelerate_KBD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a83d0ecf-aa46-4ded-ac91-98515a450b1d"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""P2_Brake_KBD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7baa7fbd-b19d-4f3a-ba9a-15ea135e7377"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""P2_TurnRight_KBD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ef8e3f81-cfef-4ed7-a9e1-3096e9e8e017"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""P2_TurnLeft_KBD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""02488f0a-c5c7-4640-9f81-da6b076413d3"",
-                    ""path"": ""<Keyboard>/n"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""P2_Ability_KBD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6cee38a4-0c73-4978-ba22-9b346b5c84b0"",
-                    ""path"": ""<Keyboard>/m"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""P2_UseItem_KBD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b915a8c2-5046-4bdd-b497-51e06d411aec"",
-                    ""path"": ""<Keyboard>/#(*)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""P2_Empty_KBD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f321ff43-e4e8-47aa-9858-f9e510423e6c"",
-                    ""path"": ""<XInputController>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""Trick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2246e2b4-04d5-4c3c-b673-316c35a99468"",
+                    ""id"": ""49bbf825-db0c-4f85-8b0d-5a12b2713ef5"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Trick_KBD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b25c037b-125b-4f23-b3a4-43f33f18e5c3"",
-                    ""path"": ""<Keyboard>/period"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""P2_Trick_KBD"",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Trick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<XInputController>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<DualShockGamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<SwitchProControllerHID>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<WebGLGamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Joystick>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Driving
         m_Driving = asset.FindActionMap("Driving", throwIfNotFound: true);
         m_Driving_Accelerate = m_Driving.FindAction("Accelerate", throwIfNotFound: true);
         m_Driving_Brake = m_Driving.FindAction("Brake", throwIfNotFound: true);
         m_Driving_Turn = m_Driving.FindAction("Turn", throwIfNotFound: true);
-        m_Driving_Camera = m_Driving.FindAction("Camera", throwIfNotFound: true);
-        m_Driving_Accelerate_KBD = m_Driving.FindAction("Accelerate_KBD", throwIfNotFound: true);
-        m_Driving_Brake_KBD = m_Driving.FindAction("Brake_KBD", throwIfNotFound: true);
-        m_Driving_TurnRight_KBD = m_Driving.FindAction("TurnRight_KBD", throwIfNotFound: true);
-        m_Driving_TurnLeft_KBD = m_Driving.FindAction("TurnLeft_KBD", throwIfNotFound: true);
         m_Driving_Ability = m_Driving.FindAction("Ability", throwIfNotFound: true);
-        m_Driving_Ability_KBD = m_Driving.FindAction("Ability_KBD", throwIfNotFound: true);
-        m_Driving_UseItem_KBD = m_Driving.FindAction("UseItem_KBD", throwIfNotFound: true);
         m_Driving_UseItem = m_Driving.FindAction("UseItem", throwIfNotFound: true);
         m_Driving_Trick = m_Driving.FindAction("Trick", throwIfNotFound: true);
-        m_Driving_Trick_KBD = m_Driving.FindAction("Trick_KBD", throwIfNotFound: true);
-        m_Driving_P2_Accelerate_KBD = m_Driving.FindAction("P2_Accelerate_KBD", throwIfNotFound: true);
-        m_Driving_P2_Brake_KBD = m_Driving.FindAction("P2_Brake_KBD", throwIfNotFound: true);
-        m_Driving_P2_TurnRight_KBD = m_Driving.FindAction("P2_TurnRight_KBD", throwIfNotFound: true);
-        m_Driving_P2_TurnLeft_KBD = m_Driving.FindAction("P2_TurnLeft_KBD", throwIfNotFound: true);
-        m_Driving_P2_Ability_KBD = m_Driving.FindAction("P2_Ability_KBD", throwIfNotFound: true);
-        m_Driving_P2_UseItem_KBD = m_Driving.FindAction("P2_UseItem_KBD", throwIfNotFound: true);
-        m_Driving_P2_Empty_KBD = m_Driving.FindAction("P2_Empty_KBD", throwIfNotFound: true);
-        m_Driving_P2_Trick_KBD = m_Driving.FindAction("P2_Trick_KBD", throwIfNotFound: true);
     }
 
     ~@InputManager()
@@ -646,25 +446,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Driving_Accelerate;
     private readonly InputAction m_Driving_Brake;
     private readonly InputAction m_Driving_Turn;
-    private readonly InputAction m_Driving_Camera;
-    private readonly InputAction m_Driving_Accelerate_KBD;
-    private readonly InputAction m_Driving_Brake_KBD;
-    private readonly InputAction m_Driving_TurnRight_KBD;
-    private readonly InputAction m_Driving_TurnLeft_KBD;
     private readonly InputAction m_Driving_Ability;
-    private readonly InputAction m_Driving_Ability_KBD;
-    private readonly InputAction m_Driving_UseItem_KBD;
     private readonly InputAction m_Driving_UseItem;
     private readonly InputAction m_Driving_Trick;
-    private readonly InputAction m_Driving_Trick_KBD;
-    private readonly InputAction m_Driving_P2_Accelerate_KBD;
-    private readonly InputAction m_Driving_P2_Brake_KBD;
-    private readonly InputAction m_Driving_P2_TurnRight_KBD;
-    private readonly InputAction m_Driving_P2_TurnLeft_KBD;
-    private readonly InputAction m_Driving_P2_Ability_KBD;
-    private readonly InputAction m_Driving_P2_UseItem_KBD;
-    private readonly InputAction m_Driving_P2_Empty_KBD;
-    private readonly InputAction m_Driving_P2_Trick_KBD;
     /// <summary>
     /// Provides access to input actions defined in input action map "Driving".
     /// </summary>
@@ -689,37 +473,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Turn => m_Wrapper.m_Driving_Turn;
         /// <summary>
-        /// Provides access to the underlying input action "Driving/Camera".
-        /// </summary>
-        public InputAction @Camera => m_Wrapper.m_Driving_Camera;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/Accelerate_KBD".
-        /// </summary>
-        public InputAction @Accelerate_KBD => m_Wrapper.m_Driving_Accelerate_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/Brake_KBD".
-        /// </summary>
-        public InputAction @Brake_KBD => m_Wrapper.m_Driving_Brake_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/TurnRight_KBD".
-        /// </summary>
-        public InputAction @TurnRight_KBD => m_Wrapper.m_Driving_TurnRight_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/TurnLeft_KBD".
-        /// </summary>
-        public InputAction @TurnLeft_KBD => m_Wrapper.m_Driving_TurnLeft_KBD;
-        /// <summary>
         /// Provides access to the underlying input action "Driving/Ability".
         /// </summary>
         public InputAction @Ability => m_Wrapper.m_Driving_Ability;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/Ability_KBD".
-        /// </summary>
-        public InputAction @Ability_KBD => m_Wrapper.m_Driving_Ability_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/UseItem_KBD".
-        /// </summary>
-        public InputAction @UseItem_KBD => m_Wrapper.m_Driving_UseItem_KBD;
         /// <summary>
         /// Provides access to the underlying input action "Driving/UseItem".
         /// </summary>
@@ -728,42 +484,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Driving/Trick".
         /// </summary>
         public InputAction @Trick => m_Wrapper.m_Driving_Trick;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/Trick_KBD".
-        /// </summary>
-        public InputAction @Trick_KBD => m_Wrapper.m_Driving_Trick_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/P2_Accelerate_KBD".
-        /// </summary>
-        public InputAction @P2_Accelerate_KBD => m_Wrapper.m_Driving_P2_Accelerate_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/P2_Brake_KBD".
-        /// </summary>
-        public InputAction @P2_Brake_KBD => m_Wrapper.m_Driving_P2_Brake_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/P2_TurnRight_KBD".
-        /// </summary>
-        public InputAction @P2_TurnRight_KBD => m_Wrapper.m_Driving_P2_TurnRight_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/P2_TurnLeft_KBD".
-        /// </summary>
-        public InputAction @P2_TurnLeft_KBD => m_Wrapper.m_Driving_P2_TurnLeft_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/P2_Ability_KBD".
-        /// </summary>
-        public InputAction @P2_Ability_KBD => m_Wrapper.m_Driving_P2_Ability_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/P2_UseItem_KBD".
-        /// </summary>
-        public InputAction @P2_UseItem_KBD => m_Wrapper.m_Driving_P2_UseItem_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/P2_Empty_KBD".
-        /// </summary>
-        public InputAction @P2_Empty_KBD => m_Wrapper.m_Driving_P2_Empty_KBD;
-        /// <summary>
-        /// Provides access to the underlying input action "Driving/P2_Trick_KBD".
-        /// </summary>
-        public InputAction @P2_Trick_KBD => m_Wrapper.m_Driving_P2_Trick_KBD;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -799,63 +519,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @Turn.started += instance.OnTurn;
             @Turn.performed += instance.OnTurn;
             @Turn.canceled += instance.OnTurn;
-            @Camera.started += instance.OnCamera;
-            @Camera.performed += instance.OnCamera;
-            @Camera.canceled += instance.OnCamera;
-            @Accelerate_KBD.started += instance.OnAccelerate_KBD;
-            @Accelerate_KBD.performed += instance.OnAccelerate_KBD;
-            @Accelerate_KBD.canceled += instance.OnAccelerate_KBD;
-            @Brake_KBD.started += instance.OnBrake_KBD;
-            @Brake_KBD.performed += instance.OnBrake_KBD;
-            @Brake_KBD.canceled += instance.OnBrake_KBD;
-            @TurnRight_KBD.started += instance.OnTurnRight_KBD;
-            @TurnRight_KBD.performed += instance.OnTurnRight_KBD;
-            @TurnRight_KBD.canceled += instance.OnTurnRight_KBD;
-            @TurnLeft_KBD.started += instance.OnTurnLeft_KBD;
-            @TurnLeft_KBD.performed += instance.OnTurnLeft_KBD;
-            @TurnLeft_KBD.canceled += instance.OnTurnLeft_KBD;
             @Ability.started += instance.OnAbility;
             @Ability.performed += instance.OnAbility;
             @Ability.canceled += instance.OnAbility;
-            @Ability_KBD.started += instance.OnAbility_KBD;
-            @Ability_KBD.performed += instance.OnAbility_KBD;
-            @Ability_KBD.canceled += instance.OnAbility_KBD;
-            @UseItem_KBD.started += instance.OnUseItem_KBD;
-            @UseItem_KBD.performed += instance.OnUseItem_KBD;
-            @UseItem_KBD.canceled += instance.OnUseItem_KBD;
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
             @Trick.started += instance.OnTrick;
             @Trick.performed += instance.OnTrick;
             @Trick.canceled += instance.OnTrick;
-            @Trick_KBD.started += instance.OnTrick_KBD;
-            @Trick_KBD.performed += instance.OnTrick_KBD;
-            @Trick_KBD.canceled += instance.OnTrick_KBD;
-            @P2_Accelerate_KBD.started += instance.OnP2_Accelerate_KBD;
-            @P2_Accelerate_KBD.performed += instance.OnP2_Accelerate_KBD;
-            @P2_Accelerate_KBD.canceled += instance.OnP2_Accelerate_KBD;
-            @P2_Brake_KBD.started += instance.OnP2_Brake_KBD;
-            @P2_Brake_KBD.performed += instance.OnP2_Brake_KBD;
-            @P2_Brake_KBD.canceled += instance.OnP2_Brake_KBD;
-            @P2_TurnRight_KBD.started += instance.OnP2_TurnRight_KBD;
-            @P2_TurnRight_KBD.performed += instance.OnP2_TurnRight_KBD;
-            @P2_TurnRight_KBD.canceled += instance.OnP2_TurnRight_KBD;
-            @P2_TurnLeft_KBD.started += instance.OnP2_TurnLeft_KBD;
-            @P2_TurnLeft_KBD.performed += instance.OnP2_TurnLeft_KBD;
-            @P2_TurnLeft_KBD.canceled += instance.OnP2_TurnLeft_KBD;
-            @P2_Ability_KBD.started += instance.OnP2_Ability_KBD;
-            @P2_Ability_KBD.performed += instance.OnP2_Ability_KBD;
-            @P2_Ability_KBD.canceled += instance.OnP2_Ability_KBD;
-            @P2_UseItem_KBD.started += instance.OnP2_UseItem_KBD;
-            @P2_UseItem_KBD.performed += instance.OnP2_UseItem_KBD;
-            @P2_UseItem_KBD.canceled += instance.OnP2_UseItem_KBD;
-            @P2_Empty_KBD.started += instance.OnP2_Empty_KBD;
-            @P2_Empty_KBD.performed += instance.OnP2_Empty_KBD;
-            @P2_Empty_KBD.canceled += instance.OnP2_Empty_KBD;
-            @P2_Trick_KBD.started += instance.OnP2_Trick_KBD;
-            @P2_Trick_KBD.performed += instance.OnP2_Trick_KBD;
-            @P2_Trick_KBD.canceled += instance.OnP2_Trick_KBD;
         }
 
         /// <summary>
@@ -876,63 +548,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @Turn.started -= instance.OnTurn;
             @Turn.performed -= instance.OnTurn;
             @Turn.canceled -= instance.OnTurn;
-            @Camera.started -= instance.OnCamera;
-            @Camera.performed -= instance.OnCamera;
-            @Camera.canceled -= instance.OnCamera;
-            @Accelerate_KBD.started -= instance.OnAccelerate_KBD;
-            @Accelerate_KBD.performed -= instance.OnAccelerate_KBD;
-            @Accelerate_KBD.canceled -= instance.OnAccelerate_KBD;
-            @Brake_KBD.started -= instance.OnBrake_KBD;
-            @Brake_KBD.performed -= instance.OnBrake_KBD;
-            @Brake_KBD.canceled -= instance.OnBrake_KBD;
-            @TurnRight_KBD.started -= instance.OnTurnRight_KBD;
-            @TurnRight_KBD.performed -= instance.OnTurnRight_KBD;
-            @TurnRight_KBD.canceled -= instance.OnTurnRight_KBD;
-            @TurnLeft_KBD.started -= instance.OnTurnLeft_KBD;
-            @TurnLeft_KBD.performed -= instance.OnTurnLeft_KBD;
-            @TurnLeft_KBD.canceled -= instance.OnTurnLeft_KBD;
             @Ability.started -= instance.OnAbility;
             @Ability.performed -= instance.OnAbility;
             @Ability.canceled -= instance.OnAbility;
-            @Ability_KBD.started -= instance.OnAbility_KBD;
-            @Ability_KBD.performed -= instance.OnAbility_KBD;
-            @Ability_KBD.canceled -= instance.OnAbility_KBD;
-            @UseItem_KBD.started -= instance.OnUseItem_KBD;
-            @UseItem_KBD.performed -= instance.OnUseItem_KBD;
-            @UseItem_KBD.canceled -= instance.OnUseItem_KBD;
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
             @Trick.started -= instance.OnTrick;
             @Trick.performed -= instance.OnTrick;
             @Trick.canceled -= instance.OnTrick;
-            @Trick_KBD.started -= instance.OnTrick_KBD;
-            @Trick_KBD.performed -= instance.OnTrick_KBD;
-            @Trick_KBD.canceled -= instance.OnTrick_KBD;
-            @P2_Accelerate_KBD.started -= instance.OnP2_Accelerate_KBD;
-            @P2_Accelerate_KBD.performed -= instance.OnP2_Accelerate_KBD;
-            @P2_Accelerate_KBD.canceled -= instance.OnP2_Accelerate_KBD;
-            @P2_Brake_KBD.started -= instance.OnP2_Brake_KBD;
-            @P2_Brake_KBD.performed -= instance.OnP2_Brake_KBD;
-            @P2_Brake_KBD.canceled -= instance.OnP2_Brake_KBD;
-            @P2_TurnRight_KBD.started -= instance.OnP2_TurnRight_KBD;
-            @P2_TurnRight_KBD.performed -= instance.OnP2_TurnRight_KBD;
-            @P2_TurnRight_KBD.canceled -= instance.OnP2_TurnRight_KBD;
-            @P2_TurnLeft_KBD.started -= instance.OnP2_TurnLeft_KBD;
-            @P2_TurnLeft_KBD.performed -= instance.OnP2_TurnLeft_KBD;
-            @P2_TurnLeft_KBD.canceled -= instance.OnP2_TurnLeft_KBD;
-            @P2_Ability_KBD.started -= instance.OnP2_Ability_KBD;
-            @P2_Ability_KBD.performed -= instance.OnP2_Ability_KBD;
-            @P2_Ability_KBD.canceled -= instance.OnP2_Ability_KBD;
-            @P2_UseItem_KBD.started -= instance.OnP2_UseItem_KBD;
-            @P2_UseItem_KBD.performed -= instance.OnP2_UseItem_KBD;
-            @P2_UseItem_KBD.canceled -= instance.OnP2_UseItem_KBD;
-            @P2_Empty_KBD.started -= instance.OnP2_Empty_KBD;
-            @P2_Empty_KBD.performed -= instance.OnP2_Empty_KBD;
-            @P2_Empty_KBD.canceled -= instance.OnP2_Empty_KBD;
-            @P2_Trick_KBD.started -= instance.OnP2_Trick_KBD;
-            @P2_Trick_KBD.performed -= instance.OnP2_Trick_KBD;
-            @P2_Trick_KBD.canceled -= instance.OnP2_Trick_KBD;
         }
 
         /// <summary>
@@ -966,6 +590,32 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="DrivingActions" /> instance referencing this action map.
     /// </summary>
     public DrivingActions @Driving => new DrivingActions(this);
+    private int m_GamepadSchemeIndex = -1;
+    /// <summary>
+    /// Provides access to the input control scheme.
+    /// </summary>
+    /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
+    private int m_KeyboardSchemeIndex = -1;
+    /// <summary>
+    /// Provides access to the input control scheme.
+    /// </summary>
+    /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+    public InputControlScheme KeyboardScheme
+    {
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Driving" which allows adding and removing callbacks.
     /// </summary>
@@ -995,61 +645,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTurn(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Camera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnCamera(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Accelerate_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAccelerate_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Brake_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnBrake_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "TurnRight_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnTurnRight_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "TurnLeft_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnTurnLeft_KBD(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "Ability" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAbility(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Ability_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAbility_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "UseItem_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnUseItem_KBD(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "UseItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -1064,68 +665,5 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrick(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Trick_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnTrick_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "P2_Accelerate_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnP2_Accelerate_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "P2_Brake_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnP2_Brake_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "P2_TurnRight_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnP2_TurnRight_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "P2_TurnLeft_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnP2_TurnLeft_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "P2_Ability_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnP2_Ability_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "P2_UseItem_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnP2_UseItem_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "P2_Empty_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnP2_Empty_KBD(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "P2_Trick_KBD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnP2_Trick_KBD(InputAction.CallbackContext context);
     }
 }
