@@ -63,6 +63,24 @@ public class AIController : RacerController
         }
         else
         {
+            if (base.SpinOut)
+            {
+                // Main Spin Out Code
+                Drive.SpinOut();
+                base.SpinOutDuration -= Time.deltaTime;
+                Debug.Log(base.SpinOutDuration);
+                // Ends Spin Out Animation
+                if (SpinOutDuration <= 1 && Drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
+                {
+                    animator.SetBool("SpinOut", false);
+                }
+
+                // Ends Spin Out
+                if (SpinOutDuration <= 0) { base.SpinOut = false; }
+
+                return; // Exit Update Code During Spin Out
+            }
+
             Drive.Turn(steering);
             Drive.Accelerate(throttle);   
         }
