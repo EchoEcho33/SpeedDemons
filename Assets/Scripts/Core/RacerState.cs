@@ -256,6 +256,7 @@ public class RacerState : MonoBehaviour
 
     private void DebuffSpinout()
     {
+        if (RacerController.SpinOut == true) {return; } // Exit if Racer is Currently In Spin Out
         if (RacerController.Drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
         {
             animator.SetBool("SpinOut", true);
