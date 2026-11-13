@@ -149,7 +149,6 @@
 		<property name="length">
 			<value>15</value>
 		</property>
-		<property name="name" />
 		<relationship name="fadeOutCurve">
 			<destination>{fb84e071-9091-413b-bd36-798d1142d8c2}</destination>
 		</relationship>
