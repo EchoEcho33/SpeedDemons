@@ -16,6 +16,10 @@ public class ItemBox : MonoBehaviour
             if (other.gameObject.CompareTag("Player"))
             {
                 GameManager.Instance.UIManager.PickUpItem(randomItem);
+                AudioManager.instance.PlayOneShot(AudioEvents.instance.hitItemBoxPlayer, this.transform.position);
+            } else
+            {
+                AudioManager.instance.PlayOneShot(AudioEvents.instance.hitItemBoxAI, this.transform.position);
             }
 
             Drive controller = other.gameObject.GetComponent<Drive>();

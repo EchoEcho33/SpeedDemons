@@ -148,6 +148,8 @@ public class Drive : MonoBehaviour
         Vector3 velocity = speed * forward;
         velocity.y = rigidbody.linearVelocity.y;
         rigidbody.linearVelocity = velocity;
+
+        AudioManager.instance.PlayOneShot(AudioEvents.instance.carSpinOut, transform.position);
     }
 
     // Just left or right for now.
