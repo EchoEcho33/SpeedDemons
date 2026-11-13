@@ -3206,7 +3206,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6524993967727341388, guid: ab5263b78f4f45540b3ea55e634d132c, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ca63b29134745404f89e41218c7622f2, type: 2}
     - target: {fileID: 9115601680618778869, guid: ab5263b78f4f45540b3ea55e634d132c, type: 3}
@@ -12224,35 +12224,35 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4428353002168372194, guid: 1d43e8022ac8f2347aa36fba1dcad984, type: 3}
-      propertyPath: 'startingGrid.Array.data[0]'
+      propertyPath: startingGrid.Array.data[0]
       value: 
       objectReference: {fileID: 8518881626104673850}
     - target: {fileID: 4428353002168372194, guid: 1d43e8022ac8f2347aa36fba1dcad984, type: 3}
-      propertyPath: 'startingGrid.Array.data[1]'
+      propertyPath: startingGrid.Array.data[1]
       value: 
       objectReference: {fileID: 8518881626104673849}
     - target: {fileID: 4428353002168372194, guid: 1d43e8022ac8f2347aa36fba1dcad984, type: 3}
-      propertyPath: 'startingGrid.Array.data[2]'
+      propertyPath: startingGrid.Array.data[2]
       value: 
       objectReference: {fileID: 8518881626104673848}
     - target: {fileID: 4428353002168372194, guid: 1d43e8022ac8f2347aa36fba1dcad984, type: 3}
-      propertyPath: 'startingGrid.Array.data[3]'
+      propertyPath: startingGrid.Array.data[3]
       value: 
       objectReference: {fileID: 8518881626104673847}
     - target: {fileID: 4428353002168372194, guid: 1d43e8022ac8f2347aa36fba1dcad984, type: 3}
-      propertyPath: 'startingGrid.Array.data[4]'
+      propertyPath: startingGrid.Array.data[4]
       value: 
       objectReference: {fileID: 8518881626104673846}
     - target: {fileID: 4428353002168372194, guid: 1d43e8022ac8f2347aa36fba1dcad984, type: 3}
-      propertyPath: 'startingGrid.Array.data[5]'
+      propertyPath: startingGrid.Array.data[5]
       value: 
       objectReference: {fileID: 8518881626104673845}
     - target: {fileID: 4428353002168372194, guid: 1d43e8022ac8f2347aa36fba1dcad984, type: 3}
-      propertyPath: 'startingGrid.Array.data[6]'
+      propertyPath: startingGrid.Array.data[6]
       value: 
       objectReference: {fileID: 8518881626104673844}
     - target: {fileID: 4428353002168372194, guid: 1d43e8022ac8f2347aa36fba1dcad984, type: 3}
-      propertyPath: 'startingGrid.Array.data[7]'
+      propertyPath: startingGrid.Array.data[7]
       value: 
       objectReference: {fileID: 8518881626104673843}
     - target: {fileID: 4428353002168372194, guid: 1d43e8022ac8f2347aa36fba1dcad984, type: 3}
@@ -14195,7 +14195,7 @@ PrefabInstance:
       value: Fireflies (1)
       objectReference: {fileID: 0}
     - target: {fileID: 884590236446903888, guid: 891e1e5f3f5a1434dab6d5ca7bda67b1, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4559493472205904878, guid: 891e1e5f3f5a1434dab6d5ca7bda67b1, type: 3}
@@ -15465,7 +15465,7 @@ PrefabInstance:
       value: Fireflies
       objectReference: {fileID: 0}
     - target: {fileID: 884590236446903888, guid: 891e1e5f3f5a1434dab6d5ca7bda67b1, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4559493472205904878, guid: 891e1e5f3f5a1434dab6d5ca7bda67b1, type: 3}
@@ -27571,6 +27571,83 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3540477030630903446, guid: 6e7cb0a601c16d9408a43fc2be94807f, type: 3}
   m_PrefabInstance: {fileID: 2023187111}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2043468971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2043468973}
+  - component: {fileID: 2043468972}
+  - component: {fileID: 2043468974}
+  m_Layer: 0
+  m_Name: MainAudioHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2043468972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043468971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33dba4f0b7263e043b3a02b105ce0e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainGameAudio
+  backgroundMusic: {fileID: 2043468974}
+--- !u!4 &2043468973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043468971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.07746, y: -0, z: -108.73915}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2043468974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043468971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -198168995
+      Data2: 1139158729
+      Data3: -1936969290
+      Data4: -1008638776
+    Path: event:/Music/MainGameMusic
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &2044889441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28664,4 +28741,5 @@ SceneRoots:
   - {fileID: 487108017}
   - {fileID: 542599640}
   - {fileID: 546919015}
+  - {fileID: 2043468973}
   - {fileID: 753573869}

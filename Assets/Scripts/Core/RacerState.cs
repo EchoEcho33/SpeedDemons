@@ -213,6 +213,7 @@ public class RacerState : MonoBehaviour
     {
         if (!_onItemCooldown && _primaryItem != null)
         {
+            AudioManager.instance.PlayOneShot(AudioEvents.instance.useItem, this.transform.position);
             _onItemCooldown = true;
             Item instantiatedItem = Instantiate(_primaryItem, RacerController.transform);
             instantiatedItem.Use(this);
