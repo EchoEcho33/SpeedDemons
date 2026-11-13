@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 47907422}
   - component: {fileID: 47907421}
   - component: {fileID: 47907420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22159,7 +22159,7 @@ GameObject:
   - component: {fileID: 1382028957}
   - component: {fileID: 1382028956}
   - component: {fileID: 1382028955}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22423,6 +22423,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 466986241}
     m_Modifications:
+    - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
+      propertyPath: _singlePlayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3540477030630903446, guid: 6e7cb0a601c16d9408a43fc2be94807f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -88.43001
@@ -22466,10 +22470,6 @@ PrefabInstance:
     - target: {fileID: 6161702022744575947, guid: 6e7cb0a601c16d9408a43fc2be94807f, type: 3}
       propertyPath: m_Name
       value: Speed Demons Streetlamp (09)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8810367436454611829, guid: eba1fc20ca2d1824b9308575863cda0d, type: 3}
-      propertyPath: _singlePlayer
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
