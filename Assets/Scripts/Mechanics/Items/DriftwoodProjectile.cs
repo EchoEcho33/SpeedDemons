@@ -40,18 +40,17 @@ public class DriftwoodProjectile : MonoBehaviour
         Transform parentTransform = other.gameObject.transform.root;
 
         // Exit if the collision was not triggered by a Racer
-        if (!parentTransform.CompareTag("Player")) { 
+        if (!(parentTransform.CompareTag("Player") || parentTransform.CompareTag("AI"))) { 
             isReturning = true;
             return; 
         }
-
-        // Exit if Collision was with the player who threw the object
-        if (parentTransform.gameObject.name == userRacerState.RacerController.GetCharacterAndKart().name) { return; }
 
         // Attempt to get Drive Component & Call SpinOut
         if (parentTransform.TryGetComponent<Drive>(out var drive))
         {
             RacerState targetRacerState = drive.Racer.RacerState;
+            // Exit if Collision was with the player who threw the object
+            if (userRacerState.Equals(targetRacerState)) { return; }
             if (targetRacerState != null)
             {
                 targetRacerState.ApplyDebuff(RacerState.Debuff.SPINOUT);
