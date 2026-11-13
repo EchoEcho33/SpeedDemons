@@ -319,4 +319,9 @@ public class RaceManager : MonoBehaviour
         yield return new WaitForSeconds(itemRespawnTime);
         gameObject.SetActive(true);
     }
+
+    public List<RacerState> GetRacerStates()
+    {
+        return racerStates;
+    }
 }

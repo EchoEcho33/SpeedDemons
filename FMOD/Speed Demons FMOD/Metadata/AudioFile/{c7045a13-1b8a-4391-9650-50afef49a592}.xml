@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{c7045a13-1b8a-4391-9650-50afef49a592}">
+		<property name="assetPath">
+			<value>SFX/Car Impact/impact_car1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.9375056689342403</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{d66e118d-1d1a-47d2-9dec-40e7fc720e25}</destination>
+		</relationship>
+	</object>
+</objects>

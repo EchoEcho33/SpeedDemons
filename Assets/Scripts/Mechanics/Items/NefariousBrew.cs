@@ -6,6 +6,6 @@ public class NefariousBrew : Item
     private int abilityBarAddition;
 
     public override void Use(RacerState racer) {
-        racer.updateBar(abilityBarAddition);
+        racer.UpdateBar(abilityBarAddition);
     }
 }
