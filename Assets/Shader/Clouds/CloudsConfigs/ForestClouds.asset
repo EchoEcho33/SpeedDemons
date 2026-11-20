@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f37f8a9e7e704f52a9813aa1ec9d3ab1, type: 3}
-  m_Name: DebugCloudsConfig
+  m_Name: ForestClouds
   m_EditorClassIdentifier: Assembly-CSharp::CloudsPreset
-  CloudTransitionColor: {r: 0.38823533, g: 0.17254902, b: 0.5058824, a: 1}
-  CloudBaseColor: {r: 0.11114563, g: 0.19502912, b: 0.432, a: 1}
+  CloudTransitionColor: {r: 0.10980393, g: 0.10980393, b: 0.27450982, a: 1}
+  CloudBaseColor: {r: 0.043137256, g: 0.058823533, b: 0.07058824, a: 1}
