@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using FMODUnity;
+using UnityEngine.UIElements;
 
 public class Drive : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Drive : MonoBehaviour
     private int m_driftAngle = 0;
     public StudioEventEmitter drivingAudio;
     private Rigidbody rigidbody;
+    private SphereCollider kartSphereCollider;
     public LayerMask ground;
     public int mode { get; private set; }
 
@@ -38,6 +40,7 @@ public class Drive : MonoBehaviour
         drivingAudio = AudioManager.instance.createEmitter(AudioEvents.instance.basicCarDrive, this.gameObject);
         drivingAudio.Play();
         rigidbody = gameObject.GetComponent<Rigidbody>();
+        kartSphereCollider = kart.kartPrefab.GetComponent<SphereCollider>();
         ground = LayerMask.GetMask("GroundLayer");
     }
 
@@ -190,7 +193,6 @@ public class Drive : MonoBehaviour
     // Make it customizable for different karts at different heights.
     public void CheckGrounded()
     {
-        // Debug.Log("This is being called" + transform.position);
 
         Vector3 down = Vector3.down;
         Ray groundCheck;
@@ -205,9 +207,13 @@ public class Drive : MonoBehaviour
                 groundCheck = new Ray(sb.position + transform.up * radius, down);
                 isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, 2 * radius, ground);
                 break;
-            default: // Normal
-                groundCheck = new Ray(transform.position + transform.up * 0.8f, down);
-                isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, 1.6f, ground);
+            default:
+                Vector3 centerPos = transform.TransformPoint(kartSphereCollider.center);
+                Debug.Log("CenterPos: " + centerPos);
+                groundCheck = new Ray(centerPos, down);
+                isGrounded = Physics.Raycast(groundCheck, out groundHitInfo, kartSphereCollider.radius * 2, ground);
+                Debug.DrawLine(centerPos, centerPos + down * kartSphereCollider.radius, Color.red, 0.25f);
+                Debug.Log("Hit?" + isGrounded);
                 break;
         }
     }
