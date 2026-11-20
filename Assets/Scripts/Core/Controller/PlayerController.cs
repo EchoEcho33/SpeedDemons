@@ -147,7 +147,7 @@ public class PlayerController : RacerController
         {
             // Main Spin Out Code
             Drive.SpinOut();
-            base.SpinOutDuration -= Time.fixedDeltaTime;
+            base.SpinOutDuration -= Time.deltaTime;
 
             // Ends Spin Out Animation
             if (SpinOutDuration <= 1 && Drive.gameObject.transform.Find("Model").TryGetComponent<Animator>(out var animator))
