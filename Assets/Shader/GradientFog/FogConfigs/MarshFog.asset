@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MarshFog
   m_EditorClassIdentifier: Assembly-CSharp::GradientFogPreset
   gradientFogSettings:
-    StartDistance: 10
+    StartDistance: 20
     EndDistance: 300
     NearColor: {r: 0.98490566, g: 0.92941266, b: 0.54820216, a: 1}
     MiddleColor: {r: 0.33501598, g: 0.79622644, b: 0.6474442, a: 1}
