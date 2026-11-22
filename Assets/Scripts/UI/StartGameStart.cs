@@ -6,7 +6,7 @@ public class StartGameStart : MonoBehaviour
     private void StartGame()
     {
         SceneManager.sceneLoaded += LoadTestTrack;
-        SceneManager.LoadSceneAsync("Scenes/Main/CharacterSelect");
+        GameManager.Instance.LoadScene("Scenes/Main/CharacterSelect");
     }
 
     public void StartSinglePlayer()

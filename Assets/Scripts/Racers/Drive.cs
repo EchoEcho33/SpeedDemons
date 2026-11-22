@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 public class Drive : MonoBehaviour
 {
+    private static readonly int SpeedHash = Animator.StringToHash("Speed");
+
     public RacerController Racer { get; private set; }
     
     public Character character { get; private set; }
@@ -27,6 +29,7 @@ public class Drive : MonoBehaviour
     private SphereCollider kartSphereCollider;
     public LayerMask ground;
     public int mode { get; private set; }
+    private Animator animator;
 
     public void AssignController(RacerController newRacerController)
     {
@@ -42,6 +45,7 @@ public class Drive : MonoBehaviour
         rigidbody = gameObject.GetComponent<Rigidbody>();
         kartSphereCollider = kart.kartPrefab.GetComponent<SphereCollider>();
         ground = LayerMask.GetMask("GroundLayer");
+        animator = character.characterObject.GetComponent<Animator>();
     }
 
     public void Accelerate(float amplitude)
@@ -74,6 +78,11 @@ public class Drive : MonoBehaviour
         rigidbody.linearVelocity = velocity;
 
         UpdateSound(1);
+        if (animator != null)
+        {
+            animator.SetFloat(SpeedHash, m_currentSpeed);
+            animator.speed = m_currentSpeed / 40 + 1;
+        }
     }
 
     public void Decelerate(float amplitude, float a)
@@ -93,6 +102,11 @@ public class Drive : MonoBehaviour
         velocity.y = rigidbody.linearVelocity.y;
         rigidbody.linearVelocity = velocity;
         UpdateSound(-1);
+        if (animator != null)
+        {
+            animator.SetFloat(SpeedHash, m_currentSpeed);
+            animator.speed = m_currentSpeed / 40 + 1;
+        }
     }
 
     public void Turn(float turnDirection, float turnMultiplier = 1.0f)

@@ -41,6 +41,7 @@ public class PlayerController : RacerController
 
     public override void InitializeDrive()
     {
+        print(Kart.kartObject);
         Drive = Kart.kartObject.AddComponent<Drive>();
         Drive.AssignController(this);
         Drive.Initialize(Character, Kart);

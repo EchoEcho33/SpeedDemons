@@ -9,7 +9,8 @@ public enum ECharacterType
     Mothman,
     Nessie,
     Yeti,
-    Jackalope
+    Jackalope,
+    Nightcrawler
 }
 
 [CreateAssetMenu(fileName = "Character", menuName = "Scriptable Objects/Character")]
