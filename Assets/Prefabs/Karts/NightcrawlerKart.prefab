@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8881826911992389522}
   - component: {fileID: 5942571378900109645}
   - component: {fileID: -2891691484253201803}
+  - component: {fileID: 7009033990444236263}
   m_Layer: 6
   m_Name: NightcrawlerKart
   m_TagString: Untagged
@@ -116,6 +117,36 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.2198486, y: 1.7760761, z: 6.764208}
   m_Center: {x: 0, y: 0.38803804, z: 0}
+--- !u!114 &7009033990444236263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989831737981309375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 41a9820487b87304b942d4152c418794, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Gamepad
+  m_DefaultActionMap: Driving
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &6059294992840102846
 GameObject:
   m_ObjectHideFlags: 0

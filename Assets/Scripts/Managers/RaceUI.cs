@@ -2,6 +2,8 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class RaceUI : MonoBehaviour
@@ -32,13 +34,31 @@ public class RaceUI : MonoBehaviour
     
     private int currCountdownValue;
 
-    public void Start()
+    [SerializeField] public RectTransform viewport;
+
+    public Camera playerCamera;
+
+    public Event countdownFinished; 
+
+    private void Start()
     {
         _primaryItemIcon.enabled = false;
         _secondaryItemIcon.enabled = false;
         
+        viewport.gameObject.SetActive(false);
+        
+        // need to delay ui init so that we can get camera rect from the PlayerInputManager's splitscreen
+        // this can also be delayed by a certain amount of time if needed. right now it enables after the countdown is complete
+        GameManager.Instance.UIManager.CountdownFinished += OnCountdownFinished;
+        
+    }
+
+    private void OnCountdownFinished()
+    {
+        ApplyViewport();
     }
     
+    // these player specific countdown functions are unused for now
     IEnumerator TickCountdown(int countdown)
     {
         
@@ -54,6 +74,7 @@ public class RaceUI : MonoBehaviour
         {
             // cant set active? doing this for now
             countdownText.enabled = false;
+            
         }
     }
 
@@ -131,5 +152,23 @@ public class RaceUI : MonoBehaviour
         {
             Debug.LogError("Background Image not set in UIManager.");
         }
+    }
+
+    private void ApplyViewport()
+    {
+        if (playerCamera == null)
+        {
+            Debug.LogError("raceui cam assignment missing", this);
+            return;
+        }
+
+        Rect cameraRect = playerCamera.rect;
+
+        viewport.anchorMin = cameraRect.min;
+        viewport.anchorMax = cameraRect.max;
+        viewport.offsetMin = Vector2.zero;
+        viewport.offsetMax = Vector2.zero;
+        viewport.localScale = Vector3.one;
+        viewport.gameObject.SetActive(true);
     }
 }

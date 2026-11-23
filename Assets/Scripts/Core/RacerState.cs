@@ -49,7 +49,12 @@ public class RacerState : MonoBehaviour
         currLap = 1;
         currAbilityCharge = 0;
 
-        GameManager.Instance.UIManager.UpdateLap(1);
+        if (RacerController is PlayerController)
+        {
+            PlayerController playerController = RacerController as PlayerController;
+            playerController.playerUI.UpdateLap(1);
+        }
+        
     }
     
 #if UNITY_EDITOR
@@ -100,8 +105,12 @@ public class RacerState : MonoBehaviour
             currLap++;
             
             //applies from all racers, change after getting Driver to connect with certain racerStates
-            if (isPlayer)
-                GameManager.Instance.UIManager.UpdateLap(currLap);
+            
+            if (RacerController is PlayerController)
+            {
+                PlayerController playerController = RacerController as PlayerController;
+                playerController.playerUI.UpdateLap(currLap);
+            }
         }
     }
     
@@ -117,7 +126,16 @@ public class RacerState : MonoBehaviour
 
     private IEnumerator RespawnDelay(GameObject racerAndCar, Rigidbody racerAndCarRigidbody)
     {
-        racerAndCar.SetActive(false);
+        if (RacerController.respawning)
+        {
+            yield break;
+        }
+        // this may seem like a strange edit, but disabling a gameobject unpairs its inputdevice.
+        // when respawning, the character is invisible (scale of 0) but still active, so a flag must be set to prevent multiple respawns from 1 contact
+        // -gianluca
+        RacerController.respawning = true;
+        var savedScale = racerAndCar.transform.localScale; 
+        racerAndCar.transform.localScale = new Vector3(0,0,0);
         // Pause the racer while respawning
         racerAndCarRigidbody.constraints = RigidbodyConstraints.FreezePosition;
         racerAndCarRigidbody.useGravity = false;
@@ -132,7 +150,7 @@ public class RacerState : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
 
         // Resumes the racer
-        racerAndCar.SetActive(true);
+        racerAndCar.transform.localScale = savedScale;
         racerAndCarRigidbody.constraints = RigidbodyConstraints.None;
         racerAndCarRigidbody.linearVelocity = Vector3.zero;
         racerAndCarRigidbody.angularVelocity = Vector3.zero;
@@ -151,20 +169,28 @@ public class RacerState : MonoBehaviour
         {
             RaceChoreographer.Instance.SendRacerRespawnEvent(aiController, currentCheckpoint);
         }
+        
+        RacerController.respawning = false;
     }
 
     public void UpdateBar(int add)
     {
         currAbilityCharge = Mathf.Clamp(0, currAbilityCharge + add, RacerController.Character.abilityCharge);
-        GameManager.Instance.UIManager.UpdateBar(currAbilityCharge, RacerController.Character.abilityCharge);
-        Debug.Log(currAbilityCharge);
+        if (RacerController is PlayerController)
+        {
+            PlayerController playerController = RacerController as PlayerController;
+            playerController.playerUI.UpdateBar(currAbilityCharge, RacerController.Character.abilityCharge);
+        }
     }
 
     public void ResetBar()
     {
         currAbilityCharge = 0;
-        GameManager.Instance.UIManager.UpdateBar(currAbilityCharge, RacerController.Character.abilityCharge);
-        Debug.Log(currAbilityCharge);
+        if (RacerController is PlayerController)
+        {
+            PlayerController playerController = RacerController as PlayerController;
+            playerController.playerUI.UpdateBar(currAbilityCharge, RacerController.Character.abilityCharge);
+        }
     }
 
     public void PickUpItem(Item item)
@@ -176,6 +202,11 @@ public class RacerState : MonoBehaviour
         {
             _secondaryItem = item;
         }
+        if (RacerController is PlayerController)
+        {
+            PlayerController playerController = RacerController as PlayerController;
+            playerController.playerUI.PickUpItem(item);
+        }
     }
 
     public bool UseItem()
@@ -186,7 +217,12 @@ public class RacerState : MonoBehaviour
             _onItemCooldown = true;
             Item instantiatedItem = Instantiate(_primaryItem, RacerController.transform);
             instantiatedItem.Use(this);
-            GameManager.Instance.UIManager.UseItem();
+            
+            if (RacerController is PlayerController)
+            {
+                PlayerController playerController = RacerController as PlayerController;
+                playerController.playerUI.UseItem();
+            }
             _primaryItem = _secondaryItem;
             _secondaryItem = null;
             StartCoroutine(ItemCooldown());

@@ -29,7 +29,7 @@ public class CharSelect : MonoBehaviour
     [SerializeField]
     private Image dragRating;
 
-    private bool _singlePlayer = true;
+    private bool _singlePlayer = false;
     void Start()
     {
         List<CharButton> buttons = new List<CharButton>();
