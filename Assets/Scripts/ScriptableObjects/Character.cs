@@ -9,7 +9,8 @@ public enum ECharacterType
     Mothman,
     Nessie,
     Yeti,
-    Jackalope
+    Jackalope,
+    Nightcrawler
 }
 
 [CreateAssetMenu(fileName = "Character", menuName = "Scriptable Objects/Character")]
@@ -39,29 +40,29 @@ public class Character : ScriptableObject
 
 
     [Serializable]
-    private struct VoiceLine
+    public struct VoiceLine
     {
         [SerializeField]
-        private string text;
+        public string text;
         [SerializeField]
-        private AudioClip audioFile;
+        public AudioClip audioFile;
     }
 
     [Serializable]
-    private struct CharacterVoices
+    public struct CharacterVoices
     {
         [SerializeField]
-        private VoiceLine passing;
+        public VoiceLine passing;
         [SerializeField]
-        private VoiceLine gettingPassed;
+        public VoiceLine gettingPassed;
         [SerializeField]
-        private VoiceLine hitting;
+        public VoiceLine hitting;
         [SerializeField]
-        private VoiceLine gettingHit;
+        public VoiceLine gettingHit;
         [SerializeField]
-        private VoiceLine ult;
+        public VoiceLine ult;
         [SerializeField]
-        private VoiceLine winning;
+        public VoiceLine winning;
     }
 
     [SerializeField]
@@ -86,5 +87,10 @@ public class Character : ScriptableObject
     public Ability getAbility()
     {
         return ability;
+    }
+
+    public CharacterVoices GetVoiceLines()
+    {
+        return VoiceLines;
     }
 }

@@ -5,13 +5,13 @@ public class StartGameStart : MonoBehaviour
 {
     private void StartGame()
     {
-        // SceneManager.sceneLoaded += LoadTestTrack;
-        SceneManager.LoadSceneAsync("Scenes/Main/CharacterSelect");
+        SceneManager.sceneLoaded += LoadTestTrack;
+        GameManager.Instance.LoadScene("Scenes/Main/CharacterSelect");
     }
 
     public void InputSelect()
     {
-        SceneManager.LoadSceneAsync("Scenes/MAIN/InputSelect");
+        GameManager.Instance.LoadScene("Scenes/MAIN/InputSelect");
     }
 
     public void StartSinglePlayer()
@@ -31,4 +31,9 @@ public class StartGameStart : MonoBehaviour
         print("opened charselect");
     }
     
+    public void LoadTestTrack(Scene scene, LoadSceneMode mode)
+    {
+        GameManager.Instance.SetGameState(GameState.WaitingToStart);
+        SceneManager.sceneLoaded -= LoadTestTrack;
+    }
 }

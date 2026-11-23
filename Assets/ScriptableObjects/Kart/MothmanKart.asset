@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: MothmanKart
   m_EditorClassIdentifier: Assembly-CSharp::Kart
   _maxSpeed: 25
-  _maxAcceleration: 10
+  _maxAcceleration: 15
   _brakeStrength: 10
   _drag: 4
   _turnRadius: 2
   _traction: 0
-  kartPrefab: {fileID: 7603069183561121243, guid: cc998fbfab1dfdf4bbc8053c1dc5fd21, type: 3}
+  kartPrefab: {fileID: 7603069183561121243, guid: a0ef94b6770e25b4eb8e0d9624f02060, type: 3}
   kartObject: {fileID: 0}

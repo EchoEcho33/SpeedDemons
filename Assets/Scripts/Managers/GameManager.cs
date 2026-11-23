@@ -71,8 +71,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     public List<Kart> karts;
-    
-    
+
+    public string ScenePath {get; private set;}
     // for cinemachine brain channel setup
     [HideInInspector]
     public int currentCameraChannel = 1; 
@@ -224,5 +224,11 @@ public class GameManager : MonoBehaviour
         LocalRacers.Clear();
         currentCameraChannel = 1;
         InputsInUse.Clear();
+    }
+
+    public void LoadScene(string ScenePath)
+    {
+        this.ScenePath = ScenePath;
+        SceneManager.LoadSceneAsync("Scenes/Main/SceneLoader");
     }
 }

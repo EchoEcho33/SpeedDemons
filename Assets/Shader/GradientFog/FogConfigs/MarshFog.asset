@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72e2a030fdf74818af9ec167e55fa82e, type: 3}
+  m_Name: MarshFog
+  m_EditorClassIdentifier: Assembly-CSharp::GradientFogPreset
+  gradientFogSettings:
+    StartDistance: 20
+    EndDistance: 300
+    NearColor: {r: 0.98490566, g: 0.92941266, b: 0.54820216, a: 1}
+    MiddleColor: {r: 0.33501598, g: 0.79622644, b: 0.6474442, a: 1}
+    FarColor: {r: 0.2920114, g: 0.3606926, b: 0.554717, a: 1}
+    FogStart: 0.3
+    FogMax: 1
+    FirstColorThreshold: 0.154
+    SecondColorThreshold: 0.51
+    MaxOpacity: 0.21
