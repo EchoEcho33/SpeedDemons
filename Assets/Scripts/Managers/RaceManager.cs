@@ -52,8 +52,10 @@ public class RaceManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        
 
         Instance = this;
+        GameManager.Instance.SetGameState(GameState.WaitingToStart);
         StoreCheckpoints();
     }
 

@@ -6,6 +6,7 @@ public class StartGameStart : MonoBehaviour
     private void StartGame()
     {
         SceneManager.sceneLoaded += LoadTestTrack;
+        GameManager.Instance.SetGameState(GameState.Lobby);
         GameManager.Instance.LoadScene("Scenes/Main/CharacterSelect");
     }
 
@@ -33,7 +34,7 @@ public class StartGameStart : MonoBehaviour
     
     public void LoadTestTrack(Scene scene, LoadSceneMode mode)
     {
-        GameManager.Instance.SetGameState(GameState.WaitingToStart);
+        
         SceneManager.sceneLoaded -= LoadTestTrack;
     }
 }
