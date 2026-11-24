@@ -286,5 +286,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe65a53bee04e1ba8c841f4824b55d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlobalRaceUI
-  _mainRaceCanvas: {fileID: 3450504724674593647}
+  _mainRaceCanvas: {fileID: 3450504724674593647, guid: cc5e42cdc64ae40459c48dc079ed8a37, type: 3}
   countdownText: {fileID: 2980086640528540042}

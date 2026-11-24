@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Driftwood
   _itemId: Driftwood
   _rarity: 1
-  _icon: {fileID: 21300000, guid: 13d42270cb0aad54eb9c75a0de77c890, type: 3}
+  _icon: {fileID: 21300000, guid: c3fcb965f765a9c44b7206ff3b968752, type: 3}
   speed: 50
   distance: 50
   driftwoodProjectile: {fileID: 4559633820259750459, guid: 0950bbca7527cfb4d917bccdd0484664, type: 3}
