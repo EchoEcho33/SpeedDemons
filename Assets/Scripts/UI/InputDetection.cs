@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class InputDetection : MonoBehaviour
 {
+    [SerializeField]
+    private Button startButton;
     // only 1 keyboard can join
-    private bool keyboardJoined = false; 
+    private bool keyboardJoined = false;
 
-    // Update is called once per frame
     void Update()
     {
         if (Keyboard.current == null || GameManager.Instance.JoinedInputDevices.Count >= 4)
@@ -19,6 +21,7 @@ public class InputDetection : MonoBehaviour
         {
             GameManager.Instance.JoinedInputDevices.Enqueue(Keyboard.current);
             keyboardJoined = true;
+            startButton.interactable = true;
             print("Keyboard joined");
         }
 
@@ -31,6 +34,7 @@ public class InputDetection : MonoBehaviour
             if (gamepad.buttonSouth.wasPressedThisFrame)
             {
                 GameManager.Instance.JoinedInputDevices.Enqueue(gamepad);
+                startButton.interactable = true;
                 print("Gamepad joined");
             }
         }

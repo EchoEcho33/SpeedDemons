@@ -6,7 +6,7 @@ public class SceneLoader : MonoBehaviour
 {
     void Start()
     {
-        StartCoroutine(LoadingSceenDelay(2.0f));
+        StartCoroutine(LoadingSceenDelay(0.5f));
     }
 
     // IT'S TOO FAST
