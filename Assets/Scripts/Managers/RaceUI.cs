@@ -21,6 +21,9 @@ public class RaceUI : MonoBehaviour
     private Image _secondaryItemIcon;
 
     [SerializeField]
+    private Image _characterPortrait;
+
+    [SerializeField]
     private TMP_Text _playerLaps;
 
     [SerializeField]
@@ -44,6 +47,7 @@ public class RaceUI : MonoBehaviour
     {
         _primaryItemIcon.enabled = false;
         _secondaryItemIcon.enabled = false;
+        
         
         viewport.gameObject.SetActive(false);
         
@@ -170,5 +174,10 @@ public class RaceUI : MonoBehaviour
         viewport.offsetMax = Vector2.zero;
         viewport.localScale = Vector3.one;
         viewport.gameObject.SetActive(true);
+    }
+
+    public void UpdatePortrait(Sprite portrait)
+    {
+        _characterPortrait.sprite = portrait;
     }
 }

@@ -118,6 +118,7 @@ public class RaceManager : MonoBehaviour
             // per player ui setup
             player.playerUI = Instantiate(PlayerUIPrefab).GetComponent<RaceUI>();
             player.playerUI.playerCamera = player.MainCamera;
+            player.playerUI.UpdatePortrait(player.Character.PolaroidIcon);
             player.playerUI.viewport.gameObject.SetActive(false);
             
             player.AssignRacerState(localRacerState);
